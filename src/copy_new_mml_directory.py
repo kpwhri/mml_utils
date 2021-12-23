@@ -42,6 +42,7 @@ def copy_to_new_mml_directory(source: pathlib.Path, dest: pathlib.Path,
             total_moved += 1
             if total_moved % 10000 == 0:
                 logger.info(f'Moved {total_moved} to {dest}.')
+    logger.info(f'Done! Moved {total_moved} to {dest}.')
 
 
 if __name__ == '__main__':
