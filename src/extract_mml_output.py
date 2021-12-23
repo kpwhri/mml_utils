@@ -117,7 +117,7 @@ def extract_mml_data(file: pathlib.Path, *, target_cuis=None):
                     'start': event['start'],
                     'length': event['length'],
                     'evid': event['id'],
-                    'negated': el['negated'],
+                    'negated': el.get('negated', None),
                 } | {
                           s: 1 for s in event['conceptinfo']['sources']
                       } | {
