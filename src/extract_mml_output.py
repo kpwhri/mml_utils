@@ -33,9 +33,13 @@ NOTE_FIELDNAMES = [
 @click.argument('note-directories', nargs=-1, type=click.Path(exists=True, path_type=pathlib.Path), )
 @click.option('--outdir', type=click.Path(exists=True, path_type=pathlib.Path),
               help='Output directory to place result files.')
-def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, *, encoding='utf8'):
+@click.option('--cui-file', type=click.Path(exists=True, path_type=pathlib.Path, dir_okay=False),
+              help='File containing one cui per line which should be included in the output.')
+def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
+                *, encoding='utf8'):
     """
 
+    :param cui_file: File containing one cui per line which should be included in the output.
     :param note_directories: Directories to with files processed by metamap and
                 containing the output (e.g., json) files.
     :param outdir:
@@ -47,13 +51,19 @@ def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, *, e
     mml_outfile = outdir / f'mml_{now}.csv'
     missing_note_dict = set()
     missing_mml_dict = set()
-    with open(note_outfile, 'w', encoding='utf8') as note_out, \
-            open(mml_outfile, 'w', encoding='utf8') as mml_out:
+
+    target_cuis = None
+    if cui_file is not None:
+        with open(cui_file, encoding='utf8') as fh:
+            target_cuis = set(x.strip() for x in fh.read().split('\n'))
+        logger.info(f'Retaining only {len(target_cuis)} CUIs.')
+    with open(note_outfile, 'w', newline='', encoding='utf8') as note_out, \
+            open(mml_outfile, 'w', newline='', encoding='utf8') as mml_out:
         note_writer = csv.DictWriter(note_out, fieldnames=NOTE_FIELDNAMES)
         note_writer.writeheader()
         mml_writer = csv.DictWriter(mml_out, fieldnames=MML_FIELDNAMES)
         mml_writer.writeheader()
-        for is_record, data in extract_data(note_directories, encoding=encoding):
+        for is_record, data in extract_data(note_directories, target_cuis=target_cuis, encoding=encoding):
             if is_record:
                 field_names = NOTE_FIELDNAMES
             else:
@@ -74,7 +84,7 @@ def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, *, e
                     mml_writer.writerow(data)
 
 
-def extract_data(note_directories: list[pathlib.Path], *, encoding='utf8', output_format='json'):
+def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, encoding='utf8', output_format='json'):
     for note_dir in note_directories:
         logger.info(f'Processing directory: {note_dir}')
         for file in note_dir.iterdir():
@@ -93,7 +103,7 @@ def extract_data(note_directories: list[pathlib.Path], *, encoding='utf8', outpu
             outfile = pathlib.Path(f'{str(file)}.{output_format}')
             if outfile.exists():
                 logger.info(f'Processing associated json: {outfile}.')
-                yield from extract_mml_data(outfile)
+                yield from extract_mml_data(outfile, target_cuis=target_cuis)
                 record['processed'] = True
             else:
                 record['processed'] = False
