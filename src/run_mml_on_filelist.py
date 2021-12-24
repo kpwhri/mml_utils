@@ -18,3 +18,7 @@ def run_single_mml_filelist(filelist: pathlib.Path, mml_home: pathlib.Path, repe
         repeat_run_mml(filelist, mml_home)
     else:
         run_mml(filelist, mml_home)
+
+
+if __name__ == '__main__':
+    run_single_mml_filelist()
