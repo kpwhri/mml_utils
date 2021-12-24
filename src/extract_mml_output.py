@@ -112,7 +112,10 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
 
 def extract_mml_data(file: pathlib.Path, *, target_cuis=None):
     with open(file, encoding='utf8') as fh:
-        data = json.load(fh)
+        text = fh.read()
+    if not text.strip():
+        return
+    data = json.loads(text)
     i = 0
     for el in data:
         for event in el['evlist']:
