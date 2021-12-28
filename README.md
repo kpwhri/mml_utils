@@ -36,6 +36,7 @@
   * [Copy Notes to Re-run: mml-copy-notes](#mml-copy-notes)
   * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
   * [Extract MML Results: mml-extract-mml](#mml-extract-mml)
+  * [Check MML Progress: mml-extract-mml](#mml-check-progress)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -167,6 +168,24 @@ Extract results from running Metamaplite. Currently only supports json output.
 
 
     mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt
+
+
+### mml-check-progress
+
+Check progress of Metamaplite running in a single directory.
+
+
+    mml-check-progress /path/to/notes
+
+To enable repeatedly checking, e.g., every 24 hours (and outputting results to log):
+
+    mml-check-progress /path/to/notes --repeat-hours 24
+
+To have the process stop before a certain date or after a certain number of hours, use either of these:
+
+    mml-check-progress /path/to/notes --repeat-end-after-hours 168   # 1 week
+    mml-check-progress /path/to/notes --repeat-end-after-datetime 2030-01-01   # will not run after this time
+
 
 ## Versions
 
