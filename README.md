@@ -37,6 +37,7 @@
   * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
   * [Extract MML Results: mml-extract-mml](#mml-extract-mml)
   * [Check MML Progress: mml-extract-mml](#mml-check-progress)
+  * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -186,6 +187,16 @@ To have the process stop before a certain date or after a certain number of hour
     mml-check-progress /path/to/notes --repeat-end-after-hours 168   # 1 week
     mml-check-progress /path/to/notes --repeat-end-after-datetime 2030-01-01   # will not run after this time
 
+
+### mml-split-filelist
+
+Split a filelist into multiple parts (to allow for parallelizing MML).
+
+This command will generate 3 separate files (`filelist.txt_part0`, `filelist.txt_part1`, and `filelist.txt_part2`), each containing 1/3. (`partN` will contain lines where `line_number % 3 == N`.)
+
+    mml-split-filelist filelist.txt 3
+
+Each of these output files can be fed separately into [`mml-run-filelist`](#mml-run-filelist)
 
 ## Versions
 
