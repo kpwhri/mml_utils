@@ -47,7 +47,7 @@ def repeat_run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None,
         filelist_version += 1
         with open(f'{filename}', encoding='utf8') as fh, \
                 open(error_path, 'a', encoding='utf8') as err, \
-                open(f'{orig_filename}_{filelist_version + 1}', 'w', encoding='utf8') as out:
+                open(f'{orig_filename}_{filelist_version}', 'w', encoding='utf8') as out:
             missing_count = 0
             still_todo = 0
             for file in fh.read().split('\n'):
@@ -64,10 +64,10 @@ def repeat_run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None,
                     still_todo += 1
                     out.write(f'{file}\n')
                 missing_count += 1
-        filelist_version += 1
         if still_todo == 0:
             break
         logger.info(f'Ready to re-run metamaplite: Remaining: {still_todo}')
+        filename = f'{orig_filename}_{filelist_version}'
         logger.info(f'Completed: {total_completed}')
     logger.info(f'Completed all: {total_completed}')
     return res
