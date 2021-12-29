@@ -16,7 +16,8 @@ from loguru import logger
 @click.option('--mmlout-ext', type=str, default='.json',
               help='Extension for metamaplite output files (e.g., ".json").')
 @click.option('--repeat-hours', type=float, default=None,
-              help='Re-run the progress check every this many hours (defaults to 24h)')
+              help='Re-run the progress check every this many hours '
+                   '(defaults to 24h if `--repeat-end-after-*` argument supplied)')
 @click.option('--repeat-end-after-hours', type=float, default=None,
               help='Stop running after this many hours (defaults to never stop).')
 @click.option('--repeat-end-after-datetime', type=click.DateTime(), default=None,
@@ -44,6 +45,8 @@ def check_mml_progress_repeat(outdir: pathlib.Path, *, textfile_ext='', mmlout_e
         else:
             repeat_end_after_datetime = repeat_end_after_datetime2
         logger.info(f'Stopping after {repeat_end_after_datetime}')
+        if not repeat_hours:
+            repeat_hours = 24
 
     while True:
         logger.info(f'Calculating Metamaplite Progress.')
