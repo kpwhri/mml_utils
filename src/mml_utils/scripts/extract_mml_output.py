@@ -151,6 +151,7 @@ def extract_mmi_line(line):
         logger.warning(f'Line contains {line[1]} rather the "MMI"; skipping line: {line}')
         return
     identifier, mmi, score, preferredname, cui, semantictype, triggerinfo, location, positional_info, treecodes = line
+    semantictypes = [st[1:-1] for st in semantictype.split(',')]  # official doco says comma-separated
     return {
         'docid': identifier,
         'matchedtext': None,
@@ -161,7 +162,9 @@ def extract_mmi_line(line):
         'length': None,
         'evid': None,
         'negated': None,
-        'semantictype': semantictype[1:-1],
+        'semantictype': semantictypes[0],  # usually (always?) just one, so show it
+    } | {
+        s: 1 for s in semantictypes
     }
 
 

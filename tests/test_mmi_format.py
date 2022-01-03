@@ -64,3 +64,4 @@ def test_extract_mmi_semantictype(mmi_lines, exp):
     for line, expected in get_mmi_lines(mmi_lines, exp):
         res = extract_mmi_line(line)
         assert expected == res['semantictype']
+        assert res[expected] == 1
