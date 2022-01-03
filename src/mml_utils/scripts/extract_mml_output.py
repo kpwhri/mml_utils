@@ -31,7 +31,9 @@ MML_FIELDNAMES = [
     'NCI_BRIDG_5_3', 'elii', 'HCPCS', 'NCI_EDQM-HC', 'NCI_NCI-GLOSS', 'phsu', 'NCI_CRCH', 'bacs', 'vita', 'HL7V3.0',
     'LNC', 'imft', 'MSH', 'NCI_CDISC-GLOSS', 'SNMI', 'NCI', 'ATC', 'chvf', 'SPN', 'AOT', 'AOD', 'HL7V2.5', 'ICF-CY',
     'USPMG', 'nnon', 'MTHMST', 'AIR', 'orch', 'NCI_CELLOSAURUS', 'LCH', 'NCI_BRIDG_3_0_3', 'MTHSPL', 'VANDF',
-    'NCI_CDISC', 'MTH', 'SNM', 'CST', 'RXNORM', 'rcpt', 'NCI_CTCAE_3', 'NCI_GDC', 'CCS_10', 'PDQ', 'chvs', 'HPO'
+    'NCI_CDISC', 'MTH', 'SNM', 'CST', 'RXNORM', 'rcpt', 'NCI_CTCAE_3', 'NCI_GDC', 'CCS_10', 'PDQ', 'chvs', 'HPO',
+    'orgt', 'lang', 'hcro', 'cnce', 'geoa', 'food', 'humn', 'ocac', 'moft', 'gngm', 'resd', 'antb', 'orgm',
+    'semantictype', 'blor', 'bird', 'mnob', 'pos', 'celc', 'source',
 ]
 NOTE_FIELDNAMES = [
     'filename', 'fullpath', 'num_chars', 'num_letters', 'num_words', 'processed',
@@ -44,10 +46,13 @@ NOTE_FIELDNAMES = [
               help='Output directory to place result files.')
 @click.option('--cui-file', type=click.Path(exists=True, path_type=pathlib.Path, dir_okay=False),
               help='File containing one cui per line which should be included in the output.')
+@click.option('--output-format', type=str, default='json',
+              help='Output format to look for (e.g., "json" or "mmi").')
 def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
-                *, encoding='utf8'):
+                *, encoding='utf8', output_format='json'):
     """
 
+    :param output_format: allowed: json, mmi
     :param cui_file: File containing one cui per line which should be included in the output.
     :param note_directories: Directories to with files processed by metamap and
                 containing the output (e.g., json) files.
@@ -72,7 +77,8 @@ def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_
         note_writer.writeheader()
         mml_writer = csv.DictWriter(mml_out, fieldnames=MML_FIELDNAMES)
         mml_writer.writeheader()
-        for is_record, data in extract_data(note_directories, target_cuis=target_cuis, encoding=encoding):
+        for is_record, data in extract_data(note_directories, target_cuis=target_cuis,
+                                            encoding=encoding, output_format=output_format):
             if is_record:
                 field_names = NOTE_FIELDNAMES
             else:
@@ -98,7 +104,7 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
     for note_dir in note_directories:
         logger.info(f'Processing directory: {note_dir}')
         for file in note_dir.iterdir():
-            if file.suffix:  # assume all notes have suffixes and all output does not
+            if file.suffix or file.is_dir():  # assume all notes have suffixes and all output does not
                 continue
             logger.info(f'Processing file: {file}')
             record = {
@@ -112,7 +118,7 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
                 record['num_letters'] = len(re.sub(r'[^A-Za-z0-9]', '', text, flags=re.I))
             outfile = pathlib.Path(f'{str(file)}.{output_format}')
             if outfile.exists():
-                logger.info(f'Processing associated json: {outfile}.')
+                logger.info(f'Processing associated {output_format}: {outfile}.')
                 yield from extract_mml_data(outfile, encoding=mm_encoding,
                                             target_cuis=target_cuis, output_format=output_format)
                 record['processed'] = True
@@ -137,12 +143,20 @@ def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None,
 
 def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
     i = 0
+    prev_line = None
     for line in csv.reader(io.StringIO(text), delimiter='|'):
+        if not line[-1] == '':
+            prev_line = line
+            continue
+        if prev_line:
+            carryover_cell = prev_line[-1] + line[0]
+            line = prev_line[:-1] + [carryover_cell] + line[1:]
+            prev_line = None
         for d in extract_mmi_line(line):
             if not d:
                 continue
             d['event_id'] = f'{filename}_{i}'
-            yield d
+            yield False, d
             i += 1
 
 
@@ -150,13 +164,18 @@ def extract_mmi_line(line):
     if line[1] != 'MMI':
         logger.warning(f'Line contains {line[1]} rather the "MMI"; skipping line: {line}')
         return
-    identifier, mmi, score, conceptstring, cui, semantictype, triggerinfo, location, positional_info, treecodes = line
-    semantictypes = [st[1:-1] for st in semantictype.split(',')]  # official doco says comma-separated
+    (identifier, mmi, score, conceptstring, cui, semantictype, triggerinfo,
+     location, positional_info, treecodes, *other) = line[:10]
+    semantictypes = [st.strip() for st in semantictype[1:-1].split(',')]  # official doco says comma-separated
     triggerinfos = [
         list(csv.reader([element], delimiter='-'))[0]
         for row in csv.reader([triggerinfo], delimiter=',')
         for element in row
     ]
+    new_triggerinfos = []
+    for ti in triggerinfos:
+        new_triggerinfos.append(['-'.join(ti[:len(ti) - 5])] + ti[len(ti) - 5:])
+    triggerinfos = new_triggerinfos
     positional_infos = [loc.split('/') for loc in positional_info.split(';')]
     for (preferredname, loc, locpos, matchedtext, pos, negation
          ), (start, length) in zip(triggerinfos, positional_infos):

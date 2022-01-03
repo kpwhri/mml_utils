@@ -13,11 +13,13 @@ from mml_utils.run_mml import repeat_run_mml, run_mml
               help='File with list of all files to be processed, one per line.')
 @click.option('--mml-home', type=click.Path(path_type=pathlib.Path, file_okay=False),
               help='Path to metamaplite home.')
-def run_single_mml_filelist(filelist: pathlib.Path, mml_home: pathlib.Path, repeat=True):
+@click.option('--output-format', type=str, default='json',
+              help='Output format (e.g., json or mmi)')
+def run_single_mml_filelist(filelist: pathlib.Path, mml_home: pathlib.Path, output_format='json', repeat=True):
     if repeat:
-        repeat_run_mml(filelist, mml_home)
+        repeat_run_mml(filelist, mml_home, output_format=output_format)
     else:
-        run_mml(filelist, mml_home)
+        run_mml(filelist, mml_home, output_format=output_format)
 
 
 if __name__ == '__main__':
