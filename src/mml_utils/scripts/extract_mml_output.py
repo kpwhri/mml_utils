@@ -112,26 +112,40 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
             outfile = pathlib.Path(f'{str(file)}.{output_format}')
             if outfile.exists():
                 logger.info(f'Processing associated json: {outfile}.')
-                yield from extract_mml_data(outfile, encoding=mm_encoding, target_cuis=target_cuis)
+                yield from extract_mml_data(outfile, encoding=mm_encoding,
+                                            target_cuis=target_cuis, output_format=output_format)
                 record['processed'] = True
             else:
                 record['processed'] = False
             yield True, record
 
 
-def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None):
+def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None, output_format='json'):
     with open(file, encoding=encoding) as fh:
         text = fh.read()
     if not text.strip():  # handle empty note
         return
-    data = json.loads(text)
+    if output_format == 'json':  # TODO: match-case
+        data = json.loads(text)
+        yield from extract_mml_from_json_data(data, file.name, target_cuis=target_cuis)
+    elif output_format == 'mmi':
+        yield from extract_mml_from_mmi_data(text, file.name, target_cuis=target_cuis)
+    else:
+        raise ValueError(f'Unrecognized output format: {output_format}.')
+
+
+def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
+    pass
+
+
+def extract_mml_from_json_data(data, filename, *, target_cuis=None):
     i = 0
     for el in data:
         for event in el['evlist']:
             if target_cuis is None or event['conceptinfo']['cui'] in target_cuis:
                 yield False, {
-                    'event_id': f'{file.name}_{i}',
-                    'docid': file.name,
+                    'event_id': f'{filename}_{i}',
+                    'docid': filename,
                     'matchedtext': event['matchedtext'],
                     'conceptstring': event['conceptinfo']['conceptstring'],
                     'cui': event['conceptinfo']['cui'],
