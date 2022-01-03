@@ -57,7 +57,7 @@ def check_mml_progress_repeat(outdir: pathlib.Path, *, textfile_ext='', mmlout_e
         if repeat_end_after_datetime:
             if datetime.now() > repeat_end_after_datetime:
                 break
-        logger.info(f'Sleeping for {repeat_hours} hours.')
+        logger.info(f'Sleeping for {repeat_hours} hours. Next check: {datetime.now() + timedelta(hours=repeat_hours)}')
         time.sleep(repeat_hours * 60 * 60)
 
 
