@@ -22,7 +22,7 @@ def get_mmi_lines(mmi_lines, exp):
     if isinstance(exp, str):
         exp = [exp]
     for line, expected in zip(mmi_lines.split('\n'), exp):
-        yield line, expected
+        yield line.split('|'), expected
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
@@ -30,7 +30,7 @@ def get_mmi_lines(mmi_lines, exp):
 ])
 def test_extract_mmi_filename(mmi_lines, exp):
     for line, expected in get_mmi_lines(mmi_lines, exp):
-        res = extract_mmi_line(line.split('|'))
+        res = extract_mmi_line(line)
         assert expected == res['docid']
 
 
@@ -44,7 +44,7 @@ def test_mmi_skips():
 ])
 def test_extract_mmi_preferredname(mmi_lines, exp):
     for line, expected in get_mmi_lines(mmi_lines, exp):
-        res = extract_mmi_line(line.split('|'))
+        res = extract_mmi_line(line)
         assert expected == res['preferredname']
 
 
@@ -53,5 +53,14 @@ def test_extract_mmi_preferredname(mmi_lines, exp):
 ])
 def test_extract_mmi_cui(mmi_lines, exp):
     for line, expected in get_mmi_lines(mmi_lines, exp):
-        res = extract_mmi_line(line.split('|'))
+        res = extract_mmi_line(line)
         assert expected == res['cui']
+
+
+@pytest.mark.parametrize(('mmi_lines', 'exp'), [
+    (pytest.lazy_fixture('mmi_risk_of'), 'idcn'),
+])
+def test_extract_mmi_semantictype(mmi_lines, exp):
+    for line, expected in get_mmi_lines(mmi_lines, exp):
+        res = extract_mmi_line(line)
+        assert expected == res['semantictype']

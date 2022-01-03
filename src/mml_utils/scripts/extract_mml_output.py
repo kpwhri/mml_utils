@@ -161,6 +161,7 @@ def extract_mmi_line(line):
         'length': None,
         'evid': None,
         'negated': None,
+        'semantictype': semantictype[1:-1],
     }
 
 
@@ -180,6 +181,8 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None):
                     'length': event['length'],
                     'evid': event['id'],
                     'negated': el.get('negated', None),
+                    'semantictype': event['conceptinfo']['semantictypes'][0],
+                    'source': event['conceptinfo']['sources'][0],
                 } | {
                           s: 1 for s in event['conceptinfo']['sources']
                       } | {
