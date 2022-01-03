@@ -1,3 +1,4 @@
+import itertools
 from textwrap import dedent
 
 import pytest
@@ -19,10 +20,10 @@ def mmi_risk_of():
 
 
 def get_mmi_lines(mmi_lines, exp):
-    if isinstance(exp, str):
+    if isinstance(exp, (str, int)):
         exp = [exp]
     for line in mmi_lines.split('\n'):
-        for res, expected in zip(extract_mmi_line(line.split('|')), exp):
+        for res, expected in zip(extract_mmi_line(line.split('|')), itertools.cycle(exp)):
             yield res, expected
 
 
@@ -70,3 +71,32 @@ def test_extract_mmi_semantictype(mmi_lines, exp):
 def test_extract_mmi_negated(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
         assert expected == res['negated']
+
+
+@pytest.mark.parametrize(('mmi_lines', 'exp'), [
+    (pytest.lazy_fixture('mmi_risk_of'), [2672, 3076, 4271]),
+])
+def test_extract_mmi_start(mmi_lines, exp):
+    for res, expected in get_mmi_lines(mmi_lines, exp):
+        assert expected == res['start']
+
+
+@pytest.mark.parametrize(('mmi_lines', 'exp'), [
+    (pytest.lazy_fixture('mmi_risk_of'), 7),
+])
+def test_extract_mmi_length(mmi_lines, exp):
+    for res, expected in get_mmi_lines(mmi_lines, exp):
+        assert expected == res['length']
+
+
+@pytest.mark.parametrize(('posinfo', 'exp'), [
+    pytest.param(
+        '[4061/10,4075/11],[4166/10,4180/11]', '?',
+        marks=[
+            pytest.mark.skip(
+                reason='This is tough...and rare: https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/Docs/MMI_Output_2016.pdf')
+        ]
+    ),
+])
+def test_positional_info(posinfo, exp):
+    pass

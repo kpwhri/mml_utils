@@ -157,15 +157,17 @@ def extract_mmi_line(line):
         for row in csv.reader([triggerinfo], delimiter=',')
         for element in row
     ]
-    for preferredname, loc, locpos, matchedtext, pos, negation in triggerinfos:
+    positional_infos = [loc.split('/') for loc in positional_info.split(';')]
+    for (preferredname, loc, locpos, matchedtext, pos, negation
+         ), (start, length) in zip(triggerinfos, positional_infos):
         yield {
                   'docid': identifier,
                   'matchedtext': matchedtext,
                   'conceptstring': conceptstring,
                   'cui': cui,
                   'preferredname': preferredname,
-                  'start': None,
-                  'length': None,
+                  'start': int(start),
+                  'length': int(length),
                   'evid': None,
                   'negated': int(negation),
                   'pos': pos,
