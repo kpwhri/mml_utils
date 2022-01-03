@@ -137,13 +137,13 @@ def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None,
 
 def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
     i = 0
-    for line in csv.reader(io.StringIO(text), sep='|'):
-        d = extract_mmi_line(line)
-        if not d:
-            continue
-        d['event_id'] = f'{filename}_{i}'
-        yield d
-        i += 1
+    for line in csv.reader(io.StringIO(text), delimiter='|'):
+        for d in extract_mmi_line(line):
+            if not d:
+                continue
+            d['event_id'] = f'{filename}_{i}'
+            yield d
+            i += 1
 
 
 def extract_mmi_line(line):

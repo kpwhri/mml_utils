@@ -100,3 +100,9 @@ def test_extract_mmi_length(mmi_lines, exp):
 ])
 def test_positional_info(posinfo, exp):
     pass
+
+
+def test_from_text(mmi_risk_of):
+    res = list(extract_mml_from_mmi_data(mmi_risk_of, 'filename'))
+    assert len(res) == 3
+    assert {d['event_id'] for d in res} == {'filename_0', 'filename_1', 'filename_2'}
