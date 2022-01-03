@@ -10,6 +10,7 @@ filename, length, processed: yes/no
 """
 import csv
 import datetime
+import io
 import json
 import pathlib
 import re
@@ -135,7 +136,19 @@ def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None,
 
 
 def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
-    pass
+    i = 0
+    for line in csv.reader(io.StringIO(text), sep='|'):
+        d = extract_mmi_line(line)
+        d['event_id'] = f'{filename}_{i}'
+        yield d
+        i += 1
+
+
+def extract_mmi_line(line):
+    identifier, mmi, score, preferredname, cui, semantictype, triggerinfo, location, positional_info, treecodes = line
+    return {
+        'docid': identifier,
+    }
 
 
 def extract_mml_from_json_data(data, filename, *, target_cuis=None):
