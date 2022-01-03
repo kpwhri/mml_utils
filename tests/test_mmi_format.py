@@ -18,15 +18,40 @@ def mmi_risk_of():
     )
 
 
+def get_mmi_lines(mmi_lines, exp):
+    if isinstance(exp, str):
+        exp = [exp]
+    for line, expected in zip(mmi_lines.split('\n'), exp):
+        yield line, expected
+
+
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
     (pytest.lazy_fixture('mmi_risk_of'), '00000000.tx'),
 ])
 def test_extract_mmi_filename(mmi_lines, exp):
-    for line in mmi_lines.split('\n'):
+    for line, expected in get_mmi_lines(mmi_lines, exp):
         res = extract_mmi_line(line.split('|'))
-        assert exp == res['docid']
+        assert expected == res['docid']
 
 
 def test_mmi_skips():
     line = '23074487|AA|FY|fiscal years|1|2|3|12|9362:2'.split('|')
     assert extract_mmi_line(line) is None
+
+
+@pytest.mark.parametrize(('mmi_lines', 'exp'), [
+    (pytest.lazy_fixture('mmi_risk_of'), 'Risk'),
+])
+def test_extract_mmi_preferredname(mmi_lines, exp):
+    for line, expected in get_mmi_lines(mmi_lines, exp):
+        res = extract_mmi_line(line.split('|'))
+        assert expected == res['preferredname']
+
+
+@pytest.mark.parametrize(('mmi_lines', 'exp'), [
+    (pytest.lazy_fixture('mmi_risk_of'), 'C0035647'),
+])
+def test_extract_mmi_cui(mmi_lines, exp):
+    for line, expected in get_mmi_lines(mmi_lines, exp):
+        res = extract_mmi_line(line.split('|'))
+        assert expected == res['cui']

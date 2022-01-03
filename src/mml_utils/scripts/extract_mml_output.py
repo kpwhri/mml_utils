@@ -153,6 +153,14 @@ def extract_mmi_line(line):
     identifier, mmi, score, preferredname, cui, semantictype, triggerinfo, location, positional_info, treecodes = line
     return {
         'docid': identifier,
+        'matchedtext': None,
+        'conceptstring': None,
+        'cui': cui,
+        'preferredname': preferredname,
+        'start': None,
+        'length': None,
+        'evid': None,
+        'negated': None,
     }
 
 
