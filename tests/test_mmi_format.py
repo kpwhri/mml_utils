@@ -9,6 +9,7 @@ def fix_text(text):
     return ''.join(dedent(text).split('\n'))
 
 
+@pytest.fixture()
 def mmi_risk_of():
     return fix_text(
         '''00000000.tx|MMI|27.63|Risk|C0035647|[idcn]|"risk of"-text-0-"risk of"--0,"risk of"-text-0-"risk of"--0,
@@ -18,9 +19,14 @@ def mmi_risk_of():
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (mmi_risk_of(), '00000000.tx'),
+    (pytest.lazy_fixture('mmi_risk_of'), '00000000.tx'),
 ])
 def test_extract_mmi_filename(mmi_lines, exp):
     for line in mmi_lines.split('\n'):
         res = extract_mmi_line(line.split('|'))
         assert exp == res['docid']
+
+
+def test_mmi_skips():
+    line = '23074487|AA|FY|fiscal years|1|2|3|12|9362:2'.split('|')
+    assert extract_mmi_line(line) is None

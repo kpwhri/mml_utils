@@ -139,12 +139,17 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
     i = 0
     for line in csv.reader(io.StringIO(text), sep='|'):
         d = extract_mmi_line(line)
+        if not d:
+            continue
         d['event_id'] = f'{filename}_{i}'
         yield d
         i += 1
 
 
 def extract_mmi_line(line):
+    if line[1] != 'MMI':
+        logger.warning(f'Line contains {line[1]} rather the "MMI"; skipping line: {line}')
+        return
     identifier, mmi, score, preferredname, cui, semantictype, triggerinfo, location, positional_info, treecodes = line
     return {
         'docid': identifier,
