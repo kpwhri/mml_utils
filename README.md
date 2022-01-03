@@ -157,18 +157,18 @@ Assumptions:
 
 Run metamaplite against a single filelist. This has the advantage of automatically re-running if a file causes an error (and skipping it in the next run).
 
-Each run will result in a newly-created filelist version.
+Each run will result in a newly-created filelist version. Default output format is `json`.
 
     
-    mml-run-filelist --filelist /path/to/filelist.txt --mml-home ./public_mm_lite
+    mml-run-filelist --filelist /path/to/filelist.txt --mml-home ./public_mm_lite [--output-format (mmi|json)]
 
 
 ### mml-extract-mml
 
-Extract results from running Metamaplite. Currently only supports json output.
+Extract results from running Metamaplite. Currently supports json (default) or MMI output.
 
 
-    mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt
+    mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json)]
 
 
 ### mml-check-progress
