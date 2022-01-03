@@ -22,7 +22,15 @@ MML_FIELDNAMES = [
     'neop', 'orga', 'qnco', 'patf', 'cell', 'qlco', 'menp', 'ftcn', 'aggp', 'inpo', 'dora', 'inpr', 'famg', 'ortf',
     'npop', 'anab', 'hlca', 'podg', 'tmco', 'lbpr', 'edac', 'mbrt', 'socb', 'prog', 'medd', 'bpoc', 'mobd', 'clna',
     'topp', 'sosy', 'idcn', 'bmod', 'SRC', 'rnlw', 'virs', 'spco', 'dsyn', 'popg', 'eehu', 'acty', 'orgf', 'cgab',
-    'tisu', 'hcpp', 'acab', 'lbtr', 'inbe', 'genf', 'evnt', 'comd', 'MDR', 'phsf', 'fndg', 'bdsu', 'phpr', 'diap'
+    'tisu', 'hcpp', 'acab', 'lbtr', 'inbe', 'genf', 'evnt', 'comd', 'MDR', 'phsf', 'fndg', 'bdsu', 'phpr', 'diap',
+    'USP', 'NCI_ICDC', 'GO', 'ICF', 'NCI_NCPDP', 'CHV', 'MEDLINEPLUS', 'FMA', 'NCI_CTCAE_5', 'NCI_NICHD', 'bodm',
+    'OMIM', 'QMR', 'NCI_DCP', 'ICPC', 'CSP', 'aapp', 'NCI_CTCAE', 'SNOMEDCT_US', 'CCS', 'NCI_FDA', 'DRUGBANK', 'horm',
+    'MED-RT', 'NCI_NCI-HL7', 'COSTAR', 'enzy', 'hops', 'NCI_CTRP', 'SNOMEDCT_VET', 'inch', 'MCM', 'ICD10PCS', 'irda',
+    'DXP', 'ICD10CM', 'NCI_DTP', 'LCH_NW', 'CCSR_10', 'ICD9CM', 'UWDA', 'MTHICD9', 'NCI_ACC-AHA', 'CVX',
+    'NCI_BRIDG_5_3', 'elii', 'HCPCS', 'NCI_EDQM-HC', 'NCI_NCI-GLOSS', 'phsu', 'NCI_CRCH', 'bacs', 'vita', 'HL7V3.0',
+    'LNC', 'imft', 'MSH', 'NCI_CDISC-GLOSS', 'SNMI', 'NCI', 'ATC', 'chvf', 'SPN', 'AOT', 'AOD', 'HL7V2.5', 'ICF-CY',
+    'USPMG', 'nnon', 'MTHMST', 'AIR', 'orch', 'NCI_CELLOSAURUS', 'LCH', 'NCI_BRIDG_3_0_3', 'MTHSPL', 'VANDF',
+    'NCI_CDISC', 'MTH', 'SNM', 'CST', 'RXNORM', 'rcpt', 'NCI_CTCAE_3', 'NCI_GDC', 'CCS_10', 'PDQ', 'chvs', 'HPO'
 ]
 NOTE_FIELDNAMES = [
     'filename', 'fullpath', 'num_chars', 'num_letters', 'num_words', 'processed',
@@ -84,7 +92,8 @@ def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_
                     mml_writer.writerow(data)
 
 
-def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, encoding='utf8', output_format='json'):
+def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
+                 output_format='json'):
     for note_dir in note_directories:
         logger.info(f'Processing directory: {note_dir}')
         for file in note_dir.iterdir():
@@ -103,17 +112,17 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
             outfile = pathlib.Path(f'{str(file)}.{output_format}')
             if outfile.exists():
                 logger.info(f'Processing associated json: {outfile}.')
-                yield from extract_mml_data(outfile, target_cuis=target_cuis)
+                yield from extract_mml_data(outfile, encoding=mm_encoding, target_cuis=target_cuis)
                 record['processed'] = True
             else:
                 record['processed'] = False
             yield True, record
 
 
-def extract_mml_data(file: pathlib.Path, *, target_cuis=None):
-    with open(file, encoding='utf8') as fh:
+def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None):
+    with open(file, encoding=encoding) as fh:
         text = fh.read()
-    if not text.strip():
+    if not text.strip():  # handle empty note
         return
     data = json.loads(text)
     i = 0
