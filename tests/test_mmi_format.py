@@ -21,39 +21,37 @@ def mmi_risk_of():
 def get_mmi_lines(mmi_lines, exp):
     if isinstance(exp, str):
         exp = [exp]
-    for line, expected in zip(mmi_lines.split('\n'), exp):
-        yield line.split('|'), expected
+    for line in mmi_lines.split('\n'):
+        for res, expected in zip(extract_mmi_line(line.split('|')), exp):
+            yield res, expected
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
     (pytest.lazy_fixture('mmi_risk_of'), '00000000.tx'),
 ])
 def test_extract_mmi_filename(mmi_lines, exp):
-    for line, expected in get_mmi_lines(mmi_lines, exp):
-        res = extract_mmi_line(line)
+    for res, expected in get_mmi_lines(mmi_lines, exp):
         assert expected == res['docid']
 
 
 def test_mmi_skips():
     line = '23074487|AA|FY|fiscal years|1|2|3|12|9362:2'.split('|')
-    assert extract_mmi_line(line) is None
+    assert len(list(extract_mmi_line(line))) == 0
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
     (pytest.lazy_fixture('mmi_risk_of'), 'Risk'),
 ])
-def test_extract_mmi_preferredname(mmi_lines, exp):
-    for line, expected in get_mmi_lines(mmi_lines, exp):
-        res = extract_mmi_line(line)
-        assert expected == res['preferredname']
+def test_extract_mmi_conceptstring(mmi_lines, exp):
+    for res, expected in get_mmi_lines(mmi_lines, exp):
+        assert expected == res['conceptstring']
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
     (pytest.lazy_fixture('mmi_risk_of'), 'C0035647'),
 ])
 def test_extract_mmi_cui(mmi_lines, exp):
-    for line, expected in get_mmi_lines(mmi_lines, exp):
-        res = extract_mmi_line(line)
+    for res, expected in get_mmi_lines(mmi_lines, exp):
         assert expected == res['cui']
 
 
@@ -61,7 +59,14 @@ def test_extract_mmi_cui(mmi_lines, exp):
     (pytest.lazy_fixture('mmi_risk_of'), 'idcn'),
 ])
 def test_extract_mmi_semantictype(mmi_lines, exp):
-    for line, expected in get_mmi_lines(mmi_lines, exp):
-        res = extract_mmi_line(line)
+    for res, expected in get_mmi_lines(mmi_lines, exp):
         assert expected == res['semantictype']
         assert res[expected] == 1
+
+
+@pytest.mark.parametrize(('mmi_lines', 'exp'), [
+    (pytest.lazy_fixture('mmi_risk_of'), [0, 0, 0]),
+])
+def test_extract_mmi_negated(mmi_lines, exp):
+    for res, expected in get_mmi_lines(mmi_lines, exp):
+        assert expected == res['negated']

@@ -150,22 +150,29 @@ def extract_mmi_line(line):
     if line[1] != 'MMI':
         logger.warning(f'Line contains {line[1]} rather the "MMI"; skipping line: {line}')
         return
-    identifier, mmi, score, preferredname, cui, semantictype, triggerinfo, location, positional_info, treecodes = line
+    identifier, mmi, score, conceptstring, cui, semantictype, triggerinfo, location, positional_info, treecodes = line
     semantictypes = [st[1:-1] for st in semantictype.split(',')]  # official doco says comma-separated
-    return {
-        'docid': identifier,
-        'matchedtext': None,
-        'conceptstring': None,
-        'cui': cui,
-        'preferredname': preferredname,
-        'start': None,
-        'length': None,
-        'evid': None,
-        'negated': None,
-        'semantictype': semantictypes[0],  # usually (always?) just one, so show it
-    } | {
-        s: 1 for s in semantictypes
-    }
+    triggerinfos = [
+        list(csv.reader([element], delimiter='-'))[0]
+        for row in csv.reader([triggerinfo], delimiter=',')
+        for element in row
+    ]
+    for preferredname, loc, locpos, matchedtext, pos, negation in triggerinfos:
+        yield {
+                  'docid': identifier,
+                  'matchedtext': matchedtext,
+                  'conceptstring': conceptstring,
+                  'cui': cui,
+                  'preferredname': preferredname,
+                  'start': None,
+                  'length': None,
+                  'evid': None,
+                  'negated': int(negation),
+                  'pos': pos,
+                  'semantictype': semantictypes[0],  # usually (always?) just one, so show it
+              } | {
+                  s: 1 for s in semantictypes
+              }
 
 
 def extract_mml_from_json_data(data, filename, *, target_cuis=None):
