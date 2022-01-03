@@ -21,7 +21,8 @@ def run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None):
     return res
 
 
-def repeat_run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None, **kwargs):
+def repeat_run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None, max_retry=20,
+                   **kwargs):
     filelist_version = 0
     return_code = 1
     total_completed = 0
@@ -69,5 +70,7 @@ def repeat_run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None,
         logger.info(f'Ready to re-run metamaplite: Remaining: {still_todo}')
         filename = f'{orig_filename}_{filelist_version}'
         logger.info(f'Completed: {total_completed}')
+        if filelist_version > max_retry:
+            logger.error(f'Too many retries: {max_retry}; exiting process.')
     logger.info(f'Completed all: {total_completed}')
     return res
