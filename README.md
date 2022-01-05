@@ -16,41 +16,44 @@
     </a -->
   </p>
 
-  <h3 align="center">Utilities and Scripts for Running Metamaplite</h3>
+<h3 align="center">Utilities and Scripts for Running Metamaplite</h3>
 
   <p>
-    Scripts for running Metamaplite against large batches of text.
+    Scripts for running Metamaplite (MML) against large batches of text.
   </p>
 </div>
 
 
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
 * [About the Project](#about-the-project)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
+    * [Prerequisites](#prerequisites)
+    * [Installation](#installation)
 * [Usage](#usage)
-  * [Run Metamaplite in Batches](#run-metamaplite-in-batches)
-  * [Copy Notes to Re-run: mml-copy-notes](#mml-copy-notes)
-  * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
-  * [Extract MML Results: mml-extract-mml](#mml-extract-mml)
-  * [Check MML Progress: mml-extract-mml](#mml-check-progress)
-  * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
+    * [Run Metamaplite in Batches](#run-metamaplite-in-batches)
+    * [Copy Notes to Re-run: mml-copy-notes](#mml-copy-notes)
+    * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
+    * [Extract MML Results: mml-extract-mml](#mml-extract-mml)
+    * [Check MML Progress: mml-extract-mml](#mml-check-progress)
+    * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
+    * [Split Long File: mml-split-files](#mml-split-files)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
+## About the Project
 
-
-## About the Project 
-The goal of this project is to put together various scripts to handle the preparation, running, and post-run extraction of results from Metamaplite.
+The goal of this project is to put together various scripts to handle the preparation, running, and post-run extraction
+of results from Metamaplite.
 
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 To get a local copy up and running follow these steps.
@@ -59,11 +62,11 @@ To get a local copy up and running follow these steps.
 
 * Python 3.9+
 * pip install .
-  * See pyproject.toml for updated dependencies.
+    * See pyproject.toml for updated dependencies.
 
 ### Installation
 
-0. Setup a virtual environment 
+0. Setup a virtual environment
     ```shell
     python -m venv .venv 
     ```
@@ -78,10 +81,10 @@ To get a local copy up and running follow these steps.
 
 ## Usage
 
-
 ### Run Metamaplite in Batches
 
 These scripts assume the following use case:
+
 * Files are currently being written/built to the target directory.
 * You want to start running Metamaplite on those records that have already been written
 * The total number of files can be unknown.
@@ -89,10 +92,11 @@ These scripts assume the following use case:
 These scripts will repeatedly look for new files, build filelists, and run Metamaplite.
 
 #### mml-build-filelists
+
 Prepare files for running metamaplite.
 
-Take a directory with text documents (input files for metamaplite), organize them into groups of 100.000
-    for subsequent processing. The subsequent processing will be done by related `mml-run-filelists-dir` command.
+Take a directory with text documents (input files for metamaplite), organize them into groups of 100.000 for subsequent
+processing. The subsequent processing will be done by related `mml-run-filelists-dir` command.
 
 Arguments:
 
@@ -100,7 +104,6 @@ Arguments:
         - This is more of a workspace. Input documents are expected under `outpath`/clarity.
         - Target files (text documents) will be moved from `clarity` to `mml`
         - Files with groups of 100.000 text documents will be plaaced in `mml_lists` subdirectory.
-
 
 Example:
 
@@ -122,8 +125,8 @@ Example:
 After, run `mml-run-filelists-dir` to process all these files. Their extension will be changed to `.complete`.
 
 #### mml-run-filelists-dir
-Run metamaplite from `mml_lists` and `mml` directory created by `build_filelists.py`.
 
+Run metamaplite from `mml_lists` and `mml` directory created by `build_filelists.py`.
 
 Arguments:
 
@@ -139,42 +142,38 @@ Example:
 
     mml-run-filelists-dir --mml-home ./public_mm_lite --filedir /path/to/dir/mml_lists/0
 
-
 ### mml-copy-notes
+
 Copy files from a completed MML directory to a new one to re-run MML.
 
-Metamaplite dumps the output `*.json` files in the same directory. If you want to rerun MML, either the `*.json` files or the notes need to be moved. This script will move the notes.
+Metamaplite dumps the output `*.json` files in the same directory. If you want to rerun MML, either the `*.json` files
+or the notes need to be moved. This script will move the notes.
 
 Assumptions:
-* All notes have no extension.
-  * To do this would require adding `Path.glob(*.txt)`, which might be a future change.
 
+* All notes have no extension.
+    * To do this would require adding `Path.glob(*.txt)`, which might be a future change.
 
     mml-copy-notes --source /path/to/notes --dest /path/to/notes2
 
-
 ### mml-run-filelist
 
-Run metamaplite against a single filelist. This has the advantage of automatically re-running if a file causes an error (and skipping it in the next run).
+Run metamaplite against a single filelist. This has the advantage of automatically re-running if a file causes an
+error (and skipping it in the next run).
 
 Each run will result in a newly-created filelist version. Default output format is `json`.
 
-    
     mml-run-filelist --filelist /path/to/filelist.txt --mml-home ./public_mm_lite [--output-format (mmi|json)]
-
 
 ### mml-extract-mml
 
 Extract results from running Metamaplite. Currently supports json (default) or MMI output.
 
-
     mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json)]
-
 
 ### mml-check-progress
 
 Check progress of Metamaplite running in a single directory.
-
 
     mml-check-progress /path/to/notes
 
@@ -187,16 +186,33 @@ To have the process stop before a certain date or after a certain number of hour
     mml-check-progress /path/to/notes --repeat-end-after-hours 168   # 1 week
     mml-check-progress /path/to/notes --repeat-end-after-datetime 2030-01-01   # will not run after this time
 
-
 ### mml-split-filelist
 
 Split a filelist into multiple parts (to allow for parallelizing MML).
 
-This command will generate 3 separate files (`filelist.txt_part0`, `filelist.txt_part1`, and `filelist.txt_part2`), each containing 1/3. (`partN` will contain lines where `line_number % 3 == N`.)
+This command will generate 3 separate files (`filelist.txt_part0`, `filelist.txt_part1`, and `filelist.txt_part2`), each
+containing 1/3. (`partN` will contain lines where `line_number % 3 == N`.)
 
     mml-split-filelist filelist.txt 3
 
 Each of these output files can be fed separately into [`mml-run-filelist`](#mml-run-filelist)
+
+### mml-split-files
+
+Some files are too long for MML to properly parse (at least in a reasonable amount of time). This script will split the
+long file into ones of (by default) 200 lines, adding all the resulting files to a new `filelist.txt`.
+
+    mml-split-files Medscape.txt Wikipedia.txt [--n-lines 200] [--filelist filelist.txt] 
+
+This will produce files like this:
+
+* Medscape_0.txt
+* Medscape_1.txt
+* Medscape_n.txt
+* Wikipedia_0.txt
+* Wikipedia_1.txt
+* Wikipedia_n.txt
+* filelist.txt  <- Run this file using [`mml-run-filelist`](#mml-run-filelist).
 
 ## Versions
 
@@ -205,13 +221,16 @@ Uses [SEMVER](https://semver.org/).
 See https://github.com/kpwhri/batch_metamaplite/releases.
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
-See the [open issues](https://github.com/kpwhri/batch_metamaplite/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/kpwhri/batch_metamaplite/issues) for a list of proposed features (and known
+issues).
 
 
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Any contributions you make are **greatly appreciated**.
@@ -222,39 +241,51 @@ Any contributions you make are **greatly appreciated**.
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
 <!-- LICENSE -->
+
 ## License
 
-Distributed under the MIT License. 
+Distributed under the MIT License.
 
 See `LICENSE` or https://kpwhri.mit-license.org for more information.
 
 
 
 <!-- CONTACT -->
+
 ## Contact
 
-Please use the [issue tracker](https://github.com/kpwhri/batch_metamaplite/issues). 
+Please use the [issue tracker](https://github.com/kpwhri/batch_metamaplite/issues).
 
 
 <!-- ACKNOWLEDGEMENTS -->
+
 ## Acknowledgements
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/kpwhri/batch_metamaplite.svg?style=flat-square
+
 [contributors-url]: https://github.com/kpwhri/batch_metamaplite/graphs/contributors
+
 [forks-shield]: https://img.shields.io/github/forks/kpwhri/batch_metamaplite.svg?style=flat-square
+
 [forks-url]: https://github.com/kpwhri/batch_metamaplite/network/members
+
 [stars-shield]: https://img.shields.io/github/stars/kpwhri/batch_metamaplite.svg?style=flat-square
+
 [stars-url]: https://github.com/kpwhri/batch_metamaplite/stargazers
+
 [issues-shield]: https://img.shields.io/github/issues/kpwhri/batch_metamaplite.svg?style=flat-square
+
 [issues-url]: https://github.com/kpwhri/batch_metamaplite/issues
+
 [license-shield]: https://img.shields.io/github/license/kpwhri/batch_metamaplite.svg?style=flat-square
+
 [license-url]: https://kpwhri.mit-license.org/
+
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+
 [linkedin-url]: https://www.linkedin.com/company/kaiserpermanentewashingtonresearch
 <!-- [product-screenshot]: images/screenshot.png -->
