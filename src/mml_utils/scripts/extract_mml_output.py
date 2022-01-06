@@ -36,6 +36,8 @@ NOTE_FIELDNAMES = [
               help='Output format to look for (e.g., "json" or "mmi").')
 @click.option('--add-fieldname', type=str, multiple=True,
               help='Add fieldnames to Metamaplite output.')
+@click.option('--max-search', type=int, default=1000,
+              help='Number of files in which to search for fieldnames.')
 def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
                 *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: list[str] = None):
     """
