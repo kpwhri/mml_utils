@@ -19,21 +19,7 @@ import click
 from loguru import logger
 
 MML_FIELDNAMES = [
-    'event_id', 'docid', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length', 'evid', 'negated',
-    'neop', 'orga', 'qnco', 'patf', 'cell', 'qlco', 'menp', 'ftcn', 'aggp', 'inpo', 'dora', 'inpr', 'famg', 'ortf',
-    'npop', 'anab', 'hlca', 'podg', 'tmco', 'lbpr', 'edac', 'mbrt', 'socb', 'prog', 'medd', 'bpoc', 'mobd', 'clna',
-    'topp', 'sosy', 'idcn', 'bmod', 'SRC', 'rnlw', 'virs', 'spco', 'dsyn', 'popg', 'eehu', 'acty', 'orgf', 'cgab',
-    'tisu', 'hcpp', 'acab', 'lbtr', 'inbe', 'genf', 'evnt', 'comd', 'MDR', 'phsf', 'fndg', 'bdsu', 'phpr', 'diap',
-    'USP', 'NCI_ICDC', 'GO', 'ICF', 'NCI_NCPDP', 'CHV', 'MEDLINEPLUS', 'FMA', 'NCI_CTCAE_5', 'NCI_NICHD', 'bodm',
-    'OMIM', 'QMR', 'NCI_DCP', 'ICPC', 'CSP', 'aapp', 'NCI_CTCAE', 'SNOMEDCT_US', 'CCS', 'NCI_FDA', 'DRUGBANK', 'horm',
-    'MED-RT', 'NCI_NCI-HL7', 'COSTAR', 'enzy', 'hops', 'NCI_CTRP', 'SNOMEDCT_VET', 'inch', 'MCM', 'ICD10PCS', 'irda',
-    'DXP', 'ICD10CM', 'NCI_DTP', 'LCH_NW', 'CCSR_10', 'ICD9CM', 'UWDA', 'MTHICD9', 'NCI_ACC-AHA', 'CVX',
-    'NCI_BRIDG_5_3', 'elii', 'HCPCS', 'NCI_EDQM-HC', 'NCI_NCI-GLOSS', 'phsu', 'NCI_CRCH', 'bacs', 'vita', 'HL7V3.0',
-    'LNC', 'imft', 'MSH', 'NCI_CDISC-GLOSS', 'SNMI', 'NCI', 'ATC', 'chvf', 'SPN', 'AOT', 'AOD', 'HL7V2.5', 'ICF-CY',
-    'USPMG', 'nnon', 'MTHMST', 'AIR', 'orch', 'NCI_CELLOSAURUS', 'LCH', 'NCI_BRIDG_3_0_3', 'MTHSPL', 'VANDF',
-    'NCI_CDISC', 'MTH', 'SNM', 'CST', 'RXNORM', 'rcpt', 'NCI_CTCAE_3', 'NCI_GDC', 'CCS_10', 'PDQ', 'chvs', 'HPO',
-    'orgt', 'lang', 'hcro', 'cnce', 'geoa', 'food', 'humn', 'ocac', 'moft', 'gngm', 'resd', 'antb', 'orgm',
-    'semantictype', 'blor', 'bird', 'mnob', 'pos', 'celc', 'source',
+    'event_id', 'docid', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length',
 ]
 NOTE_FIELDNAMES = [
     'filename', 'fullpath', 'num_chars', 'num_letters', 'num_words', 'processed',
@@ -48,10 +34,14 @@ NOTE_FIELDNAMES = [
               help='File containing one cui per line which should be included in the output.')
 @click.option('--output-format', type=str, default='json',
               help='Output format to look for (e.g., "json" or "mmi").')
+@click.option('--add-fieldname', type=str, multiple=True,
+              help='Add fieldnames to Metamaplite output.')
 def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
-                *, encoding='utf8', output_format='json'):
+                *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: list[str] = None):
     """
 
+    :param add_fieldname:
+    :param max_search:
     :param output_format: allowed: json, mmi
     :param cui_file: File containing one cui per line which should be included in the output.
     :param note_directories: Directories to with files processed by metamap and
@@ -63,14 +53,56 @@ def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     note_outfile = outdir / f'notes_{now}.csv'
     mml_outfile = outdir / f'mml_{now}.csv'
-    missing_note_dict = set()
-    missing_mml_dict = set()
+
+    if add_fieldname:
+        global MML_FIELDNAMES
+        for fieldname in add_fieldname:
+            MML_FIELDNAMES.append(fieldname)
 
     target_cuis = None
     if cui_file is not None:
         with open(cui_file, encoding='utf8') as fh:
             target_cuis = set(x.strip() for x in fh.read().split('\n'))
         logger.info(f'Retaining only {len(target_cuis)} CUIs.')
+    get_field_names(note_directories, output_format=output_format, max_search=max_search)
+    build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
+                         output_format, encoding)
+
+
+def get_field_names(note_directories: list[pathlib.Path], *, output_format='json', mm_encoding='cp1252',
+                    max_search=1000):
+    """
+
+    :param note_directories:
+    :param output_format:
+    :param mm_encoding:
+    :param max_search: how many files to look at in each directory
+    :return:
+    """
+    logger.info('Retrieving fieldnames.')
+    global MML_FIELDNAMES
+    fieldnames = set(MML_FIELDNAMES)
+    for note_dir in note_directories:
+        cnt = 0
+        for file in note_dir.iterdir():
+            if file.suffix not in {'.txt', ''} or file.is_dir():
+                continue
+            outfile = pathlib.Path(file.parent / f'{str(file.stem)}.{output_format}')
+            if not outfile.exists():
+                continue
+            for _, data in extract_mml_data(outfile, encoding=mm_encoding, output_format=output_format):
+                for fieldname in set(data.keys()) - fieldnames:
+                    MML_FIELDNAMES.append(fieldname)
+                    fieldnames.add(fieldname)
+            cnt += 1
+            if cnt > max_search:
+                break
+
+
+def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
+                         output_format, encoding):
+    missing_note_dict = set()
+    missing_mml_dict = set()
     with open(note_outfile, 'w', newline='', encoding='utf8') as note_out, \
             open(mml_outfile, 'w', newline='', encoding='utf8') as mml_out:
         note_writer = csv.DictWriter(note_out, fieldnames=NOTE_FIELDNAMES)
@@ -85,18 +117,19 @@ def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_
                 field_names = MML_FIELDNAMES
             curr_missing_data_dict = set(data.keys()) - set(field_names)
             if curr_missing_data_dict:
-                logger.error('Skipping record...')
+                logger.error(f'Only processing known fields for record: {data["fullpath"]}')
                 if is_record:
                     missing_note_dict |= curr_missing_data_dict
                     logger.error(f'''Missing Note Dict: '{"','".join(missing_note_dict)}' ''')
+                    data = {k: v for k, v in data.items() if k in NOTE_FIELDNAMES}
                 else:
                     missing_mml_dict |= curr_missing_data_dict
                     logger.error(f'''Missing MML Dict: '{"','".join(missing_mml_dict)}' ''')
+                    data = {k: v for k, v in data.items() if k in MML_FIELDNAMES}
+            if is_record:
+                note_writer.writerow(data)
             else:
-                if is_record:
-                    note_writer.writerow(data)
-                else:
-                    mml_writer.writerow(data)
+                mml_writer.writerow(data)
 
 
 def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
@@ -104,7 +137,8 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
     for note_dir in note_directories:
         logger.info(f'Processing directory: {note_dir}')
         for file in note_dir.iterdir():
-            if file.suffix or file.is_dir():  # assume all notes have suffixes and all output does not
+            if file.suffix not in {'.txt',
+                                   ''} or file.is_dir():  # assume all notes have suffixes and all output does not
                 continue
             logger.info(f'Processing file: {file}')
             record = {
@@ -116,7 +150,7 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
                 record['num_chars'] = len(text)
                 record['num_words'] = len(text.split())
                 record['num_letters'] = len(re.sub(r'[^A-Za-z0-9]', '', text, flags=re.I))
-            outfile = pathlib.Path(f'{str(file)}.{output_format}')
+            outfile = pathlib.Path(file.parent / f'{str(file.stem)}.{output_format}')
             if outfile.exists():
                 logger.info(f'Processing associated {output_format}: {outfile}.')
                 yield from extract_mml_data(outfile, encoding=mm_encoding,
@@ -142,6 +176,8 @@ def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None,
 
 
 def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
+    if not target_cuis:
+        target_cuis = set()
     i = 0
     prev_line = None
     for line in csv.reader(io.StringIO(text), delimiter='|'):
@@ -153,7 +189,7 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
             line = prev_line[:-1] + [carryover_cell] + line[1:]
             prev_line = None
         for d in extract_mmi_line(line):
-            if not d:
+            if not d or d['cui'] not in target_cuis:
                 continue
             d['event_id'] = f'{filename}_{i}'
             yield False, d
