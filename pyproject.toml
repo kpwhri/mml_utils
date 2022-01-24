@@ -28,6 +28,7 @@ classifiers = [  # https://pypi.org/classifiers/
 
 [project.optional-dependencies]
 dev = ['pytest']
+doc = ['sphinx', 'myst-parser']
 
 [project.scripts]
 mml-run-filelist = "mml_utils.scripts.run_mml_on_filelist:run_single_mml_filelist"
