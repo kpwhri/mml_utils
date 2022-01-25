@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Installing MetaMapLite &#8212; Metamaplite Utilities 0.1 documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Install UMLS Metathesaurus" href="install_umls.html" />
+    <link rel="prev" title="Glossary" href="glossary.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Metamaplite Utilities 0.1 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Installing MetaMapLite
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_umls.html">
+   Install UMLS Metathesaurus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="using_mml.html">
+   Using MetaMapLite
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/install_metamaplite.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#umls-license">
+     UMLS License
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-java">
+     Install Java
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-and-install">
+   Download and Install
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-metamaplite">
+     Download MetaMapLite
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-umls-dataset">
+     Download UMLS Dataset
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#downloading-other-umls-vocabularies">
+       Downloading Other UMLS Vocabularies
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-the-installation">
+   Test the Installation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#troubleshooting">
+   Troubleshooting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#java-not-recognized-found">
+     Java Not Recognized/Found
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Installing MetaMapLite</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#umls-license">
+     UMLS License
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-java">
+     Install Java
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-and-install">
+   Download and Install
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-metamaplite">
+     Download MetaMapLite
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-umls-dataset">
+     Download UMLS Dataset
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#downloading-other-umls-vocabularies">
+       Downloading Other UMLS Vocabularies
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-the-installation">
+   Test the Installation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#troubleshooting">
+   Troubleshooting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#java-not-recognized-found">
+     Java Not Recognized/Found
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="installing-metamaplite">
+<h1>Installing MetaMapLite<a class="headerlink" href="#installing-metamaplite" title="Permalink to this headline">¶</a></h1>
+<p>These instructions are for installing Metamaplite on Windows. Most of these steps would likely be pretty similar on
+other systems…</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>There is a complete and updated list of prerequisites on
+the <a class="reference external" href="https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/run-locally/MetaMapLite.html#Prerequisites">MetaMapLite homepage</a>, but
+the main components are:</p>
+<ul class="simple">
+<li><p>UMLS Terminology Services (UTS) Account</p></li>
+<li><p>Java 8 (JRE is fine)</p>
+<ul>
+<li><p>From Oracle: https://www.java.com/en/download/</p></li>
+<li><p>Amazon Corretto: https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="umls-license">
+<h3>UMLS License<a class="headerlink" href="#umls-license" title="Permalink to this headline">¶</a></h3>
+<p><em>If you already have a UMLS Terminology Services account, skip this step.</em></p>
+<div class="admonition-uts-account-required admonition">
+<p class="admonition-title">UTS Account Required</p>
+<p>An account is required in order to use the UMLS Metathesaurus (the vocabulary backend to Metamaplite which MetaMapLite uses to map text to NLP concepts).</p>
+</div>
+<ol class="arabic simple">
+<li><p>To create an account, visit: https://uts.nlm.nih.gov/uts/signup-login.</p></li>
+<li><p>By doing this, you will agree to the UMLS License: https://uts.nlm.nih.gov/uts/assets/LicenseAgreement.pdf</p></li>
+<li><p>To keep your account current (i.e., to keep being able to use it), you will need to annually complete a survey
+describing which sources, etc., you used, along with any suggestions for improvements.</p></li>
+</ol>
+</div>
+<div class="section" id="install-java">
+<h3>Install Java<a class="headerlink" href="#install-java" title="Permalink to this headline">¶</a></h3>
+<p>The current requirements for running MetaMapLite are Java 8 JRE (JDK is okay as well).</p>
+<p>There are a few locations from which to install the Java runtime:</p>
+<ul class="simple">
+<li><p>From Oracle: https://www.java.com/en/download/</p></li>
+<li><p>From Amazon (Corretto): https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html</p></li>
+<li><p>Or other implementations of OpenJDK: https://en.wikipedia.org/wiki/OpenJDK#OpenJDK_builds</p></li>
+</ul>
+<p>Once Java is installed, test the installation:</p>
+<ol class="arabic simple">
+<li><p>Open a <em>new</em> <code class="docutils literal notranslate"><span class="pre">powershell</span></code> or other command prompt.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-version</span></code>.</p>
+<ol class="arabic simple">
+<li><p>If you get some information about the version, you’re good to go.</p></li>
+<li><p>If you get some variant of ‘not recognized’ or ‘command not found’, you’ll need to add Java to your path.</p></li>
+</ol>
+</li>
+</ol>
+<p>To add java to your path:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Windows</span> <span class="pre">Button</span></code> + type ‘environment’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">the</span> <span class="pre">system</span> <span class="pre">environment</span> <span class="pre">variables</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Environment</span> <span class="pre">Variables</span></code></p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">New</span></code> with name <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> and path to base of install
+<img alt="img.png" src="_images/java_home.png" /></p></li>
+<li><p>Edit the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable by adding the entire path with <code class="docutils literal notranslate"><span class="pre">\bin</span></code> to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable
+<img alt="img.png" src="_images/java_on_path.png" /></p></li>
+<li><p>Exit out of all command prompts (e.g., <code class="docutils literal notranslate"><span class="pre">powershell</span></code>), and open a new one. Type <code class="docutils literal notranslate"><span class="pre">java</span></code>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="download-and-install">
+<h2>Download and Install<a class="headerlink" href="#download-and-install" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Visit the <a class="reference external" href="https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/run-locally/MetaMapLite.html#Downloads">Metamaplite Website</a>.
+If this links is
+broken, <a class="reference external" href="https://github.com/kpwhri/batch_metamaplite/issues/new?title=Broken+Link+for+Metamaplite">file an issue</a> and
+search for <a class="reference external" href="https://www.google.com/search?q=metamaplite">‘metamaplite’</a>.</p></li>
+<li><p>Go to ‘Downloads’ and find the box with the most recent version of MetaMapLite.</p></li>
+</ol>
+<p><img alt="img.png" src="_images/metamaplite_download_2020ab.png" /></p>
+<div class="section" id="download-metamaplite">
+<h3>Download MetaMapLite<a class="headerlink" href="#download-metamaplite" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Download the most recent version of MetaMapLite (<code class="docutils literal notranslate"><span class="pre">3.6.2rc6</span></code> in the above image).</p>
+<ul class="simple">
+<li><p>If you have previously installed MetaMapLite, you do not <em>need</em> to update, but it’s usually a good idea.</p></li>
+<li><p>You may require a particular version if, e.g., replicating previous work.</p></li>
+</ul>
+</li>
+<li><p>Login with your UTS Account if you are not already logged in.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Right</span> <span class="pre">click</span></code> the downloaded zip archive, and choose <code class="docutils literal notranslate"><span class="pre">Extract</span> <span class="pre">All</span></code> to <code class="docutils literal notranslate"><span class="pre">C:\mml</span></code> (or similar)
+<img alt="img.png" src="_images/unzip_public_mm_lite.png" /></p></li>
+<li><p>MetaMapLite has now been installed to <code class="docutils literal notranslate"><span class="pre">C:\mml\public_mm_lite</span></code>. This is the application’s <code class="docutils literal notranslate"><span class="pre">HOME_DIRECTORY</span></code> and will be
+used in most of the <code class="docutils literal notranslate"><span class="pre">mml_utils</span></code> scripts.</p></li>
+</ol>
+<p>You have now installed MetaMapLite, though it doesn’t have any data, so it’s probably not particularly useful yet…let’
+s install the UMLS backend.</p>
+</div>
+<div class="section" id="download-umls-dataset">
+<h3>Download UMLS Dataset<a class="headerlink" href="#download-umls-dataset" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Download the most recent version of the UMLS Level 0+4+9 dataset (<code class="docutils literal notranslate"><span class="pre">2020AB</span> <span class="pre">UMLS</span> <span class="pre">Level</span> <span class="pre">0+4+9</span> <span class="pre">Dataset</span></code> in the image
+above).</p></li>
+<li><p>Login with your UTS Account if you are not already logged in.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Right</span> <span class="pre">click</span></code> the downloaded zip archive, and choose <code class="docutils literal notranslate"><span class="pre">Extract</span> <span class="pre">All</span></code> to <code class="docutils literal notranslate"><span class="pre">C:\mml</span></code> (or <em>the same path</em> you selected
+when <a class="reference external" href="#download-metamaplite">unzipping MetaMapLite</a>)</p></li>
+</ol>
+<div class="admonition-multiple-umls-datasets admonition">
+<p class="admonition-title">Multiple UMLS Datasets</p>
+<p>You can download multiple datasets to the same MetaMapLite installation, though each will require a different name/location. Selecting these can be done by editing the <code class="docutils literal notranslate"><span class="pre">metamaplite.bat</span></code> launch file or the <code class="docutils literal notranslate"><span class="pre">config\metamaplite.properties</span></code> file’s <code class="docutils literal notranslate"><span class="pre">metamaplite.index.directory</span></code>.</p>
+</div>
+<p><img alt="img.png" src="_images/unzip_umls_data.png" /></p>
+<p>No indexing is required for this download, but you should first test the installation.</p>
+<div class="section" id="downloading-other-umls-vocabularies">
+<h4>Downloading Other UMLS Vocabularies<a class="headerlink" href="#downloading-other-umls-vocabularies" title="Permalink to this headline">¶</a></h4>
+<p>If you need other UMLS vocabularies (e.g., MedDRA), you will need to download, install, and index the
+larger <a class="reference external" href="https://www.nlm.nih.gov/research/umls/index.html">UMLS dataset</a>. A step-by-step guide for this is
+available <a class="reference internal" href="install_umls.html"><span class="doc std std-doc">here</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="test-the-installation">
+<h2>Test the Installation<a class="headerlink" href="#test-the-installation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Open a new <code class="docutils literal notranslate"><span class="pre">powershell</span></code> windows (or other command prompt).</p></li>
+<li><p>Go to the HOME_DIRECTORY (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">C:\mml\public_mm_lite</span></code>).</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;asymptomatic</span> <span class="pre">patient</span> <span class="pre">populations&quot;</span> <span class="pre">|</span> <span class="pre">.\metamaplite.bat</span> <span class="pre">--pipe</span></code></p></li>
+<li><p>You should see output like:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.92</span><span class="o">|</span><span class="n">Patients</span><span class="o">|</span><span class="n">C0030705</span><span class="o">|</span><span class="p">[</span><span class="n">podg</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Patient&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;patient&quot;</span><span class="o">-</span><span class="n">NN</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">13</span><span class="o">/</span><span class="mi">7</span><span class="o">|</span><span class="n">M01</span><span class="mf">.643</span><span class="o">|</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">Asymptomatic</span><span class="o">|</span><span class="n">C0231221</span><span class="o">|</span><span class="p">[</span><span class="n">fndg</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Asymptomatic&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;asymptomatic&quot;</span><span class="o">-</span><span class="n">JJ</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">0</span><span class="o">/</span><span class="mi">12</span><span class="o">||</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">Disabled</span> <span class="n">Person</span> <span class="n">Code</span> <span class="o">-</span> <span class="n">Patient</span><span class="o">|</span><span class="n">C1578486</span><span class="o">|</span><span class="p">[</span><span class="n">inpr</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Patient&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;patient&quot;</span><span class="o">-</span><span class="n">NN</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">13</span><span class="o">/</span><span class="mi">7</span><span class="o">||</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">Mail</span> <span class="n">Claim</span> <span class="n">Party</span> <span class="o">-</span> <span class="n">Patient</span><span class="o">|</span><span class="n">C1578481</span><span class="o">|</span><span class="p">[</span><span class="n">idcn</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Patient&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;patient&quot;</span><span class="o">-</span><span class="n">NN</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">13</span><span class="o">/</span><span class="mi">7</span><span class="o">||</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">Relationship</span> <span class="n">modifier</span> <span class="o">-</span> <span class="n">Patient</span><span class="o">|</span><span class="n">C1578484</span><span class="o">|</span><span class="p">[</span><span class="n">idcn</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Patient&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;patient&quot;</span><span class="o">-</span><span class="n">NN</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">13</span><span class="o">/</span><span class="mi">7</span><span class="o">||</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">Report</span> <span class="n">source</span> <span class="o">-</span> <span class="n">Patient</span><span class="o">|</span><span class="n">C1578483</span><span class="o">|</span><span class="p">[</span><span class="n">idcn</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Patient&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;patient&quot;</span><span class="o">-</span><span class="n">NN</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">13</span><span class="o">/</span><span class="mi">7</span><span class="o">||</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">Specimen</span> <span class="n">Source</span> <span class="n">Codes</span> <span class="o">-</span> <span class="n">Patient</span><span class="o">|</span><span class="n">C1578485</span><span class="o">|</span><span class="p">[</span><span class="n">inpr</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Patient&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;patient&quot;</span><span class="o">-</span><span class="n">NN</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">13</span><span class="o">/</span><span class="mi">7</span><span class="o">||</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">Specimen</span> <span class="n">Type</span> <span class="o">-</span> <span class="n">Patient</span><span class="o">|</span><span class="n">C1550655</span><span class="o">|</span><span class="p">[</span><span class="n">bdsu</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Patient&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;patient&quot;</span><span class="o">-</span><span class="n">NN</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">13</span><span class="o">/</span><span class="mi">7</span><span class="o">||</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">Veterinary</span> <span class="n">Patient</span><span class="o">|</span><span class="n">C1705908</span><span class="o">|</span><span class="p">[</span><span class="n">orgm</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Patient&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;patient&quot;</span><span class="o">-</span><span class="n">NN</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">13</span><span class="o">/</span><span class="mi">7</span><span class="o">||</span>
+<span class="mf">00000000.</span><span class="n">tx</span><span class="o">|</span><span class="n">MMI</span><span class="o">|</span><span class="mf">0.46</span><span class="o">|</span><span class="n">geographic</span> <span class="n">population</span><span class="o">|</span><span class="n">C0032659</span><span class="o">|</span><span class="p">[</span><span class="n">qnco</span><span class="p">]</span><span class="o">|</span><span class="s2">&quot;Populations&quot;</span><span class="o">-</span><span class="n">text</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="s2">&quot;populations&quot;</span><span class="o">-</span><span class="n">NNS</span><span class="o">-</span><span class="mi">0</span><span class="o">|</span><span class="n">text</span><span class="o">|</span><span class="mi">21</span><span class="o">/</span><span class="mi">11</span><span class="o">||</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Or, if you prefer <code class="docutils literal notranslate"><span class="pre">json</span></code> format (this project
+does): <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;asymptomatic</span> <span class="pre">patient</span> <span class="pre">populations&quot;</span> <span class="pre">|</span> <span class="pre">.\metamaplite.bat</span> <span class="pre">--pipe</span> <span class="pre">--outputformat=json</span></code></p>
+<ul class="simple">
+<li><p>NB: The output below is formatted and abridged.</p></li>
+</ul>
+</li>
+</ol>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w">  </span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;matchedtext&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;asymptomatic&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;evlist&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;matchedtext&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;asymptomatic&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ev0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;conceptinfo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;conceptstring&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Asymptomatic&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;sources&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;LNC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;CHV&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;SNMI&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;NCI_CDISC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;NCI&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;SNOMEDCT_US&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;NCI_NCI-GLOSS&quot;</span><span class="w"></span>
+<span class="w">          </span><span class="p">],</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;cui&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C0231221&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;preferredname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Asymptomatic&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;semantictypes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;fndg&quot;</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;docid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00000000.tx&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fieldid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For additional details about using MetaMapLite to process text files, see: <a class="reference internal" href="using_mml.html"><span class="doc std std-doc">Using MetaMapLite</span></a></p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="java-not-recognized-found">
+<h3>Java Not Recognized/Found<a class="headerlink" href="#java-not-recognized-found" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Ensure that Java 8 is installed (see <a class="reference external" href="#install-java">Install Java</a>).</p></li>
+<li><p>Close all instances of <code class="docutils literal notranslate"><span class="pre">powershell</span></code> or other command prompt. Open a new one and type <code class="docutils literal notranslate"><span class="pre">java</span></code>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="glossary.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Glossary</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="install_umls.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Install UMLS Metathesaurus</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By dcronkite<br/>
+    
+        &copy; Copyright 2022, dcronkite.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
