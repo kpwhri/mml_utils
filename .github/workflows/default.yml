@@ -1,6 +1,8 @@
-name: CI
+name: build_doco
 
 on:
+  workflow_dispatch:
+      branches: [ main ]
   push:
     tags:
       - '*'
