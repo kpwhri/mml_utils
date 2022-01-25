@@ -9,7 +9,7 @@ There is a complete and updated list of prerequisites on
 the [MetaMapLite homepage](https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/run-locally/MetaMapLite.html#Prerequisites), but
 the main components are:
 
-* UMLS Terminology Services (UTS) Acccount
+* UMLS Terminology Services (UTS) Account
 * Java 8 (JRE is fine)
     * From Oracle: https://www.java.com/en/download/
     * Amazon Corretto: https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html
@@ -34,7 +34,7 @@ The current requirements for running MetaMapLite are Java 8 JRE (JDK is okay as 
 There are a few locations from which to install the Java runtime:
 
 * From Oracle: https://www.java.com/en/download/
-* From Amazon (Ccorretto): https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html
+* From Amazon (Corretto): https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html
 * Or other implementations of OpenJDK: https://en.wikipedia.org/wiki/OpenJDK#OpenJDK_builds
 
 Once Java is installed, test the installation:
