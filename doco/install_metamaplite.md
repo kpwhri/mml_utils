@@ -3,6 +3,19 @@
 These instructions are for installing Metamaplite on Windows. Most of these steps would likely be pretty similar on
 other systems...
 
+## In Brief
+
+*A brief overview/reminder of the steps.*
+
+1. Go to the [MetaMapLite homepage](https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/run-locally/MetaMapLite.html#Downloads).
+2. Download MetaMapLite 'binaryonly Version'.
+3. Download UMLS Dataset.
+4. Unzip both downloads to the *same* directory (e.g., `C:\mml`).
+5. Test the installation
+   * `cd C:\mml\public_mm_lite`
+   * `echo "asymptomatic patient populations" | .\metamaplite.bat --pipe`
+6. For more usage information, see  [](using_mml.md).
+
 ## Prerequisites
 
 There is a complete and updated list of prerequisites on
