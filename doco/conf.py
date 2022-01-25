@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Metamaplite Utilities'
-copyright = '2022, dcronkite'
-author = 'dcronkite'
+copyright = '2022, KPWHRI'
+author = 'dcronkite <dcronkite@gmail.com>'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.0.4'
 
 # -- General configuration ---------------------------------------------------
 
