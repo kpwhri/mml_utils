@@ -31,6 +31,9 @@ release = '0.1'
 # ones.
 extensions = [
     'myst_parser',
+    'sphinx.ext.autodoc',
+    'sphinx_autodoc_typehints',
+    'sphinx.ext.intersphinx',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -56,3 +59,8 @@ html_static_path = ['_static']
 myst_enable_extensions = [
     'colon_fence',
 ]
+
+intersphinx_mapping = {
+}
+
+myst_url_schemes = ['http', 'https', ]
