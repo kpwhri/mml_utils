@@ -1,10 +1,6 @@
 # Glossary
 
-```{contents}
-:depth: 2
-:local:
-```
-
+Brief descriptions of various themes/items relating to MetaMapLite.
 
 ## MetaMapLite
 

@@ -15,7 +15,7 @@ home-page = 'https://github.com/kpwhri/batch_metamaplite'
 requires = ['click', 'loguru']
 requires-python = '>=3.9'
 keywords = ['nlp', 'information extraction', 'metamap', 'metamaplite']
-classifiers = [  # https://pypi.org/classifiers/
+classifiers = [# https://pypi.org/classifiers/
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Science/Research',
     'Programming Language :: Python :: 3 :: Only',
@@ -28,7 +28,12 @@ classifiers = [  # https://pypi.org/classifiers/
 
 [project.optional-dependencies]
 dev = ['pytest']
-doc = ['sphinx', 'myst-parser', 'sphinx-autodoc-typehints']
+doc = [
+    'sphinx',
+    'myst-parser',
+    'sphinx-autodoc-typehints',
+    'sphinx-book-theme',
+]
 
 [project.scripts]
 mml-run-filelist = "mml_utils.scripts.run_mml_on_filelist:run_single_mml_filelist"
