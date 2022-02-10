@@ -40,6 +40,7 @@
     * [Check MML Progress: mml-extract-mml](#mml-check-progress)
     * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
     * [Split Long File: mml-split-files](#mml-split-files)
+    * [Run AFEP on MML Output: mml-run-afep](#mml-run-afep)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
