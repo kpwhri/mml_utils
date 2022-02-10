@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Glossary &#8212; Metamaplite Utilities 0.0.4 documentation</title>
+    <title>Automated Feature Extraction for Phenotyping (AFEP) &#8212; Metamaplite Utilities 0.0.4 documentation</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -34,8 +34,8 @@
     <script src="_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installing MetaMapLite" href="install_metamaplite.html" />
-    <link rel="prev" title="Automated Feature Extraction for Phenotyping (AFEP)" href="afep.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Welcome to Metamaplite Utility documentation!" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -78,13 +78,13 @@
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="afep.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Automated Feature Extraction for Phenotyping (AFEP)
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
    Glossary
   </a>
  </li>
@@ -144,7 +144,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/glossary.md.txt"><button type="button"
+        <a class="dropdown-buttons" href="_sources/afep.md.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -175,13 +175,13 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#metamaplite">
-   MetaMapLite
+  <a class="reference internal nav-link" href="#about-afep">
+   About AFEP
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#umls-dataset-levels">
-   UMLS Dataset Levels
+  <a class="reference internal nav-link" href="#steps">
+   Steps
   </a>
  </li>
 </ul>
@@ -194,7 +194,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Glossary</h1>
+                <h1>Automated Feature Extraction for Phenotyping (AFEP)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -205,13 +205,13 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#metamaplite">
-   MetaMapLite
+  <a class="reference internal nav-link" href="#about-afep">
+   About AFEP
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#umls-dataset-levels">
-   UMLS Dataset Levels
+  <a class="reference internal nav-link" href="#steps">
+   Steps
   </a>
  </li>
 </ul>
@@ -223,15 +223,50 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="glossary">
-<h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
-<p>Brief descriptions of various themes/items relating to MetaMapLite.</p>
-<div class="section" id="metamaplite">
-<h2>MetaMapLite<a class="headerlink" href="#metamaplite" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/run-locally/MetaMapLite.html">home</a></p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="automated-feature-extraction-for-phenotyping-afep">
+<h1>Automated Feature Extraction for Phenotyping (AFEP)<a class="headerlink" href="#automated-feature-extraction-for-phenotyping-afep" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about-afep">
+<h2>About AFEP<a class="headerlink" href="#about-afep" title="Permalink to this headline">¶</a></h2>
+<p>AFEP (Automated Feature Extraction for Phenotyping) is a component of the phenotyping algorithm PheNORM which attempts
+to automatically determine useful features by mining knowledge base articles like Wikipedia, Medline, etc.</p>
+<ul class="simple">
+<li><p>See the paper <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4986664/">on pubmed</a></p></li>
+</ul>
 </div>
-<div class="section" id="umls-dataset-levels">
-<h2>UMLS Dataset Levels<a class="headerlink" href="#umls-dataset-levels" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<p>This is not directly related to MML, but MetaMapLite can be used to extract concepts for use in extracting concepts for
+MetaMapLite. These steps will guide you through extracting the concepts of interest as well as processing them using
+the <a class="reference external" href="https://github.com/kpwhri/mml_utils"><code class="docutils literal notranslate"><span class="pre">mml_utils</span></code> package</a>.</p>
+<div class="admonition-nlp-tool-for-concept-extraction admonition">
+<p class="admonition-title">NLP Tool for Concept Extraction</p>
+<p>The authors recommend NILE, but this is
+closed source, difficult to get, not clearly version (i.e., impossible to update), and doesn’t seem to have had any work
+done in a few years…so probably moribund, unfortunately.</p>
+<p>Other options include:</p>
+<ul class="simple">
+<li><p>cTAKES</p></li>
+<li><p>MetaMap</p></li>
+<li><p>MetaMapLite</p></li>
+<li><p>Your own custom tool ;)</p></li>
+</ul>
+</div>
+<ol class="arabic simple">
+<li><p>Download text from Knowledge Base sources (e.g., Medline, Medscape, Merck, Wikipedia, Mayo) on your target
+condition (e.g., arthritis or COVID-19).</p></li>
+<li><p>Name these text files something like ‘Medscape.txt’ and ‘Wikipedia.txt’ and place them in a new directory (
+e.g., <code class="docutils literal notranslate"><span class="pre">/kb_articles/</span></code>).</p></li>
+<li><p>Split the files into no more than say 200 lines (
+see <a class="reference external" href="https://github.com/kpwhri/mml_utils#mml-split-files">mml-split-files</a> command for assistance).</p></li>
+<li><p>Run MML on the entire directory (e.g., <code class="docutils literal notranslate"><span class="pre">/kb_articles/</span></code>).</p></li>
+<li><p>Run <a class="reference external" href="https://github.com/kpwhri/mml_utils#mml-run-afep">mml-run-afep</a> on the output (see parametrisation there or
+below).</p></li>
+</ol>
+<p>As a prerequisite, you’ll need to install pandas (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pandas</span></code>) which is not installed by default due to this
+being the only script requiring it.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mml-run-afep /kb_articles/ [--mml-format json|mmi] [--outdir .]
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -241,17 +276,17 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="afep.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Automated Feature Extraction for Phenotyping (AFEP)</p>
+            <p class="prev-next-title">Welcome to Metamaplite Utility documentation!</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="install_metamaplite.html" title="next page">
+    <a class='right-next' id="next-link" href="glossary.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Installing MetaMapLite</p>
+        <p class="prev-next-title">Glossary</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

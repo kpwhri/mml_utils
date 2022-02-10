@@ -78,6 +78,11 @@
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="afep.html">
+   Automated Feature Extraction for Phenotyping (AFEP)
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="glossary.html">
    Glossary
   </a>
@@ -172,6 +177,24 @@
   <a class="reference internal nav-link" href="#example-usage">
    Example Usage
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-against-a-list-of-files-output-as-json">
+     Run against a list of files, output as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       json
+      </span>
+     </code>
+     .
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-test-text-directly-in-the-shell">
+     Run/test text directly in the shell:
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -197,6 +220,24 @@
   <a class="reference internal nav-link" href="#example-usage">
    Example Usage
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-against-a-list-of-files-output-as-json">
+     Run against a list of files, output as
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       json
+      </span>
+     </code>
+     .
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-test-text-directly-in-the-shell">
+     Run/test text directly in the shell:
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -220,15 +261,13 @@
 <div class="section" id="example-usage">
 <h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
 <p>Here are some example for using MetaMapLite. All these should be run from inside the <code class="docutils literal notranslate"><span class="pre">public_mm_lite</span></code> directory.</p>
-<ol class="arabic simple">
-<li><p>Run against a list of files, output as <code class="docutils literal notranslate"><span class="pre">json</span></code>.</p>
+<div class="section" id="run-against-a-list-of-files-output-as-json">
+<h3>Run against a list of files, output as <code class="docutils literal notranslate"><span class="pre">json</span></code>.<a class="headerlink" href="#run-against-a-list-of-files-output-as-json" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Note that the output will be in the same directory. If a file is called <code class="docutils literal notranslate"><span class="pre">0001.txt</span></code>, the output will be <code class="docutils literal notranslate"><span class="pre">0001.json</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--usecontext</span></code> will determine negation based on the context algorithm rather than negex</p></li>
 <li><p>Only the semantic types <code class="docutils literal notranslate"><span class="pre">[topp]</span></code>, <code class="docutils literal notranslate"><span class="pre">[fndg]</span></code>, <code class="docutils literal notranslate"><span class="pre">[dsyn]</span></code>, <code class="docutils literal notranslate"><span class="pre">[sosy]</span></code>, and <code class="docutils literal notranslate"><span class="pre">[lbpr]</span></code> will be included in the output.</p></li>
 </ul>
-</li>
-</ol>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>metamaplite.bat --filelistfn<span class="o">=</span>filelist.txt --outputformat<span class="o">=</span>json --usecontext --restrict_to_sts<span class="o">=</span>topp,fndg,dsyn,sosy,lbpr
 </pre></div>
 </div>
@@ -240,13 +279,13 @@
 <p class="admonition-title">Negation and JSON Output</p>
 <p>Currently, <code class="docutils literal notranslate"><span class="pre">json</span></code> files do not output negation information, but you can make the following change to get that information: <a class="reference external" href="https://github.com/lhncbc/metamaplite/pull/16">https://github.com/lhncbc/metamaplite/pull/16</a>.</p>
 </div>
-<ol class="arabic simple">
-<li><p>Run/test text directly in the shell:</p>
+</div>
+<div class="section" id="run-test-text-directly-in-the-shell">
+<h3>Run/test text directly in the shell:<a class="headerlink" href="#run-test-text-directly-in-the-shell" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;asymptomatic</span> <span class="pre">patient</span> <span class="pre">populations&quot;</span> <span class="pre">|</span> <span class="pre">.\metamaplite.bat</span> <span class="pre">--pipe</span> <span class="pre">--outputformat=json</span></code></p></li>
 </ul>
-</li>
-</ol>
+</div>
 </div>
 </div>
 
