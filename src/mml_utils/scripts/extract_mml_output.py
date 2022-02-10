@@ -155,8 +155,9 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
             outfile = pathlib.Path(file.parent / f'{str(file.stem)}.{output_format}')
             if outfile.exists():
                 logger.info(f'Processing associated {output_format}: {outfile}.')
-                yield from extract_mml_data(outfile, encoding=mm_encoding,
-                                            target_cuis=target_cuis, output_format=output_format)
+                for data in extract_mml_data(outfile, encoding=mm_encoding,
+                                             target_cuis=target_cuis, output_format=output_format):
+                    yield False, data
                 record['processed'] = True
             else:
                 record['processed'] = False
@@ -177,7 +178,15 @@ def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None,
         raise ValueError(f'Unrecognized output format: {output_format}.')
 
 
-def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
+def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
+    """
+
+    :param text:
+    :param filename:
+    :param target_cuis:
+    :param extras:
+    :return:
+    """
     if not target_cuis:
         target_cuis = set()
     i = 0
@@ -194,7 +203,9 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None):
             if not d or d['cui'] not in target_cuis:
                 continue
             d['event_id'] = f'{filename}_{i}'
-            yield False, d
+            if extras:
+                d |= extras
+            yield d
             i += 1
 
 
@@ -234,29 +245,42 @@ def extract_mmi_line(line):
               }
 
 
-def extract_mml_from_json_data(data, filename, *, target_cuis=None):
+def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None):
+    """
+
+    :param data:
+    :param filename:
+    :param target_cuis:
+    :param extras:
+    :return:
+    """
     i = 0
     for el in data:
         for event in el['evlist']:
             if target_cuis is None or event['conceptinfo']['cui'] in target_cuis:
-                yield False, {
-                    'event_id': f'{filename}_{i}',
-                    'docid': filename,
-                    'matchedtext': event['matchedtext'],
-                    'conceptstring': event['conceptinfo']['conceptstring'],
-                    'cui': event['conceptinfo']['cui'],
-                    'preferredname': event['conceptinfo']['preferredname'],
-                    'start': event['start'],
-                    'length': event['length'],
-                    'evid': event['id'],
-                    'negated': el.get('negated', None),
-                    'semantictype': event['conceptinfo']['semantictypes'][0],
-                    'source': event['conceptinfo']['sources'][0],
-                } | {
-                          s: 1 for s in event['conceptinfo']['sources']
-                      } | {
-                          s: 1 for s in event['conceptinfo']['semantictypes']
-                      }
+                data = {
+                           'event_id': f'{filename}_{i}',
+                           'docid': filename,
+                           'matchedtext': event['matchedtext'],
+                           'conceptstring': event['conceptinfo']['conceptstring'],
+                           'cui': event['conceptinfo']['cui'],
+                           'preferredname': event['conceptinfo']['preferredname'],
+                           'start': event['start'],
+                           'length': event['length'],
+                           'evid': event['id'],
+                           'negated': el.get('negated', None),
+                           'semantictype': event['conceptinfo']['semantictypes'][0],
+                           'source': event['conceptinfo']['sources'][0],
+                           'all_sources': ','.join(event['conceptinfo']['sources']),
+                           'all_semantictypes': ','.join(event['conceptinfo']['semantictypes']),
+                       } | {
+                           s: 1 for s in event['conceptinfo']['sources']
+                       } | {
+                           s: 1 for s in event['conceptinfo']['semantictypes']
+                       }
+                if extras:
+                    data |= extras
+                yield data
                 i += 1
 
 

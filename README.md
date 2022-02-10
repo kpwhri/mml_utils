@@ -11,7 +11,7 @@
 <br />
 <div>
   <p>
-    <!-- a href="https://github.com/kpwhri/batch_metamaplite">
+    <!-- a href="https://github.com/kpwhri/mml_utils">
       <img src="images/logo.png" alt="Logo">
     </a -->
   </p>
@@ -72,7 +72,7 @@ To get a local copy up and running follow these steps.
     ```
 1. Clone the repo
     ```sh
-    git clone https://github.com/kpwhri/batch_metamaplite.git
+    git clone https://github.com/kpwhri/mml_utils.git
     ```
 2. Install the package (using pyproject.toml)
     ```sh
@@ -154,7 +154,7 @@ Assumptions:
 * All notes have no extension.
     * To do this would require adding `Path.glob(*.txt)`, which might be a future change.
 
-    mml-copy-notes --source /path/to/notes --dest /path/to/notes2
+  mml-copy-notes --source /path/to/notes --dest /path/to/notes2
 
 ### mml-run-filelist
 
@@ -214,18 +214,35 @@ This will produce files like this:
 * Wikipedia_n.txt
 * filelist.txt  <- Run this file using [`mml-run-filelist`](#mml-run-filelist).
 
+### mml-run-afep
+
+This is not directly related to MML. If, however, you want to implement AFEP, this and
+the [previous section](#mml-split-files) may be of some use.
+
+1. Download text from Knowledge Base sources (e.g., Medline, Medscape, Merck, Wikipedia, Mayo) on your target
+   condition (e.g., arthritis or COVID-19).
+2. Name these text files something like 'Medscape.txt' and 'Wikipedia.txt' and place them in a new directory (
+   e.g., `/kb_articles/`).
+3. Split the files into no more than say 200 lines (see [mml-split-files](#mml-split-files) command for assistance).
+4. Run MML on the entire directory (e.g., `/kb_articles/`).
+5. Run [mml-run-afep](#mml-run-afep) on the output (see parametrisation below).
+
+As a prerequisite, you'll need to install pandas (`pip install pandas`) which is not installed by default due to this
+being the only script requiring it.
+
+    mml-run-afep /kb_articles/ [--mml-format json|mmi] [--outdir .]
+
 ## Versions
 
 Uses [SEMVER](https://semver.org/).
 
-See https://github.com/kpwhri/batch_metamaplite/releases.
+See https://github.com/kpwhri/mml_utils/releases.
 
 <!-- ROADMAP -->
 
 ## Roadmap
 
-See the [open issues](https://github.com/kpwhri/batch_metamaplite/issues) for a list of proposed features (and known
-issues).
+See the [open issues](https://github.com/kpwhri/mml_utils/issues) for a list of proposed features (and known issues).
 
 
 
@@ -255,7 +272,7 @@ See `LICENSE` or https://kpwhri.mit-license.org for more information.
 
 ## Contact
 
-Please use the [issue tracker](https://github.com/kpwhri/batch_metamaplite/issues).
+Please use the [issue tracker](https://github.com/kpwhri/mml_utils/issues).
 
 
 <!-- ACKNOWLEDGEMENTS -->
@@ -265,23 +282,23 @@ Please use the [issue tracker](https://github.com/kpwhri/batch_metamaplite/issue
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/kpwhri/batch_metamaplite.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/kpwhri/mml_utils.svg?style=flat-square
 
-[contributors-url]: https://github.com/kpwhri/batch_metamaplite/graphs/contributors
+[contributors-url]: https://github.com/kpwhri/mml_utils/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/kpwhri/batch_metamaplite.svg?style=flat-square
+[forks-shield]: https://img.shields.io/github/forks/kpwhri/mml_utils.svg?style=flat-square
 
-[forks-url]: https://github.com/kpwhri/batch_metamaplite/network/members
+[forks-url]: https://github.com/kpwhri/mml_utils/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/kpwhri/batch_metamaplite.svg?style=flat-square
+[stars-shield]: https://img.shields.io/github/stars/kpwhri/mml_utils.svg?style=flat-square
 
-[stars-url]: https://github.com/kpwhri/batch_metamaplite/stargazers
+[stars-url]: https://github.com/kpwhri/mml_utils/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/kpwhri/batch_metamaplite.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/kpwhri/mml_utils.svg?style=flat-square
 
-[issues-url]: https://github.com/kpwhri/batch_metamaplite/issues
+[issues-url]: https://github.com/kpwhri/mml_utils/issues
 
-[license-shield]: https://img.shields.io/github/license/kpwhri/batch_metamaplite.svg?style=flat-square
+[license-shield]: https://img.shields.io/github/license/kpwhri/mml_utils.svg?style=flat-square
 
 [license-url]: https://kpwhri.mit-license.org/
 

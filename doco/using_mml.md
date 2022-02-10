@@ -8,10 +8,11 @@
 
 Here are some example for using MetaMapLite. All these should be run from inside the `public_mm_lite` directory.
 
-1. Run against a list of files, output as `json`.
-    * Note that the output will be in the same directory. If a file is called `0001.txt`, the output will be `0001.json`.
-    * `--usecontext` will determine negation based on the context algorithm rather than negex
-    * Only the semantic types `[topp]`, `[fndg]`, `[dsyn]`, `[sosy]`, and `[lbpr]` will be included in the output.
+### Run against a list of files, output as `json`.
+
+* Note that the output will be in the same directory. If a file is called `0001.txt`, the output will be `0001.json`.
+* `--usecontext` will determine negation based on the context algorithm rather than negex
+* Only the semantic types `[topp]`, `[fndg]`, `[dsyn]`, `[sosy]`, and `[lbpr]` will be included in the output.
 
 ```shell
 metamaplite.bat --filelistfn=filelist.txt --outputformat=json --usecontext --restrict_to_sts=topp,fndg,dsyn,sosy,lbpr
@@ -25,5 +26,6 @@ To re-run on the same files, you will need to include an `--overwrite` flag to t
 Currently, `json` files do not output negation information, but you can make the following change to get that information: [https://github.com/lhncbc/metamaplite/pull/16](https://github.com/lhncbc/metamaplite/pull/16).
 ```
 
-2. Run/test text directly in the shell:
-    * `echo "asymptomatic patient populations" | .\metamaplite.bat --pipe --outputformat=json`
+### Run/test text directly in the shell:
+
+* `echo "asymptomatic patient populations" | .\metamaplite.bat --pipe --outputformat=json`

@@ -34,6 +34,7 @@ doc = [
     'sphinx-autodoc-typehints',
     'sphinx-book-theme',
 ]
+pandas = ['pandas']
 
 [project.scripts]
 mml-run-filelist = "mml_utils.scripts.run_mml_on_filelist:run_single_mml_filelist"
@@ -43,4 +44,5 @@ mml-run-filelists-dir = "mml_utils.scripts.run_mml:run_mml_filelists_in_dir"
 mml-extract-mml = "mml_utils.scripts.extract_mml_output:extract_mml"
 mml-check-progress = "mml_utils.scripts.check_mml_progress:check_mml_progress_repeat"
 mml-split-filelist = "mml_utils.scripts.split_filelist:split_filelist"
-mml-split-files = "mml_utils.scripts.split_lon_file:split_files_on_lines"
+mml-split-files = "mml_utils.scripts.split_long_file:split_files_on_lines"
+mml-run-afep = "mml_utils.scripts.run_afep:run_afep_algorithm"
