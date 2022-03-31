@@ -85,7 +85,7 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
     cui_to_source_count = {r.cui: len(r.all_sources.split(',')) for r in
                            df[['cui', 'all_sources']].drop_duplicates().itertuples()}
     # use length or not?
-    master_cui = cui_df.query('>0 or '.join(retain_semtypes) + '>0')[
+    master_cui = cui_df.query('>0 or '.join(x for x in retain_semtypes if x in cui_df.columns) + '>0')[
         ['cui', 'matchedtext', 'docid', 'start', 'length']].groupby(
         ['docid', 'start', 'matchedtext', 'cui']).count().reset_index()
     # get unique values of docid, matchedtext, start
