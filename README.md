@@ -59,6 +59,8 @@ of results from Metamaplite.
 
 To get a local copy up and running follow these steps.
 
+Additional instructions, including UMLS/MML installation are described here: https://kpwhri.github.io/mml_utils/.
+
 ### Prerequisites
 
 * Python 3.9+
