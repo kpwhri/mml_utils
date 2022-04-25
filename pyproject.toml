@@ -46,3 +46,4 @@ mml-check-progress = "mml_utils.scripts.check_mml_progress:check_mml_progress_re
 mml-split-filelist = "mml_utils.scripts.split_filelist:split_filelist"
 mml-split-files = "mml_utils.scripts.split_long_file:split_files_on_lines"
 mml-run-afep = "mml_utils.scripts.run_afep:run_afep_algorithm"
+mml-check-offsets = "mml_utils.scripts.check_mml_offsets:check_mml_offsets"
