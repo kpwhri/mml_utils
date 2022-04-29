@@ -10,13 +10,13 @@ filename, length, processed: yes/no
 """
 import csv
 import datetime
-import io
-import json
 import pathlib
 import re
 
 import click
 from loguru import logger
+
+from mml_utils.parse.parser import extract_mml_data
 
 MML_FIELDNAMES = [
     'event_id', 'docid', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length',
@@ -162,126 +162,6 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
             else:
                 record['processed'] = False
             yield True, record
-
-
-def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None, output_format='json'):
-    with open(file, encoding=encoding) as fh:
-        text = fh.read()
-    if not text.strip():  # handle empty note
-        return
-    if output_format == 'json':  # TODO: match-case
-        data = json.loads(text)
-        yield from extract_mml_from_json_data(data, file.name, target_cuis=target_cuis)
-    elif output_format == 'mmi':
-        yield from extract_mml_from_mmi_data(text, file.name, target_cuis=target_cuis)
-    else:
-        raise ValueError(f'Unrecognized output format: {output_format}.')
-
-
-def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
-    """
-
-    :param text:
-    :param filename:
-    :param target_cuis:
-    :param extras:
-    :return:
-    """
-    if not target_cuis:
-        target_cuis = set()
-    i = 0
-    prev_line = None
-    for line in csv.reader(io.StringIO(text), delimiter='|'):
-        if not line[-1] == '':
-            prev_line = line
-            continue
-        if prev_line:
-            carryover_cell = prev_line[-1] + line[0]
-            line = prev_line[:-1] + [carryover_cell] + line[1:]
-            prev_line = None
-        for d in extract_mmi_line(line):
-            if not d or d['cui'] not in target_cuis:
-                continue
-            d['event_id'] = f'{filename}_{i}'
-            if extras:
-                d |= extras
-            yield d
-            i += 1
-
-
-def extract_mmi_line(line):
-    if line[1] != 'MMI':
-        logger.warning(f'Line contains {line[1]} rather the "MMI"; skipping line: {line}')
-        return
-    (identifier, mmi, score, conceptstring, cui, semantictype, triggerinfo,
-     location, positional_info, treecodes, *other) = line[:10]
-    semantictypes = [st.strip() for st in semantictype[1:-1].split(',')]  # official doco says comma-separated
-    triggerinfos = [
-        list(csv.reader([element], delimiter='-'))[0]
-        for row in csv.reader([triggerinfo], delimiter=',')
-        for element in row
-    ]
-    new_triggerinfos = []
-    for ti in triggerinfos:
-        new_triggerinfos.append(['-'.join(ti[:len(ti) - 5])] + ti[len(ti) - 5:])
-    triggerinfos = new_triggerinfos
-    positional_infos = [loc.split('/') for loc in positional_info.split(';')]
-    for (preferredname, loc, locpos, matchedtext, pos, negation
-         ), (start, length) in zip(triggerinfos, positional_infos):
-        yield {
-                  'docid': identifier,
-                  'matchedtext': matchedtext,
-                  'conceptstring': conceptstring,
-                  'cui': cui,
-                  'preferredname': preferredname,
-                  'start': int(start),
-                  'length': int(length),
-                  'evid': None,
-                  'negated': int(negation),
-                  'pos': pos,
-                  'semantictype': semantictypes[0],  # usually (always?) just one, so show it
-              } | {
-                  s: 1 for s in semantictypes
-              }
-
-
-def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None):
-    """
-
-    :param data:
-    :param filename:
-    :param target_cuis:
-    :param extras:
-    :return:
-    """
-    i = 0
-    for el in data:
-        for event in el['evlist']:
-            if target_cuis is None or event['conceptinfo']['cui'] in target_cuis:
-                data = {
-                           'event_id': f'{filename}_{i}',
-                           'docid': filename,
-                           'matchedtext': event['matchedtext'],
-                           'conceptstring': event['conceptinfo']['conceptstring'],
-                           'cui': event['conceptinfo']['cui'],
-                           'preferredname': event['conceptinfo']['preferredname'],
-                           'start': event['start'],
-                           'length': event['length'],
-                           'evid': event['id'],
-                           'negated': el.get('negated', None),
-                           'semantictype': event['conceptinfo']['semantictypes'][0],
-                           'source': event['conceptinfo']['sources'][0],
-                           'all_sources': ','.join(event['conceptinfo']['sources']),
-                           'all_semantictypes': ','.join(event['conceptinfo']['semantictypes']),
-                       } | {
-                           s: 1 for s in event['conceptinfo']['sources']
-                       } | {
-                           s: 1 for s in event['conceptinfo']['semantictypes']
-                       }
-                if extras:
-                    data |= extras
-                yield data
-                i += 1
 
 
 if __name__ == '__main__':

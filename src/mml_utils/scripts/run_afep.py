@@ -15,7 +15,8 @@ import click
 import pandas as pd
 from loguru import logger
 
-from mml_utils.scripts.extract_mml_output import extract_mml_from_json_data, extract_mml_from_mmi_data
+from mml_utils.parse.mmi import extract_mml_from_mmi_data
+from mml_utils.parse.json import extract_mml_from_json_data
 
 
 @click.command()

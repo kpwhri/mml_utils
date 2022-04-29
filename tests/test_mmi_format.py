@@ -3,7 +3,7 @@ from textwrap import dedent
 
 import pytest
 
-from mml_utils.scripts.extract_mml_output import extract_mml_from_mmi_data, extract_mmi_line
+from mml_utils.parse.mmi import extract_mml_from_mmi_data, extract_mmi_line
 
 
 def fix_text(text):
