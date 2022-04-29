@@ -8,6 +8,8 @@ from typing import Iterable
 import click
 from loguru import logger
 
+from mml_utils.parse.json import iter_json_matches_from_file
+
 
 @click.command()
 @click.argument('mml_directories', nargs=-1, type=click.Path(exists=True, path_type=pathlib.Path), )
@@ -72,7 +74,7 @@ def check_mml_offsets(mml_directories: Iterable[pathlib.Path], *, mml_format='js
                     text = text.replace(_from, _to)
 
             if mml_format == 'json':
-                data = iter_json_data(mml_file)
+                data = iter_json_matches_from_file(mml_file, 'matchedtext', 'start', 'end', 'length')
             else:
                 raise ValueError(f'Unrecognized MML format type: {mml_format}.')
 

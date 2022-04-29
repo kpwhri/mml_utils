@@ -1,0 +1,153 @@
+[
+  {
+    "matchedtext": "COVID-19",
+    "evlist": [
+      {
+        "score": 0,
+        "matchedtext": "COVID-19",
+        "start": 4,
+        "length": 8,
+        "id": "ev0",
+        "conceptinfo": {
+          "conceptstring": "COVID-19",
+          "sources": [
+            "MTH"
+          ],
+          "cui": "C5203670",
+          "preferredname": "COVID-19",
+          "semantictypes": [
+            "dsyn"
+          ]
+        }
+      }
+    ],
+    "docid": "00000000.tx",
+    "start": 4,
+    "length": 8,
+    "id": "en0",
+    "fieldid": "text"
+  },
+  {
+    "matchedtext": "pandemic",
+    "evlist": [
+      {
+        "score": 0,
+        "matchedtext": "pandemic",
+        "start": 13,
+        "length": 8,
+        "id": "ev0",
+        "conceptinfo": {
+          "conceptstring": "Pandemic",
+          "sources": [
+            "CSP",
+            "MSH"
+          ],
+          "cui": "C1615608",
+          "preferredname": "Pandemics",
+          "semantictypes": [
+            "phpr"
+          ]
+        }
+      }
+    ],
+    "docid": "00000000.tx",
+    "start": 13,
+    "length": 8,
+    "id": "en0",
+    "fieldid": "text"
+  },
+  {
+    "matchedtext": "known",
+    "evlist": [
+      {
+        "score": 0,
+        "matchedtext": "known",
+        "start": 28,
+        "length": 5,
+        "id": "ev0",
+        "conceptinfo": {
+          "conceptstring": "Known",
+          "sources": [
+            "MTH",
+            "CHV",
+            "NCI"
+          ],
+          "cui": "C0205309",
+          "preferredname": "Known",
+          "semantictypes": [
+            "qlco"
+          ]
+        }
+      }
+    ],
+    "docid": "00000000.tx",
+    "start": 28,
+    "length": 5,
+    "id": "en0",
+    "fieldid": "text"
+  },
+  {
+    "matchedtext": "coronavirus",
+    "evlist": [
+      {
+        "score": 0,
+        "matchedtext": "coronavirus",
+        "start": 41,
+        "length": 11,
+        "id": "ev0",
+        "conceptinfo": {
+          "conceptstring": "Coronavirus",
+          "sources": [
+            "MTH",
+            "LNC",
+            "CHV",
+            "LCH",
+            "CSP",
+            "MSH",
+            "NCI",
+            "LCH_NW"
+          ],
+          "cui": "C0206419",
+          "preferredname": "Genus: Coronavirus",
+          "semantictypes": [
+            "virs"
+          ]
+        }
+      }
+    ],
+    "docid": "00000000.tx",
+    "start": 41,
+    "length": 11,
+    "id": "en0",
+    "fieldid": "text"
+  },
+  {
+    "matchedtext": "pandemic",
+    "evlist": [
+      {
+        "score": 0,
+        "matchedtext": "pandemic",
+        "start": 53,
+        "length": 8,
+        "id": "ev0",
+        "conceptinfo": {
+          "conceptstring": "Pandemic",
+          "sources": [
+            "CSP",
+            "MSH"
+          ],
+          "cui": "C1615608",
+          "preferredname": "Pandemics",
+          "semantictypes": [
+            "phpr"
+          ]
+        }
+      }
+    ],
+    "docid": "00000000.tx",
+    "start": 53,
+    "length": 8,
+    "id": "en0",
+    "fieldid": "text"
+  }
+]

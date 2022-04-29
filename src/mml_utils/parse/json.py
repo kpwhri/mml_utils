@@ -1,3 +1,6 @@
+import json
+
+
 def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None):
     """
 
@@ -35,3 +38,21 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None)
                     data |= extras
                 yield data
                 i += 1
+
+
+def iter_json_matches_from_file(json_file, *fields):
+    with open(json_file) as fh:
+        data = json.load(fh)
+    yield from iter_json_matches(data)
+
+
+def iter_json_matches(data, *fields):
+    fields = fields if fields else ('matchedtext', 'start', 'end', 'length')
+    for match in data:
+        d = {
+            'matchedtext': match['matchedtext'],
+            'start': match['start'],
+            'length': match['length'],
+            'end': match['start'] + match['length'],
+        }
+        yield [d[field] for field in fields]
