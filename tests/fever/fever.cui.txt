@@ -1,0 +1,5 @@
+C0687681	 Feeling feverish
+C0015967	 Fever
+C0239575	 Remittent fever
+C0015970	 Fever of Unknown Origin
+C3714772	 Recurrent fevers

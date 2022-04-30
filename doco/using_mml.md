@@ -15,7 +15,7 @@ Here are some example for using MetaMapLite. All these should be run from inside
 * Only the semantic types `[topp]`, `[fndg]`, `[dsyn]`, `[sosy]`, and `[lbpr]` will be included in the output.
 
 ```shell
-metamaplite.bat --filelistfn=filelist.txt --outputformat=json --usecontext --restrict_to_sts=topp,fndg,dsyn,sosy,lbpr
+metamaplite.bat --filelistfn=filelist.txt --outputformat=files --usecontext --restrict_to_sts=topp,fndg,dsyn,sosy,lbpr
 ```
 
 ```{admonition} Re-running MetaMapLite

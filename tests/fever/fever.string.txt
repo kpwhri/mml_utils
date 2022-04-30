@@ -1,0 +1,80 @@
+febrile
+febris
+Fever
+fevered
+feverish
+Fevers
+Hyperthermia
+Hyperthermias
+hyperthermic
+PYREXIA
+pyrexial
+Pyrexias
+Has a temperature
+high temperature
+raised temperature
+increase temperature
+increased temperature
+elevated temperature
+elevation in temperature
+above normal temperature
+high body temperature
+raised body temperature
+increase body temperature
+increased body temperature
+elevated body temperature
+elevation in body temperature
+above normal body temperature
+high core body temperature
+raised core body temperature
+increase core body temperature
+increased core body temperature
+elevated core body temperature
+elevation in core body temperature
+above normal core body temperature
+temperature high
+temperature raised
+temperature increase
+temperature increased
+temperature elevated
+temperature elevation
+temperature above reference range
+temperature above normal
+Has a temp
+high temp
+raised temp
+increase temp
+increased temp
+elevated temp
+elevation in temp
+above normal temp
+high body temp
+raised body temp
+increase body temp
+increased body temp
+elevated body temp
+elevation in body temp
+above normal body temp
+high core body temp
+raised core body temp
+increase core body temp
+increased core body temp
+elevated core body temp
+elevation in core body temp
+above normal core body temp
+temp high
+temp raised
+temp increase
+temp increased
+temp elevated
+temp elevation
+temp above reference range
+temp above normal
+temp. high
+temp. raised
+temp. increase
+temp. increased
+temp. elevated
+temp. elevation
+temp. above reference range
+temp. above normal

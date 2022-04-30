@@ -5,7 +5,7 @@ import subprocess
 from loguru import logger
 
 
-def run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None):
+def run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None):
     restrict_to_sts = f"--restrict_to_sts={','.join(restrict_to_sts)}" if restrict_to_sts else ''
     # metamaplite
     logger.info(f'Running Metamaplite on current set (install location: {cwd})')
@@ -21,7 +21,7 @@ def run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None):
     return res
 
 
-def repeat_run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None, max_retry=20,
+def repeat_run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None, max_retry=20,
                    **kwargs):
     filelist_version = 0
     return_code = 1
@@ -52,7 +52,7 @@ def repeat_run_mml(filename, cwd, *, output_format='json', restrict_to_sts=None,
             missing_count = 0
             still_todo = 0
             for file in fh.read().split('\n'):
-                outfile = pathlib.Path(f'{file}.json')
+                outfile = pathlib.Path(f'{file}.files')
                 if outfile.exists():
                     total_completed += 1
                     continue

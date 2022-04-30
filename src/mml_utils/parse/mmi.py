@@ -18,9 +18,9 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
     i = 0
     prev_line = None
     for line in csv.reader(io.StringIO(text), delimiter='|'):
-        if not line[-1] == '':
-            prev_line = line
-            continue
+        # if not line[-1] == '':
+        #     prev_line = line
+        #     continue
         if prev_line:
             carryover_cell = prev_line[-1] + line[0]
             line = prev_line[:-1] + [carryover_cell] + line[1:]
@@ -62,6 +62,7 @@ def extract_mmi_line(line):
                   'preferredname': preferredname,
                   'start': int(start),
                   'length': int(length),
+                  'end': int(start) + int(length),
                   'evid': None,
                   'negated': int(negation),
                   'pos': pos,

@@ -1,4 +1,4 @@
-import json
+import files
 import pathlib
 
 import pytest
@@ -8,13 +8,13 @@ from mml_utils.parse.json import iter_json_matches_from_file
 
 @pytest.fixture
 def file0_path():
-    return pathlib.Path('json/file0.json')
+    return pathlib.Path('files/file0.json')
 
 
 @pytest.fixture
 def file0(file0_path):
     with open(file0_path) as fh:
-        return json.load(fh)
+        return files.load(fh)
 
 
 def test_iter_json_matches_from_file(file0_path):

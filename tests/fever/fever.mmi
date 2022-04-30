@@ -1,0 +1,274 @@
+00000000.tx|MMI|55.25|Temperature|C0039476|[qnco]|"Temperature"-text-10-"temperature"--0,"Temperature"-text-0-"temperature"--0,"Temperature"-text-0-"temperature"--0,"Temperature"-text-17-"temperature"--0,"Temperature"-text-18-"temperature"--0|text|59/11;131/11;509/11;1293/11;1624/11|G01.906.595;N06.230.150.450;G16.500.750.775.710;G16.500.275.063.725.710;N06.230.300.100.725.710
+00000000.tx|MMI|25.79|Fever|C0015967|[sosy]|"Fever"-text-0-"Fever"--0,"Pyrexia"-text-0-"pyrexia"--0,"Fever"-text-0-"fever"--0,"Fevers"-text-0-"Fevers"--0,"Fever"-text-0-"fever"--0,"Hyperthermia"-text-0-"hyperthermia"--0,"Hyperthermia"-text-0-"hyperthermia"--0,"Fever"-text-0-"fever"--0,"Hyperthermia"-text-0-"Hyperthermia"--0,"Fever"-text-0-"Fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-3-"fever"--0,"Fever"-text-0-"Fever"--0,"Fever"-text-27-"fever"--0|text|0/5;27/7;610/5;694/6;778/5;1214/12;1236/12;1400/5;1812/12;1845/5;2013/5;2060/5;2102/5;2233/5|C23.888.119.344
+00000000.tx|MMI|19.34|Body Temperature|C0005903|[orga]|"Temperature"-text-10-"temperature"--0,"Temperature"-text-0-"temperature"--0,"Temperature"-text-0-"temperature"--0,"Body Temperature"-text-11-"body temperature"--0,"Temperature"-text-17-"temperature"--0,"Temperature"-text-18-"temperature"--0|text|59/11;131/11;509/11;1267/16;1293/11;1624/11|G07.110;E01.370.600.875.374
+00000000.tx|MMI|16.58|Andorra|C0002838|[geoa]|"AND"-text-24-"and"--0,"AND"-text-0-"and"--0,"AND"-text-4-"and"--0,"AND"-text-0-"and"--0,"AND"-text-17-"and"--0,"AND"-text-0-"and"--0,"AND"-text-21-"and"--0,"AND"-text-24-"and"--0,"AND"-text-0-"and"--0,"AND"-text-8-"and"--0,"AND"-text-9-"and"--0,"AND"-text-4-"and"--0|text|262/3;285/3;380/3;460/3;577/3;903/3;1039/3;1186/3;1462/3;1503/3;1949/3;2156/3|Z01.542.049
+00000000.tx|MMI|13.81|Cold Temperature|C0009264|[npop]|"Cold"-text-14-"cold"--0|text|404/4|N06.230.300.100.725.710.300;G16.500.275.063.725.710.300;G01.906.595.272;G16.500.750.775.710.300;N06.230.300.100.725.154
+00000000.tx|MMI|13.81|Vaccination|C0042196|[topp]|"Vaccination"-text-21-"vaccination"--0|text|1173/11|N06.850.780.680.310.890;N06.850.780.200.425.900;E02.095.465.425.400.530.890;E05.478.550.600.890;N02.421.726.758.310.890
+00000000.tx|MMI|11.97|Thermogenesis|C0018841|[orgf]|"Heat Production"-text-0-"heat production"--0,"Heat Production"-text-36-"heat production"--0|text|444/15;1339/15|G07.110.232.778;G07.410.421.778;G16.012.500.535.778
+00000000.tx|MMI|10.13|Common Cold|C0009443|[dsyn]|"cold"-text-14-"cold"--0,"Common Cold"-text-0-"common cold"--0|text|404/4;957/11|C01.925.782.687.207;C01.748.162;C08.730.162
+00000000.tx|MMI|10.13|acetaminophen|C0000970|[orch, phsu]|"Paracetamol"-text-0-"paracetamol"--0,"acetaminophen"-text-0-"acetaminophen"--0|text|1560/11;1573/13|D02.092.146.113.092.040;D02.065.199.092.040
+00000000.tx|MMI|9.21|Precipitating Factors|C0032930|[clna]|"triggers"-text-0-"triggers"--0,"trigger"-text-0-"trigger"--0|text|341/8;620/7|N06.850.490.625.500;N05.715.350.200.650
+00000000.tx|MMI|7.37|SET protein, human|C1137947|[bacs, aapp]|"SET"-text-0-"set"--0,"SET"-text-0-"set"--0,"SET"-text-0-"set"--0,"SET"-text-19-"set"--0|text|143/3;331/3;499/3;1305/3|x.x.x.x
+00000000.tx|MMI|7.37|Set (Psychology)|C0036849|[menp]|"set"-text-0-"set"--0,"set"-text-0-"set"--0,"set"-text-0-"set"--0,"set"-text-19-"set"--0|text|143/3;331/3;499/3;1305/3|F02.463.425.838
+00000000.tx|MMI|7.37|Sweating|C0038990|[fndg]|"sweat"-text-25-"sweat"--0|text|594/5|G07.110.232.693;G16.012.500.535.693;G13.750.860;G07.410.421.693
+00000000.tx|MMI|5.99|parent|C0030551|[famg]|"Parents"-text-2-"parents"--0|text|2148/7|I01.880.853.150.500.340;F01.829.263.500.320;M01.620
+00000000.tx|MMI|5.53|And|C1515981|[idcn]|"And"-text-24-"and"--0,"And"-text-0-"and"--0,"And"-text-4-"and"--0,"And"-text-0-"and"--0,"And"-text-17-"and"--0,"And"-text-0-"and"--0,"And"-text-21-"and"--0,"And"-text-24-"and"--0,"And"-text-0-"and"--0,"And"-text-8-"and"--0,"And"-text-9-"and"--0,"And"-text-4-"and"--0|text|262/3;285/3;380/3;460/3;577/3;903/3;1039/3;1186/3;1462/3;1503/3;1949/3;2156/3|
+00000000.tx|MMI|5.53|RelationshipConjunction - and|C1550557|[inpr]|"and"-text-24-"and"--0,"and"-text-0-"and"--0,"and"-text-4-"and"--0,"and"-text-0-"and"--0,"and"-text-17-"and"--0,"and"-text-0-"and"--0,"and"-text-21-"and"--0,"and"-text-24-"and"--0,"and"-text-0-"and"--0,"and"-text-8-"and"--0,"and"-text-9-"and"--0,"and"-text-4-"and"--0|text|262/3;285/3;380/3;460/3;577/3;903/3;1039/3;1186/3;1462/3;1503/3;1949/3;2156/3|
+00000000.tx|MMI|5.53|Appendicitis|C0003615|[dsyn]|"Appendicitis"-text-10-"appendicitis"--0|text|1008/12|C01.463.099;C06.405.469.110.207;C06.405.205.099
+00000000.tx|MMI|5.53|Pain|C0030193|[sosy]|"Pain"-text-0-"pain"--0|text|1457/4|G11.561.790.444;F02.830.816.444;C23.888.592.612
+00000000.tx|MMI|5.06|Homo sapiens|C0086418|[humn]|"Humans"-text-0-"humans"--0|text|307/6|B01.050.150.900.649.313.988.400.112.400.400
+00000000.tx|MMI|5.06|Influenza|C0021400|[dsyn]|"Influenza"-text-0-"influenza"--0|text|942/9|C01.748.310;C01.925.782.620.365;C08.730.310
+00000000.tx|MMI|4.14|Fever symptoms (finding)|C0424755|[fndg]|"Fever"-text-0-"Fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-0-"Fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-3-"fever"--0,"Fever"-text-0-"Fever"--0,"Fever"-text-27-"fever"--0|text|0/5;610/5;778/5;1400/5;1845/5;2013/5;2060/5;2102/5;2233/5|
+00000000.tx|MMI|4.14|Fever, CTCAE|C4552740|[fndg]|"Fever"-text-0-"Fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-0-"Fever"--0,"Fever"-text-0-"fever"--0,"Fever"-text-3-"fever"--0,"Fever"-text-0-"Fever"--0,"Fever"-text-27-"fever"--0|text|0/5;610/5;778/5;1400/5;1845/5;2013/5;2060/5;2102/5;2233/5|
+00000000.tx|MMI|4.14|Child|C0008059|[aggp]|"Children"-text-17-"children"--0,"Children"-text-0-"Children"--0,"Children"-text-7-"children"--0|text|684/8;1637/8;1940/8|M01.060.406
+00000000.tx|MMI|4.14|Febrile Convulsions|C0009952|[dsyn]|"Febrile Seizure"-text-0-"febrile seizure"--0|text|630/15|C23.888.592.742.571;C10.597.742.571
+00000000.tx|MMI|4.14|Urinary tract infection|C0042029|[dsyn]|"Urinary Tract Infections"-text-7-"urinary tract infections"--0|text|982/24|C01.915;C12.777.892;C13.351.968.892
+00000000.tx|MMI|3.68|Human body|C0242821|[humn]|"body"-text-32-"body"--0|text|120/4|I01.076.201.450.560;K01.093.378
+00000000.tx|MMI|3.22|Malaria|C0024530|[dsyn]|"Malaria"-text-23-"malaria"--0|text|1043/7|C01.920.875;C01.610.752.530
+00000000.tx|MMI|2.76|In addition to|C0332287|[ftcn]|"With"-text-10-"with"--0,"With"-text-3-"with"--0,"With"-text-6-"with"--0,"With"-text-9-"with"--0,"With"-text-33-"with"--0,"With"-text-0-"with"--0|text|223/4;647/4;1597/4;1715/4;1791/4;2124/4|
+00000000.tx|MMI|2.76|Communicable Diseases|C0009450|[dsyn]|"Infectious"-text-0-"infectious"--0|text|1056/10|C23.550.291.531;C01.221
+00000000.tx|MMI|2.30|Health Personnel|C0018724|[prog]|"healthcare professionals"-text-8-"healthcare professionals"--0|text|2160/24|N02.360;M01.526.485
+00000000.tx|MMI|2.30|Influenza virus vaccine|C0021403|[imft, phsu]|"INFLUENZA"-text-0-"influenza"--0|text|942/9|D20.215.894.899.302
+00000000.tx|MMI|2.30|Malaria Vaccines|C0206255|[imft, phsu]|"malaria"-text-23-"malaria"--0|text|1043/7|D20.215.894.582.500
+00000000.tx|MMI|2.30|United Arab Emirates|C0041698|[geoa]|"ARE"-text-28-"are"--0|text|1987/3|Z01.252.245.500.900
+00000000.tx|MMI|2.30|World Health Organization|C0043237|[hcro]|"WHO"-text-26-"who"--0|text|1983/3|N03.540.514.718.800
+00000000.tx|MMI|2.30|ibuprofen|C0020740|[orch, phsu]|"ibuprofen"-text-0-"ibuprofen"--0|text|1547/9|D02.241.223.701.430
+00000000.tx|MMI|1.84|Data Type - ANY - Set|C1552685|[idcn]|"SET"-text-0-"set"--0,"SET"-text-0-"set"--0,"SET"-text-0-"set"--0,"SET"-text-19-"set"--0|text|143/3;331/3;499/3;1305/3|
+00000000.tx|MMI|1.84|Increase|C0442805|[ftcn]|"Increase"-text-26-"increase"--0,"Increase"-text-0-"increase"--0,"Increased"-text-0-"increased"--0,"Increase"-text-5-"increase"--0|text|104/8;319/8;350/9;1255/8|
+00000000.tx|MMI|1.84|Medical|C0205476|[ftcn]|"Medical"-text-0-"medical"--0,"Medical"-text-0-"medical"--0,"Medical"-text-13-"medical"--0,"Medical"-text-0-"medical"--0|text|806/7;1680/7;1728/7;1877/7|
+00000000.tx|MMI|1.84|Medical referral type|C1561579|[inpr]|"Medical"-text-0-"medical"--0,"Medical"-text-0-"medical"--0,"Medical"-text-13-"medical"--0,"Medical"-text-0-"medical"--0|text|806/7;1680/7;1728/7;1877/7|
+00000000.tx|MMI|1.84|Medical school type|C1547184|[idcn]|"Medical"-text-0-"medical"--0,"Medical"-text-0-"medical"--0,"Medical"-text-13-"medical"--0,"Medical"-text-0-"medical"--0|text|806/7;1680/7;1728/7;1877/7|
+00000000.tx|MMI|1.84|Medical service|C0199168|[hlca]|"Medical"-text-0-"medical"--0,"Medical"-text-0-"medical"--0,"Medical"-text-13-"medical"--0,"Medical"-text-0-"medical"--0|text|806/7;1680/7;1728/7;1877/7|
+00000000.tx|MMI|1.84|Month of May|C3812381|[tmco]|"May"-text-19-"may"--0,"May"-text-0-"may"--0,"May"-text-2-"may"--0,"May"-text-2-"may"--0|text|581/3;616/3;1489/3;1588/3|
+00000000.tx|MMI|1.84|Negation|C1518422|[ftcn]|"Not"-text-0-"not"--0,"Non"-text-8-"non"--0,"Non"-text-0-"Non"--0,"Not"-text-40-"not"--0|text|163/3;838/3;1052/3;1358/3|
+00000000.tx|MMI|1.84|Parameterized Data Type - Set|C1552652|[idcn]|"Set"-text-0-"set"--0,"Set"-text-0-"set"--0,"Set"-text-0-"set"--0,"Set"-text-19-"set"--0|text|143/3;331/3;499/3;1305/3|
+00000000.tx|MMI|1.84|Persons|C0027361|[popg]|"Person"-text-5-"person"--0,"Person"-text-14-"person"--0,"People"-text-7-"people"--0,"People"-text-31-"people"--0|text|542/6;1514/6;1708/6;1784/6|M01
+00000000.tx|MMI|1.84|Point|C3714763|[spco]|"Point"-text-0-"point"--0,"Point"-text-0-"point"--0,"Point"-text-0-"point"--0,"Point"-text-21-"point"--0|text|147/5;335/5;503/5;1309/5|
+00000000.tx|MMI|1.84|Point Name|C2347617|[qnco]|"point"-text-0-"point"--0,"point"-text-0-"point"--0,"point"-text-0-"point"--0,"point"-text-21-"point"--0|text|147/5;335/5;503/5;1309/5|
+00000000.tx|MMI|1.84|SET gene|C1366517|[gngm]|"SET"-text-0-"set"--0,"SET"-text-0-"set"--0,"SET"-text-0-"set"--0,"SET"-text-19-"set"--0|text|143/3;331/3;499/3;1305/3|
+00000000.tx|MMI|1.84|Set scale|C1442518|[ftcn]|"Set"-text-0-"set"--0,"Set"-text-0-"set"--0,"Set"-text-0-"set"--0,"Set"-text-19-"set"--0|text|143/3;331/3;499/3;1305/3|
+00000000.tx|MMI|1.84|This (eukaryote)|C1080058|[euka]|"This"-text-0-"This"--0,"This"-text-5-"this"--0,"This"-text-0-"This"--0,"This"-text-8-"this"--0|text|420/4;652/4;871/4;1602/4|
+00000000.tx|MMI|1.84|Treating|C1522326|[ftcn]|"Treatment"-text-0-"Treatment"--0,"Treatment"-text-0-"Treatment"--0,"Treatment"-text-0-"treatment"--0,"Treating"-text-1-"treating"--0|text|1380/9;1433/9;1834/9;2051/8|
+00000000.tx|MMI|1.84|point - UnitsOfMeasure|C1552961|[qnco]|"Point"-text-0-"point"--0,"Point"-text-0-"point"--0,"Point"-text-0-"point"--0,"Point"-text-21-"point"--0|text|147/5;335/5;503/5;1309/5|
+00000000.tx|MMI|1.84|set (group)|C1705195|[cnce]|"Set"-text-0-"set"--0,"Set"-text-0-"set"--0,"Set"-text-0-"set"--0,"Set"-text-19-"set"--0|text|143/3;331/3;499/3;1305/3|
+00000000.tx|MMI|1.84|Adverse effects|C0879626|[patf]|"side effects"-text-13-"side effects"--0|text|1143/12|Y10.020;Y07.020
+00000000.tx|MMI|1.84|Attention|C0004268|[menp]|"Attention"-text-0-"attention"--0|text|1688/9|F02.830.104.214
+00000000.tx|MMI|1.84|Canada|C0006823|[geoa]|"CAN"-text-0-"can"--0|text|784/3|Z01.107.567.176
+00000000.tx|MMI|1.84|Chronic Obstructive Airway Disease|C0024117|[dsyn]|"COLD"-text-14-"cold"--0|text|404/4|C08.381.495.389
+00000000.tx|MMI|1.84|Deep Vein Thrombosis|C0149871|[dsyn]|"Deep Vein Thrombosis"-text-1-"deep vein thrombosis"--0|text|1094/20|x.x.x.x
+00000000.tx|MMI|1.84|Feelings|C1527305|[menp]|"Feeling"-text-10-"feeling"--0|text|393/7|x.x.x.x
+00000000.tx|MMI|1.84|Flushing|C0016382|[sosy]|"flushed"-text-14-"flushed"--0|text|568/7|C23.888.885.344
+00000000.tx|MMI|1.84|Health Care|C0086388|[hlca]|"Healthcare"-text-1-"healthcare"--0|text|1919/10|x.x.x.x
+00000000.tx|MMI|1.84|Heat Loss|C0018840|[orgf]|"Heat Loss"-text-46-"heat loss"--0|text|1369/9|x.x.x.x
+00000000.tx|MMI|1.84|Malignant Neoplasms|C0006826|[neop]|"Cancer"-text-26-"cancer"--0|text|1190/6|x.x.x.x
+00000000.tx|MMI|1.84|NUP214 protein, human|C1366674|[bacs, aapp]|"CAN"-text-0-"can"--0|text|784/3|x.x.x.x
+00000000.tx|MMI|1.84|Rest|C0035253|[dora]|"Rest"-text-16-"rest"--0|text|1521/4|I03.450.769.647
+00000000.tx|MMI|1.84|Symptoms|C1457887|[sosy]|"Symptoms"-text-37-"symptoms"--0|text|1802/8|x.x.x.x
+00000000.tx|MMI|1.84|Unmarried|C0087136|[fndg]|"single"-text-0-"single"--1|text|169/6|x.x.x.x
+00000000.tx|MMI|1.84|Upper Respiratory Infections|C0041912|[dsyn]|"Cold"-text-14-"cold"--0|text|404/4|x.x.x.x
+00000000.tx|MMI|1.38|Administration procedure|C1533734|[topp]|"Treatment"-text-0-"Treatment"--0,"Treatment"-text-0-"Treatment"--0,"Treatment"-text-0-"treatment"--0|text|1380/9;1433/9;1834/9|
+00000000.tx|MMI|1.38|Biomaterial Treatment|C1705169|[cnce]|"Treatment"-text-0-"Treatment"--0,"Treatment"-text-0-"Treatment"--0,"Treatment"-text-0-"treatment"--0|text|1380/9;1433/9;1834/9|
+00000000.tx|MMI|1.38|Etiology aspects|C0015127|[ftcn]|"causes"-text-6-"causes"--0,"caused by"-text-0-"caused by"--0,"causes"-text-0-"causes"--0|text|384/6;791/9;1067/6|
+00000000.tx|MMI|1.38|Offspring|C0680063|[famg]|"Children"-text-17-"children"--0,"Children"-text-0-"Children"--0,"Children"-text-7-"children"--0|text|684/8;1637/8;1940/8|
+00000000.tx|MMI|1.38|Therapeutic procedure|C0087111|[topp]|"Treatment"-text-0-"Treatment"--0,"Treatment"-text-0-"Treatment"--0,"Treatment"-text-0-"treatment"--0|text|1380/9;1433/9;1834/9|
+00000000.tx|MMI|1.38|Treatment Epoch|C3538994|[resa]|"TREATMENT"-text-0-"Treatment"--0,"TREATMENT"-text-0-"Treatment"--0,"TREATMENT"-text-0-"treatment"--0|text|1380/9;1433/9;1834/9|
+00000000.tx|MMI|1.38|Treatment Study|C3161471|[resa]|"TREATMENT"-text-0-"Treatment"--0,"TREATMENT"-text-0-"Treatment"--0,"TREATMENT"-text-0-"treatment"--0|text|1380/9;1433/9;1834/9|
+00000000.tx|MMI|1.38|hyperthermia treatment|C0203597|[topp]|"Hyperthermia"-text-0-"hyperthermia"--0,"Hyperthermia"-text-0-"hyperthermia"--0,"Hyperthermia"-text-0-"Hyperthermia"--0|text|1214/12;1236/12;1812/12|
+00000000.tx|MMI|1.38|therapeutic aspects|C0039798|[ftcn]|"treatment"-text-0-"Treatment"--0,"treatment"-text-0-"Treatment"--0,"treatment"-text-0-"treatment"--0|text|1380/9;1433/9;1834/9|
+00000000.tx|MMI|1.38|treatment - ActInformationManagementReason|C3887704|[hlca]|"treatment"-text-0-"Treatment"--0,"treatment"-text-0-"Treatment"--0,"treatment"-text-0-"treatment"--0|text|1380/9;1433/9;1834/9|
+00000000.tx|MMI|1.38|Adult|C0001675|[aggp]|"Adults"-text-24-"adults"--0|text|1976/6|M01.060.116
+00000000.tx|MMI|1.38|Chills|C0085593|[sosy]|"Chills"-text-18-"chills"--0|text|412/6|C23.888.208
+00000000.tx|MMI|1.38|Collagen Diseases|C0009326|[dsyn]|"Connective Tissue Disease"-text-8-"connective tissue disease"--0|text|1116/25|C17.300.200
+00000000.tx|MMI|1.38|Inflammation|C0021368|[patf]|"Inflammation"-text-0-"inflammation"--0|text|1466/12|C23.550.470
+00000000.tx|MMI|1.38|Life|C0376558|[idcn]|"Life"-text-14-"life"--0|text|853/4|K01.752.400
+00000000.tx|MMI|1.38|Meningitis|C0025289|[dsyn]|"Meningitis"-text-0-"meningitis"--0|text|970/10|C10.228.614
+00000000.tx|MMI|1.38|Muscle Contraction|C0026820|[phsf]|"Muscle Contractions"-text-2-"muscle contractions"--0|text|360/19|G11.427.494
+00000000.tx|MMI|1.38|Normal Range|C0086715|[qnco]|"Normal Range"-text-18-"normal range"--0|text|81/12|E05.978.810
+00000000.tx|MMI|1.38|Sweat|C0038984|[bdsu]|"Sweat"-text-25-"sweat"--0|text|594/5|A12.200.849
+00000000.tx|MMI|1.38|Vasculitis|C0042384|[dsyn]|"Vasculitis"-text-0-"vasculitis"--0|text|1082/10|C14.907.940
+00000000.tx|MMI|0.92|Acetaminophen Assay|C0373527|[lbpr]|"Paracetamol"-text-0-"paracetamol"--0,"Acetaminophen"-text-0-"acetaminophen"--0|text|1560/11;1573/13|
+00000000.tx|MMI|0.92|Alert level - Serious|C1561576|[idcn]|"Serious"-text-10-"serious"--0,"Serious"-text-11-"serious"--0|text|842/7;1720/7|
+00000000.tx|MMI|0.92|Assisted (qualifier value)|C1269765|[qlco]|"Help"-text-10-"help"--0,"Help"-text-4-"help"--0|text|1507/4;1592/4|
+00000000.tx|MMI|0.92|Common (qualifier value)|C0205214|[qnco]|"Common"-text-11-"common"--0,"Common"-text-0-"common"--0|text|668/6;1870/6|
+00000000.tx|MMI|0.92|Common Specifications in HL7 V3 Publishing|C3245511|[inpr]|"common"-text-11-"common"--0,"common"-text-0-"common"--0|text|668/6;1870/6|
+00000000.tx|MMI|0.92|Device Alert Level - Serious|C1551395|[fndg]|"Serious"-text-10-"serious"--0,"Serious"-text-11-"serious"--0|text|842/7;1720/7|
+00000000.tx|MMI|0.92|Due to|C0678226|[ftcn]|"Due to"-text-22-"due to"--0,"Due to"-text-26-"due to"--0|text|94/6;1316/6|
+00000000.tx|MMI|0.92|Equipment Alert Level - Serious|C1552745|[fndg]|"Serious"-text-10-"serious"--0,"Serious"-text-11-"serious"--0|text|842/7;1720/7|
+00000000.tx|MMI|0.92|Etiology|C1314792|[ftcn]|"Causes"-text-6-"causes"--0,"Causes"-text-0-"causes"--0|text|384/6;1067/6|Y05
+00000000.tx|MMI|0.92|From|C1517320|[qlco]|"From"-text-6-"from"--0,"From"-text-0-"from"--0|text|833/4;1209/4|
+00000000.tx|MMI|0.92|Greater|C1704243|[qnco]|"Greater"-text-0-"greater"--0,"Greater"-text-0-"greater"--0|text|436/7;2129/7|
+00000000.tx|MMI|0.92|Help document|C1552861|[inpr]|"help"-text-10-"help"--0,"help"-text-4-"help"--0|text|1507/4;1592/4|
+00000000.tx|MMI|0.92|Including (qualifier)|C0332257|[ftcn]|"includes"-text-0-"includes"--0,"include"-text-0-"include"--0|text|876/8;1074/7|
+00000000.tx|MMI|0.92|Medications|C4284232|[inpr]|"Medication"-text-17-"medication"--0,"Medications"-text-0-"Medications"--0|text|1159/10;1527/11|
+00000000.tx|MMI|0.92|NON Mouse|C1513853|[mamm]|"NON"-text-8-"non"--0,"NON"-text-0-"Non"--0|text|838/3;1052/3|
+00000000.tx|MMI|0.92|NR4A2 gene|C1417836|[gngm]|"NOT"-text-0-"not"--0,"NOT"-text-40-"not"--0|text|163/3;1358/3|
+00000000.tx|MMI|0.92|Person Info|C1522390|[qlco]|"Person"-text-5-"person"--0,"Person"-text-14-"person"--0|text|542/6;1514/6|
+00000000.tx|MMI|0.92|Person Observer|C2347489|[grup]|"Person"-text-5-"person"--0,"Person"-text-14-"person"--0|text|542/6;1514/6|
+00000000.tx|MMI|0.92|Pharmaceutical Preparations|C0013227|[phsu]|"Medication"-text-17-"medication"--0,"medications"-text-0-"Medications"--0|text|1159/10;1527/11|D26
+00000000.tx|MMI|0.92|Serious|C0205404|[qlco]|"Serious"-text-10-"serious"--0,"Serious"-text-11-"serious"--0|text|842/7;1720/7|
+00000000.tx|MMI|0.92|Upper|C1282910|[spco]|"Above"-text-12-"above"--0,"Upper"-text-0-"upper"--0|text|71/5;188/5|
+00000000.tx|MMI|0.92|shared attribute|C1522138|[ftcn]|"Common"-text-11-"common"--0,"Common"-text-0-"common"--0|text|668/6;1870/6|
+00000000.tx|MMI|0.92|Connective Tissue Diseases|C0009782|[dsyn]|"CONNECTIVE TISSUE DISEASE"-text-8-"connective tissue disease"--0|text|1116/25|C17.300
+00000000.tx|MMI|0.92|Defense Mechanisms|C0011142|[menp]|"defense mechanism"-text-0-"defense mechanism"--0|text|2032/17|F01.393
+00000000.tx|MMI|0.92|Immune system|C0020962|[bdsy]|"Immune system"-text-27-"immune system"--0|text|1767/13|A15.382
+00000000.tx|MMI|0.92|Parasitic Diseases|C0030499|[dsyn]|"Parasitic Infections"-text-0-"parasitic infections"--0|text|907/20|C01.610
+00000000.tx|MMI|0.46|1 (finding)|C5201140|[fndg]|"One"-text-0-"one"--0|text|1854/3|
+00000000.tx|MMI|0.46|105|C4319547|[qnco]|"105"-text-0-"105"--0|text|751/3|
+00000000.tx|MMI|0.46|Acetaminophen [EPC]|C2917659|[phsu]|"Acetaminophen"-text-0-"acetaminophen"--0|text|1573/13|
+00000000.tx|MMI|0.46|Administration Method - Pain|C1549543|[ftcn]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Adult human body|C4082212|[anst]|"Body"-text-32-"body"--0|text|120/4|
+00000000.tx|MMI|0.46|Adverse Event Associated with Pain|C1557397|[fndg]|"PAIN"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Adverse event|C0877248|[patf]|"side effects"-text-13-"side effects"--0|text|1143/12|
+00000000.tx|MMI|0.46|Androgen Response Element|C1515984|[nusq]|"ARE"-text-28-"are"--0|text|1987/3|
+00000000.tx|MMI|0.46|Appearance|C0700364|[qlco]|"APPEAR"-text-9-"appear"--0|text|2075/6|
+00000000.tx|MMI|0.46|Appendicitis, CTCAE|C4553526|[fndg]|"Appendicitis"-text-10-"appendicitis"--0|text|1008/12|
+00000000.tx|MMI|0.46|Approximate|C0332232|[qlco]|"About"-text-0-"about"--0|text|1906/5|
+00000000.tx|MMI|0.46|Arabic numeral 100|C1704407|[qnco]|"100"-text-0-"100"--0|text|289/3|
+00000000.tx|MMI|0.46|Aspects of signs|C0220912|[ftcn]|"signs"-text-2-"signs"--0|text|1885/5|
+00000000.tx|MMI|0.46|Associated with|C0332281|[qlco]|"associated"-text-0-"associated"--0|text|1446/10|
+00000000.tx|MMI|0.46|Attention G-code|C4281780|[inpr]|"Attention"-text-0-"attention"--0|text|1688/9|
+00000000.tx|MMI|0.46|Bacterial|C0521009|[qlco]|"Bacterial"-text-0-"bacterial"--0|text|892/9|
+00000000.tx|MMI|0.46|Beginning|C0439659|[tmco]|"Begin"-text-21-"begin"--0|text|585/5|
+00000000.tx|MMI|0.46|Body Site Modifier - Lower|C1548802|[blor]|"Lower"-text-16-"lower"--0|text|1618/5|
+00000000.tx|MMI|0.46|Body of stomach|C0227230|[bpoc]|"Body"-text-32-"body"--0|text|120/4|
+00000000.tx|MMI|0.46|Body structure|C1268086|[anst]|"Body"-text-32-"body"--0|text|120/4|
+00000000.tx|MMI|0.46|Body temperature:Temperature:Point in time:^Patient:Quantitative|C0487995|[clna]|"Body temperature"-text-11-"body temperature"--0|text|1267/16|
+00000000.tx|MMI|0.46|Bound (value)|C2349209|[cnce]|"Limit"-text-2-"limit"--0|text|194/5|
+00000000.tx|MMI|0.46|COVID-19|C5203670|[dsyn]|"COVID-19"-text-18-"COVID-19"--0|text|1029/8|
+00000000.tx|MMI|0.46|CROUZON SYNDROME WITH ACANTHOSIS NIGRICANS (disorder)|C2677099|[dsyn]|"CAN"-text-0-"can"--0|text|784/3|
+00000000.tx|MMI|0.46|Can - object|C1704712|[mnob]|"Can"-text-0-"can"--0|text|784/3|
+00000000.tx|MMI|0.46|Can Dosing Unit|C1704713|[qnco]|"Can"-text-0-"can"--0|text|784/3|
+00000000.tx|MMI|0.46|Cancer Genus|C0998265|[euka]|"Cancer"-text-26-"cancer"--0|text|1190/6|
+00000000.tx|MMI|0.46|Cancer:-:Point in time:^Patient:-|C2707253|[clna]|"Cancer"-text-26-"cancer"--0|text|1190/6|
+00000000.tx|MMI|0.46|Chills, CTCAE|C4553185|[fndg]|"Chills"-text-18-"chills"--0|text|412/6|
+00000000.tx|MMI|0.46|Chronic rejection of renal transplant|C0403592|[dsyn]|"CAN"-text-0-"can"--0|text|784/3|
+00000000.tx|MMI|0.46|Cold Sensation|C0234192|[phsf]|"Cold"-text-14-"cold"--0|text|404/4|
+00000000.tx|MMI|0.46|Concern|C2699424|[idcn]|"Concern"-text-0-"concern"--0|text|2137/7|
+00000000.tx|MMI|0.46|Definable|C4724435|[cnce]|"Defined"-text-2-"defined"--0|text|39/7|
+00000000.tx|MMI|0.46|Definition|C1704788|[inpr]|"Defined"-text-2-"defined"--0|text|39/7|
+00000000.tx|MMI|0.46|Do not|C3840725|[fndg]|"Do not"-text-0-"do not"--0|text|701/6|
+00000000.tx|MMI|0.46|Document Body|C1551342|[inpr]|"Body"-text-32-"body"--0|text|120/4|
+00000000.tx|MMI|0.46|During|C0347984|[tmco]|"Over"-text-13-"over"--0|text|1284/4|
+00000000.tx|MMI|0.46|Either|C3844638|[fndg]|"Either"-text-28-"either"--0|text|1323/6|
+00000000.tx|MMI|0.46|Entity Handling - Body Temperature|C1550577|[idcn]|"Body Temperature"-text-11-"body temperature"--0|text|1267/16|
+00000000.tx|MMI|0.46|Exist|C2987476|[qlco]|"Being"-text-7-"being"--0|text|657/5|
+00000000.tx|MMI|0.46|Facilitated oscillatory release technique|C1562169|[topp]|"FOR"-text-4-"for"--0|text|200/3|
+00000000.tx|MMI|0.46|Feel Pain|C4554132|[inpr]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Feels hot|C2939147|[sosy]|"Feels hot"-text-9-"feels hot"--0|text|549/9|
+00000000.tx|MMI|0.46|Feels hot/feverish|C0424749|[fndg]|"feels hot"-text-9-"feels hot"--0|text|549/9|
+00000000.tx|MMI|0.46|Frequency of Pain Question|C0518090|[inpr]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Frequently|C0332183|[tmco]|"Often"-text-0-"often"--0|text|2111/5|
+00000000.tx|MMI|0.46|GDC AJCC Clinical N Terminology|C5202759|[inpr]|"CAN"-text-0-"can"--0|text|784/3|
+00000000.tx|MMI|0.46|Genus Homo|C1300203|[mamm]|"humans"-text-0-"humans"--0|text|307/6|
+00000000.tx|MMI|0.46|Good|C0205170|[qlco]|"Well"-text-12-"well"--0|text|1610/4|
+00000000.tx|MMI|0.46|Have Pain|C2984058|[inpr]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Health care facility|C0018704|[mnob, hcro]|"Healthcare"-text-1-"healthcare"--0|text|1919/10|
+00000000.tx|MMI|0.46|Heat (physical force)|C0018837|[npop]|"Heat"-text-6-"heat"--0|text|484/4|
+00000000.tx|MMI|0.46|High|C0205250|[qlco]|"Higher"-text-0-"higher"--0|text|721/6|
+00000000.tx|MMI|0.46|How Much Distress Pain|C4085212|[inpr]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|How Often Felt Normal question|C4553972|[inpr]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Human body structure|C0460148|[anst]|"Body"-text-32-"body"--0|text|120/4|
+00000000.tx|MMI|0.46|Illness (finding)|C0221423|[sosy]|"Sick"-text-32-"sick"--0|text|2001/4|
+00000000.tx|MMI|0.46|Immune System Finding|C1291764|[fndg]|"IMMUNE SYSTEM"-text-27-"immune system"--0|text|1767/13|
+00000000.tx|MMI|0.46|Include (action)|C2700399|[acty]|"Include"-text-0-"include"--0|text|1074/7|
+00000000.tx|MMI|0.46|Increased|C0205217|[qlco]|"Increased"-text-0-"increased"--0|text|350/9|
+00000000.tx|MMI|0.46|Intermediate|C0205103|[spco]|"Between"-text-18-"between"--0|text|249/7|
+00000000.tx|MMI|0.46|Karnofsky Performance Status 100|C3829431|[fndg]|"100"-text-0-"100"--0|text|289/3|
+00000000.tx|MMI|0.46|Known|C0205309|[qlco]|"Known"-text-23-"known"--0|text|2224/5|
+00000000.tx|MMI|0.46|Laser-Induced Fluorescence Endoscopy|C1522684|[diap]|"LIFE"-text-14-"life"--0|text|853/4|
+00000000.tx|MMI|0.46|Limit - Amount class|C1549649|[idcn]|"Limit"-text-2-"limit"--0|text|194/5|
+00000000.tx|MMI|0.46|Limited (extensiveness)|C0439801|[ftcn]|"limit"-text-2-"limit"--0|text|194/5|
+00000000.tx|MMI|0.46|Lower (action)|C2003888|[acty]|"Lower"-text-16-"lower"--0|text|1618/5|
+00000000.tx|MMI|0.46|Lower - spatial qualifier|C0441994|[spco]|"Lower"-text-16-"lower"--0|text|1618/5|
+00000000.tx|MMI|0.46|Malaria Pathway|C2984572|[ftcn]|"Malaria"-text-23-"malaria"--0|text|1043/7|
+00000000.tx|MMI|0.46|Manufactured sign|C0220913|[mnob]|"signs"-text-2-"signs"--0|text|1885/5|
+00000000.tx|MMI|0.46|Marital Status - Single|C1549113|[fndg]|"Single"-text-0-"single"--1|text|169/6|
+00000000.tx|MMI|0.46|Medications:-:Point in time:^Patient:-|C2598133|[clna]|"Medications"-text-0-"Medications"--0|text|1527/11|
+00000000.tx|MMI|0.46|Medications:Presence or Identity:Duration of the study:^Patient:Nominal|C0802604|[clna]|"Medications"-text-0-"Medications"--0|text|1527/11|
+00000000.tx|MMI|0.46|Meningitis, CTCAE|C4552844|[fndg]|"Meningitis"-text-0-"meningitis"--0|text|970/10|
+00000000.tx|MMI|0.46|Microplate Well|C4283957|[spco]|"Well"-text-12-"well"--0|text|1610/4|
+00000000.tx|MMI|0.46|More|C0205172|[qnco]|"More"-text-9-"more"--0|text|663/4|
+00000000.tx|MMI|0.46|Most|C0205393|[qnco]|"Most"-text-0-"most"--0|text|1865/4|
+00000000.tx|MMI|0.46|NUP214 gene|C1334912|[gngm]|"CAN"-text-0-"can"--0|text|784/3|
+00000000.tx|MMI|0.46|NUP214 wt Allele|C1704852|[gngm]|"CAN"-text-0-"can"--0|text|784/3|
+00000000.tx|MMI|0.46|Normal|C0205307|[qlco]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Normal Gait|C5200925|[fndg]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Normal Immune Presence|C5202633|[fndg]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Normal Observation Interpretation|C1550457|[fndg]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Normal Reference Range|C2698497|[inpr]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Normal assessment finding|C1873497|[fndg]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Normal, Unit of Concentration|C1704701|[qnco]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Not Required|C1611645|[idcn]|"Not Required"-text-0-"not required"--0|text|1419/12|
+00000000.tx|MMI|0.46|Not required - HL7ConformanceInclusion|C1546856|[idcn]|"Not required"-text-0-"not required"--0|text|1419/12|
+00000000.tx|MMI|0.46|Numerous|C0439064|[qnco]|"Many"-text-0-"many"--0|text|801/4|
+00000000.tx|MMI|0.46|Often - answer to question|C4050225|[inpr]|"Often"-text-0-"often"--0|text|2111/5|
+00000000.tx|MMI|0.46|One|C0205447|[qnco]|"One"-text-0-"one"--0|text|1854/3|
+00000000.tx|MMI|0.46|Over (spatial)|C0205136|[spco]|"Over"-text-13-"over"--0|text|1284/4|
+00000000.tx|MMI|0.46|POLY|C0747726|[cnce]|"many"-text-0-"many"--0|text|801/4|
+00000000.tx|MMI|0.46|Pain Distress Question|C4085211|[inpr]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Pain by Anatomic Descriptor, CTCAE|C1882272|[fndg]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Pain, CTCAE|C4553004|[fndg]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Pain:-:Point in time:^Patient:-|C2598155|[clna]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Patient Visit|C1512346|[hlca]|"Visits"-text-3-"visits"--0|text|1930/6|
+00000000.tx|MMI|0.46|Phenomenon|C1882365|[phpr]|"Phenomenon"-text-21-"phenomenon"--0|text|2213/10|
+00000000.tx|MMI|0.46|Phobic anxiety disorder|C0349231|[mobd]|"Phobia"-text-29-"phobia"--0|text|2239/6|
+00000000.tx|MMI|0.46|Physical findings|C0311392|[fndg]|"SIGNS"-text-2-"signs"--0|text|1885/5|
+00000000.tx|MMI|0.46|Plasmodium Measurement|C3541306|[lbpr]|"Malaria"-text-23-"malaria"--0|text|1043/7|
+00000000.tx|MMI|0.46|Preposition For|C0521125|[qlco]|"For"-text-4-"for"--0|text|200/3|
+00000000.tx|MMI|0.46|Problems - What subject filter|C1546466|[idcn]|"Problems"-text-15-"problems"--0|text|1736/8|
+00000000.tx|MMI|0.46|REST gene|C1419346|[gngm]|"REST"-text-16-"rest"--0|text|1521/4|
+00000000.tx|MMI|0.46|Rare|C0522498|[qlco]|"Rarely"-text-0-"Rarely"--0|text|601/6|
+00000000.tx|MMI|0.46|Recurrent urinary tract infection|C0262655|[dsyn]|"Urinary tract infections"-text-7-"urinary tract infections"--0|text|982/24|
+00000000.tx|MMI|0.46|Singular|C0205171|[qnco]|"Single"-text-0-"single"--1|text|169/6|
+00000000.tx|MMI|0.46|Skin appearance normal (finding)|C0558145|[fndg]|"NORMAL"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|Source|C0449416|[fndg]|"sources"-text-12-"sources"--0|text|228/7|
+00000000.tx|MMI|0.46|Special Handling Code - Body temperature|C1550112|[idcn]|"Body temperature"-text-11-"body temperature"--0|text|1267/16|
+00000000.tx|MMI|0.46|Specialty Type - cancer|C1547140|[bmod]|"Cancer"-text-26-"cancer"--0|text|1190/6|
+00000000.tx|MMI|0.46|Specimen Source Codes - Sweat|C1547922|[inpr]|"Sweat"-text-25-"sweat"--0|text|594/5|
+00000000.tx|MMI|0.46|Specimen Type - Sweat|C1561530|[bdsu]|"Sweat"-text-25-"sweat"--0|text|594/5|
+00000000.tx|MMI|0.46|Symptoms aspect|C0683368|[ftcn]|"symptoms"-text-37-"symptoms"--0|text|1802/8|
+00000000.tx|MMI|0.46|Table Frame - above|C1552828|[idcn]|"above"-text-12-"above"--0|text|71/5|
+00000000.tx|MMI|0.46|Three|C0205449|[qnco]|"Three"-text-0-"three"--0|text|1659/5|
+00000000.tx|MMI|0.46|Three (answer to question)|C5201107|[fndg]|"Three"-text-0-"three"--0|text|1659/5|
+00000000.tx|MMI|0.46|Too much|C3843660|[fndg]|"Too much"-text-32-"too much"--0|text|1330/8|
+00000000.tx|MMI|0.46|Triggered by|C1444748|[qlco]|"Trigger"-text-0-"trigger"--0|text|620/7|
+00000000.tx|MMI|0.46|Unmarried person|C0037179|[popg]|"Single"-text-0-"single"--1|text|169/6|
+00000000.tx|MMI|0.46|Up|C0547043|[spco]|"Up to"-text-17-"up to"--0|text|1963/5|
+00000000.tx|MMI|0.46|Upon - dosing instruction fragment|C1720176|[ftcn]|"Upon"-text-0-"upon"--0|text|183/4|
+00000000.tx|MMI|0.46|Useful|C3827682|[qlco]|"Useful"-text-6-"useful"--0|text|1496/6|
+00000000.tx|MMI|0.46|Usual|C3538928|[qlco]|"Usually"-text-14-"usually"--0|text|2193/7|
+00000000.tx|MMI|0.46|Usual Severity Pain|C4085210|[inpr]|"Pain"-text-0-"pain"--0|text|1457/4|
+00000000.tx|MMI|0.46|Usually|C3888388|[fndg]|"Usually"-text-14-"usually"--0|text|2193/7|
+00000000.tx|MMI|0.46|Values|C0042295|[qlco]|"Values"-text-16-"values"--0|text|242/6|
+00000000.tx|MMI|0.46|Vasculitis, CTCAE|C1963274|[fndg]|"Vasculitis"-text-0-"vasculitis"--0|text|1082/10|
+00000000.tx|MMI|0.46|Viral|C0521026|[ftcn]|"Viral"-text-0-"viral"--0|text|885/5|
+00000000.tx|MMI|0.46|Visit|C0545082|[bhvr]|"Visits"-text-3-"visits"--0|text|1930/6|
+00000000.tx|MMI|0.46|WHO Temperature/Humidity Storage Condition|C3272598|[qlco]|"WHO"-text-26-"who"--0|text|1983/3|
+00000000.tx|MMI|0.46|WWOX gene|C1421525|[gngm]|"FOR"-text-4-"for"--0|text|200/3|
+00000000.tx|MMI|0.46|WWOX wt Allele|C4321252|[gngm]|"FOR"-text-4-"for"--0|text|200/3|
+00000000.tx|MMI|0.46|Well|C3146287|[mnob]|"Well"-text-12-"well"--0|text|1610/4|
+00000000.tx|MMI|0.46|Well Marginated Nodule|C4761387|[fndg]|"Well"-text-12-"well"--0|text|1610/4|
+00000000.tx|MMI|0.46|When (temporal qualifier)|C1948054|[tmco]|"When"-text-0-"When"--0|text|490/4|
+00000000.tx|MMI|0.46|Whole body|C0444584|[anst]|"Body"-text-32-"body"--0|text|120/4|
+00000000.tx|MMI|0.46|Worse|C1457868|[fndg]|"worsen"-text-13-"worsen"--1|text|2085/6|
+00000000.tx|MMI|0.46|Worsening pattern|C0332271|[qlco]|"worsen"-text-13-"worsen"--1|text|2085/6|
+00000000.tx|MMI|0.46|are unit of measure|C1551058|[qnco]|"Are"-text-28-"are"--0|text|1987/3|
+00000000.tx|MMI|0.46|aspects of adverse effects|C0001688|[ftcn]|"side effects"-text-13-"side effects"--0|text|1143/12|
+00000000.tx|MMI|0.46|does not|C1299585|[qlco]|"does not"-text-7-"does not"--0|text|2066/8|
+00000000.tx|MMI|0.46|evolving|C0332253|[ftcn]|"evolved"-text-0-"evolved"--0|text|2019/7|
+00000000.tx|MMI|0.46|include - SetOperator|C1552866|[idcn]|"include"-text-0-"include"--0|text|1074/7|
+00000000.tx|MMI|0.46|infectious - Entity Risk|C1550587|[qlco]|"infectious"-text-0-"infectious"--0|text|1056/10|
+00000000.tx|MMI|0.46|information recipient - Referred to|C1555599|[prog]|"Referred to"-text-0-"referred to"--0|text|12/11|
+00000000.tx|MMI|0.46|medication - HL7 publishing domain|C3244316|[inpr]|"medication"-text-17-"medication"--0|text|1159/10|
+00000000.tx|MMI|0.46|month|C0439231|[tmco]|"Months"-text-0-"months"--0|text|1665/6|
+00000000.tx|MMI|0.46|normal Act Status|C1553386|[inpr]|"normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|normal Confidentiality|C1550469|[idcn]|"normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|normal Device Alert Level|C1551394|[fndg]|"Normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|normal Entity Status|C1553406|[qlco]|"normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|normal Managed Participation Status|C1553399|[idcn]|"normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|normal Role Status|C1553402|[idcn]|"normal"-text-0-"normal"--0|text|532/6|
+00000000.tx|MMI|0.46|normal body temperature|C0231262|[fndg]|"normal temperature"-text-8-"normal temperature"--0|text|204/18|
+00000000.tx|MMI|0.46|part of|C1292711|[spco]|"part of"-text-0-"part of"--0|text|1898/7|
+00000000.tx|MMI|0.46|site-specific telomere resolvase activity|C1622890|[moft]|"ResT"-text-16-"rest"--0|text|1521/4|
+00000000.tx|MMI|0.46|while|C0750519|[idcn]|"while"-text-0-"While"--0|text|2007/5|
+00000000.tx|MMI|0.46|young|C0332239|[tmco]|"young"-text-15-"young"--0|text|678/5|

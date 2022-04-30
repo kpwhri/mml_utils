@@ -23,6 +23,7 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None)
                            'preferredname': event['conceptinfo']['preferredname'],
                            'start': event['start'],
                            'length': event['length'],
+                           'end': event['start'] + event['length'],
                            'evid': event['id'],
                            'negated': el.get('negated', None),
                            'semantictype': event['conceptinfo']['semantictypes'][0],
