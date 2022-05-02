@@ -41,6 +41,8 @@
     * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
     * [Split Long File: mml-split-files](#mml-split-files)
     * [Run AFEP on MML Output: mml-run-afep](#mml-run-afep)
+    * [Check How Closely Offsets Match: mml-check-offsets](#mml-check-offsets)
+    * [Prepare CSV Files for Review: mml-prepare-review](#mml-prepare-review)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -234,6 +236,32 @@ As a prerequisite, you'll need to install pandas (`pip install pandas`) which is
 being the only script requiring it.
 
     mml-run-afep /kb_articles/ [--mml-format json|mmi] [--outdir .]
+
+### mml-check-offsets
+
+Confirm that the offsets reported by MML are correct.
+
+
+    mml-check-offsets /path/to/notes
+
+If running MML on Windows, include `--add-cr` to add back carriage returns.
+
+Use `--replacements old==new` to make certain changes to 'fix' the matches.
+
+
+### mml-prepare-review
+
+Prepare review lists of CSV files.
+
+Inputs (see `tests/fever` for examples:
+* Text file (`feature.cui.txt`) containing target CUIs, 1 per line
+* String file (`feature.string.txt`) containing text strings to look for and include with CUI data
+
+
+    mml-prepare-review /path/to/notes --target-path /path/to/inputs [--mml-format json] [--text-extension .txt] [--text-encoding utf8]
+
+
+
 
 ## Versions
 
