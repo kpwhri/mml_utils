@@ -98,7 +98,8 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
         )
         target_regex = re.compile(f"({target_pattern})", re.I)
         unique_id = 0
-        with open(target_path / f'{feature_name}.review.csv', 'w', newline='') as fh:
+        with open(target_path / f'{feature_name}.review.csv', 'w',
+                  newline='', encoding=text_encoding) as fh:
             writer = csv.DictWriter(
                 fh,
                 fieldnames=['id', 'docid', 'start', 'end', 'length', 'negation', 'type',
