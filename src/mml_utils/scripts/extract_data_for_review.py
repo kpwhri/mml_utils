@@ -117,7 +117,12 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
                         text = fh.read()
                     cui_data = []
                     for data in extract_mml_data(mml_file, target_cuis=target_cuis, output_format=mml_format):
-                        start, end = find_target_text(text, data['matchedtext'], data['start'], data['end'])
+                        try:
+                            start, end = find_target_text(text, data['matchedtext'], data['start'], data['end'])
+                        except ValueError as ve:
+                            logger.error(f'Lookup failed for {mml_file}.')
+                            logger.exception(ve)
+                            raise
                         if cui_data and (cui_data[-1][0] <= start <= cui_data[-1][1]):  # overlaps?
                             # keep longer if overlaps with previous cui
                             if end - start > cui_data[-1][1] - cui_data[-1][0]:
