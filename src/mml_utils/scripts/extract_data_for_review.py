@@ -73,13 +73,23 @@ def clean_text(text: str):
               help='Add ".txt" if text files have an extension.')
 @click.option('--text-encoding', type=str, default='utf8',
               help='Format to read text files into metamaplite.')
+@click.option('--text-errors', type=str, default='replace',
+              help='Passed to "errors" in "open" function to open file.')
+@click.option('--add-cr', type=bool, default=False, is_flag=True,
+              help='Add back carriage return; likely required if MML run on Windows.')
+@click.option('--replacements', type=str, multiple=True,
+              help='Replace text to fix offset issues. Arguments should look like "from==to" which will'
+                   ' replace "from" with "to" before checking offsets.')
 def _extract_data_for_review(note_directories: list[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
-                             mml_format='json', text_extension='', text_encoding='utf8'):
-    extract_data_for_review(note_directories, target_path, mml_format, text_extension, text_encoding)
+                             mml_format='json', text_extension='', text_encoding='utf8',
+                             text_errors='replace', add_cr=False, replacements=None):
+    extract_data_for_review(note_directories, target_path, mml_format, text_extension, text_encoding,
+                            text_errors=text_errors, add_cr=add_cr, replacements=replacements)
 
 
 def extract_data_for_review(note_directories: list[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
-                            mml_format='json', text_extension='', text_encoding='utf8'):
+                            mml_format='json', text_extension='', text_encoding='utf8',
+                            text_errors='replace', add_cr=False, replacements=None):
     """
 
     :param text_encoding:
@@ -113,8 +123,13 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
                         logger.warning(f'Failed to find corresponding text file:'
                                        f' {txt_file.name} (extension: {text_extension}).')
                         continue
-                    with open(txt_file, encoding=text_encoding) as fh:
+                    with open(txt_file, encoding=text_encoding, errors=text_errors) as fh:
                         text = fh.read()
+                    if add_cr:
+                        text = text.replace('\n', '\r\n')
+                    if replacements:
+                        for _from, _to in replacements:
+                            text = text.replace(_from, _to)
                     cui_data = []
                     for data in extract_mml_data(mml_file, target_cuis=target_cuis, output_format=mml_format):
                         try:
