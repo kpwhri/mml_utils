@@ -50,9 +50,13 @@ with pd.ExcelWriter(outpath / f'features.review{SAMPLE_SIZE}.xlsx') as writer:
         rdf.to_excel(writer, sheet_name=feature_name, index=False)
 ```
 """
+import copy
 import csv
+import datetime
 import pathlib
+import random
 import re
+from collections import defaultdict
 
 import click
 from loguru import logger
@@ -129,21 +133,35 @@ def clean_text(text: str):
               help='Passed to "errors" in "open" function to open file.')
 @click.option('--add-cr', type=bool, default=False, is_flag=True,
               help='Add back carriage return; likely required if MML run on Windows.')
+@click.option('--sample-size', type=int, default=50,
+              help='Sample size to pull for each output.')
+@click.option('--metadata-file', type=click.Path(exists=True, path_type=pathlib.Path), default=None,
+              help='Metadata file to add additional columns to output:'
+                   ' HEADER = note_id, studyid, date, etc.; VALUES = 1, A2E, 05/06/2011, etc.')
 @click.option('--replacements', type=str, multiple=True,
               help='Replace text to fix offset issues. Arguments should look like "from==to" which will'
                    ' replace "from" with "to" before checking offsets.')
 def _extract_data_for_review(note_directories: list[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
                              mml_format='json', text_extension='', text_encoding='utf8',
-                             text_errors='replace', add_cr=False, replacements=None):
+                             text_errors='replace', add_cr=False,
+                             sample_size=50, metadata_file=None,
+                             replacements=None):
     extract_data_for_review(note_directories, target_path, mml_format, text_extension, text_encoding,
-                            text_errors=text_errors, add_cr=add_cr, replacements=replacements)
+                            text_errors=text_errors, add_cr=add_cr, sample_size=sample_size,
+                            metadata_file=metadata_file, replacements=replacements)
 
 
 def extract_data_for_review(note_directories: list[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
                             mml_format='json', text_extension='', text_encoding='utf8',
-                            text_errors='replace', add_cr=False, replacements=None):
+                            text_errors='replace', add_cr=False, sample_size=50, metadata_file=None,
+                            replacements=None):
     """
 
+    :param text_errors:
+    :param add_cr:
+    :param sample_size:
+    :param metadata_file:
+    :param replacements:
     :param text_encoding:
     :param note_directories:
     :param target_path:
@@ -151,17 +169,27 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
     :param text_extension: must include `.` (e.g., `.txt`)
     :return:
     """
+    if sample_size:
+        try:
+            import openpyxl
+        except ImportError:
+            logger.warning(f'Unable to import openpyxl to build review sets:'
+                           f' run `pip install openpyxl` if you want Excel files rather than CSV files to review.')
+
+    outpath = target_path / f'review_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}'
+    outpath.mkdir(exist_ok=False)
+    note_ids = defaultdict(list)
     for feature_name in get_feature_names_from_directory(target_path):
         target_cuis = load_first_column(target_path / f'{feature_name}.cui.txt')
         logger.info(f'Starting "{feature_name}" with {len(target_cuis)} target CUIs.')
         # create pattern: sort by longest to ensure longest regex is matched first
         target_regex = build_regex_from_file(target_path, feature_name)
         unique_id = 0
-        with open(target_path / f'{feature_name}.review.csv', 'w',
+        with open(outpath / f'{feature_name}.review.csv', 'w',
                   newline='', encoding=text_encoding) as fh:
             writer = csv.DictWriter(
                 fh,
-                fieldnames=['id', 'docid', 'start', 'end', 'length', 'negation', 'type',
+                fieldnames=['id', 'note_id', 'start', 'end', 'length', 'negation', 'type',
                             'precontext', 'keyword', 'postcontext', 'fullcontext']
             )
             writer.writeheader()
@@ -213,10 +241,11 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
                         if not overlap:
                             text_data.append((start, end, False, -1))
                     # output remaining matches
+                    prev_unique_id = unique_id
                     for start, end, is_cui, negated in sorted(cui_data + text_data):
                         writer.writerow({
                             'id': unique_id,
-                            'docid': mml_file.stem,
+                            'note_id': mml_file.stem,
                             'start': start,
                             'end': end,
                             'length': end - start,
@@ -228,9 +257,14 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
                             'fullcontext': clean_text(text[max(0, start - 250): end + 250]),
                         })
                         unique_id += 1
+                    # record all note ids by feature for sampling
+                    if sample_size and prev_unique_id < unique_id:
+                        note_ids[feature_name].append(mml_file.stem)
                 logger.info(f'Completed processing {note_count} notes (Total Matches: {unique_id}).')
                 if no_text_file_count:
                     logger.warning(f'Failed to find {no_text_file_count} text files.')
+    if sample_size:
+        compile_to_excel(outpath, note_ids, text_encoding, sample_size, metadata_file)
 
 
 def build_regex_from_file(target_path, feature_name):
@@ -255,6 +289,208 @@ def load_first_column(file: pathlib.Path):
             if line.strip():
                 res[line.strip().split('\t')[0]] = 1
     return res
+
+
+@click.command()
+@click.option('--outpath', type=click.Path(exists=True, path_type=pathlib.Path),
+              help='Directory contain files like "fever.review.csv"')
+@click.option('--text-encoding', type=str, default='utf8',
+              help='Format that was used to read text files into metamaplite.')
+@click.option('--sample-size', type=int, default=50,
+              help='Sample size to pull for each output.')
+@click.option('--metadata-file', type=click.Path(exists=True, path_type=pathlib.Path), default=None,
+              help='Metadata file to add additional columns to output:'
+                   ' HEADER = note_id, studyid, date, etc.; VALUES = 1, A2E, 05/06/2011, etc.')
+@click.option('--build-csv', type=bool, default=False, is_flag=True,
+              help='Always build CSVs (possibly in addition to Excel)')
+def _compile_to_excel(outpath: pathlib.Path, text_encoding='utf8', sample_size=50, metadata_file=None, build_csv=False):
+    # get note_ids to sample from
+    note_ids = defaultdict(set)
+    for file in outpath.glob('*.review.csv'):
+        feature_name = file.stem.split('.')[0]
+        with open(file, newline='', encoding=text_encoding) as fh:
+            for row in csv.DictReader(fh):
+                note_ids[feature_name].add(row['note_id'])
+    compile_to_excel(outpath, note_ids, text_encoding=text_encoding,
+                     sample_size=sample_size, metadata_file=metadata_file, build_csv=build_csv)
+
+
+def compile_to_excel(outpath: pathlib.Path, note_ids, text_encoding='utf8', sample_size=50,
+                     metadata_file=None, build_csv=False):
+    """
+
+    :param note_ids:
+    :param outpath:
+    :param text_encoding:
+    :param sample_size: number of notes to sample
+    :param metadata_file: csv file with:
+        HEADER = note_id, studyid, date, etc.
+        VALUES = 1, A2E, 05/06/2011, etc.
+    :return:
+    """
+    # e.g., HEADER = note_id, studyid, date, etc.
+    # e.g., VALUES = 1, A2E, 05/06/2011
+    metadata_lkp = {}
+    new_fields = []
+    if metadata_file:
+        with open(metadata_file, newline='') as fh:
+            reader = csv.DictReader(fh)
+            new_fields = set(reader.fieldnames) - {'note_id'}
+            for row in reader:
+                note_id = row['note_id']
+                del row['note_id']
+                metadata_lkp[note_id] = row
+
+    # select random sample
+    new_note_ids = {}
+    for feature_name in note_ids:
+        if sample_size:
+            new_note_ids[feature_name] = set(
+                random.sample(note_ids[feature_name], min([sample_size, len(note_ids[feature_name])]))
+            )
+        else:
+            new_note_ids = None
+
+
+    has_excel = False
+    try:
+        import openpyxl
+
+        has_excel = True
+    except ImportError:
+        logger.warning(f'Openpyxl not installed: not building excel workbook, just CSV files.')
+        logger.info(f'To build Excel workbook, install openpyxl: `pip install openpyxl` and re-run.')
+
+    if has_excel:
+        _build_excel_review_set(outpath, new_fields, new_note_ids, metadata_lkp, sample_size, text_encoding)
+    if not has_excel or build_csv:
+        logger.info(f'Building CSV file output.')
+        _build_csv_review_set(outpath, new_fields, new_note_ids, metadata_lkp, sample_size, text_encoding)
+
+
+def _build_csv_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_size, text_encoding):
+    for file in outpath.glob('*.review.csv'):
+        feature_name = file.name.split('.')[0]
+        sample_note_ids = note_ids[feature_name] if note_ids else None
+        with open(file, newline='', encoding=text_encoding) as fh:
+            reader = csv.DictReader(fh)
+            with open(outpath / f'{feature_name}.sample{sample_size}.csv', 'w',
+                      newline='', encoding=text_encoding) as out:
+                writer = csv.DictWriter(out, fieldnames=reader.fieldnames[:7] + new_fields + reader.fieldnames[7:])
+                writer.writeheader()
+                for row in reader:
+                    if sample_note_ids and row['note_id'] not in sample_note_ids:
+                        continue
+                    writer.writerow(row | metadata_lkp.get(row['note_id'], dict()))
+
+
+def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_size, text_encoding):
+    """
+
+    :param outpath:
+    :param new_fields:
+    :param note_ids:
+    :param sample_size:
+    :param text_encoding:
+    :return:
+    """
+    from openpyxl import Workbook
+    from openpyxl.worksheet.table import Table, TableStyleInfo
+    from openpyxl.utils import get_column_letter
+
+    # column data
+    pre_columns = ['id', 'note_id', 'start', 'end', 'length', 'negation', 'type']
+    post_columns = ['precontext',
+                    'keyword',
+                    'postcontext',
+                    'Is this term referring to the feature?',
+                    'Does the patient have this feature?',
+                    'Optional Comments',
+                    'fullcontext',
+                    ]
+    column_widths = {
+                        'id': 12,
+                        'note_id': 12,
+                        'start': 12,
+                        'end': 12,
+                        'length': 12,
+                        'negation': 12,
+                        'type': 12,
+                    } | {
+                        field: 12 for field in new_fields
+                    } | {
+                        'precontext': 40,
+                        'keyword': 24,
+                        'postcontext': 40,
+                        'Is this term referring to the feature?': 24,
+                        'Does the patient have this feature?': 24,
+                        'Optional Comments': 24,
+                        'fullcontext': 60,
+                    }
+    column_alignments = [
+                            [True, 'right', 'center'],
+                            [True, 'right', 'center'],
+                            [True, 'right', 'center'],
+                            [True, 'right', 'center'],
+                            [True, 'right', 'center'],
+                            [True, 'right', 'center'],
+                            [True, 'right', 'center'],
+                        ] + [
+                            [True, 'right', 'center'] for _ in new_fields
+                        ] + [
+                            [True, 'right', 'center'],
+                            [True, 'center', 'center'],
+                            [True, 'left', 'center'],
+                            [True, 'center', 'center'],
+                            [True, 'center', 'center'],
+                            [True, 'left', 'center'],
+                            [True, 'left', 'center'],
+                        ]
+    wb = Workbook()
+    # Add a default style with striped rows and banded columns
+    style = TableStyleInfo(name=f'TableStyleMedium9', showFirstColumn=False,
+                           showLastColumn=False, showRowStripes=True, showColumnStripes=False)
+    for file in outpath.glob('*.review.csv'):
+        feature_name = file.name.split('.')[0]
+        sample_note_ids = note_ids[feature_name]
+        max_row_index = 0
+        ws = wb.create_sheet(title=f'{feature_name}')
+        with open(file, newline='', encoding=text_encoding) as fh:
+            reader = csv.DictReader(fh)
+            max_col_letter = get_column_letter(len(column_alignments))
+            ws.append(list(column_widths.keys()))
+            for row in reader:
+                if sample_note_ids and row['note_id'] not in sample_note_ids:
+                    continue
+                if row['note_id'] in metadata_lkp:
+                    md = list(metadata_lkp[row['note_id']].values())
+                else:
+                    md = [''] * len(new_fields)
+                ws.append(
+                    [row[k] for k in pre_columns]
+                    + md
+                    + [row.get(k, '') for k in post_columns]
+                )
+                max_row_index += 1
+
+            table = Table(
+                displayName=feature_name,
+                ref=f'A1:{max_col_letter}{max_row_index}',
+                tableStyleInfo=style,
+            )
+            ws.add_table(table)
+            for i, width in enumerate(column_widths.values(), start=1):
+                ws.column_dimensions[get_column_letter(i)].width = width
+            for sheet_row in ws.iter_rows():
+                for i, cell in enumerate(sheet_row):
+                    alignment = copy.copy(cell.alignment)
+                    alignment.wrapText = column_alignments[i][0]
+                    alignment.horizontal = column_alignments[i][1]
+                    alignment.vertical = column_alignments[i][2]
+                    cell.alignment = alignment
+    if 'Sheet1' in wb.sheetnames:
+        wb.remove(wb['Sheet1'])
+    wb.save(outpath / f'features.review.sample{sample_size}.xlsx')
 
 
 if __name__ == '__main__':
