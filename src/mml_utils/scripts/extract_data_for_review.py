@@ -155,11 +155,7 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
         target_cuis = load_first_column(target_path / f'{feature_name}.cui.txt')
         logger.info(f'Starting "{feature_name}" with {len(target_cuis)} target CUIs.')
         # create pattern: sort by longest to ensure longest regex is matched first
-        target_pattern = re.sub(
-            r'\s+', r'\\s+',
-            '|'.join(sorted(load_first_column(target_path / f'{feature_name}.string.txt'), key=lambda x: -len(x)))
-        )
-        target_regex = re.compile(f"({target_pattern})", re.I)
+        target_regex = build_regex_from_file(target_path, feature_name)
         unique_id = 0
         with open(target_path / f'{feature_name}.review.csv', 'w',
                   newline='', encoding=text_encoding) as fh:
@@ -235,6 +231,21 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
                 logger.info(f'Completed processing {note_count} notes (Total Matches: {unique_id}).')
                 if no_text_file_count:
                     logger.warning(f'Failed to find {no_text_file_count} text files.')
+
+
+def build_regex_from_file(target_path, feature_name):
+    return build_regex(
+        load_first_column(target_path / f'{feature_name}.string.txt')
+    )
+
+
+def build_regex(term_list):
+    target_pattern = re.sub(
+        r'\s+', r'\\s+',
+        '|'.join(re.escape(x) for x in sorted(term_list, key=lambda x: -len(x)))
+    )
+    target_regex = re.compile(f"({target_pattern})", re.I)
+    return target_regex
 
 
 def load_first_column(file: pathlib.Path):

@@ -2,7 +2,7 @@ import pathlib
 
 import pytest
 
-from mml_utils.scripts.extract_data_for_review import extract_data_for_review
+from mml_utils.scripts.extract_data_for_review import extract_data_for_review, build_regex
 
 
 @pytest.fixture
@@ -54,3 +54,14 @@ def test_extract_data_for_review_fever_mmi(fever_dir):
         text_encoding='utf8',
     )
     validate_csv_file(fever_dir)
+
+
+@pytest.mark.parametrize('term_list, target, exp_found', [
+    (['N&V'], 'investigate', False),
+    (['N/V'], 'investigate', False),
+    (['N+V'], 'investigate', False),
+])
+def test_build_regex(term_list, target, exp_found):
+    rx = build_regex(term_list)
+    found = bool(rx.search(target))
+    assert found == exp_found
