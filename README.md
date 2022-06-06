@@ -33,6 +33,7 @@
     * [Prerequisites](#prerequisites)
     * [Installation](#installation)
 * [Usage](#usage)
+    * [Build MetaMapLite Directory from SQL/CSV](#mml-to-txt)
     * [Run Metamaplite in Batches](#run-metamaplite-in-batches)
     * [Copy Notes to Re-run: mml-copy-notes](#mml-copy-notes)
     * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
@@ -95,6 +96,43 @@ These scripts assume the following use case:
 * The total number of files can be unknown.
 
 These scripts will repeatedly look for new files, build filelists, and run Metamaplite.
+
+
+#### mml-to-txt
+
+Prepare files for running metamaplite. Files can be in CSV file or SQL database.
+
+Additional Options (for both sql/csv):
+
+* `--n-dirs [INTEGER]`
+  * Number of directories to create with text files. Defaults to 1
+* `--text-encoding utf8`
+  * If you want the files in an encoding other than `utf8`, please specify. Be sure to test what MetaMapLite is able to handle.
+* `--text-extension ".txt"`
+  * Another option is to have no extension for these files. In that case, specify an empty string.
+
+##### mml-sql-to-txt
+
+For SQL, you will need to install `sqlalchemy` and a driver (e.g., `pyodbc` for SQL Server as in the example below).
+
+* `pip install sqlalchemy pyodbc`
+
+The first two arguments are the SqlAlchemy-style connection string, followed by the query to retrieve (note_id, text).
+
+Example:
+
+    mml-sql-to-txt "mssql+pyodbc://SERVER/DATABASE?driver=SQL+Server" "select note_id, note_text from corpus" --outdir OUTDIR
+
+##### mml-csv-to-txt
+
+For CSV, you will need to specify the id and text columns.
+
+Example:
+
+    mml-csv-to-txt /path/to/corpus.csv --outdir OUTDIR --id-col note_id --text-col note_text
+
+
+
 
 #### mml-build-filelists
 
