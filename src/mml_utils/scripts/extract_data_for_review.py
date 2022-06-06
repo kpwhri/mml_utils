@@ -453,7 +453,7 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
     for file in outpath.glob('*.review.csv'):
         feature_name = file.name.split('.')[0]
         sample_note_ids = note_ids[feature_name]
-        max_row_index = 0
+        max_row_index = 1  # 1-indexed
         ws = wb.create_sheet(title=f'{feature_name}')
         with open(file, newline='', encoding=text_encoding) as fh:
             reader = csv.DictReader(fh)
@@ -488,8 +488,7 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
                     alignment.horizontal = column_alignments[i][1]
                     alignment.vertical = column_alignments[i][2]
                     cell.alignment = alignment
-    if 'Sheet1' in wb.sheetnames:
-        wb.remove(wb['Sheet1'])
+    wb.remove(wb[wb.sheetnames[0]])  # remove default sheet
     wb.save(outpath / f'features.review.sample{sample_size}.xlsx')
 
 
