@@ -87,6 +87,13 @@ Additional instructions, including UMLS/MML installation are described here: htt
 
 ## Usage
 
+### End-to-End Example
+
+In the `examples/complete/` directory, you can find a complete end-to-end example of build and running MetaMapLite. One using `*.json` and the other `*.mmi` formats.
+
+Please see [README.md](examples/complete/README.md) file there for step-by-step instructions.
+
+
 ### Run Metamaplite in Batches
 
 These scripts assume the following use case:

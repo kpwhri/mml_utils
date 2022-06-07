@@ -76,6 +76,8 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     :param text_encoding:
     :return:
     """
+    if outdir is None:
+        outdir = pathlib.Path('.')
     outdirs = [outdir / f'notes{i}' if n_dirs > 1 else outdir / f'notes' for i in range(n_dirs)]
     for d in outdirs:
         d.mkdir(exist_ok=False, parents=True)
@@ -84,9 +86,9 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
                  for i in range(n_dirs)]
     for i, (note_id, text) in enumerate(text_gen):
         outfile = outdirs[i % n_dirs] / f'{note_id}{text_extension}'
-        with open(outfile, 'w', encoding=text_encoding) as out:
+        with open(outfile, 'w', encoding=text_encoding, errors='replace') as out:
             out.write(text)
-        filelists[i % n_dirs].write(f'{outfile}\n')
+        filelists[i % n_dirs].write(f'{outfile.absolute()}\n')
     for fl in filelists:
         fl.close()
 

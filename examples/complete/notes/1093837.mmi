@@ -1,0 +1,103 @@
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|5.53|Pancreatitis, Acute|C0001339|[dsyn]|"Acute pancreatitis"-text-0-"acute pancreatitis"-JJ-0,"Acute pancreatitis"-text-0-"acute pancreatitis"-JJ-0,"Acute pancreatitis"-text-0-"acute pancreatitis"-JJ-0|text|33/18;182/18;252/18|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|5.53|Pain|C0030193|[sosy]|"Ache"-text-13-"ache"-NN-0|text|567/4|G11.561.790.444;F02.830.816.444;C23.888.592.612|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|4.60|Age of Onset|C0206132|[qnco]|"Onset"-text-0-"onset"-NN-0|text|500/5|N06.850.490.250.100;N05.715.350.075.100|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|4.14|Abdominal Pain|C0000737|[sosy]|"Abdominal Pain"-text-0-"Abdominal pain"-JJ-0|text|402/14|C23.888.592.612.054;C23.888.821.030|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|3.22|acetylcholinesterase|C0001044|[enzy, aapp]|"AChE"-text-13-"ache"-NN-0|text|567/4|D08.811.277.352.100.170.176|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.84|Ache|C0234238|[sosy]|"Ache"-text-13-"ache"-NN-0|text|567/4|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.84|Disease Management|C0376636|[hlca]|"management"-text-0-"Management"-NN-0|text|116/10|Y11;N04.590.607|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.84|Symptoms|C1457887|[sosy]|"symptom"-text-0-"symptom"-NN-0|text|427/7|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.84|intensive care|C0085559|[hlca]|"intensive care"-text-0-"intensive care"-JJ-0|text|280/14|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Allergy Severity - Severe|C1561581|[fndg]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Borg Category-Ratio 10 Perceived Exertion Score 5|C4050466|[fndg]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Epidermal cGVHD Score 4|C4761449|[fndg]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Grade 3 Severe Adverse Event|C1519275|[fndg]|"SEVERE"-text-0-"severe"-JJ-0,"SEVERE"-text-0-"severe"-JJ-0,"SEVERE"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Intensity and Distress 5|C5203119|[fndg]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Severe (severity modifier)|C0205082|[fndg]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Severe - Severity of Illness Code|C1547227|[inpr]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Severe - Triage Code|C1547231|[inpr]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Severe Extremity Pain|C4050465|[fndg]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Severe Hallucination|C4722466|[fndg]|"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-3-"severe"-JJ-0|text|26/6;245/6;534/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|1.38|Back|C0004600|[blor]|"Back"-text-15-"back"-NN-0|text|653/4|A01.923.176|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|Administration procedure|C1533734|[topp]|"Treatment"-text-0-"treatment"-NN-0,"Treatment"-text-0-"Treatment"-NNP-0|text|164/9;232/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|Biomaterial Treatment|C1705169|[cnce]|"Treatment"-text-0-"treatment"-NN-0,"Treatment"-text-0-"Treatment"-NNP-0|text|164/9;232/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|Therapeutic procedure|C0087111|[topp]|"Treatment"-text-0-"treatment"-NN-0,"Treatment"-text-0-"Treatment"-NNP-0|text|164/9;232/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|Treating|C1522326|[ftcn]|"Treatment"-text-0-"treatment"-NN-0,"Treatment"-text-0-"Treatment"-NNP-0|text|164/9;232/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|Treatment Epoch|C3538994|[resa]|"TREATMENT"-text-0-"treatment"-NN-0,"TREATMENT"-text-0-"Treatment"-NNP-0|text|164/9;232/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|Treatment Study|C3161471|[resa]|"TREATMENT"-text-0-"treatment"-NN-0,"TREATMENT"-text-0-"Treatment"-NNP-0|text|164/9;232/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|therapeutic aspects|C0039798|[ftcn]|"treatment"-text-0-"treatment"-NN-0,"treatment"-text-0-"Treatment"-NNP-0|text|164/9;232/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|treatment - ActInformationManagementReason|C3887704|[hlca]|"treatment"-text-0-"treatment"-NN-0,"treatment"-text-0-"Treatment"-NNP-0|text|164/9;232/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|Patients|C0030705|[podg]|"Patients"-text-0-"patients"-NNS-0|text|12/8|M01.643|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.92|Signs and Symptoms|C0037088|[sosy]|"Signs and Symptoms"-text-0-"Signs and symptoms"-NNS-0|text|382/18|C23.888|
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|ACHE Gene|C1412122|[gngm]|"ACHE"-text-13-"ache"-NN-0|text|567/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Abdominal Pain, CTCAE 5|C4554323|[fndg]|"Abdominal Pain"-text-0-"Abdominal pain"-JJ-0|text|402/14||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Acetylcholinesterase measurement|C0201829|[lbpr]|"ACHE"-text-13-"ache"-NN-0|text|567/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Administration occupational activities|C0001554|[ocac]|"Management"-text-0-"Management"-NN-0|text|116/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Admission Level of Care Code - Critical|C1547298|[inpr]|"Critical"-text-8-"critical"-JJ-0|text|75/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Alert level - Critical|C1579038|[idcn]|"Critical"-text-8-"critical"-JJ-0|text|75/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Argynnis pandora|C2700598|[euka]|"cardinal"-text-0-"cardinal"-JJ-0|text|418/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|As soon as possible|C4039399|[tmco]|"As soon as possible"-text-4-"as soon as possible"-RB-0|text|52/19||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Back structure, excluding neck|C1995000|[blor]|"Back"-text-15-"back"-NN-0|text|653/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Back structure, including back of neck|C0460009|[blor]|"Back"-text-15-"back"-NN-0|text|653/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Bore (qualifier value)|C2945608|[qnco]|"boring"-text-9-"boring"-JJ-0|text|462/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|CARD8 gene|C1424714|[gngm]|"CARDINAL"-text-0-"cardinal"-JJ-0|text|418/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|CARD8 wt Allele|C2827378|[gngm]|"CARDINAL"-text-0-"cardinal"-JJ-0|text|418/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Cardinalis cardinalis|C0326926|[bird]|"Cardinal"-text-0-"cardinal"-JJ-0|text|418/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Case (situation)|C0868928|[ftcn]|"cases"-text-8-"cases"-NNS-0|text|372/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Case unit dose|C1533148|[qnco]|"Cases"-text-8-"cases"-NNS-0|text|372/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Caspase Recruitment Domain-Containing Protein 8|C2828377|[bacs, aapp]|"CARDINAL"-text-0-"cardinal"-JJ-0|text|418/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Choose (action)|C1707391|[acty]|"Selected"-text-6-"selected"-JJ-0|text|363/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Constant (qualifier)|C1948059|[qlco]|"Constant"-text-11-"constant"-JJ-0|text|558/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Constant - dosing instruction fragment|C1720529|[inpr]|"Constant"-text-11-"constant"-JJ-0|text|558/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Critical|C1511545|[qlco]|"Critical"-text-8-"critical"-JJ-0|text|75/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|DeviceAlertLevel - Critical|C1551396|[fndg]|"Critical"-text-8-"critical"-JJ-0|text|75/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Direct (qualifier)|C1947931|[qlco]|"Directly"-text-7-"directly"-RB-0|text|629/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Dorsal|C0205095|[spco]|"Back"-text-15-"back"-NN-0|text|653/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Dull|C0443208|[qlco]|"Dull"-text-6-"dull"-JJ-0|text|456/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Dull pain|C0278144|[sosy]|"Dull"-text-6-"dull"-JJ-0|text|456/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Dull sensation quality|C1455762|[qlco]|"Dull"-text-6-"dull"-JJ-0|text|456/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Entire back (surface region)|C1281593|[blor]|"Back"-text-15-"back"-NN-0|text|653/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Epidermal cGVHD Score 2|C4761314|[fndg]|"Mild"-text-0-"mild"-JJ-0|text|177/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|EquipmentAlertLevel - Critical|C1552746|[idcn]|"Critical"-text-8-"critical"-JJ-0|text|75/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Facilitated oscillatory release technique|C1562169|[topp]|"FOR"-text-10-"for"-IN-0|text|84/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Frequently|C0332183|[tmco]|"Often"-text-0-"often"-RB-0|text|578/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Genus Cardinalis (organism)|C1320142|[bird]|"Cardinal"-text-0-"cardinal"-JJ-0|text|418/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Heart Sound Auscultation at Back|C5238720|[fndg]|"Back"-text-15-"back"-NN-0|text|653/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|In addition to|C0332287|[ftcn]|"With"-text-0-"with"-IN-0|text|21/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Invasive|C0205281|[qlco]|"Invasive"-text-0-"invasive"-JJ-0|text|337/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Invasive Lesion|C1334278|[fndg]|"Invasive"-text-0-"invasive"-JJ-0|text|337/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Management Occupations|C3273539|[ocdi]|"Management"-text-0-"Management"-NN-0|text|116/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Management procedure|C1273870|[ocac]|"Management"-text-0-"Management"-NN-0|text|116/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Medical|C0205476|[ftcn]|"Medical"-text-0-"Medical"-JJ-0|text|156/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Medical referral type|C1561579|[inpr]|"Medical"-text-0-"Medical"-JJ-0|text|156/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Medical school type|C1547184|[idcn]|"Medical"-text-0-"Medical"-JJ-0|text|156/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Medical service|C0199168|[hlca]|"Medical"-text-0-"Medical"-JJ-0|text|156/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Mild (qualifier value)|C2945599|[qlco]|"Mild"-text-0-"mild"-JJ-0|text|177/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Mild Adverse Event|C1513302|[fndg]|"MILD"-text-0-"mild"-JJ-0|text|177/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Mild Allergy Severity|C1563320|[qlco]|"Mild"-text-0-"mild"-JJ-0|text|177/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Mild Hallucination|C4722210|[fndg]|"Mild"-text-0-"mild"-JJ-0|text|177/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Mild Severity of Illness Code|C1547225|[inpr]|"Mild"-text-0-"mild"-JJ-0|text|177/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Often - answer to question|C4050225|[inpr]|"Often"-text-0-"often"-RB-0|text|578/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Onset of (contextual qualifier)|C0332162|[qlco]|"Onset"-text-0-"onset"-NN-0|text|500/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Open|C0175566|[spco]|"Open"-text-0-"open"-JJ-0|text|319/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Optimum|C2698651|[qlco]|"Optimal"-text-14-"optimal"-JJ-0|text|98/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Outpatient Physical Therapy Improvement in Movement and Assessment Log (OPTIMAL) Survey|C3260738|[inpr]|"OPTIMAL"-text-14-"optimal"-JJ-0|text|98/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Patient Condition Code - Critical|C1547308|[inpr]|"Critical"-text-8-"critical"-JJ-0|text|75/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Preposition For|C0521125|[qlco]|"For"-text-10-"for"-IN-0|text|84/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Severities|C0439793|[qlco]|"Severity"-text-0-"severity"-NN-0|text|146/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Specialty Type - Intensive care|C1548354|[bmod]|"Intensive care"-text-0-"intensive care"-JJ-0|text|280/14||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Steady|C0205361|[qlco]|"Steady"-text-14-"steady"-JJ-0|text|474/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Straightforward|C1272701|[qlco]|"Straightforward"-text-2-"straightforward"-JJ-0|text|215/15||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Sudden (qualifier value)|C5201090|[qlco]|"Sudden"-text-0-"sudden"-JJ-0|text|490/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Surgical intervention (finding)|C0549433|[fndg]|"surgical intervention"-text-0-"Surgical intervention"-JJ-0|text|296/21||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Symptom:Find:Pt:^Patient:Nom|C3854129|[clna]|"Symptom"-text-0-"symptom"-NN-0|text|427/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Through|C0332273|[ftcn]|"Through to"-text-11-"through to"-IN-0|text|638/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Until|C1720302|[inpr]|"Until"-text-5-"until"-IN-0|text|541/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Upper abdomen (surface region)|C0230165|[blor]|"Upper abdomen"-text-0-"upper abdomen"-JJ-0|text|599/13||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Upper abdomen structure|C2937240|[bpoc]|"Upper abdomen"-text-0-"upper abdomen"-JJ-0|text|599/13||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Usual|C3538928|[qlco]|"Usually"-text-0-"usually"-RB-0|text|482/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|Usually|C3888388|[fndg]|"Usually"-text-0-"usually"-RB-0|text|482/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|WWOX gene|C1421525|[gngm]|"FOR"-text-10-"for"-IN-0|text|84/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|WWOX wt Allele|C4321252|[gngm]|"FOR"-text-10-"for"-IN-0|text|84/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|With - dosing instruction fragment|C1705690|[inpr]|"With"-text-0-"with"-IN-0|text|21/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|With intensity|C0522510|[qlco]|"Severity"-text-0-"severity"-NN-0|text|146/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt|MMI|0.46|chest pain radiating to back|C2318663|[sosy]|"Back"-text-15-"back"-NN-0|text|653/4||

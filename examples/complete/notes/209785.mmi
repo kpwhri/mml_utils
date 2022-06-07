@@ -1,0 +1,70 @@
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|7.37|Pancreatitis, Acute|C0001339|[dsyn]|"Acute pancreatitis"-text-0-"Acute pancreatitis"-NNP-0,"Acute pancreatitis"-text-0-"acute pancreatitis"-JJ-0,"Acute pancreatitis"-text-0-"acute pancreatitis"-JJ-0,"Acute pancreatitis"-text-0-"Acute pancreatitis"-NNP-0|text|0/18;218/18;336/18;402/18|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|3.22|Digestion|C0012238|[orgf]|"Digestion"-text-14-"digestion"-NN-0|text|187/9|G10.261.190;G07.203.650.250|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|2.76|Pancreas|C0030274|[bpoc]|"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-5-"pancreas"-NNS-0|text|44/8;116/8;469/8|A03.734|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|2.76|Pancreatic Diseases|C0030286|[dsyn]|"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-5-"pancreas"-NNS-0|text|44/8;116/8;469/8|C06.689|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.84|Pancreatitis, Chronic|C0149521|[dsyn]|"Chronic pancreatitis"-text-0-"chronic pancreatitis"-JJ-0|text|437/20|C06.689.750.830|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.84|Stomach|C0038351|[bpoc]|"Stomach"-text-5-"stomach"-NN-0|text|162/7|A03.556.875.875|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.38|Entire pancreas|C1278931|[bpoc]|"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-5-"pancreas"-NNS-0|text|44/8;116/8;469/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.38|In addition to|C0332287|[ftcn]|"With"-text-12-"with"-IN-0,"With"-text-0-"with"-IN-0,"With"-text-0-"with"-IN-0|text|182/4;213/4;324/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.38|With - dosing instruction fragment|C1705690|[inpr]|"With"-text-12-"with"-IN-0,"With"-text-0-"with"-IN-0,"With"-text-0-"with"-IN-0|text|182/4;213/4;324/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.38|pancreas extract|C0771711|[orch, phsu]|"pancreas"-text-0-"pancreas"-NNS-0,"pancreas"-text-0-"pancreas"-NNS-0,"pancreas"-text-5-"pancreas"-NNS-0|text|44/8;116/8;469/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.38|Disease|C0012634|[dsyn]|"condition"-text-0-"condition"-NN-0|text|24/9|C23.550.288|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.38|Inflammation|C0021368|[patf]|"Inflammation"-text-17-"inflammation"-NN-0|text|514/12|C23.550.470|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.38|Organ|C0178784|[bpoc]|"Organ"-text-0-"organ"-NN-0|text|136/5|Y06;N03.540|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|1.38|Stomach Diseases|C0038354|[dsyn]|"Stomach"-text-5-"stomach"-NN-0|text|162/7|C06.405.748|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.92|During|C0347984|[tmco]|"Over"-text-10-"over"-IN-0,"Over"-text-19-"over"-IN-0|text|80/4;527/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.92|Over (spatial)|C0205136|[spco]|"Over"-text-10-"over"-IN-0,"Over"-text-19-"over"-IN-0|text|80/4;527/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.92|Persons|C0027361|[popg]|"People"-text-0-"people"-NNS-0,"People"-text-0-"people"-NNS-0|text|206/6;317/6|M01|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.92|Time|C0040223|[tmco]|"Time"-text-20-"time"-NN-0|text|103/4|G01.910|
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Alert level - Serious|C1561576|[idcn]|"Serious"-text-10-"serious"-JJ-0|text|376/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Allergy Severity - Severe|C1561581|[fndg]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Approximate|C0332232|[qlco]|"About"-text-6-"about"-IN-0|text|265/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Beginning|C0439659|[tmco]|"Start"-text-0-"start"-NN-0|text|237/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Better|C0332272|[qlco]|"Better"-text-2-"better"-RB-0|text|251/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Better than Others|C4522046|[fndg]|"Better"-text-2-"better"-RB-0|text|251/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Borg Category-Ratio 10 Perceived Exertion Score 5|C4050466|[fndg]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Complication|C0009566|[patf]|"Complications"-text-12-"complications"-NNS-0|text|384/13||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Complication Aspects|C1171258|[ftcn]|"complications"-text-12-"complications"-NNS-0|text|384/13||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Complications:Type:Duration of the study:^Patient:Nominal|C0802632|[clna]|"Complications"-text-12-"complications"-NNS-0|text|384/13||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Condition|C0348080|[qlco]|"Condition"-text-0-"condition"-NN-0|text|24/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Condition Domain|C4722256|[inpr]|"CONDITION"-text-0-"condition"-NN-0|text|24/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Condition:Find:Pt:^Patient:Nom|C3864998|[clna]|"Condition"-text-0-"condition"-NN-0|text|24/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Data types - Time|C1547403|[idcn]|"Time"-text-20-"time"-NN-0|text|103/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Device Alert Level - Serious|C1551395|[fndg]|"Serious"-text-10-"serious"-JJ-0|text|376/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Different|C1705242|[qlco]|"Different"-text-0-"different"-JJ-0|text|424/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Dorsal|C0205095|[spco]|"Behind"-text-1-"behind"-IN-0|text|151/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Entire stomach|C1278920|[bpoc]|"Stomach"-text-5-"stomach"-NN-0|text|162/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Epidermal cGVHD Score 4|C4761449|[fndg]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Equipment Alert Level - Serious|C1552745|[fndg]|"Serious"-text-10-"serious"-JJ-0|text|376/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|From|C1517320|[qlco]|"From"-text-15-"from"-IN-0|text|509/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Further|C1517331|[spco]|"Further"-text-18-"further"-JJ-1|text|290/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Grade 3 Severe Adverse Event|C1519275|[fndg]|"SEVERE"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Improved - answer to question|C4084203|[fndg]|"Better"-text-2-"better"-RB-0|text|251/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Intensity and Distress 5|C5203119|[fndg]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Logical Condition|C1705253|[cnce]|"Condition"-text-0-"condition"-NN-0|text|24/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Most|C0205393|[qnco]|"Most"-text-0-"Most"-JJS-0|text|201/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Numerous|C0439064|[qnco]|"Many"-text-21-"many"-JJ-0|text|532/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Observation Interpretation - better|C1550462|[idcn]|"Better"-text-2-"better"-RB-0|text|251/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Organization administrative structures|C0029246|[orgt]|"ORGAN"-text-0-"organ"-NN-0|text|136/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Organization and administration aspects|C0029236|[ocac]|"ORGAN"-text-0-"organ"-NN-0|text|136/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|POLY|C0747726|[cnce]|"many"-text-21-"many"-JJ-0|text|532/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Problems - What subject filter|C1546466|[idcn]|"Problems"-text-20-"problems"-NNS-0|text|298/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Protein Digestion (research activity)|C2349986|[resa]|"Digestion"-text-14-"digestion"-NN-0|text|187/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Serious|C0205404|[qlco]|"Serious"-text-10-"serious"-JJ-0|text|376/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Severe (severity modifier)|C0205082|[fndg]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Severe - Severity of Illness Code|C1547227|[inpr]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Severe - Triage Code|C1547231|[inpr]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Severe Extremity Pain|C4050465|[fndg]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Severe Hallucination|C4722466|[fndg]|"Severe"-text-0-"severe"-JJ-0|text|329/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Short menstrual periods|C0425946|[fndg]|"short period"-text-16-"short period"-JJ-0|text|87/12||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Small|C0700321|[qnco]|"Small"-text-0-"small"-JJ-0|text|130/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Start brand of breakfast cereal|C0452588|[food]|"Start"-text-0-"start"-NN-0|text|237/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Stomach structure|C3714551|[bpoc]|"Stomach"-text-5-"stomach"-NN-0|text|162/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Swelling|C0038999|[fndg]|"Swollen"-text-7-"swollen"-JJ-0|text|71/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Time (foundation metadata concept)|C3541383|[tmco]|"Time"-text-20-"time"-NN-0|text|103/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Transaction counts and value totals - week|C1561540|[inpr]|"week"-text-10-"week"-NN-0|text|273/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Value type - Time|C1548318|[idcn]|"Time"-text-20-"time"-NN-0|text|103/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|Within|C0332285|[spco]|"Within"-text-4-"within"-IN-0|text|258/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|start - HtmlLinkType|C1552850|[inpr]|"start"-text-0-"start"-NN-0|text|237/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|week|C0439230|[tmco]|"week"-text-10-"week"-NN-0|text|273/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt|MMI|0.46|year|C0439234|[tmco]|"years"-text-23-"years"-NNS-0|text|537/5||

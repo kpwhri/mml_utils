@@ -1,0 +1,100 @@
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|11.05|Pain|C0030193|[sosy]|"Painful"-text-8-"painful"-JJ-0,"Pain"-text-0-"pain"-NN-0|text|72/7;657/4|G11.561.790.444;F02.830.816.444;C23.888.592.612|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|9.21|Risk|C0035647|[idcn]|"Risk of"-text-17-"risk of"-NN-0|text|719/7|G17.680.750;N06.850.520.830.600.800;N05.715.360.750.625.700;E05.318.740.600.800|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|3.68|Pancreatitis, Acute|C0001339|[dsyn]|"Acute pancreatitis"-text-0-"Acute pancreatitis"-NNP-0,"Acute pancreatitis"-text-23-"acute pancreatitis"-JJ-0|text|0/18;200/18|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|3.68|Death Rate|C0205848|[qnco]|"Mortality Rate"-text-17-"mortality rate"-NN-0|text|182/14|x.x.x.x;x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|2.76|Pancreas|C0030274|[bpoc]|"Pancreas"-text-2-"pancreas"-NNS-0,"Pancreatic"-text-0-"pancreatic"-JJ-0,"Pancreas"-text-2-"pancreas"-NNS-0|text|55/8;259/10;415/8|A03.734|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|2.30|Diagnostic Imaging|C0011923|[diap]|"Imaging"-text-15-"imaging"-NN-0|text|464/7|E01.370.350;Y04.010|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|1.84|Pancreatic Diseases|C0030286|[dsyn]|"Pancreas"-text-2-"pancreas"-NNS-0,"Pancreas"-text-2-"pancreas"-NNS-0|text|55/8;415/8|C06.689|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|1.84|Pancreatic carcinoma|C0235974|[neop]|"PANCREATIC CANCER"-text-21-"pancreatic cancer"-JJ-0|text|727/17|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|1.38|Frequently|C0332183|[tmco]|"Often"-text-0-"often"-RB-0,"Often"-text-21-"often"-RB-0,"Often"-text-0-"often"-RB-0|text|282/5;484/5;644/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|1.38|Often - answer to question|C4050225|[inpr]|"Often"-text-0-"often"-RB-0,"Often"-text-21-"often"-RB-0,"Often"-text-0-"often"-RB-0|text|282/5;484/5;644/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|1.38|Disease|C0012634|[dsyn]|"condition"-text-0-"condition"-NN-0|text|38/9|C23.550.288|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|1.38|Malnutrition|C0162429|[dsyn]|"Malnutrition"-text-0-"malnutrition"-NN-0|text|666/12|C18.654.521|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|1.38|Organ|C0178784|[bpoc]|"Organ"-text-14-"organ"-NN-0|text|347/5|Y06;N03.540|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|1.38|Pancreatitis|C0030305|[dsyn]|"Pancreatitis"-text-13-"pancreatitis"-NN-0|text|575/12|C06.689.750|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|During|C0347984|[tmco]|"Over"-text-2-"over"-IN-0,"Over"-text-25-"over"-IN-0|text|154/4;617/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|Entire pancreas|C1278931|[bpoc]|"Pancreas"-text-2-"pancreas"-NNS-0,"Pancreas"-text-2-"pancreas"-NNS-0|text|55/8;415/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|In addition to|C0332287|[ftcn]|"In addition to"-text-0-"In addition to"-IN-0,"With"-text-9-"with"-IN-0|text|502/14;705/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|Manufactured form|C0376315|[mnob]|"Form"-text-0-"form"-NN-0,"Forms"-text-9-"forms"-NNS-0|text|527/4;566/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|Over (spatial)|C0205136|[spco]|"Over"-text-2-"over"-IN-0,"Over"-text-25-"over"-IN-0|text|154/4;617/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|Qualitative form|C0348078|[qlco]|"Form"-text-0-"form"-NN-0,"forms"-text-9-"forms"-NNS-0|text|527/4;566/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|pancreas extract|C0771711|[orch, phsu]|"pancreas"-text-2-"pancreas"-NNS-0,"pancreas"-text-2-"pancreas"-NNS-0|text|55/8;415/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|year|C0439234|[tmco]|"years"-text-10-"years"-NNS-0,"years"-text-29-"years"-NNS-0|text|171/5;627/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|Diagnosis|C0011900|[diap]|"Diagnosis"-text-0-"Diagnosis"-NNP-0|text|246/9|E01;Y04|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.92|Time|C0040223|[tmco]|"times"-text-14-"times"-NNS-0|text|87/5|G01.910|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Acute - Triage Code|C1547229|[inpr]|"Acute"-text-0-"acute"-JJ-0|text|521/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Administration Method - Pain|C1549543|[ftcn]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Admission Level of Care Code - Acute|C1547295|[inpr]|"Acute"-text-0-"acute"-JJ-0|text|521/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Adverse Event Associated with Pain|C1557397|[fndg]|"PAIN"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Approximate|C0332232|[qlco]|"About"-text-31-"about"-IN-0|text|235/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Availability of|C0470187|[ftcn]|"Available"-text-13-"available"-JJ-0|text|454/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Chronic - Admission Level of Care Code|C1547296|[inpr]|"Chronic"-text-7-"chronic"-JJ-0|text|558/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Condition|C0348080|[qlco]|"Condition"-text-0-"condition"-NN-0|text|38/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Condition Domain|C4722256|[inpr]|"CONDITION"-text-0-"condition"-NN-0|text|38/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Condition:Find:Pt:^Patient:Nom|C3864998|[clna]|"Condition"-text-0-"condition"-NN-0|text|38/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Critical care medicine specialty|C1319411|[bmod]|"Critical care medicine"-text-0-"critical care medicine"-JJ-0|text|131/22||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Date of diagnosis|C2316983|[tmco]|"Diagnosis"-text-0-"Diagnosis"-NNP-0|text|246/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Diagnosis Classification - Diagnosis|C1546899|[clas]|"Diagnosis"-text-0-"Diagnosis"-NNP-0|text|246/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Diagnosis Code|C1550350|[inpr]|"DIAGNOSIS"-text-0-"Diagnosis"-NNP-0|text|246/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Diagnosis Study|C1704656|[resa]|"DIAGNOSIS"-text-0-"Diagnosis"-NNP-0|text|246/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Diagnosis:Impression/interpretation of study:Point in time:^Patient:Nominal|C0945731|[clna]|"Diagnosis"-text-0-"Diagnosis"-NNP-0|text|246/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Difficult (qualifier value)|C0332218|[fndg]|"Difficult"-text-0-"difficult"-JJ-0|text|288/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Direct (qualifier)|C1947931|[qlco]|"Directly"-text-4-"directly"-RB-0|text|424/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|EHD1 wt Allele|C4284302|[gngm]|"PAST"-text-6-"past"-JJ-0|text|163/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Easy|C0332219|[fndg]|"Easy"-text-0-"easy"-JJ-1|text|394/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Feel Pain|C4554132|[inpr]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Form:Finding:Point in time:{Setting}:Document:{Role}|C4255237|[clna]|"Form"-text-0-"form"-NN-0|text|527/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Formation|C1522492|[ftcn]|"Form"-text-0-"form"-NN-0|text|527/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Frequency of Pain Question|C0518090|[inpr]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|General surgery specialty|C1274039|[bmod]|"Surgery"-text-8-"surgery"-NN-1|text|441/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Greater|C1704243|[qnco]|"Great"-text-0-"great"-JJ-0|text|113/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Has difficulty doing (qualifier value)|C1299586|[fndg]|"Difficult"-text-0-"difficult"-JJ-0|text|288/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Have Pain|C2984058|[inpr]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Hereditary|C0439660|[ftcn]|"Hereditary"-text-3-"hereditary"-RB-0|text|543/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|High|C0205250|[qlco]|"Higher"-text-13-"higher"-JJR-0|text|712/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|How Much Distress Pain|C4085212|[inpr]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Imaging Techniques|C0079595|[diap]|"Imaging"-text-15-"imaging"-NN-0|text|464/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Imaging Technology|C1704382|[bmod]|"Imaging"-text-15-"imaging"-NN-0|text|464/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|In the past|C1444637|[tmco]|"Past"-text-6-"past"-JJ-0|text|163/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Inadequate (qualifier)|C0205412|[qlco]|"Inadequate"-text-23-"inadequate"-JJ-0|text|490/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Inadequate Daily Fluid Intake|C5238745|[fndg]|"Inadequate"-text-23-"inadequate"-JJ-0|text|490/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Inadequate Daily Salt Intake|C5238746|[fndg]|"Inadequate"-text-23-"inadequate"-JJ-0|text|490/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Inflammatory|C0333348|[ftcn]|"Inflammatory"-text-0-"inflammatory"-JJ-0|text|25/12||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Large|C0549177|[qnco]|"Great"-text-0-"great"-JJ-0|text|113/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Level of Care - Surgery|C1547138|[idcn]|"Surgery"-text-8-"surgery"-NN-1|text|441/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Logical Condition|C1705253|[cnce]|"Condition"-text-0-"condition"-NN-0|text|38/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Malignant neoplasm of pancreas|C0346647|[neop]|"Pancreatic Cancer"-text-21-"pancreatic cancer"-JJ-0|text|727/17||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Mortality Vital Statistics|C0026565|[qnco]|"Mortality rate"-text-17-"mortality rate"-NN-0|text|182/14||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Numerous|C0439064|[qnco]|"Many"-text-27-"many"-JJ-0|text|622/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Operative Surgical Procedures|C0543467|[topp]|"Surgery"-text-8-"surgery"-NN-1|text|441/7|E04|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Organization administrative structures|C0029246|[orgt]|"ORGAN"-text-14-"organ"-NN-0|text|347/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Organization and administration aspects|C0029236|[ocac]|"ORGAN"-text-14-"organ"-NN-0|text|347/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|POLY|C0747726|[cnce]|"many"-text-27-"many"-JJ-0|text|622/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Pain Distress Question|C4085211|[inpr]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Pain by Anatomic Descriptor, CTCAE|C1882272|[fndg]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Pain, CTCAE|C4553004|[fndg]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Pain:-:Point in time:^Patient:-|C2598155|[clna]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Pancreatic Cancer Pathway|C2984259|[ftcn]|"Pancreatic cancer"-text-21-"pancreatic cancer"-JJ-0|text|727/17||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Pancreatitis, CTCAE 3.0|C1963198|[fndg]|"Pancreatitis"-text-13-"pancreatitis"-NN-0|text|575/12||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Pancreatitis, CTCAE 5.0|C4554179|[fndg]|"Pancreatitis"-text-13-"pancreatitis"-NN-0|text|575/12||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Person Info|C1522390|[qlco]|"Person"-text-23-"person"-NN-0|text|610/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Person Observer|C2347489|[grup]|"Person"-text-23-"person"-NN-0|text|610/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Persons|C0027361|[popg]|"Person"-text-23-"person"-NN-0|text|610/6|M01|
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Probable diagnosis|C0332148|[fndg]|"Likely"-text-5-"likely"-JJ-0|text|693/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Probably|C0750492|[idcn]|"Likely"-text-5-"likely"-JJ-0|text|693/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Problems - What subject filter|C1546466|[idcn]|"Problems"-text-0-"problems"-NNS-0|text|270/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Provision of recurring care for chronic illness|C1555457|[hlca]|"Chronic"-text-7-"chronic"-JJ-0|text|558/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|RXFP2 gene|C1424898|[gngm]|"GREAT"-text-0-"great"-JJ-0|text|113/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Scientific Study|C0947630|[lbpr]|"studies"-text-17-"studies"-NNS-0|text|472/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Surgery specialty|C0038894|[bmod]|"Surgery"-text-8-"surgery"-NN-1|text|441/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Surgical aspects|C0038895|[ftcn]|"surgery"-text-8-"surgery"-NN-1|text|441/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Therapeutic procedure|C0087111|[topp]|"Treatments"-text-2-"treatments"-NNS-0|text|302/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Times|C1632851|[qnco]|"Times"-text-14-"times"-NNS-0|text|87/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Unsatisfactory|C0439856|[qlco]|"Inadequate"-text-23-"inadequate"-JJ-0|text|490/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Usual Severity Pain|C4085210|[inpr]|"Pain"-text-0-"pain"-NN-0|text|657/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|With - dosing instruction fragment|C1705690|[inpr]|"With"-text-9-"with"-IN-0|text|705/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|Without|C0332288|[qlco]|"Without"-text-6-"without"-IN-0|text|433/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|acute|C0205178|[tmco]|"acute"-text-0-"acute"-JJ-0|text|521/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|acute inpatient encounter|C1551345|[hlca]|"ACUTE"-text-0-"acute"-JJ-0|text|521/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|chronic|C0205191|[tmco]|"chronic"-text-7-"chronic"-JJ-0|text|558/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt|MMI|0.46|diagnosis aspect|C1704338|[ftcn]|"diagnosis"-text-0-"Diagnosis"-NNP-0|text|246/9||

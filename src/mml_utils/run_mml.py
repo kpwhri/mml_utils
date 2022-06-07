@@ -21,7 +21,7 @@ def run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None):
     return res
 
 
-def repeat_run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None, max_retry=20,
+def repeat_run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None, max_retry=10,
                    **kwargs):
     filelist_version = 0
     return_code = 1
@@ -42,6 +42,7 @@ def repeat_run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None
         )
         return_code = res.returncode
         if return_code == 0:
+            total_completed = -1
             break
         logger.info(f'Retrying metamaplite by dropping failed file.')
         logger.info(f'Looking for completed/failed files to remove from next run.')
@@ -72,5 +73,8 @@ def repeat_run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None
         logger.info(f'Completed: {total_completed}')
         if filelist_version > max_retry:
             logger.error(f'Too many retries: {max_retry}; exiting process.')
-    logger.info(f'Completed all: {total_completed}')
+    if total_completed == -1:
+        logger.info(f'Completed all.')
+    else:
+        logger.info(f'Completed all: {total_completed}')
     return res

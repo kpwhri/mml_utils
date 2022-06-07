@@ -1,0 +1,192 @@
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|7.37|Pancreatitis, Acute|C0001339|[dsyn]|"Acute pancreatitis"-text-0-"Acute pancreatitis"-NNP-0,"Acute pancreatitis"-text-0-"acute pancreatitis"-JJ-0,"Acute pancreatitis"-text-0-"acute pancreatitis"-JJ-0,"Acute pancreatitis"-text-4-"acute pancreatitis"-JJ-0|text|569/18;726/18;816/18;1086/18|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|7.37|insulin, regular, human|C0795635|[horm, aapp, phsu]|"INSULIN"-text-0-"insulin"-NN-0|text|296/7|D06.472.699.587.200.500.625.500;D12.644.548.586.200.500.625.500|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|6.45|Insulin|C0021641|[horm, aapp, phsu]|"Insulin"-text-0-"insulin"-NN-0|text|296/7|D06.472.699.587.200.500.625;D12.644.548.586.200.500.625|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|5.53|Pancreas|C0030274|[bpoc]|"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-10-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0|text|40/8;74/8;159/8;413/8;486/8;1194/8|A03.734|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|5.53|Pancreatic Diseases|C0030286|[dsyn]|"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-10-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0|text|40/8;74/8;159/8;413/8;486/8;1194/8|C06.689|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|5.53|Pancreatitis|C0030305|[dsyn]|"Pancreatitis"-text-0-"Pancreatitis"-NNP-0,"Pancreatitis"-text-0-"pancreatitis"-NN-0,"Pancreatitis"-text-0-"pancreatitis"-NN-0,"Pancreatitis"-text-31-"pancreatitis"-NN-0|text|0/12;530/12;907/12;1303/12|C06.689.750|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|5.53|glucagon|C0017687|[horm, aapp, phsu]|"glucagon"-text-0-"glucagon"-NN-0|text|308/8|D12.644.548.586.730.500;D06.472.699.587.730.500|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|4.60|Food|C0016452|[food]|"Food"-text-28-"food"-NN-0,"Food"-text-4-"food"-NN-0|text|277/4;390/4|G07.203.300;J02.500|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|3.68|Intestines, Small|C0021852|[bpoc]|"Small intestine"-text-14-"small intestine"-JJ-0,"Small intestine"-text-18-"small intestine"-JJ-0|text|137/15;242/15|A03.556.124.684|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|3.68|Symptoms|C1457887|[sosy]|"Symptoms"-text-8-"symptoms"-NNS-0,"Symptoms"-text-33-"symptoms"-NNS-0|text|1240/8;1316/8|x.x.x.x|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|3.68|Control Groups|C0009932|[grup]|"Control"-text-0-"control"-NN-0|text|370/7|E05.581.500.149;E05.318.370.074|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|3.68|Human body|C0242821|[humn]|"body"-text-0-"body"-NN-0|text|365/4|I01.076.201.450.560;K01.093.378|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|3.22|Hormones|C0019932|[horm]|"Hormones"-text-0-"hormones"-NNS-0|text|346/8|D06.472;D27.505.696.399.472|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|2.76|Entire pancreas|C1278931|[bpoc]|"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0,"Pancreas"-text-10-"pancreas"-NNS-0,"Pancreas"-text-0-"pancreas"-NNS-0|text|40/8;74/8;159/8;413/8;486/8;1194/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|2.76|pancreas extract|C0771711|[orch, phsu]|"pancreas"-text-0-"pancreas"-NNS-0,"pancreas"-text-0-"pancreas"-NNS-0,"pancreas"-text-0-"pancreas"-NNS-0,"pancreas"-text-0-"pancreas"-NNS-0,"pancreas"-text-10-"pancreas"-NNS-0,"pancreas"-text-0-"pancreas"-NNS-0|text|40/8;74/8;159/8;413/8;486/8;1194/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|2.76|Inflammation|C0021368|[patf]|"Inflammation"-text-0-"inflammation"-NN-0,"Inflammation"-text-0-"inflammation"-NN-0|text|598/12;1030/12|C23.550.470|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|2.76|Communicable Diseases|C0009450|[dsyn]|"Infection"-text-11-"infection"-NN-0|text|878/9|C23.550.291.531;C01.221|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|2.30|Cyst|C0010709|[dsyn]|"Cysts"-text-16-"cysts"-NNS-0|text|893/5|C23.300.306;C04.182|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Allergy Severity - Severe|C1561581|[fndg]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Borg Category-Ratio 10 Perceived Exertion Score 5|C4050466|[fndg]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Epidermal cGVHD Score 4|C4761449|[fndg]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Grade 3 Severe Adverse Event|C1519275|[fndg]|"SEVERE"-text-2-"severe"-JJ-0,"SEVERE"-text-0-"severe"-JJ-0,"SEVERE"-text-0-"Severe"-JJ-0,"SEVERE"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Intensity and Distress 5|C5203119|[fndg]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Pancreatitis, CTCAE 3.0|C1963198|[fndg]|"Pancreatitis"-text-0-"Pancreatitis"-NNP-0,"Pancreatitis"-text-0-"pancreatitis"-NN-0,"Pancreatitis"-text-0-"pancreatitis"-NN-0,"Pancreatitis"-text-31-"pancreatitis"-NN-0|text|0/12;530/12;907/12;1303/12||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Pancreatitis, CTCAE 5.0|C4554179|[fndg]|"Pancreatitis"-text-0-"Pancreatitis"-NNP-0,"Pancreatitis"-text-0-"pancreatitis"-NN-0,"Pancreatitis"-text-0-"pancreatitis"-NN-0,"Pancreatitis"-text-31-"pancreatitis"-NN-0|text|0/12;530/12;907/12;1303/12||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Severe (severity modifier)|C0205082|[fndg]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Severe - Severity of Illness Code|C1547227|[inpr]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Severe - Triage Code|C1547231|[inpr]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Severe Extremity Pain|C4050465|[fndg]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Severe Hallucination|C4722466|[fndg]|"Severe"-text-2-"severe"-JJ-0,"Severe"-text-0-"severe"-JJ-0,"Severe"-text-0-"Severe"-JJ-0,"Severe"-text-29-"severe"-JJ-0|text|675/6;802/6;900/6;1296/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Time|C0040223|[tmco]|"Time"-text-4-"time"-NN-0,"Time"-text-12-"time"-NN-0|text|630/4;1173/4|G01.910|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Pancreatitis, Chronic|C0149521|[dsyn]|"Chronic pancreatitis"-text-0-"Chronic pancreatitis"-NNP-0|text|993/20|C06.689.750.830|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Stomach|C0038351|[bpoc]|"Stomach"-text-2-"stomach"-NN-0|text|112/7|A03.556.875.875|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.84|Vital signs|C0518766|[clna]|"VITAL"-text-0-"vital"-JJ-0|text|940/5|E01.370.600.875|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Facilitated oscillatory release technique|C1562169|[topp]|"FOR"-text-6-"for"-IN-0,"FOR"-text-2-"for"-IN-0,"FOR"-text-10-"for"-IN-0|text|395/3;1152/3;1249/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Preposition For|C0521125|[qlco]|"For"-text-6-"for"-IN-0,"For"-text-2-"for"-IN-0,"For"-text-10-"for"-IN-0|text|395/3;1152/3;1249/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|WWOX gene|C1421525|[gngm]|"FOR"-text-6-"for"-IN-0,"FOR"-text-2-"for"-IN-0,"FOR"-text-10-"for"-IN-0|text|395/3;1152/3;1249/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|WWOX wt Allele|C4321252|[gngm]|"FOR"-text-6-"for"-IN-0,"FOR"-text-2-"for"-IN-0,"FOR"-text-10-"for"-IN-0|text|395/3;1152/3;1249/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Blood Circulation|C0005775|[phsf]|"Bloodstream"-text-0-"bloodstream"-NN-0|text|327/11|G09.330.100|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Disease|C0012634|[dsyn]|"Disease"-text-0-"disease"-NN-0|text|18/7|C23.550.288|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Hemorrhage|C0019080|[patf]|"Bleeding"-text-1-"bleeding"-NN-0|text|845/8|C23.550.414|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Kidney|C0022646|[bpoc]|"Kidneys"-text-16-"kidneys"-NNS-0|text|983/7|A05.810.453|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Life|C0376558|[idcn]|"Life"-text-5-"life"-NN-0|text|683/4|K01.752.400|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Organ|C0178784|[bpoc]|"organs"-text-0-"organs"-NNS-0|text|946/6|Y06;N03.540|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|Stomach Diseases|C0038354|[dsyn]|"Stomach"-text-2-"stomach"-NN-0|text|112/7|C06.405.748|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|1.38|ethanol|C0001962|[orch, phsu]|"Alcohol"-text-0-"alcohol"-NN-0|text|1144/7|D02.033.375|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Data types - Time|C1547403|[idcn]|"Time"-text-4-"time"-NN-0,"Time"-text-12-"time"-NN-0|text|630/4;1173/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Digestive Enzymes|C0544420|[enzy, aapp, phsu]|"Digestive Enzymes"-text-10-"digestive enzymes"-JJ-0,"Digestive Enzymes"-text-0-"digestive enzymes"-JJ-0|text|214/17;442/17||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Disorder of small intestine|C0341268|[dsyn]|"Small Intestine"-text-14-"small intestine"-JJ-0,"Small Intestine"-text-18-"small intestine"-JJ-0|text|137/15;242/15||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Entire small intestine|C1268998|[bpoc]|"Small intestine"-text-14-"small intestine"-JJ-0,"Small intestine"-text-18-"small intestine"-JJ-0|text|137/15;242/15||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Food allergenic extracts|C3540798|[imft, phsu]|"food"-text-28-"food"-NN-0,"food"-text-4-"food"-NN-0|text|277/4;390/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|From|C1517320|[qlco]|"From"-text-0-"from"-IN-0,"From"-text-0-"from"-IN-0|text|649/4;1203/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Into|C0332286|[ftcn]|"Into"-text-12-"into"-IN-0,"Into"-text-0-"into"-IN-0|text|232/4;317/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Kawasaki Disease Symptom|C5238761|[sosy]|"Symptoms"-text-8-"symptoms"-NNS-0,"Symptoms"-text-33-"symptoms"-NNS-0|text|1240/8;1316/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Lengthened (qualifier value)|C0392744|[ftcn]|"Long"-text-0-"long"-JJ-0,"Long"-text-6-"long"-JJ-0|text|1017/4;1158/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Long|C0205166|[qlco]|"Long"-text-0-"long"-JJ-0,"Long"-text-6-"long"-JJ-0|text|1017/4;1158/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Long Heart Murmur|C5238697|[fndg]|"Long"-text-0-"long"-JJ-0,"Long"-text-6-"long"-JJ-0|text|1017/4;1158/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Long Variable|C1706317|[qlco]|"Long"-text-0-"long"-JJ-0,"Long"-text-6-"long"-JJ-0|text|1017/4;1158/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Post|C0687676|[tmco]|"After"-text-0-"after"-IN-0,"After"-text-0-"after"-IN-0|text|764/5;1066/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Rheumatic Fever Symptom|C5238862|[sosy]|"Symptoms"-text-8-"symptoms"-NNS-0,"Symptoms"-text-33-"symptoms"-NNS-0|text|1240/8;1316/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Status post|C0231290|[tmco]|"After"-text-0-"after"-IN-0,"After"-text-0-"after"-IN-0|text|764/5;1066/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Symptoms aspect|C0683368|[ftcn]|"symptoms"-text-8-"symptoms"-NNS-0,"symptoms"-text-33-"symptoms"-NNS-0|text|1240/8;1316/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Time (foundation metadata concept)|C3541383|[tmco]|"Time"-text-4-"time"-NN-0,"Time"-text-12-"time"-NN-0|text|630/4;1173/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Tissue damage|C0010957|[inpo]|"Tissue damage"-text-8-"tissue damage"-NN-0,"Damage"-text-0-"Damage"-NN-0|text|863/13;1179/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Two|C0205448|[qnco]|"Two"-text-0-"two"-CD-0,"Two"-text-0-"two"-CD-0|text|173/3;517/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Value type - Time|C1548318|[idcn]|"Time"-text-4-"time"-NN-0,"Time"-text-12-"time"-NN-0|text|630/4;1173/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Alcohols|C0001975|[orch, phsu]|"Alcohol"-text-0-"alcohol"-NN-0|text|1144/7|D02.033|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Heart|C0018787|[bpoc]|"Heart"-text-8-"heart"-NN-0|text|965/5|A07.541|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.92|Lung|C0024109|[bpoc]|"Lungs"-text-11-"lungs"-NNS-0|text|972/5|A04.411|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Acute - Triage Code|C1547229|[inpr]|"Acute"-text-0-"acute"-JJ-0|text|547/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Adjacent|C0205117|[spco]|"Next to"-text-8-"next to"-JJ-0|text|124/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Administration procedure|C1533734|[topp]|"Treatment"-text-8-"treatment"-NN-0|text|788/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Admission Level of Care Code - Acute|C1547295|[inpr]|"Acute"-text-0-"acute"-JJ-0|text|547/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Adult human body|C4082212|[anst]|"Body"-text-0-"body"-NN-0|text|365/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Adverse Event Associated with Infection|C1556682|[fndg]|"INFECTION"-text-11-"infection"-NN-0|text|878/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Alcohol - Recreational Drug Use Code|C1547288|[inpr]|"Alcohol"-text-0-"alcohol"-NN-0|text|1144/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Alert level - Serious|C1561576|[idcn]|"Serious"-text-4-"serious"-JJ-0|text|855/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Before|C0332152|[tmco]|"Before"-text-6-"before"-IN-0|text|474/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Before - dosing instruction fragment|C1705850|[inpr]|"Before"-text-6-"before"-IN-0|text|474/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Biomaterial Treatment|C1705169|[cnce]|"Treatment"-text-8-"treatment"-NN-0|text|788/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Body structure|C1268086|[anst]|"Body"-text-0-"body"-NN-0|text|365/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Both kidneys|C0227665|[bpoc]|"kidneys"-text-16-"kidneys"-NNS-0|text|983/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|CONTROL veterinary product|C0308718|[phsu]|"CONTROL"-text-0-"control"-NN-0|text|370/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Case (situation)|C0868928|[ftcn]|"cases"-text-0-"cases"-NNS-0|text|809/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Case unit dose|C1533148|[qnco]|"Cases"-text-0-"cases"-NNS-0|text|809/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Chronic - Admission Level of Care Code|C1547296|[inpr]|"Chronic"-text-2-"chronic"-JJ-0|text|557/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Clinical Trial Period|C2347804|[resa]|"Period"-text-8-"period"-NN-0|text|1163/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Complete|C0205197|[qlco]|"Completely"-text-0-"completely"-RB-0|text|753/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Complete Agreement|C4319731|[fndg]|"Completely"-text-0-"completely"-RB-0|text|753/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Completely - dosing instruction fragment|C4554154|[inpr]|"Completely"-text-0-"completely"-RB-0|text|753/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Completely Able|C4319730|[fndg]|"Completely"-text-0-"completely"-RB-0|text|753/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Control - Relationship modifier|C1547100|[idcn]|"Control"-text-0-"control"-NN-0|text|370/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Control function|C2587213|[ftcn]|"Control"-text-0-"control"-NN-0|text|370/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Damage|C1883709|[ftcn]|"Damage"-text-0-"Damage"-NN-0|text|1179/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Device Alert Level - Serious|C1551395|[fndg]|"Serious"-text-4-"serious"-JJ-0|text|855/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Discomfort|C2364135|[sosy]|"Discomfort"-text-0-"discomfort"-NN-0|text|659/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Document Body|C1551342|[inpr]|"Body"-text-0-"body"-NN-0|text|365/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Dorsal|C0205095|[spco]|"Behind"-text-0-"behind"-IN-0|text|100/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Energy|C1442080|[qnco]|"Energy"-text-8-"energy"-NN-0|text|399/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Energy, Physics|C0542479|[npop]|"Energy"-text-8-"energy"-NN-0|text|399/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Entire heart|C1281570|[bpoc]|"Heart"-text-8-"heart"-NN-0|text|965/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Entire stomach|C1278920|[bpoc]|"Stomach"-text-2-"stomach"-NN-0|text|112/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Epidermal cGVHD Score 2|C4761314|[fndg]|"Mild"-text-0-"mild"-JJ-0|text|654/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Episode of|C0332189|[tmco]|"Episode of"-text-0-"episode of"-NN-0|text|1075/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Equipment Alert Level - Serious|C1552745|[fndg]|"Serious"-text-4-"serious"-JJ-0|text|855/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Ethanol measurement|C0202304|[lbpr]|"Alcohol"-text-0-"alcohol"-NN-0|text|1144/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Etiology aspects|C0015127|[ftcn]|"cause"-text-0-"cause"-NN-1|text|1118/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Frequently|C0332183|[tmco]|"Often"-text-0-"often"-RB-0|text|1052/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|GCG gene|C1333664|[gngm]|"GLUCAGON"-text-0-"glucagon"-NN-0|text|308/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Gland|C1285092|[bpoc]|"Gland"-text-0-"gland"-NN-0|text|94/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Glucagon measurement|C0337437|[lbpr]|"Glucagon"-text-0-"glucagon"-NN-0|text|308/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Human body structure|C0460148|[anst]|"Body"-text-0-"body"-NN-0|text|365/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|INS gene|C1337112|[gngm]|"INSULIN"-text-0-"insulin"-NN-0|text|296/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|INS protein, human|C4721402|[horm, aapp]|"Insulin"-text-0-"insulin"-NN-0|text|296/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Illness (finding)|C0221423|[sosy]|"Illness"-text-9-"illness"-NN-0|text|700/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|In addition to|C0332287|[ftcn]|"With"-text-0-"with"-IN-0|text|721/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Infection|C3714514|[patf]|"Infection"-text-11-"infection"-NN-0|text|878/9|C01|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Insulin Drug Class|C3714501|[horm, phsu]|"INSULIN"-text-0-"insulin"-NN-0|text|296/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Insulin [EPC]|C1579433|[phsu]|"Insulin"-text-0-"insulin"-NN-0|text|296/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Insulin measurement|C0202098|[lbpr]|"Insulin"-text-0-"insulin"-NN-0|text|296/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Kind of quantity - Energy|C1547025|[qnco]|"Energy"-text-8-"energy"-NN-0|text|399/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|LARGE1 gene|C1416798|[gngm]|"LARGE"-text-0-"large"-JJ-0|text|88/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|LINC00273 gene|C3148500|[gngm]|"TOP"-text-0-"top"-JJ-0|text|1114/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Large|C0549177|[qnco]|"Large"-text-0-"large"-JJ-0|text|88/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Laser-Induced Fluorescence Endoscopy|C1522684|[diap]|"LIFE"-text-5-"life"-NN-0|text|683/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|MAGEE1 gene|C2681922|[gngm]|"DAMAGE"-text-0-"Damage"-NN-0|text|1179/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Main|C1542147|[qlco]|"Main"-text-0-"main"-JJ-0|text|177/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Manufactured form|C0376315|[mnob]|"Forms"-text-0-"forms"-NNS-0|text|521/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Mild (qualifier value)|C2945599|[qlco]|"Mild"-text-0-"mild"-JJ-0|text|654/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Mild Adverse Event|C1513302|[fndg]|"MILD"-text-0-"mild"-JJ-0|text|654/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Mild Allergy Severity|C1563320|[qlco]|"Mild"-text-0-"mild"-JJ-0|text|654/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Mild Hallucination|C4722210|[fndg]|"Mild"-text-0-"mild"-JJ-0|text|654/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Mild Severity of Illness Code|C1547225|[inpr]|"Mild"-text-0-"mild"-JJ-0|text|654/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Most|C0205393|[qnco]|"Most"-text-0-"Most"-JJS-0|text|709/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|NR4A2 gene|C1417836|[gngm]|"NOT"-text-4-"not"-RB-0|text|1230/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Negation|C1518422|[ftcn]|"Not"-text-4-"not"-RB-0|text|1230/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Numerous|C0439064|[qnco]|"Many"-text-12-"many"-JJ-0|text|1253/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Often - answer to question|C4050225|[inpr]|"Often"-text-0-"often"-RB-0|text|1052/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Overall Energy Level|C4330907|[inpr]|"Energy"-text-8-"energy"-NN-0|text|399/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|POLY|C0747726|[cnce]|"many"-text-12-"many"-JJ-0|text|1253/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Period (temporal qualifier)|C1948053|[tmco]|"Period"-text-8-"period"-NN-0|text|1163/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Persons|C0027361|[popg]|"People"-text-0-"people"-NNS-0|text|714/6|M01|
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Primary|C0205225|[qlco]|"Main"-text-0-"main"-JJ-0|text|177/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Provision of recurring care for chronic illness|C1555457|[hlca]|"Chronic"-text-2-"chronic"-JJ-0|text|557/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Qualitative form|C0348078|[qlco]|"forms"-text-0-"forms"-NNS-0|text|521/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Release (procedure)|C1963578|[topp]|"releases"-text-12-"releases"-NNS-0|text|495/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Right|C0205090|[spco]|"Right"-text-6-"right"-JJ-0|text|782/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Right sided|C0444532|[spco]|"Right"-text-6-"right"-JJ-0|text|782/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Science of Etiology|C1524003|[cnce]|"Cause"-text-0-"cause"-NN-1|text|1118/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Scientific Control|C1882979|[cnce]|"Control"-text-0-"control"-NN-0|text|370/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Sensory Discomfort|C0234215|[sosy]|"Discomfort"-text-0-"discomfort"-NN-0|text|659/10||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Serious|C0205404|[qlco]|"Serious"-text-4-"serious"-JJ-0|text|855/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Short|C1806781|[qnco]|"Short"-text-2-"short"-JJ-0|text|624/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Short Heart Murmur|C5238699|[fndg]|"Short"-text-2-"short"-JJ-0|text|624/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Short Value|C2350002|[qnco]|"Short"-text-2-"short"-JJ-0|text|624/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Shortened|C1282927|[qlco]|"short"-text-2-"short"-JJ-0|text|624/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Stomach structure|C3714551|[bpoc]|"Stomach"-text-2-"stomach"-NN-0|text|112/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Study Control|C4553389|[cnce]|"control"-text-0-"control"-NN-0|text|370/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Sudden (qualifier value)|C5201090|[qlco]|"Sudden"-text-0-"sudden"-JJ-0|text|591/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|THOP1 gene|C1420726|[gngm]|"TOP"-text-0-"top"-JJ-0|text|1114/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Table Cell Horizontal Align - right|C1552823|[ftcn]|"right"-text-6-"right"-JJ-0|text|782/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Table Cell Vertical Align - top|C1552827|[spco]|"top"-text-0-"top"-JJ-0|text|1114/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Then|C1883708|[tmco]|"Then"-text-19-"then"-RB-0|text|1269/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Then - dosing instruction fragment|C1720594|[inpr]|"Then"-text-19-"then"-RB-0|text|1269/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Therapeutic Insulin|C1533581|[horm, aapp, phsu]|"Insulin"-text-0-"insulin"-NN-0|text|296/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Therapeutic procedure|C0087111|[topp]|"Treatment"-text-8-"treatment"-NN-0|text|788/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Top (position)|C1704458|[spco]|"Top"-text-0-"top"-JJ-0|text|1114/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Topical Dosage Form|C1710439|[bodm]|"Top"-text-0-"top"-JJ-0|text|1114/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Topical Route of Drug Administration|C1522168|[ftcn]|"TOP"-text-0-"top"-JJ-0|text|1114/3||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Transaction counts and value totals - Period|C1561960|[qnco]|"period"-text-8-"period"-NN-0|text|1163/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Treating|C1522326|[ftcn]|"Treatment"-text-8-"treatment"-NN-0|text|788/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Treatment Epoch|C3538994|[resa]|"TREATMENT"-text-8-"treatment"-NN-0|text|788/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Treatment Study|C3161471|[resa]|"TREATMENT"-text-8-"treatment"-NN-0|text|788/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|True Control Status|C3274648|[qlco]|"Control"-text-0-"control"-NN-0|text|370/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Vital (qualifier value)|C0442732|[qlco]|"Vital"-text-0-"vital"-JJ-0|text|940/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Vital High Nitrogen Enteral Nutrition|C1875856|[food]|"VITAL"-text-0-"vital"-JJ-0|text|940/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Vitality|C0424589|[fndg]|"energy"-text-8-"energy"-NN-0|text|399/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|Whole body|C0444584|[anst]|"Body"-text-0-"body"-NN-0|text|365/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|With - dosing instruction fragment|C1705690|[inpr]|"With"-text-0-"with"-IN-0|text|721/4||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|acute|C0205178|[tmco]|"acute"-text-0-"acute"-JJ-0|text|547/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|acute inpatient encounter|C1551345|[hlca]|"ACUTE"-text-0-"acute"-JJ-0|text|547/5||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|chronic|C0205191|[tmco]|"chronic"-text-2-"chronic"-JJ-0|text|557/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|control aspects|C0243148|[qlco]|"control"-text-0-"control"-NN-0|text|370/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|control substance|C1550141|[sbst]|"Control"-text-0-"control"-NN-0|text|370/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|glucagon (rDNA)|C0876232|[horm, aapp, phsu]|"Glucagon"-text-0-"glucagon"-NN-0|text|308/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|glucagon, human|C0772088|[horm, aapp, phsu]|"Glucagon"-text-0-"glucagon"-NN-0|text|308/8||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|heavy drinking|C0687132|[mobd]|"heavy alcohol use"-text-0-"heavy alcohol use"-JJ-0|text|1208/17||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|insulin activity|C1145751|[moft]|"insulin"-text-0-"insulin"-NN-0|text|296/7||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|per period (qualifier value)|C0439531|[tmco]|"period"-text-8-"period"-NN-0|text|1163/6||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|therapeutic aspects|C0039798|[ftcn]|"treatment"-text-8-"treatment"-NN-0|text|788/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|treatment - ActInformationManagementReason|C3887704|[hlca]|"treatment"-text-8-"treatment"-NN-0|text|788/9||
+D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt|MMI|0.46|year|C0439234|[tmco]|"years"-text-14-"years"-NNS-0|text|1258/5||
