@@ -10,9 +10,5 @@ caption: |
 glob:
 ---
 
-.. automodule:: mml_utils
-    :members:
-
-
 *
 ```

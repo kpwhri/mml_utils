@@ -12,13 +12,14 @@
 #
 # import os
 # import sys
-# sys.path.insert(0, os.path.abspath('.'))
+# sys.path.insert(0, os.path.abspath('../src'))
 
 
 # -- Project information -----------------------------------------------------
+from datetime import date
 
 project = 'Metamaplite Utilities'
-copyright = '2022, KPWHRI'
+copyright = f'{date.today().year}, KPWHRI'
 author = 'dcronkite <dcronkite@gmail.com>'
 
 # The full version, including alpha/beta/rc tags
