@@ -79,7 +79,11 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     if outdir is None:
         outdir = pathlib.Path('.')
     logger.info(f'Writing files to: {outdir} ({type(outdir)}.')
-    outdir = pathlib.Path(outdir)
+    # not clear what issue is here: somehow outdir is type bytes for client on 3.8
+    if isinstance(outdir, bytes):
+        outdir = pathlib.Path(outdir.decode())
+    elif isinstance(outdir, str):
+        outdir = pathlib.Path(outdir)
     outdirs = [outdir / f'notes{i}' if n_dirs > 1 else outdir / f'notes' for i in range(n_dirs)]
     for d in outdirs:
         d.mkdir(exist_ok=False, parents=True)
