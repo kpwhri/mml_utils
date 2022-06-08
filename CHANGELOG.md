@@ -17,8 +17,12 @@ Types of changes:
 
 ## [Unreleased]
 
+
+## [0.0.9] - 2022-06-08
+
 ### Added
 - End-to-end Examples
+- Require at least version 8.0.0 of click
 
 
 ## [0.0.8] - 2022-06-06
