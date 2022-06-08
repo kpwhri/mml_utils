@@ -38,7 +38,7 @@ def text_from_database(connection_string, query, outdir: pathlib.Path, n_dirs=1,
 
 
 @click.command()
-@click.argument('csv-file', type=click.Path(dir_okay=False, path_type=pathlib.Path))
+@click.argument('csv-file', type=click.Path(dir_okay=False, path_type=pathlib.Path), default=None)
 @click.option('--id-col', default='note_id', type=str,
               help='Name of column containing note ids.')
 @click.option('--text-col', default='text', type=str,
@@ -78,6 +78,7 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     """
     if outdir is None:
         outdir = pathlib.Path('.')
+    logger.info(f'Writing files to: {outdir} ({type(outdir)}.')
     outdirs = [outdir / f'notes{i}' if n_dirs > 1 else outdir / f'notes' for i in range(n_dirs)]
     for d in outdirs:
         d.mkdir(exist_ok=False, parents=True)
