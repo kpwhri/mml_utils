@@ -306,6 +306,7 @@ Inputs (see `tests/fever` for examples:
     mml-prepare-review /path/to/notes --target-path /path/to/inputs [--mml-format json] [--text-extension .txt] [--text-encoding utf8]
 
 
+To then take samples from this dataset, use `mml-prepare-review-sample`.
 
 
 ## Versions

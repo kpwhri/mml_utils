@@ -17,6 +17,9 @@ Types of changes:
 
 ## [Unreleased]
 
+### Added
+- Track previous samples to avoid re-sampling
+
 
 ## [0.0.9] - 2022-06-08
 

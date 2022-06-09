@@ -22,6 +22,7 @@ classifiers = [# https://pypi.org/classifiers/
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
     'Topic :: Text Processing :: Linguistic',
     'License :: OSI Approved :: MIT License',
     'Intended Audience :: Healthcare Industry',
@@ -50,6 +51,6 @@ mml-split-files = "mml_utils.scripts.split_long_file:split_files_on_lines"
 mml-run-afep = "mml_utils.scripts.run_afep:run_afep_algorithm"
 mml-check-offsets = "mml_utils.scripts.check_mml_offsets:check_mml_offsets"
 mml-prepare-review = "mml_utils.scripts.extract_data_for_review:_extract_data_for_review"
-mml-prepare-review-to-excel = "mml_utils.scripts.extract_data_for_review:_compile_to_excel"
+mml-prepare-review-sample = "mml_utils.scripts.sample_review_set:_compile_to_excel"
 mml-sql-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_database"
 mml-csv-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_csv"
