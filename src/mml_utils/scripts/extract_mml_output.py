@@ -92,7 +92,7 @@ def get_field_names(note_directories: list[pathlib.Path], *, output_format='json
             outfile = pathlib.Path(file.parent / f'{str(file.stem)}.{output_format}')
             if not outfile.exists():
                 continue
-            for _, data in extract_mml_data(outfile, encoding=mm_encoding, output_format=output_format):
+            for data in extract_mml_data(outfile, encoding=mm_encoding, output_format=output_format):
                 for fieldname in set(data.keys()) - fieldnames:
                     MML_FIELDNAMES.append(fieldname)
                     fieldnames.add(fieldname)

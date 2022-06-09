@@ -23,6 +23,10 @@ Types of changes:
 ### Changed
 - Metadata CSV file will limit records selected from corpus in `mml-prepare-review` (`extract_data.py`)
 
+### Fixed
+- `Extract mml` with json format (crashing) fixed
+- `Extract mml` with mmi format (crashing) fixed
+
 ## [0.0.9] - 2022-06-08
 
 ### Added
