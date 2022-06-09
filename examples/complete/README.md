@@ -62,3 +62,19 @@ Result:
 * Adds a `.json` file MetaMapLite's output next to each `.txt` file.
 * Creates a `filelist.txt_0` which is a copy of `filelist.txt`. Numbers after `0` implies that MetaMapLite ran with errors, and these were retried.
 
+
+## Compile MML Output to CSV File
+
+Compile mmi or json output to a CSV file. The `--outdir` must exist.
+
+To limit to a certain number of cuis, create a file (e.g., `include-cuis.txt`) and place each CUI on a separate line. See `include-cuis.txt` as an example.
+
+Command:
+
+    mml-extract-mml notes --outdir mmlout --cui-file include-cuis.txt --output-format mmi
+
+Result:
+* CSV file beginning with 'mml' containing an unpacked version of the mmi or json file
+* CSV file beginning with 'notes' containing summary statistics on the notes in the corpus
+* A log file with lots of errors for missing variables/column names. 
+  * To add these back into your output file, specify, e.g., `--add-fieldname negated fndg pos ...` and re-run.

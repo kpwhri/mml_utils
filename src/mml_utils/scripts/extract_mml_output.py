@@ -22,7 +22,7 @@ MML_FIELDNAMES = [
     'event_id', 'docid', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length',
 ]
 NOTE_FIELDNAMES = [
-    'filename', 'fullpath', 'num_chars', 'num_letters', 'num_words', 'processed',
+    'filename', 'docid', 'num_chars', 'num_letters', 'num_words', 'processed',
 ]
 
 
@@ -119,7 +119,7 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
                 field_names = MML_FIELDNAMES
             curr_missing_data_dict = set(data.keys()) - set(field_names)
             if curr_missing_data_dict:
-                logger.error(f'Only processing known fields for record: {data["fullpath"]}')
+                logger.error(f'Only processing known fields for record: {data["docid"]}')
                 if is_record:
                     missing_note_dict |= curr_missing_data_dict
                     logger.error(f'''Missing Note Dict: '{"','".join(missing_note_dict)}' ''')
@@ -145,7 +145,7 @@ def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, enco
             logger.info(f'Processing file: {file}')
             record = {
                 'filename': file.stem,
-                'fullpath': str(file),
+                'docid': str(file),
             }
             with open(file, encoding=encoding) as fh:
                 text = fh.read()
