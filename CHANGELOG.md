@@ -17,8 +17,12 @@ Types of changes:
 
 ## [Unreleased]
 
+
+## [0.1.0]
+
 ### Added
 - Track previous samples to avoid re-sampling
+- Examples for running `mml-extract-mml` in both json and mmi
 
 ### Changed
 - Metadata CSV file will limit records selected from corpus in `mml-prepare-review` (`extract_data.py`)
