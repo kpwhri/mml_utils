@@ -77,7 +77,8 @@ from mml_utils.review.extract_data import extract_data_for_review
               help='Sample size to pull for each output.')
 @click.option('--metadata-file', type=click.Path(exists=True, path_type=pathlib.Path), default=None,
               help='Metadata file to add additional columns to output:'
-                   ' HEADER = note_id, studyid, date, etc.; VALUES = 1, A2E, 05/06/2011, etc.')
+                   ' HEADER = note_id, studyid, date, etc.; VALUES = 1, A2E, 05/06/2011, etc.'
+                   ' This file WILL LIMIT the notes to only those in this file.')
 @click.option('--replacements', type=str, multiple=True,
               help='Replace text to fix offset issues. Arguments should look like "from==to" which will'
                    ' replace "from" with "to" before checking offsets.')

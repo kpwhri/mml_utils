@@ -20,6 +20,8 @@ Types of changes:
 ### Added
 - Track previous samples to avoid re-sampling
 
+### Changed
+- Metadata CSV file will limit records selected from corpus in `mml-prepare-review` (`extract_data.py`)
 
 ## [0.0.9] - 2022-06-08
 

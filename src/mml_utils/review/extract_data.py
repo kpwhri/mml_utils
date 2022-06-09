@@ -1,3 +1,7 @@
+"""
+
+* DECISION: treat all note_ids as string
+"""
 import csv
 import datetime
 import pathlib
@@ -65,6 +69,14 @@ def clean_text(text: str):
     return text.replace('\n', '\\n').replace('\t', ' ')
 
 
+def _get_note_ids_from_metadata_csv(csvfile: pathlib.Path, note_id_col='note_id'):
+    note_ids = set()
+    with open(csvfile, newline='') as fh:
+        for line in csv.DictReader(fh):
+            note_ids.add(str(line[note_id_col]))
+    return note_ids
+
+
 def extract_data_for_review(note_directories: list[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
                             mml_format='json', text_extension='', text_encoding='utf8',
                             text_errors='replace', add_cr=False, sample_size=50, metadata_file=None,
@@ -74,7 +86,7 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
     :param text_errors:
     :param add_cr:
     :param sample_size:
-    :param metadata_file:
+    :param metadata_file: add metadata in excel and/or limit the number of notes
     :param replacements:
     :param text_encoding:
     :param note_directories:
@@ -93,6 +105,9 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
     outpath = target_path / f'review_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}'
     outpath.mkdir(exist_ok=False)
     note_ids = defaultdict(list)
+    # limit note ids to just those in a metadata csv file
+    limit_note_ids = _get_note_ids_from_metadata_csv(metadata_file) if metadata_file else None
+    # run separately for each feature
     for feature_name in get_feature_names_from_directory(target_path):
         target_cuis = load_first_column(target_path / f'{feature_name}.cui.txt')
         logger.info(f'Starting "{feature_name}" with {len(target_cuis)} target CUIs.')
@@ -112,7 +127,10 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
                 note_count = 0
                 no_text_file_count = 0
                 for mml_file in note_directory.glob(f'*.{mml_format}'):
-                    txt_file = note_directory / f'{mml_file.stem}{text_extension}'
+                    note_id = mml_file.stem
+                    if limit_note_ids and note_id not in limit_note_ids:
+                        continue
+                    txt_file = note_directory / f'{note_id}{text_extension}'
                     if not txt_file.exists():
                         logger.warning(f'Failed to find corresponding text file:'
                                        f' {txt_file.name} (extension: {text_extension}).')
@@ -159,7 +177,7 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
                     for start, end, is_cui, negated in sorted(cui_data + text_data):
                         writer.writerow({
                             'id': unique_id,
-                            'note_id': mml_file.stem,
+                            'note_id': note_id,
                             'start': start,
                             'end': end,
                             'length': end - start,
@@ -173,7 +191,7 @@ def extract_data_for_review(note_directories: list[pathlib.Path], target_path: p
                         unique_id += 1
                     # record all note ids by feature for sampling
                     if sample_size and prev_unique_id < unique_id:
-                        note_ids[feature_name].append(mml_file.stem)
+                        note_ids[feature_name].append(note_id)
                 logger.info(f'Completed processing {note_count} notes (Total Matches: {unique_id}).')
                 if no_text_file_count:
                     logger.warning(f'Failed to find {no_text_file_count} text files.')
