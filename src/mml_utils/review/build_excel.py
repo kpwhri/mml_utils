@@ -9,8 +9,14 @@ from loguru import logger
 
 def _dump_current_sample(outpath, feature_name, dt, note_ids):
     """Dump previous sample"""
-    with open(outpath / '..' / 'sample' / f'sample.{feature_name}.{dt}.txt', 'w') as out:
+    with open(_get_sample_path(outpath) / f'sample.{feature_name}.{dt}.txt', 'w') as out:
         out.write('\n'.join(str(x) for x in note_ids))
+
+
+def _get_sample_path(outpath: pathlib.Path):
+    path = outpath / '..' / 'sample'
+    path.mkdir(exist_ok=True)
+    return path
 
 
 def _get_previous_samples(outpath, feature_name):
@@ -18,7 +24,7 @@ def _get_previous_samples(outpath, feature_name):
     results = set()
     cnt = 0  # can't use len() due to adding both string and int versions
     # get all previous samples from parent directory (i.e., the original outpath)
-    for file in (outpath / '..' / 'sample').glob(f'sample.{feature_name}.*.txt'):
+    for file in _get_sample_path(outpath).glob(f'sample.{feature_name}.*.txt'):
         with open(file) as fh:
             for note_id in fh:
                 nid = note_id.strip()
@@ -174,6 +180,9 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
                            showLastColumn=False, showRowStripes=True, showColumnStripes=False)
     for file in outpath.glob('*.review.csv'):
         feature_name = file.name.split('.')[0]
+        if feature_name not in note_ids:
+            logger.warning(f'No notes found for feature {feature_name}.')
+            continue
         sample_note_ids = note_ids[feature_name]
         max_row_index = 1  # 1-indexed
         ws = wb.create_sheet(title=f'{feature_name}')
@@ -211,4 +220,7 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
                     alignment.vertical = column_alignments[i][2]
                     cell.alignment = alignment
     wb.remove(wb[wb.sheetnames[0]])  # remove default sheet
-    wb.save(outpath / f'features.review.sample{sample_size}.xlsx')
+    if len(wb.sheetnames) > 0:
+        wb.save(outpath / f'features.review.sample{sample_size}.xlsx')
+    else:
+        logger.error(f'No features contain any samples for review: not outputting Excel file.')
