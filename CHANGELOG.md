@@ -17,6 +17,9 @@ Types of changes:
 
 ## [Unreleased]
 
+
+## [0.1.1]
+
 ### Changed
 - Made code 3.8-compatible
 - Limited logging in `mml-extract-mml`
