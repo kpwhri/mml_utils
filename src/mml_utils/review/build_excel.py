@@ -28,7 +28,7 @@ def _get_previous_samples(outpath, feature_name):
         with open(file) as fh:
             for note_id in fh:
                 nid = note_id.strip()
-                if not nid:
+                if not nid or nid in results:
                     continue
                 results.add(nid)
                 cnt += 1
