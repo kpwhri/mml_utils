@@ -106,6 +106,7 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
                          output_format, encoding):
     missing_note_dict = set()
     missing_mml_dict = set()
+    logger_warning_count = 5
     with open(note_outfile, 'w', newline='', encoding='utf8') as note_out, \
             open(mml_outfile, 'w', newline='', encoding='utf8') as mml_out:
         note_writer = csv.DictWriter(note_out, fieldnames=NOTE_FIELDNAMES)
@@ -120,19 +121,31 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
                 field_names = MML_FIELDNAMES
             curr_missing_data_dict = set(data.keys()) - set(field_names)
             if curr_missing_data_dict:
-                logger.error(f'Only processing known fields for record: {data["docid"]}')
+                if logger_warning_count > 0:
+                    logger.warning(f'Only processing known fields for record: {data["docid"]}')
+                    logger_warning_count -= 1
+                    if logger_warning_count == 0:
+                        logger.warning(f'Suppressing future warnings:'
+                                       f' a final summary of added keys will be logged at the end.')
                 if is_record:
                     missing_note_dict |= curr_missing_data_dict
-                    logger.error(f'''Missing Note Dict: '{"','".join(missing_note_dict)}' ''')
+                    if logger_warning_count >= 0:
+                        logger.info(f'''Missing Note Dict: '{"','".join(missing_note_dict)}' ''')
                     data = {k: v for k, v in data.items() if k in NOTE_FIELDNAMES}
                 else:
                     missing_mml_dict |= curr_missing_data_dict
-                    logger.error(f'''Missing MML Dict: '{"','".join(missing_mml_dict)}' ''')
+                    if logger_warning_count >= 0:
+                        logger.info(f'''Missing MML Dict: '{"','".join(missing_mml_dict)}' ''')
                     data = {k: v for k, v in data.items() if k in MML_FIELDNAMES}
             if is_record:
                 note_writer.writerow(data)
             else:
                 mml_writer.writerow(data)
+    if missing_mml_dict:
+        logger.warning(f'''All Missing MML Dict: '{"','".join(missing_mml_dict)}' ''')
+    if missing_note_dict:
+        logger.warning(f'''All Missing Note Dict: '{"','".join(missing_note_dict)}' ''')
+    logger.info(f'Completed successfully.')
 
 
 def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
