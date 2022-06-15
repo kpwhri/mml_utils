@@ -136,7 +136,7 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
                     'Optional Comments',
                     'fullcontext',
                     ]
-    column_widths = {
+    column_widths = {**{
                         'id': 12,
                         'note_id': 12,
                         'start': 12,
@@ -144,9 +144,9 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
                         'length': 12,
                         'negation': 12,
                         'type': 12,
-                    } | {
+                    }, **{
                         field: 12 for field in new_fields
-                    } | {
+                    }, **{
                         'precontext': 40,
                         'keyword': 24,
                         'postcontext': 40,
@@ -154,7 +154,7 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
                         'Does the patient have this feature?': 24,
                         'Optional Comments': 24,
                         'fullcontext': 60,
-                    }
+                    }}
     column_alignments = [
                             [True, 'right', 'center'],
                             [True, 'right', 'center'],

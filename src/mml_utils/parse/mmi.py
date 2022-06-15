@@ -54,7 +54,7 @@ def extract_mmi_line(line):
     positional_infos = [loc.split('/') for loc in positional_info.split(';')]
     for (preferredname, loc, locpos, matchedtext, pos, negation
          ), (start, length) in zip(triggerinfos, positional_infos):
-        yield {
+        yield {**{
                   'docid': identifier,
                   'matchedtext': matchedtext,
                   'conceptstring': conceptstring,
@@ -67,6 +67,6 @@ def extract_mmi_line(line):
                   'negated': int(negation),
                   'pos': pos,
                   'semantictype': semantictypes[0],  # usually (always?) just one, so show it
-              } | {
+              }, **{
                   s: 1 for s in semantictypes
-              }
+              }}

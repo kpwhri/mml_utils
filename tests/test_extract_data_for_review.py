@@ -2,7 +2,8 @@ import pathlib
 
 import pytest
 
-from mml_utils.scripts.extract_data_for_review import extract_data_for_review, build_regex
+from mml_utils.review.extract_data import build_regex
+from mml_utils.scripts.extract_data_for_review import extract_data_for_review
 
 
 @pytest.fixture

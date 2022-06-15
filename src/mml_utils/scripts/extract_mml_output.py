@@ -12,6 +12,7 @@ import csv
 import datetime
 import pathlib
 import re
+from typing import List
 
 import click
 from loguru import logger
@@ -38,8 +39,8 @@ NOTE_FIELDNAMES = [
               help='Add fieldnames to Metamaplite output.')
 @click.option('--max-search', type=int, default=1000,
               help='Number of files in which to search for fieldnames.')
-def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
-                *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: list[str] = None):
+def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
+                *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: List[str] = None):
     """
 
     :param add_fieldname:
@@ -71,7 +72,7 @@ def extract_mml(note_directories: list[pathlib.Path], outdir: pathlib.Path, cui_
                          output_format, encoding)
 
 
-def get_field_names(note_directories: list[pathlib.Path], *, output_format='json', mm_encoding='cp1252',
+def get_field_names(note_directories: List[pathlib.Path], *, output_format='json', mm_encoding='cp1252',
                     max_search=1000):
     """
 
@@ -134,7 +135,7 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
                 mml_writer.writerow(data)
 
 
-def extract_data(note_directories: list[pathlib.Path], *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
+def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
                  output_format='json'):
     for note_dir in note_directories:
         logger.info(f'Processing directory: {note_dir}')

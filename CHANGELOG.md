@@ -17,6 +17,8 @@ Types of changes:
 
 ## [Unreleased]
 
+### Changed
+- Made code 3.8-compatible
 
 ## [0.1.0]
 

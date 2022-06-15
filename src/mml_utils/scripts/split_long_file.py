@@ -4,6 +4,7 @@ MML seems to have trouble with longer files. Split these up but preserve the off
 I am not clear if this is based on line number or character count.
 """
 import pathlib
+from typing import List
 
 import click
 
@@ -14,7 +15,7 @@ import click
               help='Number of lines after which to create a new file.')
 @click.option('--filelist', type=click.Path(dir_okay=False, path_type=pathlib.Path),
               help='Choose to create a particularly-named filelist. All content will be appended.')
-def split_files_on_lines(files: list[pathlib.Path], n_lines=200, *, encoding='cp1252', filelist=None):
+def split_files_on_lines(files: List[pathlib.Path], n_lines=200, *, encoding='cp1252', filelist=None):
     if not filelist:
         filelist = files[0].parent / f'filelist_split_{files[0].stem}.txt'
     with open(filelist, 'a', encoding=encoding) as filelist_out:

@@ -7,6 +7,7 @@ import datetime
 import pathlib
 import re
 from collections import defaultdict
+from typing import List
 
 from loguru import logger
 
@@ -77,7 +78,7 @@ def _get_note_ids_from_metadata_csv(csvfile: pathlib.Path, note_id_col='note_id'
     return note_ids
 
 
-def extract_data_for_review(note_directories: list[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
+def extract_data_for_review(note_directories: List[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
                             mml_format='json', text_extension='', text_encoding='utf8',
                             text_errors='replace', add_cr=False, sample_size=50, metadata_file=None,
                             replacements=None):

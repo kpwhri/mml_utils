@@ -53,6 +53,7 @@ with pd.ExcelWriter(outpath / f'features.review{SAMPLE_SIZE}.xlsx') as writer:
 ```
 """
 import pathlib
+from typing import List
 
 import click
 
@@ -82,7 +83,7 @@ from mml_utils.review.extract_data import extract_data_for_review
 @click.option('--replacements', type=str, multiple=True,
               help='Replace text to fix offset issues. Arguments should look like "from==to" which will'
                    ' replace "from" with "to" before checking offsets.')
-def _extract_data_for_review(note_directories: list[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
+def _extract_data_for_review(note_directories: List[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
                              mml_format='json', text_extension='', text_encoding='utf8',
                              text_errors='replace', add_cr=False,
                              sample_size=50, metadata_file=None,
