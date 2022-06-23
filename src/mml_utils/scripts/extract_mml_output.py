@@ -159,7 +159,7 @@ def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, enco
             logger.info(f'Processing file: {file}')
             record = {
                 'filename': file.stem,
-                'docid': str(file),
+                'docid': str(file.name),
             }
             with open(file, encoding=encoding) as fh:
                 text = fh.read()
