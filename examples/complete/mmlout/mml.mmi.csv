@@ -1,77 +1,77 @@
-event_id,docid,matchedtext,conceptstring,cui,preferredname,start,length
-1093837.mmi_0,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,symptom,Symptoms,C1457887,symptom,427,7
-1093837.mmi_1,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,severe,Severe (severity modifier),C0205082,Severe,26,6
-1093837.mmi_2,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,severe,Severe (severity modifier),C0205082,Severe,245,6
-1093837.mmi_3,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,severe,Severe (severity modifier),C0205082,Severe,534,6
-1093837.mmi_4,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,treatment,Administration procedure,C1533734,Treatment,164,9
-1093837.mmi_5,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,Treatment,Administration procedure,C1533734,Treatment,232,9
-1093837.mmi_6,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,treatment,Therapeutic procedure,C0087111,Treatment,164,9
-1093837.mmi_7,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,Treatment,Therapeutic procedure,C0087111,Treatment,232,9
-1093837.mmi_8,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,Signs and symptoms,Signs and Symptoms,C0037088,Signs and Symptoms,382,18
-1093837.mmi_9,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,critical,DeviceAlertLevel - Critical,C1551396,Critical,75,8
-1093837.mmi_10,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,for,Facilitated oscillatory release technique,C1562169,FOR,84,3
-1093837.mmi_11,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,mild,Mild Adverse Event,C1513302,MILD,177,4
-1093837.mmi_12,D:\wksp\wait_metamaplite\examples\complete\notes\1093837.txt,usually,Usually,C3888388,Usually,482,7
-209784.mmi_0,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,inflammation,Inflammation,C0021368,Inflammation,16,12
-209784.mmi_1,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,treatment,Administration procedure,C1533734,Treatment,500,9
-209784.mmi_2,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,complications,Complication,C0009566,Complications,555,13
-209784.mmi_3,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,for,Facilitated oscillatory release technique,C1562169,FOR,354,3
-209784.mmi_4,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,life,Laser-Induced Fluorescence Endoscopy,C1522684,LIFE,538,4
-209784.mmi_5,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,long,Long Heart Murmur,C5238697,Long,64,4
-209784.mmi_6,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,Mild,Mild Adverse Event,C1513302,MILD,460,4
-209784.mmi_7,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,severe,Severe (severity modifier),C0205082,Severe,515,6
-209784.mmi_8,D:\wksp\wait_metamaplite\examples\complete\notes\209784.txt,treatment,Therapeutic procedure,C0087111,Treatment,500,9
-209785.mmi_0,D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt,condition,Disease,C0012634,condition,24,9
-209785.mmi_1,D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt,inflammation,Inflammation,C0021368,Inflammation,514,12
-209785.mmi_2,D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt,complications,Complication,C0009566,Complications,384,13
-209785.mmi_3,D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt,serious,Device Alert Level - Serious,C1551395,Serious,376,7
-209785.mmi_4,D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt,better,Improved - answer to question,C4084203,Better,251,6
-209785.mmi_5,D:\wksp\wait_metamaplite\examples\complete\notes\209785.txt,severe,Severe (severity modifier),C0205082,Severe,329,6
-209788.mmi_0,D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt,imaging,Diagnostic Imaging,C0011923,Imaging,464,7
-209788.mmi_1,D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt,condition,Disease,C0012634,condition,38,9
-209788.mmi_2,D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt,Diagnosis,Diagnosis,C0011900,Diagnosis,246,9
-209788.mmi_3,D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt,easy,Easy,C0332219,Easy,394,4
-209788.mmi_4,D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt,difficult,Has difficulty doing (qualifier value),C1299586,Difficult,288,9
-209788.mmi_5,D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt,likely,Probable diagnosis,C0332148,Likely,693,6
-209788.mmi_6,D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt,studies,Scientific Study,C0947630,studies,472,7
-209788.mmi_7,D:\wksp\wait_metamaplite\examples\complete\notes\209788.txt,treatments,Therapeutic procedure,C0087111,Treatments,302,10
-8823029.mmi_0,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,inflammation,Inflammation,C0021368,Inflammation,22,12
-8823029.mmi_1,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,inflammation,Inflammation,C0021368,Inflammation,470,12
-8823029.mmi_2,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,inflammation,Inflammation,C0021368,Inflammation,549,12
-8823029.mmi_3,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,inflammation,Inflammation,C0021368,Inflammation,779,12
-8823029.mmi_4,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,treatment,Administration procedure,C1533734,Treatment,198,9
-8823029.mmi_5,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,complications,Complication,C0009566,Complications,252,13
-8823029.mmi_6,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,fatal,Death Related to Adverse Event,C1705232,Fatal,246,5
-8823029.mmi_7,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,either,Either,C3844638,Either,507,6
-8823029.mmi_8,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,for,Facilitated oscillatory release technique,C1562169,FOR,437,3
-8823029.mmi_9,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,long,Long Heart Murmur,C5238697,Long,288,4
-8823029.mmi_10,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,mild,Mild Adverse Event,C1513302,MILD,149,4
-8823029.mmi_11,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,persistent,Persistent embryonic structure,C0332996,PERSISTENT,628,10
-8823029.mmi_12,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,medications,Pharmaceutical Preparations,C0013227,medications,887,11
-8823029.mmi_13,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,severe,Severe (severity modifier),C0205082,Severe,213,6
-8823029.mmi_14,D:\wksp\wait_metamaplite\examples\complete\notes\8823029.txt,treatment,Therapeutic procedure,C0087111,Treatment,198,9
-8823030.mmi_0,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,symptoms,Symptoms,C1457887,Symptoms,1240,8
-8823030.mmi_1,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,symptoms,Symptoms,C1457887,Symptoms,1316,8
-8823030.mmi_2,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,inflammation,Inflammation,C0021368,Inflammation,598,12
-8823030.mmi_3,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,inflammation,Inflammation,C0021368,Inflammation,1030,12
-8823030.mmi_4,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,infection,Communicable Diseases,C0009450,Infection,878,9
-8823030.mmi_5,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,severe,Severe (severity modifier),C0205082,Severe,675,6
-8823030.mmi_6,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,severe,Severe (severity modifier),C0205082,Severe,802,6
-8823030.mmi_7,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,Severe,Severe (severity modifier),C0205082,Severe,900,6
-8823030.mmi_8,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,severe,Severe (severity modifier),C0205082,Severe,1296,6
-8823030.mmi_9,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,for,Facilitated oscillatory release technique,C1562169,FOR,395,3
-8823030.mmi_10,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,for,Facilitated oscillatory release technique,C1562169,FOR,1152,3
-8823030.mmi_11,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,for,Facilitated oscillatory release technique,C1562169,FOR,1249,3
-8823030.mmi_12,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,disease,Disease,C0012634,Disease,18,7
-8823030.mmi_13,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,alcohol,ethanol,C0001962,Alcohol,1144,7
-8823030.mmi_14,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,long,Long Heart Murmur,C5238697,Long,1017,4
-8823030.mmi_15,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,long,Long Heart Murmur,C5238697,Long,1158,4
-8823030.mmi_16,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,tissue damage,Tissue damage,C0010957,Tissue damage,863,13
-8823030.mmi_17,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,Damage,Tissue damage,C0010957,Damage,1179,6
-8823030.mmi_18,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,treatment,Administration procedure,C1533734,Treatment,788,9
-8823030.mmi_19,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,serious,Device Alert Level - Serious,C1551395,Serious,855,7
-8823030.mmi_20,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,illness,Illness (finding),C0221423,Illness,700,7
-8823030.mmi_21,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,infection,Infection,C3714514,Infection,878,9
-8823030.mmi_22,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,life,Laser-Induced Fluorescence Endoscopy,C1522684,LIFE,683,4
-8823030.mmi_23,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,mild,Mild Adverse Event,C1513302,MILD,654,4
-8823030.mmi_24,D:\wksp\wait_metamaplite\examples\complete\notes\8823030.txt,treatment,Therapeutic procedure,C0087111,Treatment,788,9
+event_id,docid,filename,matchedtext,conceptstring,cui,preferredname,start,length
+1093837_0,1093837,1093837.txt,symptom,Symptoms,C1457887,symptom,427,7
+1093837_1,1093837,1093837.txt,severe,Severe (severity modifier),C0205082,Severe,26,6
+1093837_2,1093837,1093837.txt,severe,Severe (severity modifier),C0205082,Severe,245,6
+1093837_3,1093837,1093837.txt,severe,Severe (severity modifier),C0205082,Severe,534,6
+1093837_4,1093837,1093837.txt,treatment,Administration procedure,C1533734,Treatment,164,9
+1093837_5,1093837,1093837.txt,Treatment,Administration procedure,C1533734,Treatment,232,9
+1093837_6,1093837,1093837.txt,treatment,Therapeutic procedure,C0087111,Treatment,164,9
+1093837_7,1093837,1093837.txt,Treatment,Therapeutic procedure,C0087111,Treatment,232,9
+1093837_8,1093837,1093837.txt,Signs and symptoms,Signs and Symptoms,C0037088,Signs and Symptoms,382,18
+1093837_9,1093837,1093837.txt,critical,DeviceAlertLevel - Critical,C1551396,Critical,75,8
+1093837_10,1093837,1093837.txt,for,Facilitated oscillatory release technique,C1562169,FOR,84,3
+1093837_11,1093837,1093837.txt,mild,Mild Adverse Event,C1513302,MILD,177,4
+1093837_12,1093837,1093837.txt,usually,Usually,C3888388,Usually,482,7
+209784_0,209784,209784.txt,inflammation,Inflammation,C0021368,Inflammation,16,12
+209784_1,209784,209784.txt,treatment,Administration procedure,C1533734,Treatment,500,9
+209784_2,209784,209784.txt,complications,Complication,C0009566,Complications,555,13
+209784_3,209784,209784.txt,for,Facilitated oscillatory release technique,C1562169,FOR,354,3
+209784_4,209784,209784.txt,life,Laser-Induced Fluorescence Endoscopy,C1522684,LIFE,538,4
+209784_5,209784,209784.txt,long,Long Heart Murmur,C5238697,Long,64,4
+209784_6,209784,209784.txt,Mild,Mild Adverse Event,C1513302,MILD,460,4
+209784_7,209784,209784.txt,severe,Severe (severity modifier),C0205082,Severe,515,6
+209784_8,209784,209784.txt,treatment,Therapeutic procedure,C0087111,Treatment,500,9
+209785_0,209785,209785.txt,condition,Disease,C0012634,condition,24,9
+209785_1,209785,209785.txt,inflammation,Inflammation,C0021368,Inflammation,514,12
+209785_2,209785,209785.txt,complications,Complication,C0009566,Complications,384,13
+209785_3,209785,209785.txt,serious,Device Alert Level - Serious,C1551395,Serious,376,7
+209785_4,209785,209785.txt,better,Improved - answer to question,C4084203,Better,251,6
+209785_5,209785,209785.txt,severe,Severe (severity modifier),C0205082,Severe,329,6
+209788_0,209788,209788.txt,imaging,Diagnostic Imaging,C0011923,Imaging,464,7
+209788_1,209788,209788.txt,condition,Disease,C0012634,condition,38,9
+209788_2,209788,209788.txt,Diagnosis,Diagnosis,C0011900,Diagnosis,246,9
+209788_3,209788,209788.txt,easy,Easy,C0332219,Easy,394,4
+209788_4,209788,209788.txt,difficult,Has difficulty doing (qualifier value),C1299586,Difficult,288,9
+209788_5,209788,209788.txt,likely,Probable diagnosis,C0332148,Likely,693,6
+209788_6,209788,209788.txt,studies,Scientific Study,C0947630,studies,472,7
+209788_7,209788,209788.txt,treatments,Therapeutic procedure,C0087111,Treatments,302,10
+8823029_0,8823029,8823029.txt,inflammation,Inflammation,C0021368,Inflammation,22,12
+8823029_1,8823029,8823029.txt,inflammation,Inflammation,C0021368,Inflammation,470,12
+8823029_2,8823029,8823029.txt,inflammation,Inflammation,C0021368,Inflammation,549,12
+8823029_3,8823029,8823029.txt,inflammation,Inflammation,C0021368,Inflammation,779,12
+8823029_4,8823029,8823029.txt,treatment,Administration procedure,C1533734,Treatment,198,9
+8823029_5,8823029,8823029.txt,complications,Complication,C0009566,Complications,252,13
+8823029_6,8823029,8823029.txt,fatal,Death Related to Adverse Event,C1705232,Fatal,246,5
+8823029_7,8823029,8823029.txt,either,Either,C3844638,Either,507,6
+8823029_8,8823029,8823029.txt,for,Facilitated oscillatory release technique,C1562169,FOR,437,3
+8823029_9,8823029,8823029.txt,long,Long Heart Murmur,C5238697,Long,288,4
+8823029_10,8823029,8823029.txt,mild,Mild Adverse Event,C1513302,MILD,149,4
+8823029_11,8823029,8823029.txt,persistent,Persistent embryonic structure,C0332996,PERSISTENT,628,10
+8823029_12,8823029,8823029.txt,medications,Pharmaceutical Preparations,C0013227,medications,887,11
+8823029_13,8823029,8823029.txt,severe,Severe (severity modifier),C0205082,Severe,213,6
+8823029_14,8823029,8823029.txt,treatment,Therapeutic procedure,C0087111,Treatment,198,9
+8823030_0,8823030,8823030.txt,symptoms,Symptoms,C1457887,Symptoms,1240,8
+8823030_1,8823030,8823030.txt,symptoms,Symptoms,C1457887,Symptoms,1316,8
+8823030_2,8823030,8823030.txt,inflammation,Inflammation,C0021368,Inflammation,598,12
+8823030_3,8823030,8823030.txt,inflammation,Inflammation,C0021368,Inflammation,1030,12
+8823030_4,8823030,8823030.txt,infection,Communicable Diseases,C0009450,Infection,878,9
+8823030_5,8823030,8823030.txt,severe,Severe (severity modifier),C0205082,Severe,675,6
+8823030_6,8823030,8823030.txt,severe,Severe (severity modifier),C0205082,Severe,802,6
+8823030_7,8823030,8823030.txt,Severe,Severe (severity modifier),C0205082,Severe,900,6
+8823030_8,8823030,8823030.txt,severe,Severe (severity modifier),C0205082,Severe,1296,6
+8823030_9,8823030,8823030.txt,for,Facilitated oscillatory release technique,C1562169,FOR,395,3
+8823030_10,8823030,8823030.txt,for,Facilitated oscillatory release technique,C1562169,FOR,1152,3
+8823030_11,8823030,8823030.txt,for,Facilitated oscillatory release technique,C1562169,FOR,1249,3
+8823030_12,8823030,8823030.txt,disease,Disease,C0012634,Disease,18,7
+8823030_13,8823030,8823030.txt,alcohol,ethanol,C0001962,Alcohol,1144,7
+8823030_14,8823030,8823030.txt,long,Long Heart Murmur,C5238697,Long,1017,4
+8823030_15,8823030,8823030.txt,long,Long Heart Murmur,C5238697,Long,1158,4
+8823030_16,8823030,8823030.txt,tissue damage,Tissue damage,C0010957,Tissue damage,863,13
+8823030_17,8823030,8823030.txt,Damage,Tissue damage,C0010957,Damage,1179,6
+8823030_18,8823030,8823030.txt,treatment,Administration procedure,C1533734,Treatment,788,9
+8823030_19,8823030,8823030.txt,serious,Device Alert Level - Serious,C1551395,Serious,855,7
+8823030_20,8823030,8823030.txt,illness,Illness (finding),C0221423,Illness,700,7
+8823030_21,8823030,8823030.txt,infection,Infection,C3714514,Infection,878,9
+8823030_22,8823030,8823030.txt,life,Laser-Induced Fluorescence Endoscopy,C1522684,LIFE,683,4
+8823030_23,8823030,8823030.txt,mild,Mild Adverse Event,C1513302,MILD,654,4
+8823030_24,8823030,8823030.txt,treatment,Therapeutic procedure,C0087111,Treatment,788,9

@@ -1,5 +1,6 @@
 import csv
 import io
+import pathlib
 
 from loguru import logger
 
@@ -28,6 +29,7 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
         for d in extract_mmi_line(line):
             if not d or d['cui'] not in target_cuis:
                 continue
+            filename = filename.split('.')[0]  # removee extension
             d['event_id'] = f'{filename}_{i}'
             if extras:
                 d |= extras
@@ -41,6 +43,7 @@ def extract_mmi_line(line):
         return
     (identifier, mmi, score, conceptstring, cui, semantictype, triggerinfo,
      location, positional_info, treecodes, *other) = line[:10]
+    file = pathlib.Path(identifier)
     semantictypes = [st.strip() for st in semantictype[1:-1].split(',')]  # official doco says comma-separated
     triggerinfos = [
         list(csv.reader([element], delimiter='-'))[0]
@@ -59,7 +62,8 @@ def extract_mmi_line(line):
     for (preferredname, loc, locpos, matchedtext, pos, negation
          ), (start, length) in zip(triggerinfos, positional_infos):
         yield {**{
-                  'docid': identifier,
+                  'docid': file.stem,
+                  'filename': identifier,
                   'matchedtext': matchedtext,
                   'conceptstring': conceptstring,
                   'cui': cui,

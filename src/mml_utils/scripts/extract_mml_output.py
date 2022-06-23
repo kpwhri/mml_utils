@@ -20,7 +20,7 @@ from loguru import logger
 from mml_utils.parse.parser import extract_mml_data
 
 MML_FIELDNAMES = [
-    'event_id', 'docid', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length',
+    'event_id', 'docid', 'filename', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length',
 ]
 NOTE_FIELDNAMES = [
     'filename', 'docid', 'num_chars', 'num_letters', 'num_words', 'processed',
@@ -159,7 +159,7 @@ def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, enco
             logger.info(f'Processing file: {file}')
             record = {
                 'filename': file.stem,
-                'docid': str(file.name),
+                'docid': str(file),
             }
             with open(file, encoding=encoding) as fh:
                 text = fh.read()

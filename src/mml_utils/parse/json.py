@@ -1,4 +1,5 @@
 import json
+import pathlib
 
 
 def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None):
@@ -10,13 +11,15 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None)
     :param extras:
     :return:
     """
+    filename = pathlib.Path(filename)
     i = 0
     for el in data:
         for event in el['evlist']:
             if target_cuis is None or event['conceptinfo']['cui'] in target_cuis:
-                data = {
-                           'event_id': f'{filename}_{i}',
-                           'docid': filename,
+                data = {**{
+                           'event_id': f'{filename.stem}_{i}',
+                           'filename': filename,
+                           'docid': filename.stem,
                            'matchedtext': event['matchedtext'],
                            'conceptstring': event['conceptinfo']['conceptstring'],
                            'cui': event['conceptinfo']['cui'],
@@ -30,11 +33,11 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None)
                            'source': event['conceptinfo']['sources'][0],
                            'all_sources': ','.join(event['conceptinfo']['sources']),
                            'all_semantictypes': ','.join(event['conceptinfo']['semantictypes']),
-                       } | {
+                       }, **{
                            s: 1 for s in event['conceptinfo']['sources']
-                       } | {
+                       }, **{
                            s: 1 for s in event['conceptinfo']['semantictypes']
-                       }
+                       }}
                 if extras:
                     data |= extras
                 yield data
