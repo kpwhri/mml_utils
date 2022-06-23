@@ -49,6 +49,10 @@ def extract_mmi_line(line):
     ]
     new_triggerinfos = []
     for ti in triggerinfos:
+        prepared = ['-'.join(ti[:len(ti) - 5])] + ti[len(ti) - 5:]
+        if len(prepared) != 6:
+            logger.warning(f'Failed to parse: {ti}; tried: {prepared}.')
+            continue
         new_triggerinfos.append(['-'.join(ti[:len(ti) - 5])] + ti[len(ti) - 5:])
     triggerinfos = new_triggerinfos
     positional_infos = [loc.split('/') for loc in positional_info.split(';')]
