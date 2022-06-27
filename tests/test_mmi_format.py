@@ -138,3 +138,9 @@ def test_triggerinfo(triggerinfo_text, concept, loc, locpos, text, pos, neg):
     assert result[3] == text
     assert result[4] == pos
     assert result[5] == neg
+
+
+def test_empty_mmi_line():
+    mmi_line = []
+    with pytest.raises(StopIteration):
+        next(extract_mmi_line(mmi_line))

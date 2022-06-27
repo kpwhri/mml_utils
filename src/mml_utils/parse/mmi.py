@@ -79,6 +79,8 @@ def _parse_trigger_info(trigger_info_text):
 
 
 def extract_mmi_line(line):
+    if not line:
+        return
     if line[1] != 'MMI':
         logger.warning(f'Line contains {line[1]} rather the "MMI"; skipping line: {line}')
         return

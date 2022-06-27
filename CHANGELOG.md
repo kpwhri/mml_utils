@@ -17,6 +17,9 @@ Types of changes:
 
 ## [Unreleased]
 
+### Fixed
+- Handle newline at end of mmi file
+
 ## [0.1.2]
 
 ### Changed
