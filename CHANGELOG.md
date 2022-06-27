@@ -17,6 +17,11 @@ Types of changes:
 
 ## [Unreleased]
 
+### Changed
+- Converted parsing `triggerinfo` into a regular expression
+
+### Fixed
+- Made all tests pass in 3.8+
 
 ## [0.1.1]
 

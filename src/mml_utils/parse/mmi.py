@@ -1,8 +1,24 @@
 import csv
 import io
 import pathlib
+import re
 
 from loguru import logger
+
+
+TRIGGER_INFO_PAT = re.compile(
+    r'(?P<concept>".*?")'
+    r'-'
+    r'(?P<loc>\w+)'
+    r'-'
+    r'(?P<locpos>\d+)'
+    r'-'
+    r'(?P<text>".*?")'
+    r'-'
+    r'(?P<pos>\w*)'
+    r'-'
+    r'(?P<neg>[01])'  # negation flag
+)
 
 
 def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
@@ -18,7 +34,8 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
         target_cuis = set()
     i = 0
     prev_line = None
-    for line in csv.reader(io.StringIO(text), delimiter='|'):
+    for textline in text.split('\n'):
+        line = textline.split('|')
         # if not line[-1] == '':
         #     prev_line = line
         #     continue
@@ -27,7 +44,7 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
             line = prev_line[:-1] + [carryover_cell] + line[1:]
             prev_line = None
         for d in extract_mmi_line(line):
-            if not d or d['cui'] not in target_cuis:
+            if not d or (target_cuis and d['cui'] not in target_cuis):
                 continue
             filename = filename.split('.')[0]  # removee extension
             d['event_id'] = f'{filename}_{i}'
@@ -35,6 +52,19 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
                 d |= extras
             yield d
             i += 1
+
+
+def _parse_trigger_info(trigger_info_text):
+    """Parse trigger information for mmi format"""
+    for m in TRIGGER_INFO_PAT.finditer(trigger_info_text):
+        yield [
+            m.group('concept'),
+            m.group('loc'),
+            m.group('locpos'),
+            m.group('text'),
+            m.group('pos'),
+            m.group('neg'),
+        ]
 
 
 def extract_mmi_line(line):
@@ -45,19 +75,7 @@ def extract_mmi_line(line):
      location, positional_info, treecodes, *other) = line[:10]
     file = pathlib.Path(identifier)
     semantictypes = [st.strip() for st in semantictype[1:-1].split(',')]  # official doco says comma-separated
-    triggerinfos = [
-        list(csv.reader([element], delimiter='-'))[0]
-        for row in csv.reader([triggerinfo], delimiter=',')
-        for element in row
-    ]
-    new_triggerinfos = []
-    for ti in triggerinfos:
-        prepared = ['-'.join(ti[:len(ti) - 5])] + ti[len(ti) - 5:]
-        if len(prepared) != 6:
-            logger.warning(f'Failed to parse: {line} -> {ti}; tried: {prepared}.')
-            continue
-        new_triggerinfos.append(['-'.join(ti[:len(ti) - 5])] + ti[len(ti) - 5:])
-    triggerinfos = new_triggerinfos
+    triggerinfos = list(_parse_trigger_info(triggerinfo))
     positional_infos = [loc.split('/') for loc in positional_info.split(';')]
     for (preferredname, loc, locpos, matchedtext, pos, negation
          ), (start, length) in zip(triggerinfos, positional_infos):

@@ -3,7 +3,7 @@ from textwrap import dedent
 
 import pytest
 
-from mml_utils.parse.mmi import extract_mml_from_mmi_data, extract_mmi_line
+from mml_utils.parse.mmi import extract_mml_from_mmi_data, extract_mmi_line, _parse_trigger_info
 
 
 def fix_text(text):
@@ -28,7 +28,7 @@ def get_mmi_lines(mmi_lines, exp):
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (pytest.lazy_fixture('mmi_risk_of'), '00000000.tx'),
+    (pytest.lazy_fixture('mmi_risk_of'), '00000000'),
 ])
 def test_extract_mmi_filename(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
@@ -106,3 +106,29 @@ def test_from_text(mmi_risk_of):
     res = list(extract_mml_from_mmi_data(mmi_risk_of, 'filename'))
     assert len(res) == 3
     assert {d['event_id'] for d in res} == {'filename_0', 'filename_1', 'filename_2'}
+
+
+def test_comma():
+    mmi_line = '0000.tx|MMI|2.30|Chest Pain|C0008031|[sosy]' \
+               '|"Pain, Chest"-text-0-"Pain, chest"--0|text|0/11|C23.888.592.612.233'
+    lst = mmi_line.split('|')
+    result = next(extract_mmi_line(lst))
+    assert result == {'docid': '0000', 'filename': '0000.tx', 'matchedtext': '"Pain, chest"',
+                      'conceptstring': 'Chest Pain', 'cui': 'C0008031', 'preferredname': '"Pain, Chest"', 'start': 0,
+                      'length': 11, 'end': 11, 'evid': None, 'negated': 0, 'pos': '', 'semantictype': 'sosy', 'sosy': 1}
+
+
+@pytest.mark.parametrize('triggerinfo_text, concept, loc, locpos, text, pos, neg', [
+    ('"Pain" Chest"-text-0-"Pain" chest"--0', '"Pain" Chest"', 'text', '0', '"Pain" chest"', '', '0'),
+    ('"Pain, Chest"-text-0-"Pain, chest"--0', '"Pain, Chest"', 'text', '0', '"Pain, chest"', '', '0'),
+    ('"Pain Chest"-text-0-"Pain chest"--0', '"Pain Chest"', 'text', '0', '"Pain chest"', '', '0'),
+])
+def test_triggerinfo(triggerinfo_text, concept, loc, locpos, text, pos, neg):
+    """Test for only a single result"""
+    result = next(_parse_trigger_info(triggerinfo_text))
+    assert result[0] == concept
+    assert result[1] == loc
+    assert result[2] == locpos
+    assert result[3] == text
+    assert result[4] == pos
+    assert result[5] == neg

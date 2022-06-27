@@ -109,7 +109,7 @@ def _build_csv_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_si
                 for row in reader:
                     if sample_note_ids and row['note_id'] not in sample_note_ids:
                         continue
-                    writer.writerow(row | metadata_lkp.get(row['note_id'], dict()))
+                    writer.writerow({**row, **metadata_lkp.get(row['note_id'], dict())})
 
 
 def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_size, text_encoding):

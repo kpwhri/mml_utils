@@ -47,6 +47,7 @@ def finditer(target, text: str, offset=0):
 
 
 def find_target_text(text, target, start, end):
+    target = target.strip('"')
     if target == text[start:end]:
         return start, end
     for width in [50, 100]:
@@ -78,6 +79,18 @@ def _get_note_ids_from_metadata_csv(csvfile: pathlib.Path, note_id_col='note_id'
     return note_ids
 
 
+def mkdir(path):
+    start_value = path
+    fe = None
+    for i in range(100):
+        try:
+            path.mkdir(exist_ok=False)
+            return path
+        except FileExistsError as fe:
+            path = pathlib.Path(f'{start_value}_{i}')
+    raise fe
+
+
 def extract_data_for_review(note_directories: List[pathlib.Path], target_path: pathlib.Path = pathlib.Path('.'),
                             mml_format='json', text_extension='', text_encoding='utf8',
                             text_errors='replace', add_cr=False, sample_size=50, metadata_file=None,
@@ -103,8 +116,7 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
             logger.warning(f'Unable to import openpyxl to build review sets:'
                            f' run `pip install openpyxl` if you want Excel files rather than CSV files to review.')
 
-    outpath = target_path / f'review_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}'
-    outpath.mkdir(exist_ok=False)
+    outpath = mkdir(target_path / f'review_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}')
     note_ids = defaultdict(list)
     # limit note ids to just those in a metadata csv file
     limit_note_ids = _get_note_ids_from_metadata_csv(metadata_file) if metadata_file else None
@@ -198,6 +210,7 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
                     logger.warning(f'Failed to find {no_text_file_count} text files.')
     if sample_size:
         compile_to_excel(outpath, note_ids, text_encoding, sample_size, metadata_file)
+    return outpath
 
 
 def build_regex_from_file(target_path, feature_name):
