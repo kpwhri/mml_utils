@@ -56,7 +56,13 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
 
 def _parse_trigger_info(trigger_info_text):
     """Parse trigger information for mmi format"""
+    if not trigger_info_text.startswith('"'):
+        idx = trigger_info_text.index('-')
+        trigger_info_text = '"' + trigger_info_text[:idx] + '"' + trigger_info_text[idx:]
+    prev_end = 0
     for m in TRIGGER_INFO_PAT.finditer(trigger_info_text):
+        if m.start() > prev_end:
+            logger.warning(f'Possible unparsed content: {trigger_info_text[prev_end:m.end()]} in {trigger_info_text}')
         yield [
             m.group('concept'),
             m.group('loc'),
@@ -65,6 +71,7 @@ def _parse_trigger_info(trigger_info_text):
             m.group('pos'),
             m.group('neg'),
         ]
+        prev_end = m.end() + 1  # the '+1' is for the comma separating valuess
 
 
 def extract_mmi_line(line):

@@ -13,9 +13,9 @@ def fix_text(text):
 @pytest.fixture()
 def mmi_risk_of():
     return fix_text(
-        '''00000000.tx|MMI|27.63|Risk|C0035647|[idcn]|"risk of"-text-0-"risk of"--0,"risk of"-text-0-"risk of"--0,
-        "risk of"-text-20-"risk of"--0|text|2672/7;3076/7;4271/7|G17.680.750;N06.850.520.830.600.800;N05.715.360.
-        750.625.700;E05.318.740.600.80'''
+        '00000000.tx|MMI|27.63|Risk|C0035647|[idcn]|"risk of"-text-0-"risk of"--0,"risk of"-text-0-"risk of"--0,'
+        '"risk of"-text-20-"risk of"--0|text|2672/7;3076/7;4271/7|G17.680.750;N06.850.520.830.600.800;N05.715.360.'
+        '750.625.700;E05.318.740.600.80'
     )
 
 
@@ -122,6 +122,8 @@ def test_comma():
     ('"Pain" Chest"-text-0-"Pain" chest"--0', '"Pain" Chest"', 'text', '0', '"Pain" chest"', '', '0'),
     ('"Pain, Chest"-text-0-"Pain, chest"--0', '"Pain, Chest"', 'text', '0', '"Pain, chest"', '', '0'),
     ('"Pain Chest"-text-0-"Pain chest"--0', '"Pain Chest"', 'text', '0', '"Pain chest"', '', '0'),
+    ('"Pain, Chest"-text-92-"pain, chest"-NN-0', '"Pain, Chest"', 'text', '92', '"pain, chest"', 'NN', '0'),
+    ('Pain, Chest-text-92-"pain, chest"-NN-0', '"Pain, Chest"', 'text', '92', '"pain, chest"', 'NN', '0'),
 ])
 def test_triggerinfo(triggerinfo_text, concept, loc, locpos, text, pos, neg):
     """Test for only a single result"""
