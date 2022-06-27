@@ -17,6 +17,8 @@ Types of changes:
 
 ## [Unreleased]
 
+## [0.1.2]
+
 ### Changed
 - Converted parsing `triggerinfo` into a regular expression
 
