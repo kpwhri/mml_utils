@@ -56,8 +56,12 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
 
 def _parse_trigger_info(trigger_info_text):
     """Parse trigger information for mmi format"""
-    if not trigger_info_text.startswith('"'):
+    if not trigger_info_text.startswith('"'):  # backwards compatibility with CSV parser which stripped quotes
         idx = trigger_info_text.index('-')
+        i = 0
+        while trigger_info_text[idx+1:idx+4] not in {'tex', 'ti-', 'ab-', 'tx-'} and i < 4:
+            idx = trigger_info_text.index('-', idx + 1)
+            i += 1
         trigger_info_text = '"' + trigger_info_text[:idx] + '"' + trigger_info_text[idx:]
     prev_end = 0
     for m in TRIGGER_INFO_PAT.finditer(trigger_info_text):

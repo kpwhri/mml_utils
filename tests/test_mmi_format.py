@@ -124,6 +124,10 @@ def test_comma():
     ('"Pain Chest"-text-0-"Pain chest"--0', '"Pain Chest"', 'text', '0', '"Pain chest"', '', '0'),
     ('"Pain, Chest"-text-92-"pain, chest"-NN-0', '"Pain, Chest"', 'text', '92', '"pain, chest"', 'NN', '0'),
     ('Pain, Chest-text-92-"pain, chest"-NN-0', '"Pain, Chest"', 'text', '92', '"pain, chest"', 'NN', '0'),
+    ('"C-reactive protein"-text-57-"C-REACTIVE PROTEIN"-NNP-0',
+     '"C-reactive protein"', 'text', '57', '"C-REACTIVE PROTEIN"', 'NNP', '0'),
+    ('C-reactive protein-text-57-"C-REACTIVE PROTEIN"-NNP-0',
+     '"C-reactive protein"', 'text', '57', '"C-REACTIVE PROTEIN"', 'NNP', '0'),
 ])
 def test_triggerinfo(triggerinfo_text, concept, loc, locpos, text, pos, neg):
     """Test for only a single result"""
