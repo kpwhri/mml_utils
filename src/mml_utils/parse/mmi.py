@@ -17,7 +17,8 @@ TRIGGER_INFO_PAT = re.compile(
     r'-'
     r'(?P<pos>\w*)'
     r'-'
-    r'(?P<neg>[01])'  # negation flag
+    r'(?P<neg>[01])',  # negation flag
+    re.DOTALL  # handle newline inside term
 )
 
 
@@ -43,6 +44,9 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
             carryover_cell = prev_line[-1] + line[0]
             line = prev_line[:-1] + [carryover_cell] + line[1:]
             prev_line = None
+        if len(line) < 10:
+            prev_line = line
+            continue
         for d in extract_mmi_line(line):
             if not d or (target_cuis and d['cui'] not in target_cuis):
                 continue
@@ -68,10 +72,10 @@ def _parse_trigger_info(trigger_info_text):
         if m.start() > prev_end:
             logger.warning(f'Possible unparsed content: {trigger_info_text[prev_end:m.end()]} in {trigger_info_text}')
         yield [
-            m.group('concept'),
+            m.group('concept').strip('"'),
             m.group('loc'),
             m.group('locpos'),
-            m.group('text'),
+            m.group('text').strip('"'),
             m.group('pos'),
             m.group('neg'),
         ]
