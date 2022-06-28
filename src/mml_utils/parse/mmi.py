@@ -5,7 +5,6 @@ import re
 
 from loguru import logger
 
-
 TRIGGER_INFO_PAT = re.compile(
     r'(?P<concept>".*?")'
     r'-'
@@ -63,7 +62,7 @@ def _parse_trigger_info(trigger_info_text):
     if not trigger_info_text.startswith('"'):  # backwards compatibility with CSV parser which stripped quotes
         idx = trigger_info_text.index('-')
         i = 0
-        while trigger_info_text[idx+1:idx+4] not in {'tex', 'ti-', 'ab-', 'tx-'} and i < 4:
+        while trigger_info_text[idx + 1:idx + 4] not in {'tex', 'ti-', 'ab-', 'tx-'} and i < 4:
             idx = trigger_info_text.index('-', idx + 1)
             i += 1
         trigger_info_text = '"' + trigger_info_text[:idx] + '"' + trigger_info_text[idx:]
@@ -82,6 +81,13 @@ def _parse_trigger_info(trigger_info_text):
         prev_end = m.end() + 1  # the '+1' is for the comma separating valuess
 
 
+def _has_invalid_length(info, exp_length, label, info_string, file, line):
+    if len(info) != exp_length:
+        logger.error(f'Unknown format of length {len(info)} for {label} ({info_string}, section {info}) in file `{file}`: {line}')
+        return True
+    return False
+
+
 def extract_mmi_line(line):
     if not line or len(line) == 1:
         return
@@ -94,22 +100,27 @@ def extract_mmi_line(line):
     semantictypes = [st.strip() for st in semantictype[1:-1].split(',')]  # official doco says comma-separated
     triggerinfos = list(_parse_trigger_info(triggerinfo))
     positional_infos = [loc.split('/') for loc in positional_info.split(';')]
-    for (preferredname, loc, locpos, matchedtext, pos, negation
-         ), (start, length) in zip(triggerinfos, positional_infos):
+    for ti, pi in zip(triggerinfos, positional_infos):
+        if _has_invalid_length(ti, 6, 'trigger info', triggerinfo, file, line):
+            continue
+        if _has_invalid_length(pi, 2, 'positional info', positional_info, file, line):
+            continue
+        preferredname, loc, locpos, matchedtext, pos, negation = ti
+        start, length = pi
         yield {**{
-                  'docid': file.stem,
-                  'filename': identifier,
-                  'matchedtext': matchedtext,
-                  'conceptstring': conceptstring,
-                  'cui': cui,
-                  'preferredname': preferredname,
-                  'start': int(start),
-                  'length': int(length),
-                  'end': int(start) + int(length),
-                  'evid': None,
-                  'negated': int(negation),
-                  'pos': pos,
-                  'semantictype': semantictypes[0],  # usually (always?) just one, so show it
-              }, **{
-                  s: 1 for s in semantictypes
-              }}
+            'docid': file.stem,
+            'filename': identifier,
+            'matchedtext': matchedtext,
+            'conceptstring': conceptstring,
+            'cui': cui,
+            'preferredname': preferredname,
+            'start': int(start),
+            'length': int(length),
+            'end': int(start) + int(length),
+            'evid': None,
+            'negated': int(negation),
+            'pos': pos,
+            'semantictype': semantictypes[0],  # usually (always?) just one, so show it
+        }, **{
+            s: 1 for s in semantictypes
+        }}

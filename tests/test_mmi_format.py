@@ -1,4 +1,5 @@
 import itertools
+import logging
 from textwrap import dedent
 
 import pytest
@@ -113,21 +114,21 @@ def test_comma():
                '|"Pain, Chest"-text-0-"Pain, chest"--0|text|0/11|C23.888.592.612.233'
     lst = mmi_line.split('|')
     result = next(extract_mmi_line(lst))
-    assert result == {'docid': '0000', 'filename': '0000.tx', 'matchedtext': '"Pain, chest"',
-                      'conceptstring': 'Chest Pain', 'cui': 'C0008031', 'preferredname': '"Pain, Chest"', 'start': 0,
+    assert result == {'docid': '0000', 'filename': '0000.tx', 'matchedtext': 'Pain, chest',
+                      'conceptstring': 'Chest Pain', 'cui': 'C0008031', 'preferredname': 'Pain, Chest', 'start': 0,
                       'length': 11, 'end': 11, 'evid': None, 'negated': 0, 'pos': '', 'semantictype': 'sosy', 'sosy': 1}
 
 
 @pytest.mark.parametrize('triggerinfo_text, concept, loc, locpos, text, pos, neg', [
-    ('"Pain" Chest"-text-0-"Pain" chest"--0', '"Pain" Chest"', 'text', '0', '"Pain" chest"', '', '0'),
-    ('"Pain, Chest"-text-0-"Pain, chest"--0', '"Pain, Chest"', 'text', '0', '"Pain, chest"', '', '0'),
-    ('"Pain Chest"-text-0-"Pain chest"--0', '"Pain Chest"', 'text', '0', '"Pain chest"', '', '0'),
-    ('"Pain, Chest"-text-92-"pain, chest"-NN-0', '"Pain, Chest"', 'text', '92', '"pain, chest"', 'NN', '0'),
-    ('Pain, Chest-text-92-"pain, chest"-NN-0', '"Pain, Chest"', 'text', '92', '"pain, chest"', 'NN', '0'),
+    ('"Pain" Chest"-text-0-"Pain" chest"--0', 'Pain" Chest', 'text', '0', 'Pain" chest', '', '0'),
+    ('"Pain, Chest"-text-0-"Pain, chest"--0', 'Pain, Chest', 'text', '0', 'Pain, chest', '', '0'),
+    ('"Pain Chest"-text-0-"Pain chest"--0', 'Pain Chest', 'text', '0', 'Pain chest', '', '0'),
+    ('"Pain, Chest"-text-92-"pain, chest"-NN-0', 'Pain, Chest', 'text', '92', 'pain, chest', 'NN', '0'),
+    ('Pain, Chest-text-92-"pain, chest"-NN-0', 'Pain, Chest', 'text', '92', 'pain, chest', 'NN', '0'),
     ('"C-reactive protein"-text-57-"C-REACTIVE PROTEIN"-NNP-0',
-     '"C-reactive protein"', 'text', '57', '"C-REACTIVE PROTEIN"', 'NNP', '0'),
+     'C-reactive protein', 'text', '57', 'C-REACTIVE PROTEIN', 'NNP', '0'),
     ('C-reactive protein-text-57-"C-REACTIVE PROTEIN"-NNP-0',
-     '"C-reactive protein"', 'text', '57', '"C-REACTIVE PROTEIN"', 'NNP', '0'),
+     'C-reactive protein', 'text', '57', 'C-REACTIVE PROTEIN', 'NNP', '0'),
 ])
 def test_triggerinfo(triggerinfo_text, concept, loc, locpos, text, pos, neg):
     """Test for only a single result"""
@@ -146,3 +147,14 @@ def test_triggerinfo(triggerinfo_text, concept, loc, locpos, text, pos, neg):
 def test_empty_mmi_line(mmi_line):
     with pytest.raises(StopIteration):
         next(extract_mmi_line(mmi_line))
+
+
+@pytest.mark.parametrize('line, exp_logtext', [
+    ('0000.tx|MMI|2.30|Chest Pain|C0008031|[sosy]'
+     '|"Pain, Chest"-text-0-"Pain, chest"--0|text|11|C23.888.592.612.233',
+     'Unknown format of length 1 for positional info'),
+])
+def test_has_invalid_length(caplog, line, exp_logtext):
+    with caplog.at_level(logging.ERROR):
+        _ = list(extract_mmi_line(line.split('|')))
+    assert exp_logtext in caplog.text
