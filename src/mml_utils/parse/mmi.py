@@ -27,7 +27,10 @@ def split_mmi_line(textline):
     quoted = False
     for i, letter in enumerate(textline):
         if letter == '"':
-            quoted = not quoted
+            if quoted and i + 1 < len(textline) and textline[i+1] == '-':  # not in middle of string
+                quoted = False
+            elif not quoted:
+                quoted = True
         elif letter == '|':
             if not quoted:
                 segments.append(textline[segment_start:i])

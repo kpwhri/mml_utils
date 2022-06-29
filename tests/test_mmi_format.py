@@ -169,6 +169,10 @@ def test_has_invalid_length(caplog, line, exp_logtext):
      11,
      '"3 4"-text-77-"3  4"-CD-0,"3 4"-text-83-"3 | 4"-CD-0',
      ),
+    ('181690.txt|MMI|0.92|3/4|C0442757|[fndg]|"3 4"-text-77-"3  4"-CD-0,"3 4"-text-83-"3 "| 4"-CD-0|text|705/4;710/5||',
+     11,
+     '"3 4"-text-77-"3  4"-CD-0,"3 4"-text-83-"3 "| 4"-CD-0',
+     ),  # handle quote mark inside
     (pytest.lazy_fixture('mmi_risk_of'),
      10,
      '"risk of"-text-0-"risk of"--0,"risk of"-text-0-"risk of"--0,"risk of"-text-20-"risk of"--0',
@@ -176,6 +180,5 @@ def test_has_invalid_length(caplog, line, exp_logtext):
 ])
 def test_pipes_in_capture_mmi(text, exp_length, exp_triggerinfo):
     line = split_mmi_line(text)
-
     assert len(line) == exp_length
     assert line[6] == exp_triggerinfo
