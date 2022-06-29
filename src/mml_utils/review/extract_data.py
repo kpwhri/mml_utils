@@ -127,7 +127,7 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
         # create pattern: sort by longest to ensure longest regex is matched first
         target_regex = build_regex_from_file(target_path, feature_name)
         unique_id = 0
-        with open(outpath / f'{feature_name}.review.csv', 'w',
+        with open(outpath.parent / f'{feature_name}.review.csv', 'w',
                   newline='', encoding=text_encoding) as fh:
             writer = csv.DictWriter(
                 fh,

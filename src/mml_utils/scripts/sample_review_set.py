@@ -1,6 +1,7 @@
 """
 Build review set. Must be run after extracting data for reviewing (relies on those generated CSV files).
 
+If you get error of `No features contain any samples for review: not outputting Excel file.`, find the review.csv files.
 """
 import csv
 import datetime
@@ -20,13 +21,25 @@ from mml_utils.review.build_excel import compile_to_excel
               help='Format that was used to read text files into metamaplite.')
 @click.option('--sample-size', type=int, default=50,
               help='Sample size to pull for each output.')
+@click.option('--sample-snippets-per-note', type=int, default=None,
+              help='For IRR, set this to 1 to get a random snippet for each note.')
 @click.option('--metadata-file', type=click.Path(exists=True, path_type=pathlib.Path), default=None,
               help='Metadata file to add additional columns to output:'
                    ' HEADER = note_id, studyid, date, etc.; VALUES = 1, A2E, 05/06/2011, etc.')
 @click.option('--build-csv', type=bool, default=False, is_flag=True,
               help='Always build CSVs (possibly in addition to Excel)')
 def _compile_to_excel(target_path: pathlib.Path, text_encoding='utf8', sample_size=50, metadata_file=None,
-                      build_csv=False):
+                      build_csv=False, sample_snippets_per_note=None):
+    """
+
+    :param target_path:
+    :param text_encoding:
+    :param sample_size:
+    :param metadata_file:
+    :param build_csv:
+    :param sample_snippets_per_note: sample up to this many snippets for each note (this was set to 1 for an IRR pull)
+    :return:
+    """
     # get note_ids to sample from
     note_ids = defaultdict(set)
     for file in target_path.glob('*.review.csv'):
@@ -37,7 +50,8 @@ def _compile_to_excel(target_path: pathlib.Path, text_encoding='utf8', sample_si
     outpath = target_path / f'review_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}'
     outpath.mkdir(exist_ok=False)
     compile_to_excel(outpath, note_ids, text_encoding=text_encoding,
-                     sample_size=sample_size, metadata_file=metadata_file, build_csv=build_csv)
+                     sample_size=sample_size, metadata_file=metadata_file, build_csv=build_csv,
+                     sample_snippets_per_note=sample_snippets_per_note)
 
 
 if __name__ == '__main__':
