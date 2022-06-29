@@ -21,6 +21,21 @@ TRIGGER_INFO_PAT = re.compile(
 )
 
 
+def split_mmi_line(textline):
+    segment_start = 0
+    segments = []
+    quoted = False
+    for i, letter in enumerate(textline):
+        if letter == '"':
+            quoted = not quoted
+        elif letter == '|':
+            if not quoted:
+                segments.append(textline[segment_start:i])
+                segment_start = i + 1  # starts next character
+    segments.append(textline[segment_start:])
+    return segments
+
+
 def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
     """
 
@@ -35,7 +50,7 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
     i = 0
     prev_line = None
     for textline in text.split('\n'):
-        line = textline.split('|')
+        line = split_mmi_line(textline)
         # if not line[-1] == '':
         #     prev_line = line
         #     continue

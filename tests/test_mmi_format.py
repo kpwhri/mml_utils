@@ -4,7 +4,7 @@ from textwrap import dedent
 
 import pytest
 
-from mml_utils.parse.mmi import extract_mml_from_mmi_data, extract_mmi_line, _parse_trigger_info
+from mml_utils.parse.mmi import extract_mml_from_mmi_data, extract_mmi_line, _parse_trigger_info, split_mmi_line
 
 
 def fix_text(text):
@@ -158,3 +158,24 @@ def test_has_invalid_length(caplog, line, exp_logtext):
     with caplog.at_level(logging.ERROR):
         _ = list(extract_mmi_line(line.split('|')))
     assert exp_logtext in caplog.text
+
+
+@pytest.mark.parametrize('text, exp_length, exp_triggerinfo', [
+    ('181695.txt|MMI|0.92|3/4|C0442757|[fndg]|"3 4"-text-77-"3  4"-CD-0,"3 4"-text-83-"3 | 4"-CD-0|text|616/4;621/5||',
+     11,
+     '"3 4"-text-77-"3  4"-CD-0,"3 4"-text-83-"3 | 4"-CD-0',
+     ),
+    ('181690.txt|MMI|0.92|3/4|C0442757|[fndg]|"3 4"-text-77-"3  4"-CD-0,"3 4"-text-83-"3 | 4"-CD-0|text|705/4;710/5||',
+     11,
+     '"3 4"-text-77-"3  4"-CD-0,"3 4"-text-83-"3 | 4"-CD-0',
+     ),
+    (pytest.lazy_fixture('mmi_risk_of'),
+     10,
+     '"risk of"-text-0-"risk of"--0,"risk of"-text-0-"risk of"--0,"risk of"-text-20-"risk of"--0',
+     ),
+])
+def test_pipes_in_capture_mmi(text, exp_length, exp_triggerinfo):
+    line = split_mmi_line(text)
+
+    assert len(line) == exp_length
+    assert line[6] == exp_triggerinfo

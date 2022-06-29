@@ -14,7 +14,7 @@ def fever_dir():
 
 def validate_csv_file(fever_dir):
     lines = []
-    with open(fever_dir / 'fever.review.csv', newline='') as fh:
+    with open(fever_dir.parent / 'fever.review.csv', newline='') as fh:
         for line in fh:
             lines.append(line.strip())
     assert len(lines) == 16
