@@ -18,18 +18,18 @@ def validate_csv_file(fever_dir):
         for line in fh:
             lines.append(line.strip())
     assert len(lines) == 16
-    assert lines[0] == ','.join(('id', 'note_id', 'start', 'end', 'length', 'negation', 'type',
+    assert lines[0] == ','.join(('id', 'note_id', 'start', 'end', 'length', 'negation', 'spaceprob', 'type',
                                  'precontext', 'keyword', 'postcontext', 'fullcontext'))
     found_cui = False
     found_text = False
     for i, line in enumerate(lines[1:]):
         lst = line.split(',')
-        assert lst[6] in {'CUI', 'TEXT'}
-        found_cui = found_cui or lst[6] == 'CUI'
-        found_text = found_text or lst[6] == 'TEXT'
-        assert len(lst[7]) <= 105
-        assert len(lst[9]) <= 105
-        assert len(lst[10]) <= 550
+        assert lst[7] in {'CUI', 'TEXT'}
+        found_cui = found_cui or lst[7] == 'CUI'
+        found_text = found_text or lst[7] == 'TEXT'
+        assert len(lst[8]) <= 105
+        assert len(lst[10]) <= 105
+        assert len(lst[11]) <= 550
         assert int(lst[0]) == i
         assert lst[1] == 'fever'
     assert found_cui

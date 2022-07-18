@@ -201,6 +201,7 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
                             [True, 'right', 'center'],
                             [True, 'right', 'center'],
                             [True, 'right', 'center'],
+                            [True, 'right', 'center'],
                         ] + [
                             [True, 'right', 'center'] for _ in new_fields
                         ] + [

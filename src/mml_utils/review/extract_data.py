@@ -131,7 +131,7 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
                   newline='', encoding=text_encoding) as fh:
             writer = csv.DictWriter(
                 fh,
-                fieldnames=['id', 'note_id', 'start', 'end', 'length', 'negation', 'type',
+                fieldnames=['id', 'note_id', 'start', 'end', 'length', 'negation', 'spaceprob', 'type',
                             'precontext', 'keyword', 'postcontext', 'fullcontext']
             )
             writer.writeheader()
