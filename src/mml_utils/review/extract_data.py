@@ -157,68 +157,14 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
                     if replacements:
                         for _from, _to in replacements:
                             text = text.replace(_from, _to)
-                    cui_data = []
-                    for data in extract_mml_data(mml_file, target_cuis=target_cuis, output_format=mml_format):
-                        try:
-                            start, end = find_target_text(text, data['matchedtext'], data['start'], data['end'])
-                        except ValueError as ve:
-                            logger.error(f'Lookup failed for {mml_file}.')
-                            logger.exception(ve)
-                            raise
-                        if cui_data and (cui_data[-1][0] <= start <= cui_data[-1][1]):  # overlaps with previous?
-                            # NB: unlikely to work in MMI format (but JSON is ordered)
-                            # keep longer if overlaps with previous cui
-                            if end - start > cui_data[-1][1] - cui_data[-1][0]:
-                                cui_data[-1] = start, end, True, data['negated'], None
-                        else:  # no overlap
-                            cui_data.append((start, end, True, data['negated'], None))
+                    cui_data = extract_cuis(text, mml_file, mml_format, target_cuis)
                     # handle mmi format where results are not ordered
-                    cui_data_unique = []
-                    for cui_start, cui_end, is_cui, negated, spacingissue in sorted(cui_data):
-                        if cui_data_unique and cui_data_unique[-1][0] <= cui_start <= cui_data_unique[-1][1]:
-                            # word will always be after
-                            if cui_end - cui_start > cui_data_unique[-1][1] - cui_data_unique[-1][0]:  # take longer
-                                cui_data[-1] = cui_start, cui_end, is_cui, negated, spacingissue
-                        else:
-                            cui_data_unique.append((cui_start, cui_end, is_cui, negated, spacingissue))
-                    cui_data = cui_data_unique
+                    cui_data = removing_overlapping_cuis(cui_data)
                     # find mentions from string
-                    text_data = []
-                    for m in target_regex.finditer(text):
-                        start, end = m.start(), m.end()
-                        overlap = False  # overlaps with already-found CUI?
-                        for cui_start, cui_end, is_cui, negated, spacingissue in cui_data:
-                            if not is_cui or cui_start > start:
-                                break
-                            # is there overlap from cuis?
-                            if is_cui and start <= cui_start <= end or start <= cui_end <= end:
-                                overlap = True
-                                break  # skip if cui already contained
-                        if not overlap:
-                            # check if middle of word
-                            if re.match(r'[A-Za-z\d]', text[start-1]) or re.match(r'[A-Za-z\d]', text[end]):
-                                if end - start >= 4:  # exclude short overlaps
-                                    text_data.append((start, end, False, -1, True))
-                            else:
-                                text_data.append((start, end, False, -1, False))
+                    text_data = extract_missing_cuis_from_text(text, target_regex, cui_data)
                     # output remaining matches
                     prev_unique_id = unique_id
-                    for start, end, is_cui, negated, spacingissue in sorted(cui_data + text_data):
-                        writer.writerow({
-                            'id': unique_id,
-                            'note_id': note_id,
-                            'start': start,
-                            'end': end,
-                            'length': end - start,
-                            'negation': negated,
-                            'spaceprob': spacingissue,
-                            'type': 'CUI' if is_cui else 'TEXT',
-                            'precontext': clean_text(text[max(0, start - 100):start]),
-                            'keyword': clean_text(text[start:end]),
-                            'postcontext': clean_text(text[end:end + 100]),
-                            'fullcontext': clean_text(text[max(0, start - 250): end + 250]),
-                        })
-                        unique_id += 1
+                    unique_id = write_to_csv(writer, cui_data, text_data, note_id, unique_id, text)
                     # record all note ids by feature for sampling
                     if sample_size and prev_unique_id < unique_id:
                         note_ids[feature_name].append(note_id)
@@ -228,6 +174,110 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
     if sample_size:
         compile_to_excel(outpath, note_ids, text_encoding, sample_size, metadata_file)
     return outpath
+
+
+def write_to_csv(writer, cui_data, text_data, note_id, unique_id, text):
+    """
+    Write cui and text data to CSV file along with relevant metadata
+    :param writer:
+    :param cui_data:
+    :param text_data:
+    :param note_id:
+    :param unique_id:
+    :param text:
+    :return:
+    """
+    for start, end, is_cui, negated, spacingissue in sorted(cui_data + text_data):
+        writer.writerow({
+            'id': unique_id,
+            'note_id': note_id,
+            'start': start,
+            'end': end,
+            'length': end - start,
+            'negation': negated,
+            'spaceprob': spacingissue,
+            'type': 'CUI' if is_cui else 'TEXT',
+            'precontext': clean_text(text[max(0, start - 100):start]),
+            'keyword': clean_text(text[start:end]),
+            'postcontext': clean_text(text[end:end + 100]),
+            'fullcontext': clean_text(text[max(0, start - 250): end + 250]),
+        })
+        unique_id += 1
+    return unique_id
+
+
+def extract_missing_cuis_from_text(text, target_regex, cui_data):
+    """
+    Look in text for mentions of target CUIs that have been overlooked by MetaMapLite.
+    :param text:
+    :param target_regex:
+    :param cui_data:
+    :return:
+    """
+    text_data = []
+    for m in target_regex.finditer(text):
+        start, end = m.start(), m.end()
+        overlap = False  # overlaps with already-found CUI?
+        for cui_start, cui_end, is_cui, negated, spacingissue in cui_data:
+            if not is_cui or cui_start > start:
+                break
+            # is there overlap from cuis?
+            if is_cui and start <= cui_start <= end or start <= cui_end <= end:
+                overlap = True
+                break  # skip if cui already contained
+        if not overlap:
+            # check if middle of word
+            if re.match(r'[A-Za-z\d]', text[start - 1]) or re.match(r'[A-Za-z\d]', text[end]):
+                if end - start >= 4:  # exclude short overlaps
+                    text_data.append((start, end, False, -1, True))
+            else:
+                text_data.append((start, end, False, -1, False))
+    return text_data
+
+
+def extract_cuis(text, mml_file, mml_format, target_cuis):
+    """
+    Extract target CUIs from metamaplite data.
+    :param text:
+    :param mml_file:
+    :param mml_format:
+    :param target_cuis:
+    :return:
+    """
+    cui_data = []
+    for data in extract_mml_data(mml_file, target_cuis=target_cuis, output_format=mml_format):
+        try:
+            start, end = find_target_text(text, data['matchedtext'], data['start'], data['end'])
+        except ValueError as ve:
+            logger.error(f'Lookup failed for {mml_file}.')
+            logger.exception(ve)
+            raise
+        if cui_data and (cui_data[-1][0] <= start <= cui_data[-1][1]):  # overlaps with previous?
+            # NB: unlikely to work in MMI format (but JSON is ordered)
+            # keep longer if overlaps with previous cui
+            if end - start > cui_data[-1][1] - cui_data[-1][0]:
+                cui_data[-1] = start, end, True, data['negated'], None
+        else:  # no overlap
+            cui_data.append((start, end, True, data['negated'], None))
+    return cui_data
+
+
+def removing_overlapping_cuis(cui_data):
+    """
+    Sort CUI data, and when 2 CUIs overlap, retain only the longer
+    :param cui_data:
+    :return:
+    """
+    cui_data_unique = []
+    for cui_start, cui_end, is_cui, negated, spacingissue in sorted(cui_data):
+        if cui_data_unique and cui_data_unique[-1][0] <= cui_start <= cui_data_unique[-1][1]:
+            # word will always be after
+            if cui_end - cui_start > cui_data_unique[-1][1] - cui_data_unique[-1][0]:  # take longer
+                cui_data[-1] = cui_start, cui_end, is_cui, negated, spacingissue
+        else:
+            cui_data_unique.append((cui_start, cui_end, is_cui, negated, spacingissue))
+    cui_data = cui_data_unique
+    return cui_data
 
 
 def build_regex_from_file(target_path, feature_name):
