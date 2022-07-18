@@ -164,7 +164,7 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
         config['sample-snippet'] = {}
 
     # column data
-    pre_columns = ['id', 'note_id', 'start', 'end', 'length', 'negation', 'type']
+    pre_columns = ['id', 'note_id', 'start', 'end', 'length', 'negation', 'spaceprob', 'type']
     post_columns = ['precontext',
                     'keyword',
                     'postcontext',
@@ -180,6 +180,7 @@ def _build_excel_review_set(outpath, new_fields, note_ids, metadata_lkp, sample_
         'end': 12,
         'length': 12,
         'negation': 12,
+        'spaceprob': 12,
         'type': 12,
     }, **{
         field: 12 for field in new_fields

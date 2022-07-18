@@ -165,18 +165,29 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
                             logger.error(f'Lookup failed for {mml_file}.')
                             logger.exception(ve)
                             raise
-                        if cui_data and (cui_data[-1][0] <= start <= cui_data[-1][1]):  # overlaps?
+                        if cui_data and (cui_data[-1][0] <= start <= cui_data[-1][1]):  # overlaps with previous?
+                            # NB: unlikely to work in MMI format (but JSON is ordered)
                             # keep longer if overlaps with previous cui
                             if end - start > cui_data[-1][1] - cui_data[-1][0]:
-                                cui_data[-1] = start, end, True, data['negated']
+                                cui_data[-1] = start, end, True, data['negated'], None
                         else:  # no overlap
-                            cui_data.append((start, end, True, data['negated']))
+                            cui_data.append((start, end, True, data['negated'], None))
+                    # handle mmi format where results are not ordered
+                    cui_data_unique = []
+                    for cui_start, cui_end, is_cui, negated, spacingissue in sorted(cui_data):
+                        if cui_data_unique and cui_data_unique[-1][0] <= cui_start <= cui_data_unique[-1][1]:
+                            # word will always be after
+                            if cui_end - cui_start > cui_data_unique[-1][1] - cui_data_unique[-1][0]:  # take longer
+                                cui_data[-1] = cui_start, cui_end, is_cui, negated, spacingissue
+                        else:
+                            cui_data_unique.append((cui_start, cui_end, is_cui, negated, spacingissue))
+                    cui_data = cui_data_unique
                     # find mentions from string
                     text_data = []
                     for m in target_regex.finditer(text):
                         start, end = m.start(), m.end()
-                        overlap = False
-                        for cui_start, cui_end, is_cui, negated in cui_data:
+                        overlap = False  # overlaps with already-found CUI?
+                        for cui_start, cui_end, is_cui, negated, spacingissue in cui_data:
                             if not is_cui or cui_start > start:
                                 break
                             # is there overlap from cuis?
@@ -184,10 +195,15 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
                                 overlap = True
                                 break  # skip if cui already contained
                         if not overlap:
-                            text_data.append((start, end, False, -1))
+                            # check if middle of word
+                            if re.match(r'[A-Za-z\d]', text[start-1]) or re.match(r'[A-Za-z\d]', text[end]):
+                                if end - start >= 4:  # exclude short overlaps
+                                    text_data.append((start, end, False, -1, True))
+                            else:
+                                text_data.append((start, end, False, -1, False))
                     # output remaining matches
                     prev_unique_id = unique_id
-                    for start, end, is_cui, negated in sorted(cui_data + text_data):
+                    for start, end, is_cui, negated, spacingissue in sorted(cui_data + text_data):
                         writer.writerow({
                             'id': unique_id,
                             'note_id': note_id,
@@ -195,6 +211,7 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
                             'end': end,
                             'length': end - start,
                             'negation': negated,
+                            'spaceprob': spacingissue,
                             'type': 'CUI' if is_cui else 'TEXT',
                             'precontext': clean_text(text[max(0, start - 100):start]),
                             'keyword': clean_text(text[start:end]),
