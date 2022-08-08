@@ -64,6 +64,9 @@ def test_extract_data_for_review_fever_mmi(fever_dir):
     (['N&V'], 'investigate', False),
     (['N/V'], 'investigate', False),
     (['N+V'], 'investigate', False),
+    (['nv'], 'investigate', False),
+    (['nv'], 'nv', True),
+    (['nv'], 'nvi', False),
 ])
 def test_build_regex(term_list, target, exp_found):
     rx = build_regex(term_list)

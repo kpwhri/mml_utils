@@ -286,10 +286,11 @@ def build_regex_from_file(target_path, feature_name):
     )
 
 
-def build_regex(term_list):
+def build_regex(term_list, *, max_length_for_word_boundaries=3):
     target_pattern = re.sub(
         r'\s+', r'\\s+',
-        '|'.join(re.escape(x) for x in sorted(term_list, key=lambda x: -len(x)))
+        '|'.join(re.escape(x) if len(x) > max_length_for_word_boundaries else fr'\b{re.escape(x)}\b'
+                 for x in sorted(term_list, key=lambda x: -len(x)))
     )
     target_regex = re.compile(f"({target_pattern})", re.I)
     return target_regex
