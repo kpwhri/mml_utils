@@ -136,7 +136,7 @@ def extract_mmi_line(line):
             'length': int(length),
             'end': int(start) + int(length),
             'evid': None,
-            'negated': int(negation),
+            'negated': bool(int(negation)),
             'pos': pos,
             'semantictype': semantictypes[0],  # usually (always?) just one, so show it
         }, **{

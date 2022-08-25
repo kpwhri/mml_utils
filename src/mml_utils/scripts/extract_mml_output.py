@@ -39,10 +39,14 @@ NOTE_FIELDNAMES = [
               help='Add fieldnames to Metamaplite output.')
 @click.option('--max-search', type=int, default=1000,
               help='Number of files in which to search for fieldnames.')
+@click.option('--exclude-negated', is_flag=True, default=False,
+              help='Exclude all results which have been determined by MML to be negated.')
 def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
-                *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: List[str] = None):
+                *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: List[str] = None,
+                exclude_negated=False):
     """
 
+    :param exclude_negated: exclude negated CUIs from the output
     :param add_fieldname:
     :param max_search:
     :param output_format: allowed: json, mmi
@@ -69,7 +73,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
         logger.info(f'Retaining only {len(target_cuis)} CUIs.')
     get_field_names(note_directories, output_format=output_format, max_search=max_search)
     build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
-                         output_format, encoding)
+                         output_format, encoding, exclude_negated)
 
 
 def get_field_names(note_directories: List[pathlib.Path], *, output_format='json', mm_encoding='cp1252',
@@ -103,7 +107,7 @@ def get_field_names(note_directories: List[pathlib.Path], *, output_format='json
 
 
 def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
-                         output_format, encoding):
+                         output_format, encoding, exclude_negated):
     missing_note_dict = set()
     missing_mml_dict = set()
     logger_warning_count = 5
@@ -114,7 +118,8 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
         mml_writer = csv.DictWriter(mml_out, fieldnames=MML_FIELDNAMES)
         mml_writer.writeheader()
         for is_record, data in extract_data(note_directories, target_cuis=target_cuis,
-                                            encoding=encoding, output_format=output_format):
+                                            encoding=encoding, output_format=output_format,
+                                            exclude_negated=exclude_negated):
             if is_record:
                 field_names = NOTE_FIELDNAMES
             else:
@@ -149,33 +154,50 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
 
 
 def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
-                 output_format='json'):
+                 output_format='json', exclude_negated=False):
     for note_dir in note_directories:
         logger.info(f'Processing directory: {note_dir}')
-        for file in note_dir.iterdir():
-            if file.suffix not in {'.txt',
-                                   ''} or file.is_dir():  # assume all notes have suffixes and all output does not
-                continue
-            logger.info(f'Processing file: {file}')
-            record = {
-                'filename': file.stem,
-                'docid': str(file),
-            }
-            with open(file, encoding=encoding) as fh:
-                text = fh.read()
-                record['num_chars'] = len(text)
-                record['num_words'] = len(text.split())
-                record['num_letters'] = len(re.sub(r'[^A-Za-z0-9]', '', text, flags=re.I))
-            outfile = pathlib.Path(file.parent / f'{str(file.stem)}.{output_format}')
-            if outfile.exists():
-                logger.info(f'Processing associated {output_format}: {outfile}.')
-                for data in extract_mml_data(outfile, encoding=mm_encoding,
-                                             target_cuis=target_cuis, output_format=output_format):
-                    yield False, data
-                record['processed'] = True
-            else:
-                record['processed'] = False
-            yield True, record
+        yield from extract_data_from_directory(
+            note_dir, encoding=encoding, exclude_negated=exclude_negated, mm_encoding=mm_encoding,
+            output_format=output_format, target_cuis=target_cuis
+        )
+
+
+def extract_data_from_directory(note_dir, *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
+                                output_format='json', exclude_negated=False):
+    for file in note_dir.iterdir():
+        if file.suffix not in {'.txt', ''} or file.is_dir():  # assume all notes have suffixes and all output does not
+            continue
+        logger.info(f'Processing file: {file}')
+        yield from extract_data_from_file(
+            file, encoding=encoding, exclude_negated=exclude_negated, mm_encoding=mm_encoding,
+            output_format=output_format, target_cuis=target_cuis
+        )
+
+
+def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
+                           output_format='json', exclude_negated=False):
+    record = {
+        'filename': file.stem,
+        'docid': str(file),
+    }
+    with open(file, encoding=encoding) as fh:
+        text = fh.read()
+        record['num_chars'] = len(text)
+        record['num_words'] = len(text.split())
+        record['num_letters'] = len(re.sub(r'[^A-Za-z0-9]', '', text, flags=re.I))
+    outfile = pathlib.Path(file.parent / f'{str(file.stem)}.{output_format}')
+    if outfile.exists():
+        logger.info(f'Processing associated {output_format}: {outfile}.')
+        for data in extract_mml_data(outfile, encoding=mm_encoding,
+                                     target_cuis=target_cuis, output_format=output_format):
+            if exclude_negated and data['negated']:
+                continue  # exclude negated terms if requested
+            yield False, data
+        record['processed'] = True
+    else:
+        record['processed'] = False
+    yield True, record
 
 
 if __name__ == '__main__':

@@ -1,0 +1,64 @@
+[
+  {
+    "matchedtext": "Fever",
+    "evlist": [
+      {
+        "score": 0,
+        "matchedtext": "Fever",
+        "start": 0,
+        "length": 5,
+        "id": "ev0",
+        "conceptinfo": {
+          "conceptstring": "Fever",
+          "sources": [
+            "MTH",
+            "NCI_CTCAE_5",
+            "NCI"
+          ],
+          "cui": "C4552740",
+          "preferredname": "Fever, CTCAE",
+          "semantictypes": [
+            "fndg"
+          ]
+        }
+      }
+    ],
+    "docid": "00000000.tx",
+    "start": 0,
+    "length": 5,
+    "id": "en0",
+    "fieldid": "text",
+    "negated": false
+  },
+  {
+    "matchedtext": "Fever",
+    "evlist": [
+      {
+        "score": 0,
+        "matchedtext": "Fever",
+        "start": 10,
+        "length": 5,
+        "id": "ev0",
+        "conceptinfo": {
+          "conceptstring": "Fever",
+          "sources": [
+            "MTH",
+            "NCI_CTCAE_5",
+            "NCI"
+          ],
+          "cui": "C4552740",
+          "preferredname": "Fever, CTCAE",
+          "semantictypes": [
+            "fndg"
+          ]
+        }
+      }
+    ],
+    "docid": "00000000.tx",
+    "start": 10,
+    "length": 5,
+    "id": "en0",
+    "fieldid": "text",
+    "negated": true
+  }
+]
