@@ -29,7 +29,7 @@ NOTE_FIELDNAMES = [
 
 @click.command()
 @click.argument('note-directories', nargs=-1, type=click.Path(exists=True, path_type=pathlib.Path), )
-@click.option('--outdir', type=click.Path(exists=True, path_type=pathlib.Path),
+@click.option('--outdir', type=click.Path(path_type=pathlib.Path),
               help='Output directory to place result files.')
 @click.option('--cui-file', type=click.Path(exists=True, path_type=pathlib.Path, dir_okay=False),
               help='File containing one cui per line which should be included in the output.')
@@ -58,6 +58,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
     :return:
     """
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+    outdir.mkdir(exist_ok=True)
     note_outfile = outdir / f'notes_{now}.csv'
     mml_outfile = outdir / f'mml_{now}.csv'
 
