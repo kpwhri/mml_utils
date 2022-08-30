@@ -27,8 +27,11 @@ def split_mmi_line(textline):
     quoted = False
     for i, letter in enumerate(textline):
         if letter == '"':
-            if quoted and i + 1 < len(textline) and textline[i+1] == '-':  # not in middle of string
-                quoted = False
+            if quoted and i + 1 < len(textline):
+                if len(segments) == 6 and textline[i+1] == '-':  # in the middle of trigger info, ensure not in string
+                    quoted = False
+                elif len(segments) != 6 and textline[i+1] in '|':
+                    quoted = False
             elif not quoted:
                 quoted = True
         elif letter == '|':

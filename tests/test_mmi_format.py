@@ -20,6 +20,34 @@ def mmi_risk_of():
     )
 
 
+@pytest.fixture()
+def mmi_history():
+    return fix_text(
+        '155.txt|MMI|3.68|Medical History|C0262926|[fndg]|'
+        '"Medical History"-text-0-"MEDICAL HISTORY"-NNP-0,"History"-text-82-"HISTORY"-NNP-0,'
+        '"History"-text-88-"History"-NNP-0,"History"-text-181-"History"-NN-0,'
+        '"History"-text-194-"History"-NN-0,"History"-text-205-"HISTORY"-NNP-0,'
+        '"History"-text-211-"History"-NNP-0,"History of"-text-0-"history of"-NN-0|'
+        'text|675/15;2252/7;2270/7;2487/7;2519/7;2542/7;2560/7;4102/10||'
+    )
+
+
+@pytest.fixture()
+def mmi_fatigue():
+    return fix_text(
+        '446.txt|MMI|4.14|Fatigue|C0015672|[sosy]|"tired all the time"-text-129-"tired all the time"-JJ-0,'
+        '"Fatigue"-text-0-"Fatigue"-NN-0,"Fatigue"-text-22-"fatigue"-NN-0|text|621/18;1329/7;1738/7|C23.888.369|'
+    )
+
+
+@pytest.fixture()
+def mmi_tired_all_the_time():
+    return fix_text(
+        '446|MMI|0.46|Complaining of "tired all the time"|C0439055|[fndg]|'
+        '"Tired all the time"-text-129-"tired all the time"-JJ-0|text|621/18||'
+    )
+
+
 def get_mmi_lines(mmi_lines, exp):
     if isinstance(exp, (str, int)):
         exp = [exp]
@@ -129,6 +157,9 @@ def test_comma():
      'C-reactive protein', 'text', '57', 'C-REACTIVE PROTEIN', 'NNP', '0'),
     ('C-reactive protein-text-57-"C-REACTIVE PROTEIN"-NNP-0',
      'C-reactive protein', 'text', '57', 'C-REACTIVE PROTEIN', 'NNP', '0'),
+    ('"tired all the time"-text-129-"tired all the time"-JJ-0,'
+     '"Fatigue"-text-0-"Fatigue"-NN-0,"Fatigue"-text-22-"fatigue"-NN-0',
+     'tired all the time', 'text', '129', 'tired all the time', 'JJ', '0'),
 ])
 def test_triggerinfo(triggerinfo_text, concept, loc, locpos, text, pos, neg):
     """Test for only a single result"""
@@ -192,6 +223,21 @@ def test_has_invalid_length(caplog, line, exp_logtext):
     (pytest.lazy_fixture('mmi_risk_of'),
      10,
      '"risk of"-text-0-"risk of"--0,"risk of"-text-0-"risk of"--0,"risk of"-text-20-"risk of"--0',
+     ),
+    (pytest.lazy_fixture('mmi_history'),
+     11,
+     '"Medical History"-text-0-"MEDICAL HISTORY"-NNP-0,"History"-text-82-"HISTORY"-NNP-0,'
+     '"History"-text-88-"History"-NNP-0,"History"-text-181-"History"-NN-0,"History"-text-194-"History"-NN-0,'
+     '"History"-text-205-"HISTORY"-NNP-0,"History"-text-211-"History"-NNP-0,"History of"-text-0-"history of"-NN-0'
+     ),
+    (pytest.lazy_fixture('mmi_fatigue'),
+     11,
+     '"tired all the time"-text-129-"tired all the time"-JJ-0,'
+     '"Fatigue"-text-0-"Fatigue"-NN-0,"Fatigue"-text-22-"fatigue"-NN-0'
+     ),
+    (pytest.lazy_fixture('mmi_tired_all_the_time'),
+     11,
+     '"Tired all the time"-text-129-"tired all the time"-JJ-0',
      ),
 ])
 def test_pipes_in_capture_mmi(text, exp_length, exp_triggerinfo):
