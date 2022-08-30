@@ -48,6 +48,14 @@ def mmi_tired_all_the_time():
     )
 
 
+@pytest.fixture()
+def mmi_tired_all_the_time_one_quote():
+    return fix_text(
+        '446|MMI|0.46|Complaining of "tired all the time|C0439055|[fndg]|'
+        '"Tired all the time"-text-129-"tired all the time"-JJ-0|text|621/18||'
+    )
+
+
 def get_mmi_lines(mmi_lines, exp):
     if isinstance(exp, (str, int)):
         exp = [exp]
@@ -236,6 +244,10 @@ def test_has_invalid_length(caplog, line, exp_logtext):
      '"Fatigue"-text-0-"Fatigue"-NN-0,"Fatigue"-text-22-"fatigue"-NN-0'
      ),
     (pytest.lazy_fixture('mmi_tired_all_the_time'),
+     11,
+     '"Tired all the time"-text-129-"tired all the time"-JJ-0',
+     ),
+    (pytest.lazy_fixture('mmi_tired_all_the_time_one_quote'),
      11,
      '"Tired all the time"-text-129-"tired all the time"-JJ-0',
      ),

@@ -38,6 +38,10 @@ def split_mmi_line(textline):
             if not quoted:
                 segments.append(textline[segment_start:i])
                 segment_start = i + 1  # starts next character
+            elif quoted and len(segments) == 3 and textline[i+1] == 'C':  # handle single quote in matchedtext
+                segments.append(textline[segment_start:i])
+                segment_start = i + 1  # starts next character
+                quoted = False
     segments.append(textline[segment_start:])
     return segments
 
