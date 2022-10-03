@@ -1,5 +1,6 @@
 import json
 import pathlib
+import re
 import subprocess
 from tempfile import TemporaryDirectory
 
@@ -26,18 +27,40 @@ def run_mml_from_text(text, mml_home, *, restrict_to_sts=None, restrict_to_src=N
     return data
 
 
+def update(command, curr):
+    if command == '--':
+        return []
+    elif command.startswith('-'):
+        parts = set(re.split(r'\|,', command[1:]))
+        return [x for x in curr if x not in parts]
+    elif command.startswith('+'):
+        parts = re.split(r'\|,', command[1:])
+        return curr + parts
+    else:
+        print(f'Unrecognized command sequence: {command}')
+        return curr
+
+
+def help(sources, semantic_types):
+    print('Add sources: +src+MDR|SNOMEDCT_US (https://www.nlm.nih.gov/research/umls/sourcereleasedocs/index.html)')
+    print(
+        'Add semantic types: +sts+sosy|fndg (https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/Docs/SemanticTypes_2018AB.txt)'
+    )
+    print('Remove all sources: +src--')
+    print('Remove all semantic types: +sts--')
+    print(f'Current sources: {", ".join(sources)}')
+    print(f'Current semantic types: {", ".join(semantic_types)}')
+    print(f'To include multiple lines, first line and last line should be `===`.')
+    print(f'Type `help` to see this message again.')
+
+
 @click.command()
 @click.argument('mml-home', type=click.Path(exists=True, path_type=pathlib.Path))
 def interactive_mml(mml_home: pathlib.Path):
     sources = []
     semantic_types = []
+    help(sources, semantic_types)
     while True:
-        print('Add sources: +src+MDR|SNOMEDCT_US (https://www.nlm.nih.gov/research/umls/sourcereleasedocs/index.html)')
-        print(
-            'Add semantic types: +sts+sosy|fndg (https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/Docs/SemanticTypes_2018AB.txt)'
-        )
-        print('Remove all sources: +src--')
-        print('Remove all semantic types: +sts--')
         data = []
         opened = False
         while True:
@@ -46,10 +69,14 @@ def interactive_mml(mml_home: pathlib.Path):
                 if opened:
                     break
                 opened = True
+            elif datum == 'help':
+                help(sources, semantic_types)
             elif datum.startswith('+src'):
-                sources = update_sources()
+                sources = update(datum[4:], sources)
+                print(f'Current sources: {", ".join(sources)}')
             elif datum.startswith('+sts'):
-                semantic_types = update_semantic_type()
+                semantic_types = update(datum[4:], semantic_types)
+                print(f'Current semantic types: {", ".join(semantic_types)}')
             elif not opened:
                 data.append(datum)
                 break
@@ -57,7 +84,10 @@ def interactive_mml(mml_home: pathlib.Path):
                 data.append(datum)
         text = '\n'.join(data)
         result = run_mml_from_text(text, mml_home, restrict_to_src=sources, restrict_to_sts=semantic_types)
+        print(' === === === ')
+        print(f'RESULTS: {len(result)}')
         print(json.dumps(result, indent=2))
+        print(' === === === ')
 
 
 if __name__ == '__main__':
