@@ -5,12 +5,13 @@ import subprocess
 from loguru import logger
 
 
-def run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None):
+def run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None, restrict_to_src=None):
     restrict_to_sts = f"--restrict_to_sts={','.join(restrict_to_sts)}" if restrict_to_sts else ''
+    restrict_to_src = f"--restrict_to_sources={','.join(restrict_to_src)}" if restrict_to_src else ''
     # metamaplite
     logger.info(f'Running Metamaplite on current set (install location: {cwd})')
     cmd = (f'metamaplite.bat --filelistfn={filename} --outputformat={output_format}'
-           f' --overwrite --usecontext {restrict_to_sts}'
+           f' --overwrite --usecontext {restrict_to_sts} {restrict_to_src}'
            # f' --restrict_to_sts=topp,fndg,dsyn,sosy,lbpr'
            f''.split()
            )
