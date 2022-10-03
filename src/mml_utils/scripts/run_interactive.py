@@ -71,6 +71,8 @@ def interactive_mml(mml_home: pathlib.Path):
                 opened = True
             elif datum == 'help':
                 help(sources, semantic_types)
+            elif datum in {'quit', 'exit', 'q'}:
+                return
             elif datum.startswith('+src'):
                 sources = update(datum[4:], sources)
                 print(f'Current sources: {", ".join(sources)}')
