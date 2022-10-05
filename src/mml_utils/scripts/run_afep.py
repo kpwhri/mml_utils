@@ -10,6 +10,7 @@ import datetime
 import json
 import math
 import pathlib
+import re
 
 import click
 import pandas as pd
@@ -18,6 +19,13 @@ from loguru import logger
 from mml_utils.parse.mmi import extract_mml_from_mmi_data
 from mml_utils.parse.json import extract_mml_from_json_data
 
+try:
+    from umls_api_tool.auth import FriendlyAuthenticator
+    UMLS_API_TOOL_INSTALLED = True
+except ImportError:
+    logger.warning(f'UMLS API Tool not installed. CUI expansion not available.')
+    UMLS_API_TOOL_INSTALLED = False
+
 
 @click.command()
 @click.argument('note-directories', nargs=-1, type=click.Path(exists=True, path_type=pathlib.Path), )
@@ -25,7 +33,12 @@ from mml_utils.parse.json import extract_mml_from_json_data
               help='Output format to look for (e.g., "json" or "mmi").')
 @click.option('--outdir', type=click.Path(file_okay=False, path_type=pathlib.Path), default=None,
               help='Output directory')
-def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.Path = None):
+@click.option('--expand-cuis', is_flag=True,
+              help='For CUIs with and/or, look for subterms. This helps to comabat longest match in, e.g., MML.')
+@click.option('--apikey', default=None, type=str,
+              help='API key for use when trying to expand CUIs.')
+def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.Path = None,
+                       expand_cuis=False, apikey=None):
     """
     Run greedy AFEP algorithm on extracted knowledge base articles
 
@@ -65,6 +78,35 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
                 results.append(result)
 
     logger.info(f'Article types: {article_types}')
+    if expand_cuis and UMLS_API_TOOL_INSTALLED:
+        logger.info(f'Trying to expand CUIs...')
+        auth = FriendlyAuthenticator.from_apikey(apikey)
+        known_cuis = {}  # cui -> new terms
+        new_results = []
+        for row in results:
+            target_cui = row['cui']
+            if target_cui not in known_cuis:
+                target_name = row['preferredname']
+                curr_results = []
+                if re.search(r'\b(?:or|and)\b', target_name, re.I):
+                    for term in re.split(r'\W+', target_name):
+                        if term.lower() in {'and', 'or', ''}:
+                            continue
+                        for cui_data in auth.search(term, language='ENG', limit_pages=1):
+                            if cui_data['name'].lower() == term.lower():
+                                curr_results.append({
+                                    'cui': cui_data['cui'],
+                                    'matchedtext': cui_data['name'],
+                                    'length': len(cui_data['name']),
+                                    'offset': target_name.index(term)
+                                })
+                                break  # go to next word
+                known_cuis[target_cui] = curr_results
+            for res in known_cuis[target_cui]:
+                # update cui, matchedtext, start, and length
+                new_results.append(row | res | {'start': row['start'] + res['offset']})
+        results += new_results
+
     logger.info(f'Building pandas dataset from {len(results)} results.')
     df = pd.DataFrame.from_records(results)
     s = df[['cui', 'article_source']].drop_duplicates().groupby('cui').count()
