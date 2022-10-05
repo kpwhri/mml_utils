@@ -35,6 +35,9 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
     """
     Run greedy AFEP algorithm on extracted knowledge base articles
 
+    :param expand_cuis:
+    :param apikey:
+    :param skip_greedy_algorithm:
     :param outdir:
     :param note_directories:
     :param mml_format:
