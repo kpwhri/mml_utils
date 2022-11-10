@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Installing cTAKES &#8212; Metamaplite Utilities 0.1.2 documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing MetaMapLite" href="install_metamaplite.html" />
+    <link rel="prev" title="Glossary" href="glossary.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Metamaplite Utilities 0.1.2 documentation</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="afep.html">
+   Automated Feature Extraction for Phenotyping (AFEP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="build_umls_for_ctakes.html">
+   Build UMLS for cTAKES
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Installing cTAKES
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_metamaplite.html">
+   Installing MetaMapLite
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_umls.html">
+   Install UMLS Metathesaurus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="umls_license.html">
+   UMLS License
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="using_mml.html">
+   Using MetaMapLite
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/install_ctakes.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in-brief">
+   In Brief
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section id="installing-ctakes">
+<h1>Installing cTAKES<a class="headerlink" href="#installing-ctakes" title="Permalink to this heading">¶</a></h1>
+<p>These steps focus on install cTAKES for running <code class="docutils literal notranslate"><span class="pre">ctakes-fast</span></code> on Windows.</p>
+<section id="in-brief">
+<h2>In Brief<a class="headerlink" href="#in-brief" title="Permalink to this heading">¶</a></h2>
+<p>This will summarize the steps from the <a class="reference external" href="https://cwiki.apache.org/confluence/display/CTAKES/cTAKES+4.0+User+Install+Guide">cTAKES User Install Guide</a>.</p>
+<ol class="arabic simple">
+<li><p>Navigate to https://ctakes.apache.org/downloads.cgi and download appropriate files.</p>
+<ul class="simple">
+<li><p>Click ‘Windows’ button under <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Installation</span></code></p></li>
+<li><p>To update dictionary (but not cTAKES, you can download new dictionary):</p>
+<ul>
+<li><p>Click ‘Fast Version’ button under <code class="docutils literal notranslate"><span class="pre">UMLS</span> <span class="pre">Dictionary</span></code></p></li>
+<li><p>(Optional) Click ‘All Versions’ button under <code class="docutils literal notranslate"><span class="pre">UMLS</span> <span class="pre">Dictionary</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Unzip <code class="docutils literal notranslate"><span class="pre">apache-ctakes-x.y.z.a</span></code> to CTAKES_HOME (e.g., <code class="docutils literal notranslate"><span class="pre">C:\apache-ctakes</span></code>)</p>
+<ul class="simple">
+<li><p>(Optional) Unzip <code class="docutils literal notranslate"><span class="pre">ctakes-resources-x.y-bin</span></code>, and move contents of <code class="docutils literal notranslate"><span class="pre">resources</span></code> directory into <code class="docutils literal notranslate"><span class="pre">CTAKES_HOME/resources</span></code>.</p></li>
+</ul>
+</li>
+<li><p><span class="xref myst">Obtain UMLS Key</span></p></li>
+<li><p>(Optional) Add the api key as a user environment variable (i.e., not shared with other users)</p>
+<ul class="simple">
+<li><p>Start &gt; Environment variables. Under <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Variables</span></code>, <code class="docutils literal notranslate"><span class="pre">New</span></code>. Set <code class="docutils literal notranslate"><span class="pre">umlsKey</span></code> to your API KEY.</p></li>
+<li><p>In powershell, add to your <code class="docutils literal notranslate"><span class="pre">.profile</span></code>: <code class="docutils literal notranslate"><span class="pre">$env:umlsKey='API-KEY'</span></code></p></li>
+</ul>
+</li>
+<li><p>Test run with these commands (in, e.g., powershell) – pick a directory with a single file:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">CTAKES_HOME</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bin\runClinicalPipeline</span> <span class="pre">-i</span> <span class="pre">C:\Input\MyNotes\</span> <span class="pre">--xmiOut</span> <span class="pre">C:\Output\MyNotes\</span> <span class="pre">--key</span> <span class="pre">API-KEY</span></code></p></li>
+</ul>
+</li>
+<li><p>You can ensure that <code class="docutils literal notranslate"><span class="pre">fast-ctakes</span></code> is being run by looking for the logging info line ‘Dictionary Descriptor’ which should reference <code class="docutils literal notranslate"><span class="pre">/lookup/fast/sno_rx_##aa.xml</span></code>.</p></li>
+</ol>
+</section>
+</section>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="glossary.html" title="previous page">Glossary</a>
+    <a class='right-next' id="next-link" href="install_metamaplite.html" title="next page">Installing MetaMapLite</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By dcronkite <dcronkite@gmail.com><br/>
+        
+            &copy; Copyright 2022, KPWHRI.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

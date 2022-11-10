@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Build UMLS for cTAKES &#8212; Metamaplite Utilities 0.1.2 documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Automated Feature Extraction for Phenotyping (AFEP)" href="afep.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Metamaplite Utilities 0.1.2 documentation</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="afep.html">
+   Automated Feature Extraction for Phenotyping (AFEP)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Build UMLS for cTAKES
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_ctakes.html">
+   Installing cTAKES
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_metamaplite.html">
+   Installing MetaMapLite
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_umls.html">
+   Install UMLS Metathesaurus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="umls_license.html">
+   UMLS License
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="using_mml.html">
+   Using MetaMapLite
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/build_umls_for_ctakes.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#steps-to-build-dictionary">
+   Steps to Build Dictionary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-ctakes-with-new-dictionary">
+   Run cTAKES with New Dictionary
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section id="build-umls-for-ctakes">
+<h1>Build UMLS for cTAKES<a class="headerlink" href="#build-umls-for-ctakes" title="Permalink to this heading">¶</a></h1>
+<p>By default, cTAKES includes the <code class="docutils literal notranslate"><span class="pre">SNOMED_CT</span></code> and <code class="docutils literal notranslate"><span class="pre">RXNORM</span></code> subsets, but sometimes this isn’t sufficient. You may require <code class="docutils literal notranslate"><span class="pre">MedDRA</span></code> or any other number of UMLS sources.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Download the full UMLS: <span class="xref myst">Install UMLS Metathesaurus</span></p></li>
+<li><p>Downloaded cTAKES and unzip directory. This base directory will be called <code class="docutils literal notranslate"><span class="pre">CTAKES_HOME</span></code> (e.g., C:\apache-ctakes-4.x.y.z)</p></li>
+</ul>
+</section>
+<section id="steps-to-build-dictionary">
+<h2>Steps to Build Dictionary<a class="headerlink" href="#steps-to-build-dictionary" title="Permalink to this heading">¶</a></h2>
+<p>The main documentation is on the cTAKES wiki: https://cwiki.apache.org/confluence/display/CTAKES/Dictionary+Creator+GUI</p>
+<ul class="simple">
+<li><p>Launch Dictionary Creator GUI window</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$CTAKES_HOME</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bin\runDictionaryCreator.bat</span></code>  (or <code class="docutils literal notranslate"><span class="pre">.sh</span></code>)</p></li>
+</ul>
+</li>
+<li><p>On the <code class="docutils literal notranslate"><span class="pre">UMLS</span> <span class="pre">Installation</span></code> line, choose <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">Directory</span></code> button.</p></li>
+<li><p>Choose a UMLS download directory.</p>
+<ul>
+<li><p>In whatever shell you ran the command, you can watch the vocabularies get loaded</p></li>
+</ul>
+</li>
+<li><p>In the GUI, the left hand side shows available <span class="xref myst">source vocabularies</span>. On the right hand side, semantic types can be selected/unselected.</p>
+<ul>
+<li><p>To include a particular vocabulary, place a checkcbox next to it.</p>
+<ul>
+<li><p>To remove a vocabulary, first ensure the ‘Source’ is checked, and then uncheck ‘Target’ first; then, uncheck ‘Source’</p></li>
+</ul>
+</li>
+<li><p>To include/exclude a particular semantic type, choose the checkbox next to it.</p></li>
+<li><p>The GUI window can be expanded to see more elements.</p></li>
+<li><p>To see all the checkboxes, sort by the ‘Source’ or ‘Use’ columns (click the column header)</p></li>
+<li><p>To replicate MetaMapLite, choose the vocabularies level 0, 4, and 9 (https://www.nlm.nih.gov/research/umls/sourcereleasedocs/index.html) and all semantic types.</p></li>
+</ul>
+</li>
+<li><p>Once the appropriate source vocabularies and semantic types have been selected:</p>
+<ul>
+<li><p>Name the dictionary something useful (and memorable) in the <code class="docutils literal notranslate"><span class="pre">Dictionary</span> <span class="pre">Name</span></code> line</p>
+<ul>
+<li><p>Ideally, include a reference to the vocabularies, the purpose, as well as the UMLS version</p></li>
+</ul>
+</li>
+<li><p>Choose ‘Build Dictionary’</p></li>
+</ul>
+</li>
+<li><p>You dictionary will be created in <code class="docutils literal notranslate"><span class="pre">$CTAKES_HOME\resources\org\apache\ctakes\dictionary\lookup\fast</span></code></p></li>
+</ul>
+</section>
+<section id="run-ctakes-with-new-dictionary">
+<h2>Run cTAKES with New Dictionary<a class="headerlink" href="#run-ctakes-with-new-dictionary" title="Permalink to this heading">¶</a></h2>
+<p>If already running with <code class="docutils literal notranslate"><span class="pre">bin\runClinicalPipeline.bat</span></code> (or <code class="docutils literal notranslate"><span class="pre">.sh</span></code>):</p>
+<ul class="simple">
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">--lookupXml</span></code> option to specify the full path</p></li>
+<li><p>E.g.,</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>\<span class="nb">bin</span>\<span class="n">runClinicalPipeline</span><span class="o">.</span><span class="n">bat</span> 
+<span class="o">-</span><span class="n">i</span> <span class="n">C</span><span class="p">:</span>\<span class="n">inputfiles</span> 
+<span class="o">--</span><span class="n">xmiOut</span> <span class="n">C</span><span class="p">:</span>\<span class="n">outputxmi</span> 
+<span class="o">--</span><span class="n">key</span> <span class="n">xxx</span><span class="o">-</span><span class="n">yyy</span> 
+<span class="o">--</span><span class="n">lookupXml</span> <span class="n">C</span><span class="p">:</span>\<span class="n">ctakes</span>\<span class="n">apache</span><span class="o">-</span><span class="n">ctakes</span><span class="o">-</span><span class="mf">4.</span><span class="n">x</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">z</span>\<span class="n">resources</span>\<span class="n">org</span>\<span class="n">apache</span>\<span class="n">ctakes</span>\<span class="n">dictionary</span>\<span class="n">lookup</span>\<span class="n">fast</span>\<span class="n">custom_dict</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>If using MML Utils’ <code class="docutils literal notranslate"><span class="pre">run_ctakes</span></code> command,</p>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">--dictionary</span></code> to the existing command</p></li>
+<li><p>E.g.,</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mml</span><span class="o">-</span><span class="n">run</span><span class="o">-</span><span class="n">ctakes</span> 
+<span class="n">C</span><span class="p">:</span>\<span class="n">inputfiles</span> 
+<span class="o">--</span><span class="n">ctakes</span><span class="o">-</span><span class="n">home</span> <span class="n">C</span><span class="p">:</span>\<span class="n">ctakes</span>\<span class="n">apache</span><span class="o">-</span><span class="n">ctakes</span><span class="o">-</span><span class="mf">4.</span><span class="n">x</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">z</span> 
+<span class="o">--</span><span class="n">outdir</span> <span class="n">C</span><span class="p">:</span>\<span class="n">outputxmi</span> 
+<span class="o">--</span><span class="n">umls</span><span class="o">-</span><span class="n">key</span> <span class="n">xxx</span><span class="o">-</span><span class="n">yyy</span> 
+<span class="o">--</span><span class="n">dictionary</span> <span class="n">C</span><span class="p">:</span>\<span class="n">ctakes</span>\<span class="n">apache</span><span class="o">-</span><span class="n">ctakes</span><span class="o">-</span><span class="mf">4.</span><span class="n">x</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">z</span>\<span class="n">resources</span>\<span class="n">org</span>\<span class="n">apache</span>\<span class="n">ctakes</span>\<span class="n">dictionary</span>\<span class="n">lookup</span>\<span class="n">fast</span>\<span class="n">custom_dict</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="afep.html" title="previous page">Automated Feature Extraction for Phenotyping (AFEP)</a>
+    <a class='right-next' id="next-link" href="glossary.html" title="next page">Glossary</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By dcronkite <dcronkite@gmail.com><br/>
+        
+            &copy; Copyright 2022, KPWHRI.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

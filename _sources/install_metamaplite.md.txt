@@ -14,7 +14,7 @@ other systems...
 5. Test the installation
    * `cd C:\mml\public_mm_lite`
    * `echo "asymptomatic patient populations" | .\metamaplite.bat --pipe`
-6. For more usage information, see  [](using_mml.md).
+6. For more usage information, see [](using_mml.md).
 
 ## Prerequisites
 
@@ -35,10 +35,7 @@ the main components are:
 An account is required in order to use the UMLS Metathesaurus (the vocabulary backend to Metamaplite which MetaMapLite uses to map text to NLP concepts).
 ```
 
-1. To create an account, visit: https://uts.nlm.nih.gov/uts/signup-login.
-2. By doing this, you will agree to the UMLS License: https://uts.nlm.nih.gov/uts/assets/LicenseAgreement.pdf
-3. To keep your account current (i.e., to keep being able to use it), you will need to annually complete a survey
-   describing which sources, etc., you used, along with any suggestions for improvements.
+[](umls_license.md#create-umls-account)
 
 ### Install Java
 
