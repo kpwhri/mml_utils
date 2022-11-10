@@ -35,4 +35,25 @@ The main documentation is on the cTAKES wiki: https://cwiki.apache.org/confluenc
 
 ## Run cTAKES with New Dictionary
 
-* TODO
+If already running with `bin\runClinicalPipeline.bat` (or `.sh`):
+* Add the `--lookupXml` option to specify the full path
+* E.g., 
+```
+.\bin\runClinicalPipeline.bat 
+-i C:\inputfiles 
+--xmiOut C:\outputxmi 
+--key xxx-yyy 
+--lookupXml C:\ctakes\apache-ctakes-4.x.y.z\resources\org\apache\ctakes\dictionary\lookup\fast\custom_dict.xml
+```
+
+If using MML Utils' `run_ctakes` command, 
+* Add `--dictionary` to the existing command
+* E.g.,
+```
+mml-run-ctakes 
+C:\inputfiles 
+--ctakes-home C:\ctakes\apache-ctakes-4.x.y.z 
+--outdir C:\outputxmi 
+--umls-key xxx-yyy 
+--dictionary C:\ctakes\apache-ctakes-4.x.y.z\resources\org\apache\ctakes\dictionary\lookup\fast\custom_dict.xml
+```

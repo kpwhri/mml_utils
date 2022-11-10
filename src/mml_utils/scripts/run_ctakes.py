@@ -14,8 +14,11 @@ from mml_utils.run_ctakes import run_ctakes
 @click.option('--umls-key', default=None,
               help='UMLS key including hyphens for using UMLS dictionary.'
                    ' Key may also be set as environment variable.')
-def run_ctakes_directory(directory: Path, ctakes_home: Path, outdir: Path, umls_key: str = None):
-    run_ctakes(directory, ctakes_home, outdir, umls_key)
+@click.option('--dictionary', type=click.Path(path_type=Path, dir_okay=True),
+              help='Path to XML file for custom-created dictionary.')
+def run_ctakes_directory(directory: Path, ctakes_home: Path, outdir: Path, umls_key: str = None,
+                         dictionary: Path = None):
+    run_ctakes(directory, ctakes_home, outdir, umls_key, dictionary)
 
 
 if __name__ == '__main__':
