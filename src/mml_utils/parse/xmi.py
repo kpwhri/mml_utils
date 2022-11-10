@@ -16,8 +16,8 @@ def build_index_references(root):
     for child in root:
         if 'syntax.ecore}ConllDependencyNode' in child.tag and child.get('id') != '0':
             postag = child.get('postag')
-            start_idx = int(child.get('begin')) - 1  # 1-based indexing
-            end_idx = int(child.get('end')) - 1  # 1-based indexing
+            start_idx = int(child.get('begin'))
+            end_idx = int(child.get('end'))
             postags[start_idx] = postag
             terms.append(' ' * (start_idx - prev_index))
             terms.append(child.get('form'))
@@ -37,12 +37,13 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
     file = pathlib.Path(filename)
     stem = file.stem.replace('.txt', '')
     results = defaultdict(dict)
+    i = 0
     for child in root:
         if 'textsem.ecore' in child.tag:
             if 'ontologyConceptArr' in child.keys():
                 polarity = int(child.get('polarity'))
-                start_idx = int(child.get('begin')) - 1
-                end_idx = int(child.get('end')) - 1
+                start_idx = int(child.get('begin'))
+                end_idx = int(child.get('end'))
                 confidence = float(child.get('confidence'))
                 uncertainty = float(child.get('uncertainty'))
                 conditional = bool(child.get('conditional'))
@@ -52,8 +53,9 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
                 for concept in child.get("ontologyConceptArr").split():
                     concept_id = int(concept)
                     results[concept_id].update({
-                        'event_id': f'{stem}_{concept_id}',
+                        'event_id': f'{stem}_{concept_id}_{i}',
                         'docid': stem,
+                        'filename': file.name,
                         'start': start_idx,
                         'end': end_idx,
                         'length': end_idx - start_idx,
@@ -67,6 +69,7 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
                         'evid': None,
                         'pos': postags[start_idx],
                     })
+                    i += 1
         elif 'refsem.ecore' in child.tag:
             currid = int(child.get(r'{http://www.omg.org/XMI}id'))
             results[currid].update({
@@ -78,4 +81,4 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
                 'score': float(child.get('score')),
                 'code': child.get('code', None),
             })
-    yield from (result for result in results.values() if result['cui'] in target_cuis)
+    yield from (result for result in results.values() if not target_cuis or result['cui'] in target_cuis)
