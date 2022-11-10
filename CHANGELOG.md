@@ -17,6 +17,11 @@ Types of changes:
 
 ## [Unreleased]
 
+## [0.1.3]
+
+### Added
+- Support for running and extracting data from cTAKES
+
 ### Fixed
 - Handle newline at end of mmi file
 

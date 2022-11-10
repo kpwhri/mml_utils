@@ -4,7 +4,7 @@ build-backend = 'flit_core.buildapi'
 
 [project]
 name = 'mml_utils'
-version = '0.1.2'
+version = '0.1.3'
 module = 'mml_utils'
 authors = [
     { name = 'dcronkite', email = 'dcronkite+pypi@gmail.com' },
@@ -54,3 +54,4 @@ mml-prepare-review = "mml_utils.scripts.extract_data_for_review:_extract_data_fo
 mml-prepare-review-sample = "mml_utils.scripts.sample_review_set:_compile_to_excel"
 mml-sql-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_database"
 mml-csv-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_csv"
+mml-run-ctakes = "mml_utils.scripts.run_ctakes:run_ctakes"
