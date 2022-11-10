@@ -20,10 +20,14 @@ Types of changes:
 ## [0.1.3]
 
 ### Added
-- Support for running and extracting data from cTAKES
+- Support for running and extracting data from cTAKES (including parsing xmi output files)
+- Interactive version of MML to test running on text
+- Ability to limit semantic types/sources
 
 ### Fixed
 - Handle newline at end of mmi file
+- Automatically create directories
+- Improve mmi format parsing
 
 ## [0.1.2]
 
