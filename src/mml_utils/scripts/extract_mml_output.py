@@ -77,7 +77,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
     target_cuis = None
     if cui_file is not None:
         with open(cui_file, encoding='utf8') as fh:
-            target_cuis = set(x.strip() for x in fh.read().split('\n'))
+            target_cuis = set(x.strip() for x in fh.read().split('\n') if x.strip())
         logger.info(f'Retaining only {len(target_cuis)} CUIs.')
     get_field_names(note_directories, output_format=output_format, max_search=max_search,
                     output_directories=output_directories, mm_encoding=mm_encoding)
@@ -89,7 +89,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
 def get_output_file(curr_directory, exp_filename, output_format, output_directories=None):
     if output_format == 'xmi':
         output_format = 'txt.xmi'  # how ctakes does renaming
-    if path := (pathlib.Path(curr_directory / f'{exp_filename}.{output_format}')).exists():
+    if (path := pathlib.Path(curr_directory / f'{exp_filename}.{output_format}')).exists():
         return path
     elif output_directories:
         for output_directory in output_directories:
