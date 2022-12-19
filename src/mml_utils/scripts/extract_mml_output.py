@@ -86,7 +86,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
                          mm_encoding=mm_encoding)
 
 
-def get_output_file(curr_directory, exp_filename, output_format, output_directories=None):
+def get_output_file(curr_directory, exp_filename, output_format, output_directories=None, skip_missing=False):
     if output_format == 'xmi':
         output_format = 'txt.xmi'  # how ctakes does renaming
     if (path := pathlib.Path(curr_directory / f'{exp_filename}.{output_format}')).exists():
@@ -95,7 +95,11 @@ def get_output_file(curr_directory, exp_filename, output_format, output_director
         for output_directory in output_directories:
             if (path := pathlib.Path(output_directory / f'{exp_filename}.{output_format}')).exists():
                 return path
-    raise ValueError(f'Unable to find expected output file: {exp_filename}.{output_format}.')
+    msg = f'Unable to find expected output file: {exp_filename}.{output_format}.'
+    if skip_missing:
+        logger.warning(msg)
+    else:
+        raise ValueError(msg)
 
 
 def get_field_names(note_directories: List[pathlib.Path], *, output_format='json', mm_encoding='cp1252',
@@ -118,7 +122,7 @@ def get_field_names(note_directories: List[pathlib.Path], *, output_format='json
                 continue
             outfile = get_output_file(file.parent, f'{str(file.stem)}', output_format,
                                       output_directories=output_directories)
-            if not outfile.exists():
+            if outfile is None or not outfile.exists():
                 continue
             for data in extract_mml_data(outfile, encoding=mm_encoding, output_format=output_format):
                 for fieldname in set(data.keys()) - fieldnames:
@@ -213,7 +217,7 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encodi
         record['num_letters'] = len(re.sub(r'[^A-Za-z0-9]', '', text, flags=re.I))
     outfile = get_output_file(file.parent, f'{str(file.stem)}', output_format,
                               output_directories=output_directories)
-    if outfile.exists():
+    if outfile and outfile.exists():
         logger.info(f'Processing associated {output_format}: {outfile}.')
         for data in extract_mml_data(outfile, encoding=mm_encoding,
                                      target_cuis=target_cuis, output_format=output_format):
