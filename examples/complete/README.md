@@ -16,7 +16,7 @@ There is a CSV file in `corpus.csv` which needs to be converted to a directory c
 
 Command:
 
-    mml-csv-to-txt corpus.csv --id-col note_id --text-col text
+    mml-csv-to-txt corpus.csv --id-col docid --text-col text
 
 Result:
 

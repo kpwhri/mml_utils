@@ -1,4 +1,4 @@
-patient_id,note_id,text
+studyid,docid,text
 PAT02301,209784,"Pancreatitis is inflammation of the pancreas. The pancreas is a long, flat gland that sits tucked behind the stomach in the upper abdomen. The pancreas produces enzymes that help digestion and hormones that help regulate the way your body processes sugar (glucose).
 
 Pancreatitis can occur as acute pancreatitis — meaning it appears suddenly and lasts for days. Some people develop chronic pancreatitis, which is pancreatitis that occurs over many years.

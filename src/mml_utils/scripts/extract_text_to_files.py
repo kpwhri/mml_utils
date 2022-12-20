@@ -39,7 +39,7 @@ def text_from_database(connection_string, query, outdir: pathlib.Path, n_dirs=1,
 
 @click.command()
 @click.argument('csv-file', type=click.Path(dir_okay=False, path_type=pathlib.Path), default=None)
-@click.option('--id-col', default='note_id', type=str,
+@click.option('--id-col', default='docid', type=str,
               help='Name of column containing note ids.')
 @click.option('--text-col', default='text', type=str,
               help='Name of column containing text.')

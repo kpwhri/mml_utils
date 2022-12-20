@@ -33,17 +33,20 @@
     * [Prerequisites](#prerequisites)
     * [Installation](#installation)
 * [Usage](#usage)
-    * [Build MetaMapLite Directory from SQL/CSV](#mml-to-txt)
-    * [Run Metamaplite in Batches](#run-metamaplite-in-batches)
-    * [Copy Notes to Re-run: mml-copy-notes](#mml-copy-notes)
-    * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
-    * [Extract MML Results: mml-extract-mml](#mml-extract-mml)
-    * [Check MML Progress: mml-extract-mml](#mml-check-progress)
-    * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
-    * [Split Long File: mml-split-files](#mml-split-files)
-    * [Run AFEP on MML Output: mml-run-afep](#mml-run-afep)
-    * [Check How Closely Offsets Match: mml-check-offsets](#mml-check-offsets)
-    * [Prepare CSV Files for Review: mml-prepare-review](#mml-prepare-review)
+    * [End to End Example](examples/complete/README.md) 
+    * Commands
+      * [Build MetaMapLite Directory from SQL/CSV](#mml-to-txt)
+      * [Run Metamaplite in Batches](#run-metamaplite-in-batches)
+      * [Copy Notes to Re-run: mml-copy-notes](#mml-copy-notes)
+      * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
+      * [Extract MML Results: mml-extract-mml](#mml-extract-mml)
+      * [Check MML Progress: mml-extract-mml](#mml-check-progress)
+      * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
+      * [Split Long File: mml-split-files](#mml-split-files)
+      * [Run AFEP on MML Output: mml-run-afep](#mml-run-afep)
+      * [Check How Closely Offsets Match: mml-check-offsets](#mml-check-offsets)
+      * [Prepare CSV Files for Review: mml-prepare-review](#mml-prepare-review)
+      * [Build Frequncy Tables](examples/complete/README.md#generate-frequency-tables)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -67,8 +70,8 @@ Additional instructions, including UMLS/MML installation are described here: htt
 ### Prerequisites
 
 * Python 3.9+
-* pip install .
-    * See pyproject.toml for updated dependencies.
+* `pip install .`
+    * See `pyproject.toml` for updated dependencies.
 
 ### Installation
 
@@ -92,6 +95,105 @@ Additional instructions, including UMLS/MML installation are described here: htt
 In the `examples/complete/` directory, you can find a complete end-to-end example of build and running MetaMapLite. One using `*.json` and the other `*.mmi` formats.
 
 Please see [README.md](examples/complete/README.md) file there for step-by-step instructions.
+
+This examples will lead you through:
+* Installing metamaplite (MML)
+* Installing this package
+* Running MML on a sample CSV dataset
+* Extracting results
+* Generating frequency tables
+
+### Data Preparation
+
+#### Corpus
+
+Apart from just installing the code, you'll need to prepare and format your data. This can often be quite 
+time-consuming as you'll need to select a cohort, time windows, etc. 
+Prepare this data to look like the [corpus.csv file](examples/complete/corpus.csv) with columns of:
+
+* `studyid`
+* `docid`
+* `text`
+
+Also, create a `metadata_file.csv` which contains:
+
+* `studyid`
+* `docid`
+* `date`: as `YYYY-MM-DD`
+* ...other fields which may be of interest.
+
+For MetaMapLite (MML) to read the data, you'll need all the text in a single directory. 
+The name of each note should be `DOCID.txt` (Python: `f'{docid}.txt'`).
+See the [end-to-end examples](examples/complete/README.md) for commands to convert
+[CSV to Text](examples/complete/README.md#csv-to-text) and
+[creating filelists](examples/complete/README.md#aside-split-into-multiple-filelists).
+
+
+#### Supplementary Files
+
+In addition to the corpus files, several JSON files can be useful for summarizing data (building frequencies, etc.).
+
+
+##### CUI Definitions
+
+A CUI Definitions json file can be constructed defining the different CUIs that are be targeted. 
+This is particularly useful when building frequency files 
+([`mml-build-freqs` command](examples/complete/README.md#generate-frequency-tables)).
+
+By compiling a list of CUIs in a txt file, this file can be built automatically with a script from the 
+[`umls_api_tool` package](https://github.com/dcronkite/umls_api_tool/blob/master/examples/cui/cui_to_best_definition.py).
+
+Here's an example:
+
+```json
+[
+  {
+    "cui": "C0027497",
+    "definition": "Nausea"
+  },
+  {
+    "cui": "C0027498",
+    "definition": "Nausea and vomiting"
+  }
+]
+```
+
+
+##### Feature Mapping
+
+In certain applications, multiple CUIs will be grouped into a single *feature* or *category*. 
+A JSON file should be generated grouping these together. CUIs may appear in multiple features.
+
+Mapping of `feature_name` -> `CUIs`. This will be a json file like:
+
+```json
+[
+  {
+    "feature": "Nausea",
+    "cuis": [
+      "C0027498",
+      "C0027497"
+    ]
+  },
+  {
+    "feature": "Vomiting",
+    "cuis": [
+      "C0027498",
+      "C0221151",
+      "C1510416",
+      "C0152165",
+      "C0020450",
+      "C0042963"
+    ]
+  },
+  {
+    "feature": "Diarrhea",
+    "cuis": [
+      "C0011991"
+    ]
+  }
+]
+```
 
 
 ### Run Metamaplite in Batches
