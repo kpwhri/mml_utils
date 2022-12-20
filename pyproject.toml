@@ -4,14 +4,14 @@ build-backend = 'flit_core.buildapi'
 
 [project]
 name = 'mml_utils'
-version = '0.1.3'
+version = '0.2.0'
 module = 'mml_utils'
 authors = [
     { name = 'dcronkite', email = 'dcronkite+pypi@gmail.com' },
 ]
 readme = 'README.md'
 description = 'Library to support the use/deployment of Metamaplite.'
-home-page = 'https://github.com/kpwhri/batch_metamaplite'
+home-page = 'https://github.com/kpwhri/mml_utils'
 requires = ['click>=8.0.0', 'loguru']
 requires-python = '>=3.8'
 keywords = ['nlp', 'information extraction', 'metamap', 'metamaplite']
@@ -55,3 +55,4 @@ mml-prepare-review-sample = "mml_utils.scripts.sample_review_set:_compile_to_exc
 mml-sql-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_database"
 mml-csv-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_csv"
 mml-run-ctakes = "mml_utils.scripts.run_ctakes:run_ctakes"
+mml-build-freqs = "mml_utils.scripts.build_frequency_tables:_build_frequency_tables"
