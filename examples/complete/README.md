@@ -95,9 +95,7 @@ regardless
 of how many CUIs may have been identified (e.g., there are different CUIs for `nausea` and `feeling nauseous`, but we
 want to include both in our counts).
 
-> :warning: **Requires pandas**: Install pandas by running `pip install pandas` from the command line.
-
-> **Warning**
+> **Warning**  
 > **Requires pandas**: Install pandas by running `pip install pandas` from the command line.
 
 Command:
