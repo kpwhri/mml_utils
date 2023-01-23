@@ -7,6 +7,7 @@ try:
     UMLS_API_TOOL_INSTALLED = True
 except ImportError:
     logger.warning(f'UMLS API Tool not installed. CUI expansion not available.')
+    logger.info(f'Install umls_api_tool by running `pip install git+https://github.com/dcronkite/umls_api_tool.git`')
     UMLS_API_TOOL_INSTALLED = False
 
 
