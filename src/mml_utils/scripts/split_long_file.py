@@ -10,7 +10,7 @@ import click
 
 
 @click.command()
-@click.argument('files', nargs=-1, type=click.Path(exists=True, dir_okay=False, path_type=pathlib.Path))
+@click.argument('files', nargs=-1, type=click.Path(exists=True, dir_okay=True, path_type=pathlib.Path))
 @click.option('--n-lines', type=int, default=200,
               help='Number of lines after which to create a new file.')
 @click.option('--filelist', type=click.Path(dir_okay=False, path_type=pathlib.Path),
@@ -20,8 +20,13 @@ def split_files_on_lines(files: List[pathlib.Path], n_lines=200, *, encoding='cp
         filelist = files[0].parent / f'filelist_split_{files[0].stem}.txt'
     with open(filelist, 'a', encoding=encoding) as filelist_out:
         for file in files:
-            for name in split_on_lines(file, n_lines=n_lines, in_encoding=encoding):
-                filelist_out.write(f'{name}\n')
+            if file.is_dir():
+                for _file in file.iterdir():
+                    for name in split_on_lines(_file, n_lines=n_lines, in_encoding=encoding):
+                        filelist_out.write(f'{name}\n')
+            else:
+                for name in split_on_lines(file, n_lines=n_lines, in_encoding=encoding):
+                    filelist_out.write(f'{name}\n')
 
 
 def split_on_lines(file, n_lines=200, *, in_encoding='cp1252', out_encoding='cp1252', errors='replace'):
