@@ -1,7 +1,9 @@
 from pathlib import Path
 
 import click
+from loguru import logger
 
+from mml_utils.ctakes.clean import clean_non_xml
 from mml_utils.run_ctakes import run_ctakes
 
 
@@ -16,8 +18,15 @@ from mml_utils.run_ctakes import run_ctakes
                    ' Key may also be set as environment variable.')
 @click.option('--dictionary', type=click.Path(path_type=Path, dir_okay=True),
               help='Path to XML file for custom-created dictionary.')
+@click.option('--clean-files', default=False, is_flag=True,
+              help='Remove non-xml characters from files in directories. Overwrites the files.')
+@click.option('--clean-file-src-encoding', default='utf8',
+              help='File format to read in src files for cleaning.')
 def run_ctakes_directory(directory: Path, ctakes_home: Path, outdir: Path, umls_key: str = None,
-                         dictionary: Path = None):
+                         dictionary: Path = None, clean_files: bool = False, clean_files_src_encoding='utf8'):
+    if clean_files:
+        logger.info(f'Overwriting files in {directory} to remove non-XML characters.')
+        clean_non_xml(directory, encoding=clean_files_src_encoding)
     run_ctakes(directory, ctakes_home, outdir, umls_key, dictionary)
 
 
