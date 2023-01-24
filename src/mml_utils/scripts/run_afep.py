@@ -30,8 +30,10 @@ from mml_utils.phenorm.cui_expansion import add_shorter_match_cuis
               help='API key for use when trying to expand CUIs.')
 @click.option('--skip-greedy-algorithm', is_flag=True, default=False,
               help='Skip greedy selection algorithm.')
+@click.option('--min-kb', default=None, type=int,
+              help='Minimum number of knowledge base articles. Defaults to half (rounded up) of KB sources.')
 def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.Path = None,
-                       expand_cuis=False, apikey=None, skip_greedy_algorithm=False):
+                       expand_cuis=False, apikey=None, skip_greedy_algorithm=False, min_kb=None):
     """
     Run greedy AFEP algorithm on extracted knowledge base articles
 
@@ -58,9 +60,10 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
     logger.info(f'Building pandas dataset from {len(results)} results.')
     df = pd.DataFrame.from_records(results)
     s = df[['cui', 'article_source']].drop_duplicates().groupby('cui').count()
-    half_articles = math.ceil(len(article_types) / 2)
-    logger.info(f'Retaining only CUIs appearing in at least {half_articles} knowledge base sources.')
-    cuis_with_three_or_more = set(s[s.article_source >= half_articles].index)
+    if min_kb is None:
+        min_kb = math.ceil(len(article_types) / 2)
+    logger.info(f'Retaining only CUIs appearing in at least {min_kb} knowledge base sources.')
+    cuis_with_three_or_more = set(s[s.article_source >= min_kb].index)
     cui_df = df[df.cui.isin(cuis_with_three_or_more)]
     logger.info(f'Retained {cui_df.shape[0]} CUIs.')
 
@@ -80,6 +83,16 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
 
     with open(outdir / f'selected_cuis_{now}.txt', 'w') as out:
         out.write('\n'.join(res_dict_df['cui'].unique()))
+
+    cui_df['value'] = 1
+    article_df = cui_df[['cui', 'article_source', 'value']].pivot_table(
+        index='cui', columns='article_source', fill_value=0
+    )
+    article_df.columns = article_df.columns.droplevel(level=0)
+    article_df.columns.name = None
+    article_df['n_articles'] = article_df.apply(sum, axis=1)
+    summary_df = pd.merge(res_dict_df, article_df.reset_index(), on='cui')
+    summary_df.to_csv(outdir / f'selected_cui_details_{now}.csv', index=False)
 
 
 if __name__ == '__main__':
