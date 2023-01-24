@@ -4,7 +4,7 @@ build-backend = 'flit_core.buildapi'
 
 [project]
 name = 'mml_utils'
-version = '0.2.0'
+version = '0.2.1'
 module = 'mml_utils'
 authors = [
     { name = 'dcronkite', email = 'dcronkite+pypi@gmail.com' },
@@ -12,9 +12,12 @@ authors = [
 readme = 'README.md'
 description = 'Library to support the use/deployment of Metamaplite.'
 home-page = 'https://github.com/kpwhri/mml_utils'
-requires = ['click>=8.0.0', 'loguru']
+dependencies = [
+    'click>=8.0.0',
+    'loguru',
+]
 requires-python = '>=3.8'
-keywords = ['nlp', 'information extraction', 'metamap', 'metamaplite']
+keywords = ['nlp', 'information extraction', 'metamap', 'metamaplite', 'ctakes']
 classifiers = [# https://pypi.org/classifiers/
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Science/Research',

@@ -17,6 +17,20 @@ Types of changes:
 
 ## [Unreleased]
 
+## [0.2.1]
+
+### Added
+- Option to remove non-xml characters before cTAKES processes files
+- Better logging information
+- AFEP: Set minimum number of knowledge base articles in feature selection
+- AFEP: Output details along with list of selected CUIs
+
+## [0.2.0]
+
+### Added
+- Warnings to install pandas
+- Script and documentation for building frequencies
+
 ## [0.1.3]
 
 ### Added
