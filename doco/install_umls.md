@@ -15,7 +15,7 @@ For many applications, the entire UMLS must be downloaded. This can take a while
   * If you don't yet have a login, [register](umls_license.md#create-umls-account)
 * Under the 'UMLS' section, choose `Download`
   * Or, from the top menu, select `Download` > `UMLS`.
-* In the top table with the most recent dataset, download `UMLS Metathesaurus Full Subset` (~30GB).
+* To download a dataset that can be customized (e.g., select only `MedDRA`), in the second table, download `Full UMLS Release Files` (~30GB).
 * Download to a location like the Downloads folder
 * Unzip the file to `C:\umls\umls\-202xAA`
 
@@ -30,3 +30,16 @@ Often, all that is required (especially for something like `cTAKES`) is the `MRC
 * In the section for the most recent dataset, download `MRCONSO.RRF`
 * Download to a location like the Downloads folder
 * Unzip the file to `C:\umls\umls-202xAA-mrconso`
+
+
+## Install Custom Subset with Metamorphosys
+
+Install a hand-selected subset of the UMLS. This requires the 'Full UMLS Release Files' which includes Metamorphosys.
+
+* Download a version of UMLS including Metamorphosys
+* Unzip the downloaded archive
+* Open the directory, and unzip `mmsys.zip` (this contains the Metamorphosys binary)
+* Run the executable
+* Select the relevant subset
+
+## Using Subset
