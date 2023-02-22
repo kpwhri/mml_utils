@@ -356,6 +356,10 @@ long file into ones of (by default) 200 lines, adding all the resulting files to
 
     mml-split-files Medscape.txt Wikipedia.txt [--n-lines 200] [--filelist filelist.txt] 
 
+Or, you can specify an entire directory with files as below:
+
+    mml-split-files kb-articles [--n-lines 200]
+
 This will produce files like this:
 
 * Medscape_0.txt
