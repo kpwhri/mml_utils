@@ -17,6 +17,9 @@ Types of changes:
 
 ## [Unreleased]
 
+
+## [0.2.2]
+
 ### Added
 - Installation instructions for building UMLS subset for Metamaplite
 - Documentation troubleshooting page
