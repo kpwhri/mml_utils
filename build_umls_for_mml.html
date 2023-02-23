@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Build UMLS for Metamaplite &#8212; Metamaplite Utilities 0.1.2 documentation</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Build UMLS for cTAKES" href="build_umls_for_ctakes.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Metamaplite Utilities 0.1.2 documentation</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="afep.html">
+   Automated Feature Extraction for Phenotyping (AFEP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="build_umls_for_ctakes.html">
+   Build UMLS for cTAKES
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Build UMLS for Metamaplite
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_ctakes.html">
+   Installing cTAKES
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_metamaplite.html">
+   Installing MetaMapLite
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install_umls.html">
+   Install UMLS Metathesaurus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="umls_license.html">
+   UMLS License
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="using_mml.html">
+   Using MetaMapLite
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/build_umls_for_mml.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-built-subsets">
+   Pre-built Subsets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-custom-subset">
+   Building Custom Subset
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-1-download-the-full-umls">
+     Step 1: Download the full UMLS
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-2-download-the-lvg">
+     Step 2: Download the LVG.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-3-run-metamorphosys">
+     Step 3: Run MetamorphoSys
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-4-index-the-subset">
+     Step 4: Index the Subset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-5-run-metamaplite">
+     Step 5: Run Metamaplite
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section id="build-umls-for-metamaplite">
+<h1>Build UMLS for Metamaplite<a class="headerlink" href="#build-umls-for-metamaplite" title="Permalink to this heading">¶</a></h1>
+<p>Using specific UMLS subsets for running Metamaplite.</p>
+<section id="pre-built-subsets">
+<h2>Pre-built Subsets<a class="headerlink" href="#pre-built-subsets" title="Permalink to this heading">¶</a></h2>
+<p>On the Metamaplite <a class="reference external" href="https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/run-locally/MetaMapLite.html#Downloads">home page</a> there are pre-built subsets of the UMLS which include either just the Level 0 vocabulary or the Level 0+4+9 vocabularies. To include these in your installation:</p>
+<p><img alt="img.png" src="_images/prebuilt_mml_datasets.png" /></p>
+<ol class="arabic simple">
+<li><p>Download the desired dataset from the <a class="reference external" href="https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/run-locally/MetaMapLite.html#Downloads">Downloads section</a> of the Metamaplite home page.</p></li>
+<li><p>Extract/unzip the archive into the same directory as Metamaplite.</p>
+<ul class="simple">
+<li><p>In other words, the <code class="docutils literal notranslate"><span class="pre">DataSet</span></code> archives contain content that should be placed in <code class="docutils literal notranslate"><span class="pre">$METAMAPLITE_BASE/data/ivf</span></code></p></li>
+<li><p>The content does not <em>need</em> to be placed in this directory if you prefer a different organizational structure (see step #3)</p></li>
+</ul>
+</li>
+<li><p>If running using the shell script (<code class="docutils literal notranslate"><span class="pre">metamaplite.sh</span></code> or <code class="docutils literal notranslate"><span class="pre">metamaplite.bat</span></code>), update that script to point to the appropriate subset.</p>
+<ul class="simple">
+<li><p>Namely, the option <code class="docutils literal notranslate"><span class="pre">-Dmetamaplite.index.directory</span></code> should point to the unpacked directory.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="building-custom-subset">
+<h2>Building Custom Subset<a class="headerlink" href="#building-custom-subset" title="Permalink to this heading">¶</a></h2>
+<p>The pre-built subsets are the easiest way to go, but that doesn’t work for all applications. Let’s suppose, e.g., your project requires MedDRA which is a level 4 vocabulary and not currently included in any pre-built subset. How can we include it? We will follow the following three steps:</p>
+<ol class="arabic simple">
+<li><p>Download the full UMLS (with <code class="docutils literal notranslate"><span class="pre">mmsys</span></code>/Metamorphosys)</p></li>
+<li><p>Download the <a class="reference external" href="https://lhncbc.nlm.nih.gov/LSG/Projects/lvg/current/web/index.html">LVG</a></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">mmsys</span></code> to get the desired subset.</p></li>
+<li><p>Index the subset</p></li>
+<li><p>Run MML pointing to this subset</p></li>
+</ol>
+<section id="step-1-download-the-full-umls">
+<h3>Step 1: Download the full UMLS<a class="headerlink" href="#step-1-download-the-full-umls" title="Permalink to this heading">¶</a></h3>
+<p>NB: At some point, you will be prompted to login. If you don’t yet have a UMLS account, register here: <span class="xref myst"></span></p>
+<ol class="arabic simple">
+<li><p>Navigate to the <a class="reference external" href="https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html">UMLS Knowledge Sources Downloads</a>.</p></li>
+<li><p>Choose a download under <code class="docutils literal notranslate"><span class="pre">Full</span> <span class="pre">UMLS</span> <span class="pre">Release</span> <span class="pre">Files</span></code>. It should be around 35GB and include a description stating that it ‘includes…MetamorphoSys’.</p></li>
+<li><p>Unzip the archive.</p></li>
+<li><p>Inside the archive, you’ll also find a <code class="docutils literal notranslate"><span class="pre">mmsys.zip</span></code> which also needs to be extracted.</p>
+<ul class="simple">
+<li><p>This contains MetamorphoSys (mmsys) which we’ll be using to build a subset.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-2-download-the-lvg">
+<h3>Step 2: Download the LVG.<a class="headerlink" href="#step-2-download-the-lvg" title="Permalink to this heading">¶</a></h3>
+<p>The LVG is a lexical variant generator which will generate lexical variants for all the terms in your preferred subset. This allows a greater capture of terms that the base words alone.</p>
+<ol class="arabic simple">
+<li><p>Download LVG from the <a class="reference external" href="https://lhncbc.nlm.nih.gov/LSG/Projects/lvg/current/web/download.html">NIH website</a>.</p>
+<ul class="simple">
+<li><p>If this link doesn’t work, search for <code class="docutils literal notranslate"><span class="pre">lexical</span> <span class="pre">tools</span> <span class="pre">nih</span></code></p></li>
+<li><p>Unless you have another reason, download the ‘Full Version’</p></li>
+</ul>
+</li>
+<li><p>Extract the <code class="docutils literal notranslate"><span class="pre">tgz</span></code> archive (on Windows, you may need to use something like 7-zip).</p>
+<ul class="simple">
+<li><p>I placed it in <code class="docutils literal notranslate"><span class="pre">D:\lvg2023</span></code></p></li>
+<li><p>This will be the <code class="docutils literal notranslate"><span class="pre">LVG_DIR</span></code> referred to later when indexing the UMLS subset.</p></li>
+</ul>
+</li>
+<li><p>There are shell scripts, but I don’t usually use these…just run the following command from the <code class="docutils literal notranslate"><span class="pre">LVG_DIR</span></code> (e.g., in <code class="docutils literal notranslate"><span class="pre">lvg202X</span></code> where directories include ‘bin’, ‘lib’, ‘install’, ‘examples’, etc.):</p>
+<ul class="simple">
+<li><p>Windows: <code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-cp</span> <span class="pre">&quot;.;lib\lvg2023api.jar;install\lib\lvgInstall.jar;lib\jdbcDrivers\HSqlDb\hsqldb.jar&quot;</span> <span class="pre">gov.nih.nlm.nls.lvg.install.Setup.LvgInstall</span></code></p></li>
+<li><p>Linux (untested): <code class="docutils literal notranslate"><span class="pre">java</span> <span class="pre">-cp</span> <span class="pre">&quot;.:lib/lvg2023api.jar:install/lib/lvgInstall.jar:lib/jdbcDrivers/HSqlDb/hsqldb.jar&quot;</span> <span class="pre">gov.nih.nlm.nls.lvg.install.Setup.LvgInstall</span></code></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-3-run-metamorphosys">
+<h3>Step 3: Run MetamorphoSys<a class="headerlink" href="#step-3-run-metamorphosys" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>In the directory where you unzipped <code class="docutils literal notranslate"><span class="pre">mmsys.zip</span></code>, locate the <code class="docutils literal notranslate"><span class="pre">run</span></code> shell script for your system:</p>
+<ul class="simple">
+<li><p>Linux: <code class="docutils literal notranslate"><span class="pre">run_linux.sh</span></code></p></li>
+<li><p>Mac: <code class="docutils literal notranslate"><span class="pre">run_mac.sh</span></code></p></li>
+<li><p>Windows: <code class="docutils literal notranslate"><span class="pre">run64.bat</span></code></p></li>
+</ul>
+</li>
+</ol>
+<div class="admonition-windows-users admonition">
+<p class="admonition-title">Windows Users</p>
+<p>Ensure that you are running <code class="docutils literal notranslate"><span class="pre">run64.bat</span></code> and not <code class="docutils literal notranslate"><span class="pre">run.bat</span></code> which points to the 32-bit version.</p>
+<p>Alternatively, you can update the <code class="docutils literal notranslate"><span class="pre">run.bat</span></code> line 11 from <code class="docutils literal notranslate"><span class="pre">jre\windows</span></code> to <code class="docutils literal notranslate"><span class="pre">jre\windows64</span></code> (this is the only difference).</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Run the target shell script and MetamorphoSys will open.
+<img alt="img.png" src="_images/metamorphosys.png" /></p></li>
+<li><p>To create a new subset, choose <code class="docutils literal notranslate"><span class="pre">Install</span> <span class="pre">UMLS</span></code>.</p></li>
+<li><p>Ensure that <code class="docutils literal notranslate"><span class="pre">Source</span></code> points to your installation and update <code class="docutils literal notranslate"><span class="pre">Destination</span></code> to point to your desired output.</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">OK</span></code></p></li>
+<li><p>If this is your first time, choose <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Configuration...</span></code>.</p>
+<ul class="simple">
+<li><p>If you want to use an existing configuration file that you have, select <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">Configuration...</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Accept</span></code> the license agreement notice.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">default</span> <span class="pre">subset</span></code> allow you to select the starting configuration which can be helpful for some use cases.</p>
+<ul class="simple">
+<li><p>E.g., if you want only Level 0 sources, SNOMED_CT, and MedDRA, start with <code class="docutils literal notranslate"><span class="pre">Level</span> <span class="pre">0</span> <span class="pre">+</span> <span class="pre">SNOMEDCT_US</span></code>, and then add MDR after clicking OK.
+<img alt="img.png" src="_images/mmsys_select_default_subset.png" /></p></li>
+<li><p>If you don’t need anything pre-selected (e.g., you just want MedDRA), pick anything and just select to include only MDR after clicking OK.</p></li>
+</ul>
+</li>
+<li><p>Find the <code class="docutils literal notranslate"><span class="pre">Source</span> <span class="pre">List</span></code> tab. Here, pay attention to the top where the selected sources (i.e., the ones highlighted blue) are either INCLUDED or EXCLUDED.</p>
+<ul class="simple">
+<li><p>Sort alphabetically or by level by clicking on any headers</p></li>
+<li><p>Be careful not to click the sources, otherwise you will lose your selection</p>
+<ul>
+<li><p>If this happens, find the <code class="docutils literal notranslate"><span class="pre">Reset</span></code> menu item at the top and reset the source lists.</p></li>
+</ul>
+</li>
+<li><p>To find <code class="docutils literal notranslate"><span class="pre">MedDRA</span></code>, I sort by <code class="docutils literal notranslate"><span class="pre">Full</span> <span class="pre">Source</span> <span class="pre">Name</span></code> and find the <code class="docutils literal notranslate"><span class="pre">m</span></code>s.</p>
+<ul>
+<li><p>Hold the <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> key and add to the selection by clicking the target vocabulary
+<img alt="img.png" src="_images/mmsys_source_list.png" /></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>When you are done adding sources (and any other configurable options), save the configuration file with <code class="docutils literal notranslate"><span class="pre">File</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">Configuration</span></code></p></li>
+<li><p>Then, build the subset with <code class="docutils literal notranslate"><span class="pre">Done</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Begin</span> <span class="pre">Subset</span></code>.</p></li>
+<li><p>This may take a while depending on the number of vocabularies…So go pour yourself some more tea and have a croissant.</p></li>
+</ol>
+</section>
+<section id="step-4-index-the-subset">
+<h3>Step 4: Index the Subset<a class="headerlink" href="#step-4-index-the-subset" title="Permalink to this heading">¶</a></h3>
+<p>You have now created a UMLS subset to run, but it is not yet indexed for Metamaplite. To index it, follow the steps below. Instructions are also available on <a class="reference external" href="https://github.com/lhncbc/metamaplite#generating-indexes-from-umls-tables">MML README</a>.</p>
+<ol class="arabic simple">
+<li><p>Locate your MML installation directory (<code class="docutils literal notranslate"><span class="pre">$MML_HOME</span></code>).</p></li>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">$MML_HOME/bin</span></code>, there should be two <code class="docutils literal notranslate"><span class="pre">create_indexes</span></code> scripts, one for each system.</p></li>
+<li><p>Open this file as it will likely require some updates/modifications.</p>
+<ul class="simple">
+<li><p>Update the MML version to ensure it matches yours. E.g., I updated mine from <code class="docutils literal notranslate"><span class="pre">3.6.2rc5</span></code> to <code class="docutils literal notranslate"><span class="pre">3.6.2rc8</span></code></p>
+<ul>
+<li><p>This is just needed for the name of the jar file in <code class="docutils literal notranslate"><span class="pre">$MML_HOME/target</span></code> so you can look up your version there.</p></li>
+</ul>
+</li>
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">LVG_DIR</span></code> to point to where you downloaded the LVG in step 2</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">LVG_DIR=D:\lvg2023</span></code> or <code class="docutils literal notranslate"><span class="pre">LVG_DIR=~/lvg2023</span></code></p></li>
+</ul>
+</li>
+<li><p>On Windows, in the call to ‘GenerateVariants’ (between lines 50-60), add <code class="docutils literal notranslate"><span class="pre">&quot;-Dgv.words.temp.filename=words.txt.tmp&quot;</span></code> between <code class="docutils literal notranslate"><span class="pre">-Xmx4g</span></code> and <code class="docutils literal notranslate"><span class="pre">-cp</span></code>.</p>
+<ul>
+<li><p>This fixes an issue where the default file is set to a unix value.</p></li>
+<li><p>See issue status: https://github.com/lhncbc/metamaplite/issues/22</p></li>
+</ul>
+</li>
+<li><p>On Windows (and maybe Linux), create the directory <code class="docutils literal notranslate"><span class="pre">%IVFDIR%\indices\meshtcrelaxed</span></code></p>
+<ul>
+<li><p>See issue status: https://github.com/lhncbc/metamaplite/issues/21</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>You can either run this from the command line with four arguments or update the four lines beginning with <code class="docutils literal notranslate"><span class="pre">MRCONSO</span></code> (<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">MRCONSO</span></code> on Windows) to the correct paths.</p>
+<ul class="simple">
+<li><p>One option is to create a copy of this <code class="docutils literal notranslate"><span class="pre">create_indexes.bat</span></code> script called, e.g., <code class="docutils literal notranslate"><span class="pre">create_indexes_mdr.bat</span></code> and modify the arguments. This will help provide documentation/reproducibility.</p></li>
+</ul>
+</li>
+<li><p>When running, if you get an error:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">java.io.FileNotFoundException:</span> <span class="pre">\tmp\words.txt.tmp</span></code>: see Step 4, #3, bullet 3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java.io.FileNotFoundException:</span> <span class="pre">tables/vars.txt</span></code>: see Step 4, #3, bullet 3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">java.io.FileNotFoundException:</span> <span class="pre">indices/meshtcrelaxed/postings</span></code>: see Step 4, #3, bullet 4</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-5-run-metamaplite">
+<h3>Step 5: Run Metamaplite<a class="headerlink" href="#step-5-run-metamaplite" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">IVFDIR</span></code> (i.e., the output directory from step 4), you’ll find two directories, ‘indices’ and ‘tables’.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">IVFDIR</span></code> as the <code class="docutils literal notranslate"><span class="pre">metamaplite.index.directory</span></code> option when running Metamaplite.</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">mml_utils</span></code>, the command line should look something like this:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mml-run-filelist</span> <span class="pre">--properties</span> <span class="pre">metamaplite.index.directory</span> <span class="pre">C:\umls\2022AB\meddra\ivf</span> <span class="pre">--filelist</span> <span class="pre">filelist.txt</span> <span class="pre">--mml-home</span> <span class="pre">$MML_HOME</span></code></p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+</section>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="build_umls_for_ctakes.html" title="previous page">Build UMLS for cTAKES</a>
+    <a class='right-next' id="next-link" href="glossary.html" title="next page">Glossary</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By dcronkite <dcronkite@gmail.com><br/>
+        
+            &copy; Copyright 2023, KPWHRI.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

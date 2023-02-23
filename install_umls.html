@@ -40,7 +40,7 @@
     <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="UMLS License" href="umls_license.html" />
+    <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
     <link rel="prev" title="Installing MetaMapLite" href="install_metamaplite.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -86,6 +86,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="build_umls_for_mml.html">
+   Build UMLS for Metamaplite
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="glossary.html">
    Glossary
   </a>
@@ -103,6 +108,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Install UMLS Metathesaurus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
@@ -202,6 +212,16 @@
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-custom-subset-with-metamorphosys">
+   Install Custom Subset with Metamorphosys
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-subset">
+   Using Subset
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -233,7 +253,7 @@
 <li><p>Or, from the top menu, select <code class="docutils literal notranslate"><span class="pre">Download</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">UMLS</span></code>.</p></li>
 </ul>
 </li>
-<li><p>In the top table with the most recent dataset, download <code class="docutils literal notranslate"><span class="pre">UMLS</span> <span class="pre">Metathesaurus</span> <span class="pre">Full</span> <span class="pre">Subset</span></code> (~30GB).</p></li>
+<li><p>To download a dataset that can be customized (e.g., select only <code class="docutils literal notranslate"><span class="pre">MedDRA</span></code>), in the second table, download <code class="docutils literal notranslate"><span class="pre">Full</span> <span class="pre">UMLS</span> <span class="pre">Release</span> <span class="pre">Files</span></code> (~30GB).</p></li>
 <li><p>Download to a location like the Downloads folder</p></li>
 <li><p>Unzip the file to <code class="docutils literal notranslate"><span class="pre">C:\umls\umls\-202xAA</span></code></p></li>
 </ul>
@@ -258,6 +278,20 @@
 </ul>
 </section>
 </section>
+<section id="install-custom-subset-with-metamorphosys">
+<h2>Install Custom Subset with Metamorphosys<a class="headerlink" href="#install-custom-subset-with-metamorphosys" title="Permalink to this heading">¶</a></h2>
+<p>Install a hand-selected subset of the UMLS. This requires the ‘Full UMLS Release Files’ which includes Metamorphosys.</p>
+<ul class="simple">
+<li><p>Download a version of UMLS including Metamorphosys</p></li>
+<li><p>Unzip the downloaded archive</p></li>
+<li><p>Open the directory, and unzip <code class="docutils literal notranslate"><span class="pre">mmsys.zip</span></code> (this contains the Metamorphosys binary)</p></li>
+<li><p>Run the executable</p></li>
+<li><p>Select the relevant subset</p></li>
+</ul>
+</section>
+<section id="using-subset">
+<h2>Using Subset<a class="headerlink" href="#using-subset" title="Permalink to this heading">¶</a></h2>
+</section>
 </section>
 
 
@@ -270,7 +304,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="install_metamaplite.html" title="previous page">Installing MetaMapLite</a>
-    <a class='right-next' id="next-link" href="umls_license.html" title="next page">UMLS License</a>
+    <a class='right-next' id="next-link" href="troubleshooting.html" title="next page">Troubleshooting</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

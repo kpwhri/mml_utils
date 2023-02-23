@@ -1,5 +1,5 @@
 
-Welcome to Metamaplite Utility documentation!
+Welcome to MML Util documentation!
 =================================================
 
 ```{toctree}

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Automated Feature Extraction for Phenotyping (AFEP) &#8212; Metamaplite Utilities 0.1.2 documentation</title>
+    <title>Troubleshooting &#8212; Metamaplite Utilities 0.1.2 documentation</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -40,8 +40,8 @@
     <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Build UMLS for cTAKES" href="build_umls_for_ctakes.html" />
-    <link rel="prev" title="Welcome to MML Util documentation!" href="index.html" />
+    <link rel="next" title="UMLS License" href="umls_license.html" />
+    <link rel="prev" title="Install UMLS Metathesaurus" href="install_umls.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -75,8 +75,8 @@
  </span>
 </p>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="afep.html">
    Automated Feature Extraction for Phenotyping (AFEP)
   </a>
  </li>
@@ -110,8 +110,8 @@
    Install UMLS Metathesaurus
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="troubleshooting.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Troubleshooting
   </a>
  </li>
@@ -165,7 +165,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/afep.md.txt"><button type="button"
+        <a class="dropdown-buttons" href="_sources/troubleshooting.md.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -196,14 +196,33 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#about-afep">
-   About AFEP
+  <a class="reference internal nav-link" href="#metamaplite">
+   Metamaplite
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#steps">
-   Steps
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#invalid-maximum-heap-size">
+     Invalid maximum heap size
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#error">
+       Error
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#explanation">
+       Explanation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#resolution">
+       Resolution
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -216,50 +235,40 @@
         
               <div>
                 
-  <section id="automated-feature-extraction-for-phenotyping-afep">
-<h1>Automated Feature Extraction for Phenotyping (AFEP)<a class="headerlink" href="#automated-feature-extraction-for-phenotyping-afep" title="Permalink to this heading">¶</a></h1>
-<section id="about-afep">
-<h2>About AFEP<a class="headerlink" href="#about-afep" title="Permalink to this heading">¶</a></h2>
-<p>AFEP (Automated Feature Extraction for Phenotyping) is a component of the phenotyping algorithm PheNORM which attempts
-to automatically determine useful features by mining knowledge base articles like Wikipedia, Medline, etc.</p>
-<ul class="simple">
-<li><p>See the paper <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4986664/">on pubmed</a></p></li>
-</ul>
-</section>
-<section id="steps">
-<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this heading">¶</a></h2>
-<p>This is not directly related to MML, but MetaMapLite can be used to extract concepts for use in extracting concepts for
-MetaMapLite. These steps will guide you through extracting the concepts of interest as well as processing them using
-the <a class="reference external" href="https://github.com/kpwhri/mml_utils"><code class="docutils literal notranslate"><span class="pre">mml_utils</span></code> package</a>.</p>
-<div class="admonition-nlp-tool-for-concept-extraction admonition">
-<p class="admonition-title">NLP Tool for Concept Extraction</p>
-<p>The authors recommend NILE, but this is
-closed source, difficult to get, not clearly version (i.e., impossible to update), and doesn’t seem to have had any work
-done in a few years…so probably moribund, unfortunately.</p>
-<p>Other options include:</p>
-<ul class="simple">
-<li><p>cTAKES</p></li>
-<li><p>MetaMap</p></li>
-<li><p>MetaMapLite</p></li>
-<li><p>Your own custom tool ;)</p></li>
-</ul>
-</div>
-<ol class="arabic simple">
-<li><p>Download text from Knowledge Base sources (e.g., Medline, Medscape, Merck, Wikipedia, Mayo) on your target
-condition (e.g., arthritis or COVID-19).</p></li>
-<li><p>Name these text files something like ‘Medscape.txt’ and ‘Wikipedia.txt’ and place them in a new directory (
-e.g., <code class="docutils literal notranslate"><span class="pre">/kb_articles/</span></code>).</p></li>
-<li><p>Split the files into no more than say 200 lines (
-see <a class="reference external" href="https://github.com/kpwhri/mml_utils#mml-split-files">mml-split-files</a> command for assistance).</p></li>
-<li><p>Run MML on the entire directory (e.g., <code class="docutils literal notranslate"><span class="pre">/kb_articles/</span></code>).</p></li>
-<li><p>Run <a class="reference external" href="https://github.com/kpwhri/mml_utils#mml-run-afep">mml-run-afep</a> on the output (see parametrisation there or
-below).</p></li>
-</ol>
-<p>As a prerequisite, you’ll need to install pandas (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pandas</span></code>) which is not installed by default due to this
-being the only script requiring it.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mml-run-afep /kb_articles/ [--mml-format json|mmi] [--outdir .]
+  <section id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">¶</a></h1>
+<p>This page discusses several possible errors and issues that you might encounter, along with fixes and workarounds.</p>
+<p>If you encounter a new issue, suggested resolution, etc., please <a class="reference external" href="https://github.com/kpwhri/mml_utils/issues/new/choose">submit an Issue</a>.</p>
+<section id="metamaplite">
+<h2>Metamaplite<a class="headerlink" href="#metamaplite" title="Permalink to this heading">¶</a></h2>
+<section id="invalid-maximum-heap-size">
+<h3>Invalid maximum heap size<a class="headerlink" href="#invalid-maximum-heap-size" title="Permalink to this heading">¶</a></h3>
+<section id="error">
+<h4>Error<a class="headerlink" href="#error" title="Permalink to this heading">¶</a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Invalid<span class="w"> </span>maximum<span class="w"> </span>heap<span class="w"> </span>size:<span class="w"> </span>-Xmx12g
+The<span class="w"> </span>specified<span class="w"> </span>size<span class="w"> </span>exceeds<span class="w"> </span>the<span class="w"> </span>maximum<span class="w"> </span>representable<span class="w"> </span>size.
+Error:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>create<span class="w"> </span>the<span class="w"> </span>Java<span class="w"> </span>Virtual<span class="w"> </span>Machine.
+Error:<span class="w"> </span>A<span class="w"> </span>fatal<span class="w"> </span>exception<span class="w"> </span>has<span class="w"> </span>occurred.<span class="w"> </span>Program<span class="w"> </span>will<span class="w"> </span>exit.
 </pre></div>
 </div>
+</section>
+<section id="explanation">
+<h4>Explanation<a class="headerlink" href="#explanation" title="Permalink to this heading">¶</a></h4>
+<p>You are running a 32-bit version of Java which has a maximum heap size on Windows around 1.5GB, but Metamaplite is requesting 12GB.</p>
+</section>
+<section id="resolution">
+<h4>Resolution<a class="headerlink" href="#resolution" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Install a 64-bit (<code class="docutils literal notranslate"><span class="pre">x64</span></code>) version of Java (e.g., <a class="reference external" href="https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html">Corretto</a>).</p></li>
+<li><p>Ensure this version of Java is the first version of Java in your $PATH (check environment variables).</p>
+<ul>
+<li><p>This should be done by default.</p></li>
+</ul>
+</li>
+<li><p>Restart any open terminals/powershell to load/refresh the new environment.</p></li>
+</ul>
+</section>
+</section>
 </section>
 </section>
 
@@ -272,8 +281,8 @@ being the only script requiring it.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page">Welcome to MML Util documentation!</a>
-    <a class='right-next' id="next-link" href="build_umls_for_ctakes.html" title="next page">Build UMLS for cTAKES</a>
+    <a class='left-prev' id="prev-link" href="install_umls.html" title="previous page">Install UMLS Metathesaurus</a>
+    <a class='right-next' id="next-link" href="umls_license.html" title="next page">UMLS License</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
