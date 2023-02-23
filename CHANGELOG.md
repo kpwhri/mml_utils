@@ -17,6 +17,14 @@ Types of changes:
 
 ## [Unreleased]
 
+### Added
+- Installation instructions for building UMLS subset for Metamaplite
+- Documentation troubleshooting page
+- Instructions on how to specify downloading a subset with MetamorphoSys
+
+### Changed
+- Metamaplite no longer runs the batch/shell script but creates the entire command line
+
 ## [0.2.1]
 
 ### Added
