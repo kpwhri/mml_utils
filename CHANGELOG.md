@@ -18,6 +18,8 @@ Types of changes:
 
 ## [Unreleased]
 
+## [0.2.3]
+
 ### Added
 
 - Updated AFEP process to include reading from cTAKES (requires specifying the `--data-directory` option)
