@@ -18,7 +18,7 @@ The main documentation is on the cTAKES wiki: https://cwiki.apache.org/confluenc
   * `cd $CTAKES_HOME`
   * `bin\runDictionaryCreator.bat`  (or `.sh`)
 * On the `UMLS Installation` line, choose `Select Directory` button.
-* Choose a UMLS download directory.
+* Choose a UMLS download directory (it should contain a folder called `META`)
   * In whatever shell you ran the command, you can watch the vocabularies get loaded
 * In the GUI, the left hand side shows available [source vocabularies](glossary.md#umls-dataset-levels). On the right hand side, semantic types can be selected/unselected.
   * To include a particular vocabulary, place a checkcbox next to it.
