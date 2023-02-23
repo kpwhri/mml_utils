@@ -21,7 +21,7 @@ from mml_utils.phenorm.cui_expansion import add_shorter_match_cuis
 @click.command()
 @click.argument('note-directories', nargs=-1, type=click.Path(exists=True, path_type=pathlib.Path), )
 @click.option('--mml-format', type=str, default='json',
-              help='Output format to look for (e.g., "json" or "mmi").')
+              help='Output format to look for (e.g., "json" or "xmi"). "mmi" currently not implemented.')
 @click.option('--outdir', type=click.Path(file_okay=False, path_type=pathlib.Path), default=None,
               help='Output directory')
 @click.option('--expand-cuis', is_flag=True,
