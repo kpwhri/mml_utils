@@ -17,6 +17,8 @@ Types of changes:
 
 ## [Unreleased]
 
+### Fixed
+- Default value when no semantic type in json output
 
 ## [0.2.2]
 
