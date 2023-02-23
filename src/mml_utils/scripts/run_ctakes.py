@@ -20,7 +20,7 @@ from mml_utils.run_ctakes import run_ctakes
               help='Path to XML file for custom-created dictionary.')
 @click.option('--clean-files', default=False, is_flag=True,
               help='Remove non-xml characters from files in directories. Overwrites the files.')
-@click.option('--clean-file-src-encoding', default='utf8',
+@click.option('--clean-files-src-encoding', default='utf8',
               help='File format to read in src files for cleaning.')
 def run_ctakes_directory(directory: Path, ctakes_home: Path, outdir: Path, umls_key: str = None,
                          dictionary: Path = None, clean_files: bool = False, clean_files_src_encoding='utf8'):
