@@ -19,6 +19,7 @@ Types of changes:
 
 ### Fixed
 - Default value when no semantic type in json output
+- Avoiding pandas' SettingWithCopyWarning 
 
 ## [0.2.2]
 

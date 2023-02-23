@@ -64,7 +64,7 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
         min_kb = math.ceil(len(article_types) / 2)
     logger.info(f'Retaining only CUIs appearing in at least {min_kb} knowledge base sources.')
     cuis_with_three_or_more = set(s[s.article_source >= min_kb].index)
-    cui_df = df[df.cui.isin(cuis_with_three_or_more)]
+    cui_df = df[df.cui.isin(cuis_with_three_or_more)].copy()
     logger.info(f'Retained {cui_df.shape[0]} CUIs.')
 
     # greedy algorithm to reduce number of CUIs
