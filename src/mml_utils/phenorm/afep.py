@@ -7,26 +7,34 @@ from loguru import logger
 
 from mml_utils.parse.json import extract_mml_from_json_data
 from mml_utils.parse.mmi import extract_mml_from_mmi_data
+from mml_utils.parse.xmi import extract_mml_from_xmi_data
 
 
-def extract_articles(note_directories, mml_format):
+def extract_articles(note_directories, mml_format, *, data_directories=None):
     article_types = set()
     results = []
-    for path in note_directories:
+    if data_directories is None:
+        data_directories = note_directories
+    for path in data_directories:
         for file in path.glob(f'*.{mml_format}'):
             article_type = file.stem.split('_')[0]
             article_types.add(article_type)
             filename = file.stem
 
-            with open(file) as fh:
-                if mml_format == 'json':
+            if mml_format == 'json':
+                with open(file) as fh:
                     data = json.load(fh)
-                    extract_function = extract_mml_from_json_data
-                elif mml_format == 'mmi':
-                    extract_function = extract_mml_from_mmi_data
+                extract_function = extract_mml_from_json_data
+            elif mml_format == 'mmi':
+                with open(file) as fh:
                     data = fh.read()
-                else:
-                    raise ValueError(f'Unrecognized file format for MetaMapLite data: {mml_format}.')
+                extract_function = extract_mml_from_mmi_data
+            elif mml_format == 'xmi':
+                extract_function = extract_mml_from_xmi_data
+                with open(file, encoding='utf8') as fh:
+                    data = fh.read()
+            else:
+                raise ValueError(f'Unrecognized file format for MetaMapLite data: {mml_format}.')
             extras = {
                 'article_source': article_type,
             }

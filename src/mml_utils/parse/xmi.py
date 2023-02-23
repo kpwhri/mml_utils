@@ -7,6 +7,8 @@ import pathlib
 from collections import defaultdict
 from xml.etree import ElementTree
 
+from mml_utils.umls.semantictype import TUI_TO_SEMTYPE
+
 
 def build_index_references(root):
     # collect offsets
@@ -36,7 +38,10 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
     # extract info
     file = pathlib.Path(filename)
     stem = file.stem.replace('.txt', '')
-    results = defaultdict(dict)
+    # results are stored, prefixed by any extras
+    if extras is None:
+        extras = {}
+    results = defaultdict(lambda: extras.copy())
     i = 0
     for child in root:
         if 'textsem.ecore' in child.tag:
@@ -72,13 +77,30 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
                     i += 1
         elif 'refsem.ecore' in child.tag:
             currid = int(child.get(r'{http://www.omg.org/XMI}id'))
-            results[currid].update({
-                'source': child.get('codingScheme', None),
-                'cui': child.get('cui', None),
-                'conceptstring': child.get('preferredText', None),
-                'preferredname': child.get('preferredText', None),  # not sure which this represents?
-                'tui': child.get('tui', None),
-                'score': float(child.get('score')),
-                'code': child.get('code', None),
-            })
+            tui = child.get('tui', None)
+            semtype = TUI_TO_SEMTYPE.get(tui, None)
+            source = child.get('codingScheme', None)
+            # check if already present (i.e., multiple sources) -> not sure if this ever happens
+            if currid in results and 'source' in results[currid]:
+                results[currid]['all_sources'].append(source)
+                results[currid]['all_semantictypes'].append(semtype)
+                results[currid][semtype] = 1
+                results[currid][source] = 1
+            else:
+                results[currid].update({
+                    'source': source,
+                    'cui': child.get('cui', None),
+                    'conceptstring': child.get('preferredText', None),
+                    'preferredname': child.get('preferredText', None),  # not sure which this represents?
+                    'tui': tui,
+                    'semantictype': semtype,
+                    'score': float(child.get('score')),
+                    'code': child.get('code', None),
+                    'all_sources': [source],
+                    'all_semantictypes': [semtype],
+                    semtype: 1,
+                })
+    for currid in results:
+        results[currid]['all_sources'] = ','.join(results[currid]['all_sources'])
+        results[currid]['all_semantictypes'] = ','.join(results[currid]['all_semantictypes'])
     yield from (result for result in results.values() if not target_cuis or result['cui'] in target_cuis)

@@ -32,8 +32,10 @@ from mml_utils.phenorm.cui_expansion import add_shorter_match_cuis
               help='Skip greedy selection algorithm.')
 @click.option('--min-kb', default=None, type=int,
               help='Minimum number of knowledge base articles. Defaults to half (rounded up) of KB sources.')
+@click.option('--data-directory', type=click.Path(exists=True, path_type=pathlib.Path), multiple=True,
+              help='Data directory if data is in a different directory than notes (e.g., with cTAKES).')
 def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.Path = None,
-                       expand_cuis=False, apikey=None, skip_greedy_algorithm=False, min_kb=None):
+                       expand_cuis=False, apikey=None, skip_greedy_algorithm=False, min_kb=None, data_directory=None):
     """
     Run greedy AFEP algorithm on extracted knowledge base articles
 
@@ -51,7 +53,7 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
     else:
         outdir = pathlib.Path('.')
 
-    article_types, results = extract_articles(note_directories, mml_format)
+    article_types, results = extract_articles(note_directories, mml_format, data_directories=data_directory)
     logger.info(f'Article types: {article_types}')
 
     if expand_cuis:
