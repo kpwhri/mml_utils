@@ -18,6 +18,10 @@ Types of changes:
 
 ## [Unreleased]
 
+### Added
+
+- Stub for reporting AFEP results in an excel (and CSV) table(s).
+
 ## [0.2.3]
 
 ### Added
