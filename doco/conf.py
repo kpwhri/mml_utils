@@ -23,7 +23,7 @@ copyright = f'{date.today().year}, KPWHRI'
 author = 'dcronkite <dcronkite@gmail.com>'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.2'
+release = '0.2.3'
 
 # -- General configuration ---------------------------------------------------
 
