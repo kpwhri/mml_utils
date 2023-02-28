@@ -16,11 +16,13 @@ Types of changes:
 * `Fixed`: for any bug fixes.
 * `Security`: in case of vulnerabilities.
 
+
 ## [Unreleased]
 
 ### Added
 
 - Stub for reporting AFEP results in an excel (and CSV) table(s).
+- Added release checklist since was forgetting to update documentation version.
 
 ## [0.2.3]
 
