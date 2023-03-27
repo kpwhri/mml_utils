@@ -26,6 +26,7 @@ Types of changes:
 - Diffs tab to Excel AFEP summary
 - Multi-version AFEP runner using a TOML config file
 - Console scripts to `pyproject.toml` for new functionality
+- Test for building AFEP summary table
 
 ### Fixed
 

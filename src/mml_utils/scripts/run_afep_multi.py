@@ -78,12 +78,16 @@ def parse_config(config_file):
 
 @click.command()
 @click.argument('config_file', required=True, type=click.Path(exists=True, dir_okay=False, path_type=Path))
-def run_afep_algorithm_multi(config_file):
+def _run_afep_algorithm_multi(config_file):
     """
     Use config file to guide
     :param config_file: currently only supports toml or json
     :return:
     """
+    run_afep_algorithm_multi(config_file)
+
+
+def run_afep_algorithm_multi(config_file):
     data = parse_config(config_file)
     config = MultiAfepConfig(**data)
     for run in config.runs:
@@ -93,4 +97,4 @@ def run_afep_algorithm_multi(config_file):
 
 
 if __name__ == '__main__':
-    run_afep_algorithm_multi()
+    _run_afep_algorithm_multi()
