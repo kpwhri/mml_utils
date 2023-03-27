@@ -1,13 +1,4 @@
-import pathlib
-
-import pytest
-
 from mml_utils.scripts.extract_mml_output import extract_data_from_file
-
-
-@pytest.fixture
-def short_fever_file():
-    return pathlib.Path('short_fever') / 'fever.txt'
 
 
 def test_extract_data_from_file(short_fever_file):

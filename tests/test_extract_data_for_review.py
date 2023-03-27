@@ -1,15 +1,9 @@
-import pathlib
 import shutil
 
 import pytest
 
 from mml_utils.review.extract_data import build_regex
 from mml_utils.scripts.extract_data_for_review import extract_data_for_review
-
-
-@pytest.fixture
-def fever_dir():
-    return pathlib.Path('fever')
 
 
 def validate_csv_file(fever_dir):
