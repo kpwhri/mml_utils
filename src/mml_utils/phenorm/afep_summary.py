@@ -1,12 +1,5 @@
-"""
-TODO: In progress
-
-Requires: pandas; xlsxwriter
-"""
-
 from pathlib import Path
 
-import click
 import pandas as pd
 
 
@@ -15,15 +8,16 @@ def format_table_to_excel(writer, df, name, how='mean'):
     ws = writer.sheets[name]
     ws.add_table(0, 0, df.shape[0], df.shape[1] - 1, {'columns': [{'header': col} for col in df.columns]})
     for i, col in enumerate(df.columns):
+        col_len = len(col) + 1
         if str(df[col].dtype) == 'object':
             if how == 'median':
-                ws.set_column(i, i, df[col].str.len().median() + 2)
+                ws.set_column(i, i, max(col_len, df[col].str.len().median() + 2))
             elif how == 'mean':
-                ws.set_column(i, i, df[col].str.len().mean() + 2)
+                ws.set_column(i, i, max(col_len, df[col].str.len().mean() + 2))
             else:
-                ws.set_column(i, i, df[col].str.len().max())
+                ws.set_column(i, i, max(col_len, df[col].str.len().max()))
         else:
-            ws.set_column(i, i, max(len(col), 12))
+            ws.set_column(i, i, max(col_len, 12))
 
 
 def add_diffs(cdf, names):
@@ -44,10 +38,6 @@ def add_diffs(cdf, names):
     return diff_df
 
 
-@click.command()
-@click.argument('afep_path', type=click.Path(path_type=Path, file_okay=False))
-@click.option('--how', type=str,
-              help='How to determine length of columns (mean, median, max)')
 def build_afep_excel(afep_path: Path, how='mean'):
     """Search in `afep_path` for directories containing `-selected` to find csv files with selected features"""
     cdf = None
@@ -76,7 +66,3 @@ def build_afep_excel(afep_path: Path, how='mean'):
     format_table_to_excel(writer, diff_df, 'diffs', how=how)
     writer.close()
     cdf.to_csv(afep_path / 'afep_summary.csv')
-
-
-if __name__ == '__main__':
-    build_afep_excel()

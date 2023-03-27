@@ -24,6 +24,7 @@ Types of changes:
 - Reporting AFEP results in an excel (and CSV) table(s).
 - Added release checklist since was forgetting to update documentation version.
 - Diffs tab to Excel AFEP summary
+- Multi-version AFEP runner using a TOML config file
 
 ## [0.2.3]
 

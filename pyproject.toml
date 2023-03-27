@@ -15,6 +15,7 @@ home-page = 'https://github.com/kpwhri/mml_utils'
 dependencies = [
     'click>=8.0.0',
     'loguru',
+    'pydantic',
 ]
 requires-python = '>=3.8'
 keywords = ['nlp', 'information extraction', 'metamap', 'metamaplite', 'ctakes']
