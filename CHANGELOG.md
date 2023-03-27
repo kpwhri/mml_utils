@@ -21,8 +21,9 @@ Types of changes:
 
 ### Added
 
-- Stub for reporting AFEP results in an excel (and CSV) table(s).
+- Reporting AFEP results in an excel (and CSV) table(s).
 - Added release checklist since was forgetting to update documentation version.
+- Diffs tab to Excel AFEP summary
 
 ## [0.2.3]
 
