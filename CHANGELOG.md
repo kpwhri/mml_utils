@@ -25,6 +25,7 @@ Types of changes:
 - Added release checklist since was forgetting to update documentation version.
 - Diffs tab to Excel AFEP summary
 - Multi-version AFEP runner using a TOML config file
+- Console scripts to `pyproject.toml` for new functionality
 
 ## [0.2.3]
 
