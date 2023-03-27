@@ -27,6 +27,10 @@ Types of changes:
 - Multi-version AFEP runner using a TOML config file
 - Console scripts to `pyproject.toml` for new functionality
 
+### Fixed
+
+- Random requires `list`, not `set`
+
 ## [0.2.3]
 
 ### Added
