@@ -27,6 +27,7 @@ Types of changes:
 - Multi-version AFEP runner using a TOML config file
 - Console scripts to `pyproject.toml` for new functionality
 - Test for building AFEP summary table
+- Added documentation for AFEP commands
 
 ### Fixed
 

@@ -69,7 +69,9 @@ Additional instructions, including UMLS/MML installation are described here: htt
 
 ### Prerequisites
 
-* Python 3.9+
+* Recommended Python 3.11+
+  * Okay: Python 3.9+
+  * Some portions of the code may require 3.11
 * `pip install .`
     * See `pyproject.toml` for updated dependencies.
 
@@ -387,6 +389,35 @@ As a prerequisite, you'll need to install pandas (`pip install pandas`) which is
 being the only script requiring it.
 
     mml-run-afep /kb_articles/ [--mml-format json|mmi] [--outdir .]
+
+An Excel table showing the resulting CUIs can then be built by running:
+
+    mml-summarize-afep OUTDIR(outdirectory from `mml-run-afep` command)
+
+If experimenting with multiple approaches (e.g., cTAKES+MedDRA vs MML+MedDRA vs ...), you can run these all in a single command:
+
+    mml-run-afep-multi config.toml
+
+Example TOML:
+
+    outdir = 'path/output_dir'
+    
+    [[runs]]
+    note_directories = ['/path/to/usabase']
+    
+    [[runs]]
+    note_directories = ['/path/to/meddra']
+    name = 'mdr'  # use 'mdr' as output name rather than 'meddra'
+    
+    [[runs]]
+    note_directories = ['/path/to/kb_articles']
+    data_directory = ['/path/to/ctakes_meddra']
+    expand_cuis = True
+    apikey = '1234-5678-9101'
+
+
+This will run AFEP three times and then create an Excel file containing the summary measures.
+
 
 ### mml-check-offsets
 
