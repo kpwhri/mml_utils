@@ -33,7 +33,10 @@ classifiers = [# https://pypi.org/classifiers/
 ]
 
 [project.optional-dependencies]
-dev = ['pytest']
+dev = [
+    'pytest',
+    'pytest-lazy-fixture',
+]
 doc = [
     'sphinx',
     'myst-parser',

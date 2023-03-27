@@ -76,7 +76,7 @@ def compile_to_excel(outpath: pathlib.Path, note_ids, text_encoding='utf8', samp
             prev_samples = _get_previous_samples(outpath, feature_name)
             curr_pop = set(note_ids[feature_name]) - prev_samples
             new_note_ids[feature_name] = set(
-                random.sample(curr_pop, min([sample_size, len(curr_pop)]))
+                random.sample(sorted(curr_pop), min([sample_size, len(curr_pop)]))
             )
             _dump_current_sample(outpath, feature_name, dt, new_note_ids[feature_name])
         else:
