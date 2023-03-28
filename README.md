@@ -321,9 +321,18 @@ Each run will result in a newly-created filelist version. Default output format 
 
 ### mml-extract-mml
 
-Extract results from running Metamaplite. Currently supports json (default) or MMI output.
+Extract results from running Metamaplite. Currently supports json (default), xmi (ctakes), and mmi.
 
-    mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json)]
+    mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json|xmi)]
+
+For usage with cTAKES output, include the `--output-directory [CTAKES_XMI_DIR]` which points to the cTAKES output directory.
+
+    mml-extract-mml /path/to/notes --outdir /path/to/output [...] --output-directory /path/to/*.xmi.txt_dir --output-format xmi
+
+For encoding challenges, you can use the following arguments:
+
+* `--file-encoding`: encoding that the text notes are written/saved in (e.g., 'latin1', 'utf8')
+* `--output-encoding`: encoding that the program (i.e., Metamaplite or cTAKES) wrote the output to
 
 ### mml-check-progress
 
@@ -445,6 +454,11 @@ Inputs (see `tests/fever` for examples:
 
 To then take samples from this dataset, use `mml-prepare-review-sample`.
 
+## Troubleshooting
+
+* If there is a problem with file encoding (e.g., an error like 'unable to decode byte'), the above programs should provide some method for specifying the encoding:
+  * Example options: `--text-encoding` / `--file-encoding`, `--output-encoding`
+  * Example encodings to try for English: `utf8`, `latin1`
 
 ## Versions
 

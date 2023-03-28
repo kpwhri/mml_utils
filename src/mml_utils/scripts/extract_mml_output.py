@@ -37,7 +37,7 @@ NOTE_FIELDNAMES = [
               help='Output format to look for (MML: "json" or "mmi"; cTAKES: "xmi").')
 @click.option('--output-directory', 'output_directories', multiple=True,
               type=click.Path(exists=True, path_type=pathlib.Path, file_okay=False),
-              help='(Optional) Output directories if different from `note-directories`.')
+              help='(Optional) Output directories if different from `note-directories` (e.g., for cTAKES).')
 @click.option('--add-fieldname', type=str, multiple=True,
               help='Add fieldnames to Metamaplite output.')
 @click.option('--max-search', type=int, default=1000,
@@ -79,6 +79,8 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
         with open(cui_file, encoding='utf8') as fh:
             target_cuis = set(x.strip() for x in fh.read().split('\n') if x.strip())
         logger.info(f'Retaining only {len(target_cuis)} CUIs.')
+    if output_directories is None:
+        output_directories = note_directories
     get_field_names(note_directories, output_format=output_format, max_search=max_search,
                     output_directories=output_directories, mm_encoding=mm_encoding)
     build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
@@ -87,6 +89,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
 
 
 def get_output_file(curr_directory, exp_filename, output_format, output_directories=None, skip_missing=False):
+    """Retrieve the extracted data from file."""
     if output_format == 'xmi':
         output_format = 'txt.xmi'  # how ctakes does renaming
     if (path := pathlib.Path(curr_directory / f'{exp_filename}.{output_format}')).exists():
