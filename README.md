@@ -334,6 +334,28 @@ For encoding challenges, you can use the following arguments:
 * `--file-encoding`: encoding that the text notes are written/saved in (e.g., 'latin1', 'utf8')
 * `--output-encoding`: encoding that the program (i.e., Metamaplite or cTAKES) wrote the output to
 
+#### mml-compare-extracts
+
+To compare two different feature extraction processes (e.g., cTAKES + MedDRA vs MML + MedDRA), place the relevant `notes` and `mml` csv files into directories named after the feature extraction. This command is directory-based rather than file-based, so both outputs cannot be in the same folder. For the following example (generated from `mml-extract-mml`...
+
+    ct_meddra / notes_20230329.csv
+    ct_meddra / mml_20230329.csv
+    mml_meddra / notes_20230329.csv
+    mml_meddra / mml_20230329.csv
+
+...use this command:
+
+    mml-compare-extracts ct_meddra mml_meddra
+
+This will create a comparison CSV file called 'compare_ct_meddra_mml_meddra.csv' in the current directory showing the differences.
+
+More generally, the command:
+
+    mml-compare-extracts EXTRACT_DIR_1 EXTRACT_DIR_2 [--outpath OUTPUT_DIR] [--text-encoding (utf|latin1|etc.)] [--name1 NAME] [--name2 NAME2]
+
+The `--name#` arguments are to override the default names which are based on the directories.
+
+
 ### mml-check-progress
 
 Check progress of Metamaplite running in a single directory.
