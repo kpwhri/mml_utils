@@ -1,17 +1,15 @@
 [build-system]
-requires = ['flit_core >=3.2']
+requires = ['flit_core >=3.2,<4']
 build-backend = 'flit_core.buildapi'
 
 [project]
 name = 'mml_utils'
-version = '0.2.3'
+dynamic = ['version', 'description']
 module = 'mml_utils'
 authors = [
     { name = 'dcronkite', email = 'dcronkite+pypi@gmail.com' },
 ]
 readme = 'README.md'
-description = 'Library to support the use/deployment of Metamaplite.'
-home-page = 'https://github.com/kpwhri/mml_utils'
 dependencies = [
     'click>=8.0.0',
     'loguru',
@@ -66,3 +64,8 @@ mml-sql-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_database"
 mml-csv-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_csv"
 mml-run-ctakes = "mml_utils.scripts.run_ctakes:run_ctakes_directory"
 mml-build-freqs = "mml_utils.scripts.build_frequency_tables:_build_frequency_tables"
+
+[project.urls]
+Home = 'https://github.com/kpwhri/mml_utils'
+Documentation = 'https://kpwhri.github.io/mml_utils/'
+Changelog = 'https://github.com/kpwhri/mml_utils/blob/master/CHANGELOG.md'
