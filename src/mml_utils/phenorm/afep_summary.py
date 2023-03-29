@@ -2,22 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-
-def format_table_to_excel(writer, df, name, how='mean'):
-    df.to_excel(writer, name, index=False, startrow=1, header=False)
-    ws = writer.sheets[name]
-    ws.add_table(0, 0, df.shape[0], df.shape[1] - 1, {'columns': [{'header': col} for col in df.columns]})
-    for i, col in enumerate(df.columns):
-        col_len = len(col) + 1
-        if str(df[col].dtype) == 'object':
-            if how == 'median':
-                ws.set_column(i, i, max(col_len, df[col].str.len().median() + 2))
-            elif how == 'mean':
-                ws.set_column(i, i, max(col_len, df[col].str.len().mean() + 2))
-            else:
-                ws.set_column(i, i, max(col_len, df[col].str.len().max()))
-        else:
-            ws.set_column(i, i, max(col_len, 12))
+from mml_utils.excel.tables import format_table_to_excel
 
 
 def add_diffs(cdf, names):

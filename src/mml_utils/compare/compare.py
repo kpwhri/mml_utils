@@ -2,6 +2,7 @@ import csv
 from pathlib import Path
 
 from mml_utils.compare.merger import DataComparator
+from mml_utils.excel.tables import send_csv_to_excel
 
 
 def binary_compare(dc1, dc2):
@@ -35,13 +36,15 @@ def binary_compare(dc1, dc2):
 def write_binary_comparison(miss1, miss2, outpath: Path, name1=None, name2=None, text_encoding='latin1'):
     name1 = name1 or 'self'
     name2 = name2 or 'other'
-    with open(outpath / f'compare_{name1}_{name2}.csv', 'w', newline='', encoding=text_encoding) as fh:
+    outfn = outpath / f'compare_{name1}_{name2}.csv'
+    with open(outfn, 'w', newline='', encoding=text_encoding) as fh:
         writer = csv.writer(fh)
         writer.writerow(['present_in', 'missing_from', 'cui', 'preferredname', 'docid', 'start', 'end', 'context'])
         for docid, start, end, cui, prefname, context in miss1:
             writer.writerow([name2, name1, cui, prefname, docid, start, end, context])
         for docid, start, end, cui, prefname, context in miss2:
             writer.writerow([name1, name2, cui, prefname, docid, start, end, context])
+    return outfn
 
 
 def extract_binary_text_differences(path1: Path, path2: Path, outpath: Path = None, name1=None, name2=None,
@@ -51,4 +54,5 @@ def extract_binary_text_differences(path1: Path, path2: Path, outpath: Path = No
     dc1 = DataComparator(path1, name=name1, text_encoding=text_encoding)
     dc2 = DataComparator(path2, name=name2, text_encoding=text_encoding)
     miss1, miss2 = binary_compare(dc1, dc2)
-    write_binary_comparison(miss1, miss2, outpath, dc1.name, dc2.name, text_encoding=text_encoding)
+    outfile = write_binary_comparison(miss1, miss2, outpath, dc1.name, dc2.name, text_encoding=text_encoding)
+    send_csv_to_excel(outfile, close=True)
