@@ -52,6 +52,7 @@ mml-copy-notes = "mml_utils.scripts.copy_new_mml_directory:copy_to_new_mml_direc
 mml-build-filelists = "mml_utils.scripts.build_filelists:run"
 mml-run-filelists-dir = "mml_utils.scripts.run_mml:run_mml_filelists_in_dir"
 mml-extract-mml = "mml_utils.scripts.extract_mml_output:extract_mml"
+mml-compare-extracts = "mml_utils.scripts.compare_output_binary:compare_output_binary"
 mml-check-progress = "mml_utils.scripts.check_mml_progress:check_mml_progress_repeat"
 mml-split-filelist = "mml_utils.scripts.split_filelist:split_filelist"
 mml-split-files = "mml_utils.scripts.split_long_file:split_files_on_lines"

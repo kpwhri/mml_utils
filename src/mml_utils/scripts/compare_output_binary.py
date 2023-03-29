@@ -1,3 +1,6 @@
+"""
+Console script to extract text differences between the outputs of the CSV summary files.
+"""
 import click
 
 from pathlib import Path
