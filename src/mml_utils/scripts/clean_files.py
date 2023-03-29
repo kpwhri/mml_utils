@@ -25,13 +25,13 @@ def clean_files_cmd(filelist: Path = None, inpath: Path = None, outpath: Path = 
         outfilelist = filelist.parent / f'cleaned_{filelist.name}'
         outpath.mkdir(exist_ok=True)
         with open(filelist) as fh:
-            with open(outfilelist) as out:
+            with open(outfilelist, 'w') as out:
                 for line in fh:
                     line = line.strip()
                     if not line:
                         continue
                     path = Path(line)
-                    with open(outpath / path.name, 'w', encoding=to_encoding) as out_txt:
+                    with open(outpath / path.name, 'w', encoding=to_encoding, errors='ignore') as out_txt:
                         out_txt.write(clean_file(path, encoding=from_encoding))
                     out.write(f'{(outpath / path.name).as_posix()}\n')
     elif inpath:
