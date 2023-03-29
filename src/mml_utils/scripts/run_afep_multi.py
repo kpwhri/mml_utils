@@ -58,12 +58,17 @@ class MultiAfepConfig(BaseModel):
     build_summary: bool = True
     base_directory: Path = None
     note_directories: list[Path] = None
+    apikey: str = None
+    expand_cuis: bool = False
 
     def __init__(self, **kw):
         super().__init__(**kw)
         # post init
         for run in self.runs:
             run.set_outdir(self.outdir)
+            if self.expand_cuis or run.expand_cuis:
+                run.apikey = self.apikey
+                run.expand_cuis = True
 
 
 def parse_config(config_file):
