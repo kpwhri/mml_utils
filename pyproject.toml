@@ -45,6 +45,7 @@ pandas = ['pandas']
 excel = ['openpyxl']
 
 [project.scripts]
+mml-clean = "mml_utils.scripts.clean_files:clean_files_cmd"
 mml-run-filelist = "mml_utils.scripts.run_mml_on_filelist:run_single_mml_filelist"
 mml-copy-notes = "mml_utils.scripts.copy_new_mml_directory:copy_to_new_mml_directory"
 mml-build-filelists = "mml_utils.scripts.build_filelists:run"
