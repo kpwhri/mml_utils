@@ -459,7 +459,7 @@ Confirm that the offsets reported by MML are correct.
 
 If running MML on Windows, include `--add-cr` to add back carriage returns.
 
-Use `--replacements old==new` to make certain changes to 'fix' the matches.
+Use `--replacements old==new` to make certain changes to 'fix' the matches (e.g., special characters).
 
 
 ### mml-prepare-review

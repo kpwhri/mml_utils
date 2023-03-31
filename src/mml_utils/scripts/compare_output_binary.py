@@ -21,7 +21,7 @@ from mml_utils.compare.compare import extract_binary_text_differences
               help='Name for data in path2.')
 def compare_output_binary(path1: Path, path2: Path, outpath: Path = None, text_encoding='latin1',
                           name1=None, name2=None):
-    """Compare output (result of `extract_mml_output`) of two different feature extraction versions"""
+    """Compare output (result of `mml-extract-mml`) of two different feature extraction versions"""
     extract_binary_text_differences(path1, path2, outpath, name1, name2, text_encoding=text_encoding)
 
 

@@ -12,10 +12,10 @@ def binary_compare(dc1, dc2):
         if dc1 == dc2:
             DataComparator.next_after_both(dc1, dc2)
         elif dc1 > dc2:
-            while dc1 > dc2:
+            while dc2 and dc1 > dc2:
                 dc1_missing.append(dc2.describe())
                 dc2.next()
-        elif dc2 > dc1:
+        elif dc1 and dc2 > dc1:
             while dc2 > dc1:
                 dc2_missing.append(dc1.describe())
                 dc1.next()

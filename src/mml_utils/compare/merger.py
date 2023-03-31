@@ -2,6 +2,8 @@ import csv
 from pathlib import Path
 import functools
 
+from mml_utils.review.extract_data import find_target_text
+
 
 @functools.total_ordering
 class DataComparator:
@@ -40,6 +42,10 @@ class DataComparator:
     def concept(self):
         return self.current[5]
 
+    @property
+    def matched(self):
+        return self.current[6]
+
     def next(self):
         self.curr_idx += 1
 
@@ -60,17 +66,28 @@ class DataComparator:
         with open(path) as fh:
             for row in csv.DictReader(fh):
                 data.add((row['docid'], int(row['start']), int(row['length']),
-                          int(row['start']) + int(row['length']), row['cui'], row['preferredname']))
+                          int(row['start']) + int(row['length']), row['cui'],
+                          row['preferredname'], row['matchedtext']))
         return sorted(data)
 
-    def get_context(self, encoding=None, width=20):
+    def get_context(self, encoding='latin1', width=20):
         with open(self.file_dict[self.docid], encoding=encoding or self.text_encoding) as fh:
             text = fh.read()
-        return text[max(self.start - width, 0): self.end + width]
+        text = text.replace('\n', '\r\n')
+        try:
+            start, end = find_target_text(text, self.matched, self.start, self.end)
+        except:
+            start, end = None, None
+        if start is None:
+            return self.matched
+        return text[max(start - width, 0): end + width]
 
     def describe(self, encoding=None, width=20):
-        return self.docid, self.start, self.end, self.cui, self.concept, self.get_context(encoding=encoding,
-                                                                                          width=width)
+        if width <= 0:
+            return self.docid, self.start, self.end, self.cui, self.concept, self.matched
+        else:
+            return self.docid, self.start, self.end, self.cui, self.concept, self.get_context(encoding=encoding,
+                                                                                              width=width)
 
     def overlaps(self, other):
         if self.docid != other.docid:
