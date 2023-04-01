@@ -10,13 +10,13 @@ class DataComparator:
     """Aids in comparison of output of different feature extraction methods."""
 
     def __init__(self, path: Path, name=None, text_encoding='latin1'):
-        notes_path = sorted(path.glob('notes_*'))[-1]
-        mml_path = sorted(path.glob('mml_*'))[-1]
+        notes_path = sorted(path.glob('notes_*.csv'))[-1]
+        mml_path = sorted(path.glob('mml_*.csv'))[-1]
+        self.text_encoding = text_encoding
         self.name = name or path.stem
         self.data = self._read_csv(mml_path)
         self.file_dict = self._read_to_filedict(notes_path)
         self.curr_idx = 0
-        self.text_encoding = text_encoding
 
     @property
     def current(self):
@@ -56,14 +56,14 @@ class DataComparator:
 
     def _read_to_filedict(self, path: Path):
         d = {}
-        with open(path) as fh:
+        with open(path, encoding=self.text_encoding) as fh:
             for row in csv.DictReader(fh):
                 d[row['filename']] = row['docid']
         return d
 
     def _read_csv(self, path: Path):
         data = set()
-        with open(path) as fh:
+        with open(path, encoding=self.text_encoding) as fh:
             for row in csv.DictReader(fh):
                 data.add((row['docid'], int(row['start']), int(row['length']),
                           int(row['start']) + int(row['length']), row['cui'],
@@ -84,10 +84,10 @@ class DataComparator:
 
     def describe(self, encoding=None, width=20):
         if width <= 0:
-            return self.docid, self.start, self.end, self.cui, self.concept, self.matched
+            return self.docid, self.start, self.end, self.cui, self.concept, self.matched, self.matched
         else:
-            return self.docid, self.start, self.end, self.cui, self.concept, self.get_context(encoding=encoding,
-                                                                                              width=width)
+            return (self.docid, self.start, self.end, self.cui, self.concept, self.matched,
+                    self.get_context(encoding=encoding, width=width))
 
     def overlaps(self, other):
         if self.docid != other.docid:

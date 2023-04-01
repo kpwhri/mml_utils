@@ -39,11 +39,14 @@ def write_binary_comparison(miss1, miss2, outpath: Path, name1=None, name2=None,
     outfn = outpath / f'compare_{name1}_{name2}.csv'
     with open(outfn, 'w', newline='', encoding=text_encoding) as fh:
         writer = csv.writer(fh)
-        writer.writerow(['present_in', 'missing_from', 'cui', 'preferredname', 'docid', 'start', 'end', 'context'])
-        for docid, start, end, cui, prefname, context in miss1:
-            writer.writerow([name2, name1, cui, prefname, docid, start, end, context])
-        for docid, start, end, cui, prefname, context in miss2:
-            writer.writerow([name1, name2, cui, prefname, docid, start, end, context])
+        writer.writerow(['present_in', 'missing_from', 'cui', 'preferredname',
+                         'docid', 'start', 'end', 'matchedtext', 'context'])
+        # in name2, missing from name1
+        for docid, start, end, cui, prefname, matchedtext, context in miss1:
+            writer.writerow([name2, name1, cui, prefname, docid, start, end, matchedtext, context])
+        # in name1, missing from name2
+        for docid, start, end, cui, prefname, matchedtext, context in miss2:
+            writer.writerow([name1, name2, cui, prefname, docid, start, end, matchedtext, context])
     return outfn
 
 
