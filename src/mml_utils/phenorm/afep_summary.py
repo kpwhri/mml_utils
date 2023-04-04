@@ -8,19 +8,25 @@ from mml_utils.excel.tables import format_table_to_excel
 def add_diffs(cdf, names):
     """Add a table comparing results from different vocabularies."""
     diff_df = None
-    cols = ['cui', 'preferredname']
+    col = ['cui']
+    cols = col + ['preferredname']
     for i, name in enumerate(names):
         for name2 in names[i + 1:]:
-            res1 = cdf[(cdf[name] == 1) & (cdf[name2] == 0)][cols].copy()
+            res1 = cdf[(cdf[name] == 1) & (cdf[name2] == 0)][col].copy().drop_duplicates()
             res1[f'{name}-vs-{name2}'] = f'{name}_only'
-            res2 = cdf[(cdf[name] == 0) & (cdf[name2] == 1)][cols].copy()
+            res2 = cdf[(cdf[name] == 0) & (cdf[name2] == 1)][col].copy().drop_duplicates()
             res2[f'{name}-vs-{name2}'] = f'{name2}_only'
+            # cui is not unique in this data (cui + preferredname is)
+            shared = set(res1['cui'].unique()) & set(res2['cui'].unique())
             df = pd.concat((res1, res2))
+            df = df.drop(df[df['cui'].isin(shared)].index)
             if diff_df is None:
                 diff_df = df
             else:
-                diff_df = pd.merge(diff_df, df, on=cols, how='outer').fillna('NONE')
-    return diff_df
+                diff_df = pd.merge(diff_df, df, on=col, how='outer').fillna('NA')
+    cui_mapping = cdf[cols].groupby(col).agg(lambda x: '; '.join(x)).reset_index()
+    res_df = pd.merge(diff_df, cui_mapping, on=col)
+    return res_df[cols + [x for x in res_df.columns if x not in cols]]
 
 
 def build_afep_excel(afep_path: Path, how='mean'):
