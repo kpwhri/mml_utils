@@ -58,6 +58,8 @@ def run_greedy_algorithm(cui_df, df):
         'lbtr', 'lbpr', 'medd', 'mobd', 'neop', 'nnon', 'orch', 'patf', 'phsu', 'phpr', 'rcpt', 'sosy',
         'topp', 'vita'
     }
+    if 'all_sources' not in df.columns:  # backwards compatibility: TODO: remove
+        df['all_sources'] = ''
     cui_to_source_count = {r.cui: len(r.all_sources.split(',')) for r in
                            df[['cui', 'all_sources']].drop_duplicates().itertuples()}
     # use length or not?

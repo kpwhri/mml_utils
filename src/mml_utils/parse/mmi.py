@@ -144,6 +144,8 @@ def extract_mmi_line(line):
             'negated': bool(int(negation)),
             'pos': pos,
             'semantictype': semantictypes[0],  # usually (always?) just one, so show it
+            'all_semantictypes': ','.join(semantictypes),
+            'all_sources': '',
         }, **{
             s: 1 for s in semantictypes
         }}
