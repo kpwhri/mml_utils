@@ -1,0 +1,5 @@
+wikipedia.txt|MMI|5.18|Anaphylactic shock|C4316895|[patf]|["Anaphylactic shock"-tx-1-"Anaphylaxis"-noun-0]|TX|0/11|
+wikipedia.txt|MMI|5.18|anaphylaxis|C0002792|[patf]|["Anaphylaxis"-tx-1-"Anaphylaxis"-noun-0]|TX|0/11|
+wikipedia.txt|MMI|19.38|Anaphylactic shock|C4316895|[patf]|["Anaphylactic shock"-tx-5-"Anaphylactoid reaction"-noun-0,"Anaphylactic shock"-tx-5-"Anaphylaxis"-noun-0,"Anaphylactic shock"-tx-5-"anaphylactic shock"-noun-0,"Anaphylactic shock"-tx-5-"anaphylaxis"-noun-0,"Anaphylactic shock"-tx-3-"Anaphylaxis"-noun-0]|TX|459/22;769/11;483/18;512/11;131/11|
+wikipedia.txt|MMI|15.15|anaphylaxis|C0002792|[patf]|["Anaphylaxis"-tx-5-"Anaphylaxis"-noun-0,"Anaphylaxis"-tx-5-"anaphylactic shock"-noun-0,"Anaphylaxis"-tx-5-"anaphylaxis"-noun-0,"Anaphylaxis"-tx-3-"Anaphylaxis"-noun-0]|TX|769/11;483/18;512/11;131/11|
+wikipedia.txt|MMI|11.18|Allergic Reaction|C1527304|[patf]|["Allergic reaction NOS"-tx-5-"Allergic reaction"-noun-0,"Allergic reaction NOS"-tx-5-"Allergy"-noun-0,"Allergic reaction NOS"-tx-5-"allergic reaction"-noun-0]|TX|629/17;285/7;813/17|

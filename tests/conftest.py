@@ -37,3 +37,8 @@ def file0_path():
 def file0(file0_path):
     with open(file0_path) as fh:
         return files.load(fh)
+
+
+@pytest.fixture
+def anaphylaxis_dir():
+    return Path('anaphylaxis')

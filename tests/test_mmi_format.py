@@ -4,6 +4,8 @@ from textwrap import dedent
 
 import pytest
 
+from pytest_lazyfixture import lazy_fixture
+
 from mml_utils.parse.mmi import extract_mml_from_mmi_data, extract_mmi_line, _parse_trigger_info, split_mmi_line
 
 
@@ -65,7 +67,7 @@ def get_mmi_lines(mmi_lines, exp):
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (pytest.lazy_fixture('mmi_risk_of'), '00000000'),
+    (lazy_fixture('mmi_risk_of'), '00000000'),
 ])
 def test_extract_mmi_filename(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
@@ -78,7 +80,7 @@ def test_mmi_skips():
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (pytest.lazy_fixture('mmi_risk_of'), 'Risk'),
+    (lazy_fixture('mmi_risk_of'), 'Risk'),
 ])
 def test_extract_mmi_conceptstring(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
@@ -86,7 +88,7 @@ def test_extract_mmi_conceptstring(mmi_lines, exp):
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (pytest.lazy_fixture('mmi_risk_of'), 'C0035647'),
+    (lazy_fixture('mmi_risk_of'), 'C0035647'),
 ])
 def test_extract_mmi_cui(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
@@ -94,7 +96,7 @@ def test_extract_mmi_cui(mmi_lines, exp):
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (pytest.lazy_fixture('mmi_risk_of'), 'idcn'),
+    (lazy_fixture('mmi_risk_of'), 'idcn'),
 ])
 def test_extract_mmi_semantictype(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
@@ -103,7 +105,7 @@ def test_extract_mmi_semantictype(mmi_lines, exp):
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (pytest.lazy_fixture('mmi_risk_of'), [0, 0, 0]),
+    (lazy_fixture('mmi_risk_of'), [0, 0, 0]),
 ])
 def test_extract_mmi_negated(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
@@ -111,7 +113,7 @@ def test_extract_mmi_negated(mmi_lines, exp):
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (pytest.lazy_fixture('mmi_risk_of'), [2672, 3076, 4271]),
+    (lazy_fixture('mmi_risk_of'), [2672, 3076, 4271]),
 ])
 def test_extract_mmi_start(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
@@ -119,7 +121,7 @@ def test_extract_mmi_start(mmi_lines, exp):
 
 
 @pytest.mark.parametrize(('mmi_lines', 'exp'), [
-    (pytest.lazy_fixture('mmi_risk_of'), 7),
+    (lazy_fixture('mmi_risk_of'), 7),
 ])
 def test_extract_mmi_length(mmi_lines, exp):
     for res, expected in get_mmi_lines(mmi_lines, exp):
@@ -228,26 +230,26 @@ def test_has_invalid_length(caplog, line, exp_logtext):
      11,
      '"3 4"-text-77-"3  4"-CD-0,"3 4"-text-83-"3 "| 4"-CD-0',
      ),  # handle quote mark inside
-    (pytest.lazy_fixture('mmi_risk_of'),
+    (lazy_fixture('mmi_risk_of'),
      10,
      '"risk of"-text-0-"risk of"--0,"risk of"-text-0-"risk of"--0,"risk of"-text-20-"risk of"--0',
      ),
-    (pytest.lazy_fixture('mmi_history'),
+    (lazy_fixture('mmi_history'),
      11,
      '"Medical History"-text-0-"MEDICAL HISTORY"-NNP-0,"History"-text-82-"HISTORY"-NNP-0,'
      '"History"-text-88-"History"-NNP-0,"History"-text-181-"History"-NN-0,"History"-text-194-"History"-NN-0,'
      '"History"-text-205-"HISTORY"-NNP-0,"History"-text-211-"History"-NNP-0,"History of"-text-0-"history of"-NN-0'
      ),
-    (pytest.lazy_fixture('mmi_fatigue'),
+    (lazy_fixture('mmi_fatigue'),
      11,
      '"tired all the time"-text-129-"tired all the time"-JJ-0,'
      '"Fatigue"-text-0-"Fatigue"-NN-0,"Fatigue"-text-22-"fatigue"-NN-0'
      ),
-    (pytest.lazy_fixture('mmi_tired_all_the_time'),
+    (lazy_fixture('mmi_tired_all_the_time'),
      11,
      '"Tired all the time"-text-129-"tired all the time"-JJ-0',
      ),
-    (pytest.lazy_fixture('mmi_tired_all_the_time_one_quote'),
+    (lazy_fixture('mmi_tired_all_the_time_one_quote'),
      11,
      '"Tired all the time"-text-129-"tired all the time"-JJ-0',
      ),
