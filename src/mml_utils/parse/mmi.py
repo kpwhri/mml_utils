@@ -26,9 +26,9 @@ def split_mmi_line(textline):
     for i, letter in enumerate(textline):
         if letter == '"':
             if quoted and i + 1 < len(textline):
-                if len(segments) == 6 and textline[i+1] == '-':  # in the middle of trigger info, ensure not in string
+                if len(segments) == 6 and textline[i + 1] == '-':  # in the middle of trigger info, ensure not in string
                     quoted = False
-                elif len(segments) != 6 and textline[i+1] in '|':
+                elif len(segments) != 6 and textline[i + 1] in '|':
                     quoted = False
             elif not quoted:
                 quoted = True
@@ -36,7 +36,7 @@ def split_mmi_line(textline):
             if not quoted:
                 segments.append(textline[segment_start:i])
                 segment_start = i + 1  # starts next character
-            elif quoted and len(segments) == 3 and textline[i+1] == 'C':  # handle single quote in matchedtext
+            elif quoted and len(segments) == 3 and textline[i + 1] == 'C':  # handle single quote in matchedtext
                 segments.append(textline[segment_start:i])
                 segment_start = i + 1  # starts next character
                 quoted = False
@@ -82,6 +82,7 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
 
 def _parse_trigger_info(trigger_info_text):
     """Parse trigger information for mmi format"""
+    trigger_info_text = trigger_info_text.strip('[]')
     if not trigger_info_text.startswith('"'):  # backwards compatibility with CSV parser which stripped quotes
         idx = trigger_info_text.index('-')
         i = 0
@@ -106,9 +107,36 @@ def _parse_trigger_info(trigger_info_text):
 
 def _has_invalid_length(info, exp_length, label, info_string, file, line):
     if len(info) != exp_length:
-        logger.error(f'Unknown format of length {len(info)} for {label} ({info_string}, section {info}) in file `{file}`: {line}')
+        logger.error(
+            f'Unknown format of length {len(info)} for {label} ({info_string}, section {info}) in file `{file}`: {line}')
         return True
     return False
+
+
+def get_start_end_length_from_pos_info_loc(loc):
+    start, length = loc.strip('[]').split('/')
+    start = int(start)
+    length = int(length)
+    end = start + length
+    return start, end, length
+
+
+def _parse_positional_info(positional_info_text):
+    """
+
+    :param positional_info_text:
+    :return:  tuple[int, int, int] : tuple[start, end, length]
+    """
+    if positional_info_text.startswith('['):  # weird MM mmi output which duplicates after semicolon
+        positional_info_text = positional_info_text.replace('[', '').replace(']', '').split(';')[0].replace(',', ';')
+    multi_indices = {}  # comma-separated values with same reference (metamap-specific); e.g., loc of [44/9],[179/9]
+    for loc in positional_info_text.split(';'):
+        if ',' in loc:  # split phrase
+            if loc not in multi_indices:
+                multi_indices[loc] = [get_start_end_length_from_pos_info_loc(value) for value in loc.split(',')]
+            yield multi_indices[loc].pop(0)
+        else:
+            yield get_start_end_length_from_pos_info_loc(loc)
 
 
 def extract_mmi_line(line):
@@ -122,14 +150,12 @@ def extract_mmi_line(line):
     file = pathlib.Path(identifier)
     semantictypes = [st.strip() for st in semantictype[1:-1].split(',')]  # official doco says comma-separated
     triggerinfos = list(_parse_trigger_info(triggerinfo))
-    positional_infos = [loc.split('/') for loc in positional_info.split(';')]
+    positional_infos = list(_parse_positional_info(positional_info))
     for ti, pi in zip(triggerinfos, positional_infos):
         if _has_invalid_length(ti, 6, 'trigger info', triggerinfo, file, line):
             continue
-        if _has_invalid_length(pi, 2, 'positional info', positional_info, file, line):
-            continue
         preferredname, loc, locpos, matchedtext, pos, negation = ti
-        start, length = pi
+        start, end, length = pi
         yield {**{
             'docid': file.stem,
             'filename': identifier,
@@ -137,9 +163,9 @@ def extract_mmi_line(line):
             'conceptstring': conceptstring,
             'cui': cui,
             'preferredname': preferredname,
-            'start': int(start),
-            'length': int(length),
-            'end': int(start) + int(length),
+            'start': start,
+            'length': length,
+            'end': end,
             'evid': None,
             'negated': bool(int(negation)),
             'pos': pos,

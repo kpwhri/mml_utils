@@ -38,6 +38,7 @@ Types of changes:
 - Random requires `list`, not `set`
 - Updated `pyproject.toml` for new flit version
 - Migrated `pytest_lazy_fixture` to new format (i.e., no longer able to call from pytest directly) 
+- Changed mmi parser to handle commas/semicolons more appropriately
 
 ## [0.2.3]
 
