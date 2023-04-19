@@ -32,6 +32,7 @@ Types of changes:
 - Tests to support metamap's mmi file (this seems to include extra brackets, but still parsed correctly)
 - Doco for installing/using metamap
 - Add `all_semantictypes` and `all_sources` to mmi output
+- Skip metamap acronym/abbreviation lines
 
 ### Fixed
 
