@@ -66,7 +66,9 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
             carryover_cell = prev_line[-1] + line[0]
             line = prev_line[:-1] + [carryover_cell] + line[1:]
             prev_line = None
-        if len(line) < 10 and line[1] != 'AA':  # AA=Acronyms and Abbreviations with only length 9 (Metamap only)
+        if len(line) == 9 and line[1] == 'AA':
+            continue  # AA=Acronyms and Abbreviations with only length 9 (Metamap only)
+        if len(line) < 10:
             prev_line = line
             continue
         for d in extract_mmi_line(line):
