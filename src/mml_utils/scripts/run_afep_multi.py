@@ -60,6 +60,7 @@ class MultiAfepConfig(BaseModel):
     note_directories: list[Path] = None
     apikey: str = None
     expand_cuis: bool = False
+    min_kb: int = None
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -69,6 +70,8 @@ class MultiAfepConfig(BaseModel):
             if self.expand_cuis or run.expand_cuis:
                 run.apikey = self.apikey
                 run.expand_cuis = True
+            if self.min_kb:
+                run.min_kb = self.min_kb
 
 
 def parse_config(config_file):

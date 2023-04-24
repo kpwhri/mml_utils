@@ -33,6 +33,7 @@ Types of changes:
 - Doco for installing/using metamap
 - Add `all_semantictypes` and `all_sources` to mmi output
 - Skip metamap acronym/abbreviation lines
+- Change `min_kb` to allow setting globally in `run_afep_multi`
 
 ### Fixed
 
