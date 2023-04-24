@@ -19,6 +19,9 @@ Types of changes:
 
 ## [Unreleased]
 
+
+## [0.3.0] - 2023-04-24 (Added Metamap Support)
+
 ### Added
 
 - Reporting AFEP results in an excel (and CSV) table(s).
