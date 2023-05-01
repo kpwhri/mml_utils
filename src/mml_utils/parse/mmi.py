@@ -36,6 +36,8 @@ def split_mmi_line(textline):
             if not quoted:
                 segments.append(textline[segment_start:i])
                 segment_start = i + 1  # starts next character
+            elif i + 1 >= len(textline):  # character was just a quote
+                raise ValueError(f'Unsure how to handle quotation mark in: {textline[:i]} [source:{textline}]')
             elif quoted and len(segments) == 3 and textline[i + 1] == 'C':  # handle single quote in matchedtext
                 segments.append(textline[segment_start:i])
                 segment_start = i + 1  # starts next character
@@ -58,6 +60,8 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
     i = 0
     prev_line = None
     for textline in text.split('\n'):
+        if textline and not prev_line and textline.split('|')[1] not in 'MMI':
+            continue
         line = split_mmi_line(textline)
         # if not line[-1] == '':
         #     prev_line = line

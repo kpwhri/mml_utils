@@ -32,7 +32,7 @@ def extract_articles(note_directories, mml_format, *, data_directories=None):
                     data = json.load(fh)
                 extract_function = extract_mml_from_json_data
             elif mml_format == 'mmi':
-                with open(file) as fh:
+                with open(file, encoding='utf8') as fh:
                     data = fh.read()
                 extract_function = extract_mml_from_mmi_data
             elif mml_format == 'xmi':
