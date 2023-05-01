@@ -19,6 +19,10 @@ Types of changes:
 
 ## [Unreleased]
 
+### Added
+
+- Check for MMI in second field earlier in the process (to avoid parsing failures)
+
 
 ## [0.3.0] - 2023-04-24 (Added Metamap Support)
 
