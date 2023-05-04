@@ -48,6 +48,14 @@ NOTE_FIELDNAMES = [
               help='Encoding for reading output of MML or cTAKES.')
 @click.option('--file-encoding', 'encoding', default='utf8',
               help='Encoding for reading text files.')
+def _extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
+                 *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: List[str] = None,
+                 exclude_negated=False, output_directories=None, mm_encoding='cp1252'):
+    extract_mml(note_directories, outdir, cui_file,
+                encoding=encoding, output_format=output_format, max_search=max_search, add_fieldname=add_fieldname,
+                exclude_negated=exclude_negated, output_directories=output_directories, mm_encoding=mm_encoding)
+
+
 def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
                 *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: List[str] = None,
                 exclude_negated=False, output_directories=None, mm_encoding='cp1252'):
@@ -86,6 +94,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
     build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
                          output_format, encoding, exclude_negated, output_directories=output_directories,
                          mm_encoding=mm_encoding)
+    return note_outfile, mml_outfile
 
 
 def get_output_file(curr_directory, exp_filename, output_format, output_directories=None, skip_missing=False):
@@ -234,4 +243,4 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encodi
 
 
 if __name__ == '__main__':
-    extract_mml()
+    _extract_mml()
