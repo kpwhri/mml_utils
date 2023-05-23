@@ -19,9 +19,12 @@ Types of changes:
 
 ## [Unreleased]
 
+## [0.3.1] - 2023-05-23
+
 ### Added
 
 - Check for MMI in second field earlier in the process (to avoid parsing failures)
+- Run Metamaplite on a single file rather than requiring a filelist
 
 
 ## [0.3.0] - 2023-04-24 (Added Metamap Support)

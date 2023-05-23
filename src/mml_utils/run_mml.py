@@ -22,7 +22,7 @@ def get_mml_jar(mml_home: Path):
 
 
 def run_mml(filename, cwd: Path, *, output_format='files', restrict_to_sts=None, restrict_to_src=None,
-            property_file=None, properties=None):
+            property_file=None, properties=None, is_filelist=True):
     restrict_to_sts = f"--restrict_to_sts={','.join(restrict_to_sts)}" if restrict_to_sts else ''
     restrict_to_src = f"--restrict_to_sources={','.join(restrict_to_src)}" if restrict_to_src else ''
 
@@ -61,7 +61,8 @@ def run_mml(filename, cwd: Path, *, output_format='files', restrict_to_sts=None,
     # metamaplite
     logger.info(f'Running Metamaplite on current set (install location: {cwd})')
     prefix = f'java {jvm_opts} {property_file} {properties} -cp "{classpath}" gov.nih.nlm.nls.ner.MetaMapLite'
-    cmd = (f'{prefix} --filelistfn={filename} --outputformat={output_format}'
+    file_arg = '--filelistfn' if is_filelist else '--filelist'
+    cmd = (f'{prefix} {file_arg}={filename} --outputformat={output_format}'
            f' --overwrite --usecontext {restrict_to_sts} {restrict_to_src}'
            f''.split()
            )
