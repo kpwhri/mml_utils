@@ -1,3 +1,4 @@
 loguru
 click
 pydantic
+charset_normalizer

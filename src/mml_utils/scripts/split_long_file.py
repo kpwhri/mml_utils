@@ -7,6 +7,7 @@ import pathlib
 from typing import List
 
 import click
+from charset_normalizer import from_path
 
 
 @click.command()
@@ -32,16 +33,16 @@ def split_files_on_lines(files: List[pathlib.Path], n_lines=200, *, encoding='cp
 def split_on_lines(file, n_lines=200, *, in_encoding='cp1252', out_encoding='cp1252', errors='replace'):
     lines = []
     i = 0
-    with open(file, encoding=in_encoding, errors=errors) as fh:
-        for line in fh:
-            lines.append(line)
-            if len(lines) % n_lines == 0:
-                name = file.parent / f'{file.stem}_{i}{file.suffix}'
-                with open(name, 'w', encoding=out_encoding, errors=errors) as out:
-                    out.writelines(lines)
-                yield name
-                i += 1
-                lines = []
+    charset = from_path(file).best()
+    for line in str(charset).splitlines(keepends=True):
+        lines.append(line)
+        if len(lines) % n_lines == 0:
+            name = file.parent / f'{file.stem}_{i}{file.suffix}'
+            with open(name, 'w', encoding=out_encoding, errors=errors) as out:
+                out.writelines(lines)
+            yield name
+            i += 1
+            lines = []
     name = file.parent / f'{file.stem}_{i}{file.suffix}'
     with open(name, 'w', encoding=out_encoding, errors=errors) as out:
         out.writelines(lines)

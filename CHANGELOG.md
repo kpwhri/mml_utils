@@ -19,6 +19,13 @@ Types of changes:
 
 ## [Unreleased]
 
+## [0.3.2] - 2023-05-24
+
+### Added
+
+- Using `charset_normalizer` package to read files correctly (with file encoding) before splitting. This should probably be used more broadly...eventually.
+
+
 ## [0.3.1] - 2023-05-23
 
 ### Added
