@@ -24,14 +24,18 @@ from mml_utils.run_mml import repeat_run_mml, run_mml
                    ' according to dataset.')
 @click.option('--dataset', default='USAbase',
               help='Specify UMLS dataset.')
+@click.option('--loglevel', default='WARN',
+              type=click.Choice(['ALL', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL', 'OFF', 'TRACE']),
+              help='Select logging level. Defaults to WARN to avoid MML\'s dense logging output.')
 def run_single_mml_filelist(filelist: pathlib.Path, mml_home: pathlib.Path, output_format='json',
-                            property_file=None, properties=None, repeat=False, version=None, dataset='USAbase'):
+                            property_file=None, properties=None, repeat=False, version=None, dataset='USAbase',
+                            loglevel='WARN'):
     if repeat:
         repeat_run_mml(filelist, mml_home, output_format=output_format, property_file=property_file,
-                       properties=properties, version=version, dataset=dataset)
+                       properties=properties, version=version, dataset=dataset, loglevel=loglevel)
     else:
         run_mml(filelist, mml_home, output_format=output_format, property_file=property_file, properties=properties,
-                version=version, dataset=dataset)
+                version=version, dataset=dataset, loglevel=loglevel)
 
 
 if __name__ == '__main__':
