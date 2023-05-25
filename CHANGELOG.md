@@ -19,6 +19,13 @@ Types of changes:
 
 ## [Unreleased]
 
+## [0.3.3] - 2023-05-25
+
+### Changed
+
+- Remove default UMLS version/dataset from `run_mml` and allow these as specified by parameters
+  - If nothing specified, default to looking up available datasets, defaulting to `USAbase` dataset
+
 ## [0.3.2] - 2023-05-24
 
 ### Added
