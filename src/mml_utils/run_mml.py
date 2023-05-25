@@ -21,13 +21,36 @@ def get_mml_jar(mml_home: Path):
     return file
 
 
+def get_umls_versions(cwd: Path):
+    versions = [p for p in cwd.iterdir() if p.is_dir()]
+    options = []
+    for version in versions:
+        for dataset in version.iterdir():
+            if dataset.is_dir():
+                options.append((version.stem, dataset.stem))
+    return sorted(options, reverse=True)
+
+
 def run_mml(filename, cwd: Path, *, output_format='files', restrict_to_sts=None, restrict_to_src=None,
-            property_file=None, properties=None, is_filelist=True):
+            property_file=None, properties=None, is_filelist=True, version=None, dataset='USAbase'):
     restrict_to_sts = f"--restrict_to_sts={','.join(restrict_to_sts)}" if restrict_to_sts else ''
     restrict_to_src = f"--restrict_to_sources={','.join(restrict_to_src)}" if restrict_to_src else ''
 
     # handle properties
     property_file = f'-Dmetamaplite.property.file={property_file}' if property_file else ''
+    installed_versions = get_umls_versions(cwd / 'data' / 'ivf')
+    if version is None or (version, dataset) not in installed_versions:
+        logger.warning(f'UMLS Version and/or Dataset NOT SPECIFIED or NOT FOUND!')
+        logger.warning(f'> Version: {version}, Dataset: {dataset}')
+        logger.info(f'Installed datasets/versions (in {cwd / "data" / "ivf"}:')
+        for version_, dataset_ in installed_versions:
+            selected_version = ''
+            if dataset_ == dataset:
+                version = version_
+                selected_version = ' <<- Using this version as best match.'
+            logger.info(f'> Version: {version_}, Dataset: {dataset_}{selected_version}')
+    if version is None or not (cwd / 'data' / 'ivf' / version / dataset).exists():
+        raise ValueError(f'UMLS Version/Dataset does not exist: {version}/{dataset}.')
     default_props = (
         ('opennlp.en-sent.bin.path', cwd / 'data' / 'models' / 'en-sent.bin'),
         ('opennlp.en-token.bin.path', cwd / 'data' / 'models' / 'en-token.bin'),
@@ -35,7 +58,7 @@ def run_mml(filename, cwd: Path, *, output_format='files', restrict_to_sts=None,
         ('opennlp.en-chunker.bin.path', cwd / 'data' / 'models' / 'en-chunker.bin'),
         ('log4j.configurationFile', cwd / 'config' / 'log4j2.xml'),
         ('metamaplite.entitylookup.resultlength', '1500'),
-        ('metamaplite.index.directory', cwd / 'data' / 'ivf' / '2022AA' / 'USAbase'),
+        ('metamaplite.index.directory', cwd / 'data' / 'ivf' / version / dataset),
         ('metamaplite.excluded.termsfile', cwd / 'data' / 'specialterms.txt'),
     )
     found_props = set()
@@ -66,7 +89,7 @@ def run_mml(filename, cwd: Path, *, output_format='files', restrict_to_sts=None,
            f' --overwrite --usecontext {restrict_to_sts} {restrict_to_src}'
            f''.split()
            )
-    print(' '.join(cmd))
+    logger.debug('Running command >> ' + ' '.join(cmd))
     res = subprocess.run(cmd, universal_newlines=True, cwd=cwd, env=os.environ | get_env(cwd))
     if res.returncode != 0:
         logger.warning(f'Metamaplite returned with status code {res.returncode}.')
@@ -75,7 +98,7 @@ def run_mml(filename, cwd: Path, *, output_format='files', restrict_to_sts=None,
 
 
 def repeat_run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None, max_retry=10,
-                   property_file=None, properties=None, **kwargs):
+                   property_file=None, properties=None, version=None, dataset='USAbase', **kwargs):
     filelist_version = 0
     return_code = 1
     total_completed = 0
@@ -94,6 +117,8 @@ def repeat_run_mml(filename, cwd, *, output_format='files', restrict_to_sts=None
             restrict_to_sts=restrict_to_sts,
             property_file=property_file,
             properties=properties,
+            version=version,
+            dataset=dataset,
         )
         return_code = res.returncode
         if return_code == 0:

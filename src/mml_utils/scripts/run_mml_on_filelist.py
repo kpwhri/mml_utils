@@ -19,13 +19,19 @@ from mml_utils.run_mml import repeat_run_mml, run_mml
               help='Path to properety file to run.')
 @click.option('--properties', nargs=2, default=None, multiple=True,
               help='Specify additional properties, e.g., --properties metamaplite.index.directory $PATH.')
+@click.option('--version', default=None,
+              help='Specify UMLS version. If not specified, relevant version will be automatically selected'
+                   ' according to dataset.')
+@click.option('--dataset', default='USAbase',
+              help='Specify UMLS dataset.')
 def run_single_mml_filelist(filelist: pathlib.Path, mml_home: pathlib.Path, output_format='json',
-                            property_file=None, properties=None, repeat=False):
+                            property_file=None, properties=None, repeat=False, version=None, dataset='USAbase'):
     if repeat:
         repeat_run_mml(filelist, mml_home, output_format=output_format, property_file=property_file,
-                       properties=properties)
+                       properties=properties, version=version, dataset=dataset)
     else:
-        run_mml(filelist, mml_home, output_format=output_format, property_file=property_file, properties=properties)
+        run_mml(filelist, mml_home, output_format=output_format, property_file=property_file, properties=properties,
+                version=version, dataset=dataset)
 
 
 if __name__ == '__main__':
