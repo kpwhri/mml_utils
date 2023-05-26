@@ -53,7 +53,8 @@ def build_afep_excel(afep_path: Path, how='mean'):
     for name in names:
         cdf[name] = cdf[name].apply(int)
     format_table_to_excel(writer, cdf, 'afep_summary', how=how)
-    diff_df = add_diffs(cdf, names)
-    format_table_to_excel(writer, diff_df, 'diffs', how=how)
+    if len(names) > 1:
+        diff_df = add_diffs(cdf, names)
+        format_table_to_excel(writer, diff_df, 'diffs', how=how)
     writer.close()
     cdf.to_csv(afep_path / 'afep_summary.csv')

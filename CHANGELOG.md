@@ -19,6 +19,11 @@ Types of changes:
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed bug when running AFEP with a single set of data.
+
+
 ## [0.3.3] - 2023-05-25
 
 ### Changed
