@@ -23,6 +23,7 @@ Types of changes:
 
 - Added logging
 - Gave option to specify a max number of knowledge base articles (not just a min)
+- Scripts to build metamap shell scripts by varying parameters, etc. 
 
 ### Fixed
 
