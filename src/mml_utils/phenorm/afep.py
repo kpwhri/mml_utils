@@ -90,7 +90,8 @@ def run_greedy_algorithm(cui_df, df):
 
 
 def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.Path = None,
-                       expand_cuis=False, apikey=None, skip_greedy_algorithm=False, min_kb=None, data_directory=None):
+                       expand_cuis=False, apikey=None, skip_greedy_algorithm=False, min_kb=None,
+                       max_kb=None, data_directory=None):
     now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     if outdir:
         outdir.mkdir(exist_ok=True, parents=True)
@@ -115,6 +116,13 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
     cuis_with_three_or_more = set(s[s.article_source >= min_kb].index)
     cui_df = df[df.cui.isin(cuis_with_three_or_more)].copy()
     logger.info(f'Retained {cui_df.shape[0]} CUIs.')
+
+    # max knowledge base articles
+    if max_kb is not None:
+        logger.info(f'Removing CUIs appearing in more than {min_kb} knowledge base sources.')
+        cuis_with_max_kb = set(s[s.article_source <= max_kb].index)
+        cui_df = df[df.cui.isin(cuis_with_max_kb)].copy()
+        logger.info(f'Now retained {cui_df.shape[0]} CUIs.')
 
     # greedy algorithm to reduce number of CUIs
     if skip_greedy_algorithm:

@@ -27,6 +27,8 @@ from mml_utils.phenorm.afep import run_afep_algorithm
               help='Skip greedy selection algorithm.')
 @click.option('--min-kb', default=None, type=int,
               help='Minimum number of knowledge base articles. Defaults to half (rounded up) of KB sources.')
+@click.option('--max-kb', default=None, type=int,
+              help='Maximum number of knowledge base articles. No default (max will not be enforced).')
 @click.option('--data-directory', type=click.Path(exists=True, path_type=pathlib.Path), multiple=True,
               help='Data directory if data is in a different directory than notes (e.g., with cTAKES).')
 def _run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.Path = None,

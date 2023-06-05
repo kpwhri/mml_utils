@@ -19,6 +19,11 @@ Types of changes:
 
 ## [Unreleased]
 
+### Added
+
+- Added logging
+- Gave option to specify a max number of knowledge base articles (not just a min)
+
 ### Fixed
 
 - Fixed bug when running AFEP with a single set of data.

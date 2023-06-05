@@ -36,6 +36,7 @@ class AfepRun(BaseModel):
     apikey: str = None
     skip_greedy_algorithm: bool = False
     min_kb: int = None  # default to ceiling(n_articles/2)
+    max_kb: int = None
     data_directory: list[Path] = None
     name: str = None  # for naming output directory
 
@@ -62,6 +63,7 @@ class MultiAfepConfig(BaseModel):
     apikey: str = None
     expand_cuis: bool = False
     min_kb: int = None
+    max_kb: int = None
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -71,8 +73,10 @@ class MultiAfepConfig(BaseModel):
             if self.expand_cuis or run.expand_cuis:
                 run.apikey = self.apikey
                 run.expand_cuis = True
-            if self.min_kb:
+            if self.min_kb and run.min_kb is None:
                 run.min_kb = self.min_kb
+            if self.max_kb and run.max_kb is None:
+                run.max_kb = self.max_kb
 
 
 def parse_config(config_file):
