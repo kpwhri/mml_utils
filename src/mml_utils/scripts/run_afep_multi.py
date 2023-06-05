@@ -21,6 +21,7 @@ from pathlib import Path
 import tomllib
 
 import click
+from loguru import logger
 from pydantic import BaseModel
 
 from mml_utils.phenorm.afep import run_afep_algorithm
@@ -99,6 +100,7 @@ def run_afep_algorithm_multi(config_file):
     data = parse_config(config_file)
     config = MultiAfepConfig(**data)
     for run in config.runs:
+        logger.info(f'Running {run.name}...')
         run_afep_algorithm(**run.dict(exclude={'name'}))
     if config.build_summary:
         build_afep_excel(config.outdir)

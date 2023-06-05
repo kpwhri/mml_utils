@@ -61,7 +61,8 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
     prev_line = None
     for textline in text.split('\n'):
         if textline and not prev_line and (line := textline.split('|')[1]) not in {'MMI'}:
-            logger.warning(f'Line contains {line[1]} rather the "MMI"; skipping line: {textline}')
+            if line not in {'CONJ', 'AA'}:  # known abbreviations, not problems
+                logger.warning(f'Line contains {line} rather the "MMI"; skipping line: {textline}')
             continue
         line = split_mmi_line(textline)
         # if not line[-1] == '':

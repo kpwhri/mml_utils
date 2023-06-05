@@ -99,6 +99,9 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: pathlib.P
 
     article_types, results = extract_articles(note_directories, mml_format, data_directories=data_directory)
     logger.info(f'Article types: {article_types}')
+    if len(article_types) == 0:
+        logger.error(f'No articles found!')
+        raise ValueError(f'No articles found! Perhaps the wrong directory was indicated for reading output?')
 
     if expand_cuis:
         results = add_shorter_match_cuis(results, apikey)
