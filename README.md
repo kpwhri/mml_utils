@@ -47,6 +47,7 @@
       * [Check How Closely Offsets Match: mml-check-offsets](#mml-check-offsets)
       * [Prepare CSV Files for Review: mml-prepare-review](#mml-prepare-review)
       * [Build Frequncy Tables](examples/complete/README.md#generate-frequency-tables)
+      * [Build Metamap Sheel Script](#build-metamap-scripts-mml-build-mmscript--mml-build-mmscript-multi)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -429,7 +430,7 @@ If experimenting with multiple approaches (e.g., cTAKES+MedDRA vs MML+MedDRA vs 
 
     mml-run-afep-multi config.toml
 
-Example TOML:
+Example TOML (an example can be generated using `write_afep_script_for_dirs`):
 
     outdir = 'path/output_dir'
     
@@ -448,6 +449,32 @@ Example TOML:
 
 
 This will run AFEP three times and then create an Excel file containing the summary measures.
+
+
+### Build Metamap Scripts: mml-build-mmscript / mml-build-mmscript-multi
+
+Build a metamap shell script can be a bit of a challenge since the metamap executable expects specifying only a single target file and a single output file. Instead of building this manually, `mml-build-mmscript` (for single configurations) and `mml-build-mmscript-multi` (for comparing multiple metamap configurations).
+
+An example config using the `mml-build-mmscript-multi`:
+
+    outpath = 'C:/metamap/scripts'
+    filelist = 'C:/metamap/kb_filelist.txt'
+    mm_outpath = '/mnt/c/output'
+    parameters = '-R MDR,RXNORM -Z 2022AB -V NLM -N'  # shared parameters, will be prefixed
+    
+    [[runs]]
+    # the first run with unique metamap parameters
+    parameters = '-y -C --conj'
+    name = 'relaxed_wsd_conj'
+    
+    [[runs]]
+    # another configuration
+    parameters = '-y -C'
+    name = 'relaxed_wsd'
+    
+    [[runs]]
+    parameters = '-C --conj'
+    name = 'conj'
 
 
 ### mml-check-offsets

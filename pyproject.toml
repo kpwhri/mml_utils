@@ -66,6 +66,8 @@ mml-sql-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_database"
 mml-csv-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_csv"
 mml-run-ctakes = "mml_utils.scripts.run_ctakes:run_ctakes_directory"
 mml-build-freqs = "mml_utils.scripts.build_frequency_tables:_build_frequency_tables"
+mml-build-mmscript-multi = "mml_utils.scripts.build_mm_script_multi:_run_build_mm_multi"
+mml-build-mmscript = "mml_utils.scripts.build_mm_script:_build_mm_script"
 
 [project.urls]
 Home = 'https://github.com/kpwhri/mml_utils'
