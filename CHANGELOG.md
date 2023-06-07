@@ -19,13 +19,17 @@ Types of changes:
 
 ## [Unreleased]
 
+
+## [0.3.4] - 2023-06-07
+
 ### Added
 
 - Added logging
 - Gave option to specify a max number of knowledge base articles (not just a min)
 - Scripts to build metamap shell scripts by varying parameters, etc.
 - Metamap shell script builder now generates a draft AFEP toml config
-- more AFEP configs can be grouped in MultiAfepConfig to reduce amount of redundant configuartions
+- more AFEP configs can be grouped in MultiAfepConfig to reduce amount of redundant configurations
+- Updated README with new metamap script builder commands
 
 ### Fixed
 
@@ -39,6 +43,7 @@ Types of changes:
 
 - Remove default UMLS version/dataset from `run_mml` and allow these as specified by parameters
   - If nothing specified, default to looking up available datasets, defaulting to `USAbase` dataset
+
 
 ## [0.3.2] - 2023-05-24
 
