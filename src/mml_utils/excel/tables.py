@@ -10,6 +10,10 @@ SESSION_WRITER = None
 
 
 def format_table_to_excel(writer, df, name, how='mean'):
+    if len(name) >= 32:
+        name = '_'.join(str(x)[:4] for x in name.split('_'))
+        if len(name) >= 32:
+            name = name[:31]
     df.to_excel(writer, name, index=False, startrow=1, header=False)
     ws = writer.sheets[name]
     ws.add_table(0, 0, df.shape[0], df.shape[1] - 1, {'columns': [{'header': col} for col in df.columns]})

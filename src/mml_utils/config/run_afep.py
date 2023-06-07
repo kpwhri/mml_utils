@@ -1,11 +1,14 @@
+"""
+Pydantic models for configuring AFEP.
+"""
 from pathlib import Path
 
 from pydantic import BaseModel
 
 
 class AfepRun(BaseModel):
-    note_directories: list[Path]
-    mml_format: str = 'json'
+    note_directories: list[Path] = None
+    mml_format: str = None  # default to json if not specified by MultiAfepConfig
     outdir: Path = None  # should be assigned by parent; to alter name, use 'name'
     expand_cuis: bool = False
     apikey: str = None
@@ -15,8 +18,25 @@ class AfepRun(BaseModel):
     data_directory: list[Path] = None
     name: str = None  # for naming output directory
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # post init
+        if not self.name:
+            self.name = self.data_directory[0].stem
+
     def set_outdir(self, default: Path):
         self.outdir = self.get_outdir(default)
+
+    def set_note_directories(self, default: list[Path]):
+        if not self.note_directories:
+            self.note_directories = default
+
+    def set_mml_format(self, default: str):
+        if not self.mml_format:
+            if default:
+                self.mml_format = default
+            else:  # default to json if not otherwise specified
+                self.mml_format = 'json'
 
     def get_outdir(self, default: Path):
         name = f'{self.name if self.name else self.note_directories[0].stem}' \
@@ -28,6 +48,9 @@ class AfepRun(BaseModel):
         else:
             return default / f'{self.note_directories[0].stem}-selected{"-cui-exp" if self.expand_cuis else ""}'
 
+    def is_valid(self):
+        assert self.note_directories is not None
+
 
 class MultiAfepConfig(BaseModel):
     runs: list[AfepRun]
@@ -35,6 +58,7 @@ class MultiAfepConfig(BaseModel):
     build_summary: bool = True
     base_directory: Path = None
     note_directories: list[Path] = None
+    mml_format: str = None
     apikey: str = None
     expand_cuis: bool = False
     min_kb: int = None
@@ -45,6 +69,8 @@ class MultiAfepConfig(BaseModel):
         # post init
         for run in self.runs:
             run.set_outdir(self.outdir)
+            run.set_note_directories(self.note_directories)
+            run.set_mml_format(self.mml_format)
             if self.expand_cuis or run.expand_cuis:
                 run.apikey = self.apikey
                 run.expand_cuis = True
@@ -52,3 +78,4 @@ class MultiAfepConfig(BaseModel):
                 run.min_kb = self.min_kb
             if self.max_kb and run.max_kb is None:
                 run.max_kb = self.max_kb
+            run.is_valid()

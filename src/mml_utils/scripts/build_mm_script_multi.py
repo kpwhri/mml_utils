@@ -6,6 +6,7 @@ from loguru import logger
 from mml_utils.config.build_mm_script import MultiBuildMMScript
 from mml_utils.config.parser import parse_config
 from mml_utils.build.mm_scripts import RotatingFileHandler, write_shell_script, write_ensure_directories
+from mml_utils.phenorm.afep import write_afep_script_for_dirs
 
 
 @click.command()
@@ -33,6 +34,8 @@ def run_build_mm_multi(config_file):
                                               parameters=run.parameters)
     logger.info(f'Writing ensure directories script...')
     write_ensure_directories(config.outpath, target_dirs)
+    logger.info(f'Writing example AFEP config...')
+    write_afep_script_for_dirs(config_file.parent, target_dirs, mml_format='mmi')
     logger.info(f'Completed.')
 
 
