@@ -23,11 +23,14 @@ Types of changes:
 
 - Added logging
 - Gave option to specify a max number of knowledge base articles (not just a min)
-- Scripts to build metamap shell scripts by varying parameters, etc. 
+- Scripts to build metamap shell scripts by varying parameters, etc.
+- Metamap shell script builder now generates a draft AFEP toml config
+- more AFEP configs can be grouped in MultiAfepConfig to reduce amount of redundant configuartions
 
 ### Fixed
 
 - Fixed bug when running AFEP with a single set of data.
+- Force Excel summary tab name length to be <= 31.
 
 
 ## [0.3.3] - 2023-05-25
