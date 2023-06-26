@@ -28,6 +28,7 @@ class MultiBuildMMScript(BaseModel):
     num_scripts = -1
     max_per_script = -1
     parameters = ''  # shared parameters
+    replace: tuple[str, str] = None  # e.g., Windows path to mount: ['M:', '/mnt/m']
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

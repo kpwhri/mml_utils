@@ -88,12 +88,16 @@ def write_ensure_directories(outpath, target_dirs):
             out.write(f'mkdir -p {target_dir.as_posix()}\n')
 
 
-def write_shell_script(writer, directory, filelist, mm_outpath, mm_path, parameters):
+def write_shell_script(writer, directory, filelist, mm_outpath, mm_path, parameters, replace):
     target_dirs = set()
     for target_file in get_next_file(filelist, directory):
         target_dir = mm_outpath or target_file.parent
         target_dirs.add(target_dir)
+        if replace:
+            file = target_file.as_posix().replace(replace[0], replace[1])
+        else:
+            file = target_file.as_posix()
         writer.writeline(
-            f'{mm_path} {parameters} {target_file.as_posix()} {(target_dir / target_file.stem).as_posix()}.mmi'
+            f'{mm_path} {parameters} {file} {(target_dir / target_file.stem).as_posix()}.mmi'
         )
     return target_dirs

@@ -31,7 +31,7 @@ def run_build_mm_multi(config_file):
             logger.info(f'Running {run.name}...')
             target_dirs |= write_shell_script(writer, config.directory, config.filelist,
                                               mm_path=config.mm_path, mm_outpath=run.mm_outpath,
-                                              parameters=run.parameters)
+                                              parameters=run.parameters, replace=config.replace)
     logger.info(f'Writing ensure directories script...')
     write_ensure_directories(config.outpath, target_dirs)
     logger.info(f'Writing example AFEP config...')
