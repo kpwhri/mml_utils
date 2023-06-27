@@ -67,6 +67,10 @@ The following will assume that the desired use case is `NLM` (specifically, MDR/
 * Run on Files:
   * `metamap -R MDR -V NLM -Z 2022AB <INPUT_FILEPATH> <OUTPUT_FILEPATH>`
 
+```{admonition} Files run with Metamap Must End in a Newline
+All files read by Metamap must end in a newline (\n), otherwise they will not be correctly processed and raise an error. If you open the file in an editor, ensure that the last line is empty/blank.
+```
+
 ## Troubleshooting
 
 ### `db_open_problem ---> .../norm_prefix`
