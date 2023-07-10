@@ -30,7 +30,7 @@ def build_index_references(root):
 
 def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
     if not target_cuis:
-        target_cuis = set()
+        target_cuis = {}
     tree = ElementTree.ElementTree(ElementTree.fromstring(text))
     root = tree.getroot()
     # build text not to get 'matchedtext' equivalent
@@ -55,7 +55,7 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
                 generic = bool(child.get('generic'))
                 subject = child.get('subject')
 
-                for concept in child.get("ontologyConceptArr").split():
+                for concept in child.get('ontologyConceptArr').split():
                     concept_id = int(concept)
                     results[concept_id].update({
                         'event_id': f'{stem}_{concept_id}_{i}',
@@ -87,9 +87,10 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
                 results[currid][semtype] = 1
                 results[currid][source] = 1
             else:
+                cui = child.get('cui', None)
                 results[currid].update({
                     'source': source,
-                    'cui': child.get('cui', None),
+                    'cui': target_cuis[cui] if target_cuis else cui,
                     'conceptstring': child.get('preferredText', None),
                     'preferredname': child.get('preferredText', None),  # not sure which this represents?
                     'tui': tui,

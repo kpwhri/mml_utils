@@ -15,7 +15,8 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None)
     i = 0
     for el in data:
         for event in el['evlist']:
-            if target_cuis is None or event['conceptinfo']['cui'] in target_cuis:
+            cui = event['conceptinfo']['cui']
+            if not target_cuis or cui in target_cuis:
                 semtype = event['conceptinfo']['semantictypes'][0] if event['conceptinfo']['semantictypes'] else ''
                 data = {**{
                            'event_id': f'{filename.stem}_{i}',
@@ -23,7 +24,7 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None)
                            'docid': filename.stem,
                            'matchedtext': event['matchedtext'],
                            'conceptstring': event['conceptinfo']['conceptstring'],
-                           'cui': event['conceptinfo']['cui'],
+                           'cui': target_cuis[cui] if target_cuis else cui,
                            'preferredname': event['conceptinfo']['preferredname'],
                            'start': event['start'],
                            'length': event['length'],

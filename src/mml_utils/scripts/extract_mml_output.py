@@ -32,7 +32,8 @@ NOTE_FIELDNAMES = [
 @click.option('--outdir', type=click.Path(path_type=pathlib.Path),
               help='Output directory to place result files.')
 @click.option('--cui-file', type=click.Path(exists=True, path_type=pathlib.Path, dir_okay=False),
-              help='File containing one cui per line which should be included in the output.')
+              help='File containing one cui per line which should be included in the output;'
+                   ' to enable mapping, place FROM_CUI,TO_CUI on the line.')
 @click.option('--output-format', type=str, default='json',
               help='Output format to look for (MML: "json" or "mmi"; cTAKES: "xmi").')
 @click.option('--output-directory', 'output_directories', multiple=True,
@@ -54,6 +55,19 @@ def _extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui
     extract_mml(note_directories, outdir, cui_file,
                 encoding=encoding, output_format=output_format, max_search=max_search, add_fieldname=add_fieldname,
                 exclude_negated=exclude_negated, output_directories=output_directories, mm_encoding=mm_encoding)
+
+
+def load_target_cuis(cui_file):
+    if cui_file is None:
+        logger.warning(f'Retaining all CUIs.')
+        return {}
+    target_cuis = {}
+    with open(cui_file, encoding='utf8') as fh:
+        for line in fh:
+            lst = line.strip().split(',')
+            target_cuis[lst[0]] = lst[0] if len(lst) == 1 else lst[1]
+    logger.info(f'Keeping {len(set(target_cuis.keys()))} CUIs, and mapping to {len(set(target_cuis.values()))}.')
+    return target_cuis
 
 
 def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
@@ -82,11 +96,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
         for fieldname in add_fieldname:
             MML_FIELDNAMES.append(fieldname)
 
-    target_cuis = None
-    if cui_file is not None:
-        with open(cui_file, encoding='utf8') as fh:
-            target_cuis = set(x.strip() for x in fh.read().split('\n') if x.strip())
-        logger.info(f'Retaining only {len(target_cuis)} CUIs.')
+    target_cuis = load_target_cuis(cui_file)
     if output_directories is None:
         output_directories = note_directories
     get_field_names(note_directories, output_format=output_format, max_search=max_search,

@@ -22,6 +22,7 @@ Types of changes:
 ### Added
 
 - Enable multi-metamap builder to make replacements to the source posix path.
+- All cui file to do transformations
 
 
 ## [0.3.4] - 2023-06-07

@@ -56,7 +56,7 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
     :return:
     """
     if not target_cuis:
-        target_cuis = set()
+        target_cuis = {}
     i = 0
     prev_line = None
     for textline in text.split('\n'):
@@ -80,6 +80,8 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
         for d in extract_mmi_line(line):
             if not d or (target_cuis and d['cui'] not in target_cuis):
                 continue
+            if target_cuis:
+                d['cui'] = target_cuis[d['cui']]
             filename = filename.split('.')[0]  # removee extension
             d['event_id'] = f'{filename}_{i}'
             if extras:

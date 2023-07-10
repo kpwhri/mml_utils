@@ -19,6 +19,11 @@ def fever_dir():
 
 
 @pytest.fixture
+def fever_file():
+    return Path('fever') / 'fever.txt'
+
+
+@pytest.fixture
 def short_fever_dir():
     return Path('short_fever')
 

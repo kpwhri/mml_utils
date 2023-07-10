@@ -28,3 +28,15 @@ def test_extract_data_from_file_exclude_negated(short_fever_file):
     assert data['processed'] is True
     assert data['num_chars'] == 16
     assert data['num_letters'] == 12
+
+
+def test_extract_data_from_file_target_cuis(fever_file):
+    cui = 'C4552740'
+    results = list(extract_data_from_file(fever_file, target_cuis={cui: cui}))
+    for is_record, data in results:
+        if is_record:
+            assert data['processed'] is True
+            assert data['num_chars'] == 2216
+            assert data['num_letters'] == 1796
+        else:
+            assert data['cui'] == cui
