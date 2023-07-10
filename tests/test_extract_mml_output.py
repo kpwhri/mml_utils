@@ -82,9 +82,9 @@ def test_extract_data_from_file_target_multiple_cuis_mapping(fever_file):
     target_cuis = TargetCuis()
     cui = 'C4552740'
     cui2 = 'C0424755'
-    target_cuis.add(cui, cui)
-    target_cuis.add(cui, cui2)
-    target_cuis.add(cui2, cui)
+    target_cuis.add(cui, cui)  # maps 9 (total of cui is now 9)
+    target_cuis.add(cui, cui2)  # maps 9 (total of cui2 is now 9)
+    target_cuis.add(cui2, cui)  # maps 9 (total of cui is now 18)
     results = list(extract_data_from_file(fever_file, target_cuis=target_cuis))
     cnt = Counter()
     for is_record, data in results:
@@ -95,5 +95,5 @@ def test_extract_data_from_file_target_multiple_cuis_mapping(fever_file):
         else:
             assert data['cui'] in {cui, cui2}
             cnt[data['cui']] += 1
-    assert cnt[cui] == 18
-    assert cnt[cui2] == 9
+    assert cnt[cui] == 18  # all cui + cui2
+    assert cnt[cui2] == 9  # all cui (which were mapped from cui to cui2)
