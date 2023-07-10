@@ -3,6 +3,8 @@ import re
 
 from loguru import logger
 
+from mml_utils.parse.target_cuis import TargetCuis
+
 TRIGGER_INFO_PAT = re.compile(
     r'(?P<concept>".*?")'
     r'-'
@@ -46,7 +48,7 @@ def split_mmi_line(textline):
     return segments
 
 
-def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
+def extract_mml_from_mmi_data(text, filename, *, target_cuis: TargetCuis=None, extras=None):
     """
 
     :param text:
@@ -56,7 +58,7 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
     :return:
     """
     if not target_cuis:
-        target_cuis = {}
+        target_cuis = TargetCuis()
     i = 0
     prev_line = None
     for textline in text.split('\n'):
@@ -78,16 +80,16 @@ def extract_mml_from_mmi_data(text, filename, *, target_cuis=None, extras=None):
             prev_line = line
             continue
         for d in extract_mmi_line(line):
-            if not d or (target_cuis and d['cui'] not in target_cuis):
+            if not d:
                 continue
-            if target_cuis:
-                d['cui'] = target_cuis[d['cui']]
-            filename = filename.split('.')[0]  # removee extension
-            d['event_id'] = f'{filename}_{i}'
-            if extras:
-                d |= extras
-            yield d
-            i += 1
+            for cui in target_cuis.get_target_cuis(d['cui']):
+                d['cui'] = cui
+                filename = filename.split('.')[0]  # removee extension
+                d['event_id'] = f'{filename}_{i}'
+                if extras:
+                    d |= extras
+                yield d
+                i += 1
 
 
 def _parse_trigger_info(trigger_info_text):

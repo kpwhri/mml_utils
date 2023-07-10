@@ -12,6 +12,7 @@ from typing import List
 from loguru import logger
 
 from mml_utils.parse.parser import extract_mml_data
+from mml_utils.parse.target_cuis import TargetCuis
 from mml_utils.review.build_excel import compile_to_excel
 
 
@@ -122,7 +123,7 @@ def extract_data_for_review(note_directories: List[pathlib.Path], target_path: p
     limit_note_ids = _get_note_ids_from_metadata_csv(metadata_file) if metadata_file else None
     # run separately for each feature
     for feature_name in get_feature_names_from_directory(target_path):
-        target_cuis = load_first_column(target_path / f'{feature_name}.cui.txt')
+        target_cuis = TargetCuis.fromdict(load_first_column(target_path / f'{feature_name}.cui.txt'))
         logger.info(f'Starting "{feature_name}" with {len(target_cuis)} target CUIs.')
         # create pattern: sort by longest to ensure longest regex is matched first
         target_regex = build_regex_from_file(target_path, feature_name)

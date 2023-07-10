@@ -1,3 +1,4 @@
+from mml_utils.parse.target_cuis import TargetCuis
 from mml_utils.scripts.extract_mml_output import extract_data_from_file
 
 
@@ -32,7 +33,7 @@ def test_extract_data_from_file_exclude_negated(short_fever_file):
 
 def test_extract_data_from_file_target_cuis(fever_file):
     cui = 'C4552740'
-    results = list(extract_data_from_file(fever_file, target_cuis={cui: cui}))
+    results = list(extract_data_from_file(fever_file, target_cuis=TargetCuis.fromdict({cui: cui})))
     cnt = 0
     for is_record, data in results:
         if is_record:
@@ -47,7 +48,7 @@ def test_extract_data_from_file_target_cuis(fever_file):
 
 def test_extract_data_from_file_target_cuis_mapping(fever_file):
     cui = 'C4552740'
-    results = list(extract_data_from_file(fever_file, target_cuis={cui: cui, 'C0424755': cui}))
+    results = list(extract_data_from_file(fever_file, target_cuis=TargetCuis.fromdict({cui: cui, 'C0424755': cui})))
     cnt = 0
     for is_record, data in results:
         if is_record:

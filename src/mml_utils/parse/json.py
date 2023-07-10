@@ -1,8 +1,10 @@
 import json
 import pathlib
 
+from mml_utils.parse.target_cuis import TargetCuis
 
-def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None):
+
+def extract_mml_from_json_data(data, filename, *, target_cuis: TargetCuis=None, extras=None):
     """
 
     :param data:
@@ -15,8 +17,7 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None)
     i = 0
     for el in data:
         for event in el['evlist']:
-            cui = event['conceptinfo']['cui']
-            if not target_cuis or cui in target_cuis:
+            for cui in target_cuis.get_target_cuis(event['conceptinfo']['cui']):
                 semtype = event['conceptinfo']['semantictypes'][0] if event['conceptinfo']['semantictypes'] else ''
                 data = {**{
                            'event_id': f'{filename.stem}_{i}',
@@ -24,7 +25,7 @@ def extract_mml_from_json_data(data, filename, *, target_cuis=None, extras=None)
                            'docid': filename.stem,
                            'matchedtext': event['matchedtext'],
                            'conceptstring': event['conceptinfo']['conceptstring'],
-                           'cui': target_cuis[cui] if target_cuis else cui,
+                           'cui': cui,
                            'preferredname': event['conceptinfo']['preferredname'],
                            'start': event['start'],
                            'length': event['length'],

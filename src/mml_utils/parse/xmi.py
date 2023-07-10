@@ -7,6 +7,7 @@ import pathlib
 from collections import defaultdict
 from xml.etree import ElementTree
 
+from mml_utils.parse.target_cuis import TargetCuis
 from mml_utils.umls.semantictype import TUI_TO_SEMTYPE
 
 
@@ -28,9 +29,9 @@ def build_index_references(root):
     return text, postags
 
 
-def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
+def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis=None, extras=None):
     if not target_cuis:
-        target_cuis = {}
+        target_cuis = TargetCuis()
     tree = ElementTree.ElementTree(ElementTree.fromstring(text))
     root = tree.getroot()
     # build text not to get 'matchedtext' equivalent
@@ -87,20 +88,21 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis=None, extras=None):
                 results[currid][semtype] = 1
                 results[currid][source] = 1
             else:
-                cui = child.get('cui', None)
-                results[currid].update({
-                    'source': source,
-                    'cui': target_cuis[cui] if target_cuis else cui,
-                    'conceptstring': child.get('preferredText', None),
-                    'preferredname': child.get('preferredText', None),  # not sure which this represents?
-                    'tui': tui,
-                    'semantictype': semtype,
-                    'score': float(child.get('score')),
-                    'code': child.get('code', None),
-                    'all_sources': [source],
-                    'all_semantictypes': [semtype],
-                    semtype: 1,
-                })
+                for cui in target_cuis.get_target_cuis(child.get('cui', None)):
+                    # TODO: this might not behave as intended within the for loop
+                    results[currid].update({
+                        'source': source,
+                        'cui': cui,
+                        'conceptstring': child.get('preferredText', None),
+                        'preferredname': child.get('preferredText', None),  # not sure which this represents?
+                        'tui': tui,
+                        'semantictype': semtype,
+                        'score': float(child.get('score')),
+                        'code': child.get('code', None),
+                        'all_sources': [source],
+                        'all_semantictypes': [semtype],
+                        semtype: 1,
+                    })
     for currid in results:
         results[currid]['all_sources'] = ','.join(results[currid]['all_sources'])
         results[currid]['all_semantictypes'] = ','.join(results[currid]['all_semantictypes'])

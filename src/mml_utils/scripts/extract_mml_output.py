@@ -18,6 +18,7 @@ import click
 from loguru import logger
 
 from mml_utils.parse.parser import extract_mml_data
+from mml_utils.parse.target_cuis import TargetCuis
 
 MML_FIELDNAMES = [
     'event_id', 'docid', 'filename', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length',
@@ -57,16 +58,15 @@ def _extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui
                 exclude_negated=exclude_negated, output_directories=output_directories, mm_encoding=mm_encoding)
 
 
-def load_target_cuis(cui_file):
+def load_target_cuis(cui_file) -> TargetCuis:
+    target_cuis = TargetCuis()
     if cui_file is None:
         logger.warning(f'Retaining all CUIs.')
-        return {}
-    target_cuis = {}
+        return target_cuis
     with open(cui_file, encoding='utf8') as fh:
         for line in fh:
-            lst = line.strip().split(',')
-            target_cuis[lst[0]] = lst[0] if len(lst) == 1 else lst[1]
-    logger.info(f'Keeping {len(set(target_cuis.keys()))} CUIs, and mapping to {len(set(target_cuis.values()))}.')
+            target_cuis.add(*line.strip().split(','))
+    logger.info(f'Keeping {target_cuis.n_keys()} CUIs, and mapping to {target_cuis.n_values()}.')
     return target_cuis
 
 
@@ -232,6 +232,7 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encodi
         'filename': file.stem,
         'docid': str(file),
     }
+    target_cuis = TargetCuis() if target_cuis is None else target_cuis
     with open(file, encoding=encoding) as fh:
         text = fh.read()
         record['num_chars'] = len(text)
