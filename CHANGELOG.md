@@ -23,6 +23,7 @@ Types of changes:
 
 - Enable multi-metamap builder to make replacements to the source posix path.
 - All cui file to do transformations
+- Script to transform file from UTF-8 (or other encoding) to ASCII.
 
 
 ## [0.3.4] - 2023-06-07
