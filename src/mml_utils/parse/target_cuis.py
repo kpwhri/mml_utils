@@ -20,13 +20,13 @@ class TargetCuis:
             yield item
 
     def add(self, src, target=None):
-        self.data[src.strip()].add(target.strip() or src.strip())
+        self.data[src].add(target or src)
 
     def n_keys(self):
         return len(self.data.keys())
 
     def n_values(self):
-        return sum(len(x) for x in self.data.values())
+        return len(set().union(*self.data.values()))
 
     def __len__(self):
         return self.n_values()
