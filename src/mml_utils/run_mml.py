@@ -6,8 +6,7 @@ from string import Template
 
 from loguru import logger
 
-from mml_utils.os_utils import get_cp_sep
-
+from mml_utils.os_utils import get_cp_sep, is_windows
 
 LOG4J_CONFIG = Template('''<?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="$LOGLEVEL">
@@ -117,7 +116,10 @@ def run_mml(filename, cwd: Path, *, output_format='files', restrict_to_sts=None,
 
     # metamaplite
     logger.info(f'Running Metamaplite on current set (install location: {cwd})')
-    prefix = f'java {jvm_opts} {property_file} {properties} -cp "{classpath}" gov.nih.nlm.nls.ner.MetaMapLite'
+    if is_windows():  # must have quotes in classpath
+        prefix = f'java {jvm_opts} {property_file} {properties} -cp "{classpath}" gov.nih.nlm.nls.ner.MetaMapLite'
+    else:  # cannot have quotes in classpath (ClassNotFoundException)
+        prefix = f'java {jvm_opts} {property_file} {properties} -cp {classpath} gov.nih.nlm.nls.ner.MetaMapLite'
     file_arg = '--filelistfn' if is_filelist else '--filelist'
     cmd = (f'{prefix} {file_arg}={filename} --outputformat={output_format}'
            f' --overwrite --usecontext {restrict_to_sts} {restrict_to_src}'
