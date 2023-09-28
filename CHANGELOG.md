@@ -19,6 +19,9 @@ Types of changes:
 
 ## [Unreleased]
 
+
+## [0.3.5] - 2023-09-28
+
 ### Added
 
 - Enable multi-metamap builder to make replacements to the source posix path.
