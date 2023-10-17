@@ -45,7 +45,10 @@ def clean_files_cmd(filelist: Path = None, inpath: Path = None, outpath: Path = 
 
 def clean_file(file, encoding=None):
     with open(file, encoding=encoding) as fh:
-        return remove_control_characters(fh.read())
+        text = remove_control_characters(fh.read())
+        if not text.rstrip(' ').endswith('\n'):
+            text += '\n'
+    return text
 
 
 def remove_control_characters(s):
