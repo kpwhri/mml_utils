@@ -76,7 +76,7 @@ def get_next_file(filelist: Path = None, directory: Path = None):
 
 def build_mm_script(parameters='', outpath: Path = None, mm_path: Path = None, filelist: Path = None,
                     directory: Path = None, mm_outpath: Path = None,
-                    script_stem='script', num_scripts=-1, max_per_script=-1):
+                    script_stem='script', num_scripts=-1, max_per_script=-1, replace=None):
     if filelist is None and directory is None:
         raise ValueError(f'Either `filelist` or `directory` must be specified.')
 
@@ -86,7 +86,7 @@ def build_mm_script(parameters='', outpath: Path = None, mm_path: Path = None, f
     outpath.mkdir(exist_ok=True)
 
     with RotatingFileHandler(outpath, script_stem, max_per_script=max_per_script, num_scripts=num_scripts) as writer:
-        target_dirs = write_shell_script(writer, directory, filelist, mm_outpath, mm_path, parameters)
+        target_dirs = write_shell_script(writer, directory, filelist, mm_outpath, mm_path, parameters, replace)
 
     write_ensure_directories(outpath, target_dirs)
 
