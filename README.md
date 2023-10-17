@@ -93,11 +93,11 @@ Additional instructions, including UMLS/MML installation are described here: htt
 
 ## Data Formats
 
-| Tool        | Encoding | Requires Newline |
-|-------------|----------|------------------|
-| Metamap     | ?        | : Y            : | 
-| Metamaplite | ?        | : N            : | 
-| cTAKES      | ?        | : N            : | 
+| Tool        | Encoding | Requires Newline | Allows Spaces in Path |
+|-------------|----------|------------------|-----------------------|
+| Metamap     | ?        | : Y            : | : N:                  |
+| Metamaplite | ?        | : N            : | : Y:                  | 
+| cTAKES      | ?        | : N            : | : Y:                  | 
 
 ## Usage
 

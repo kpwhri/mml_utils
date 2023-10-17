@@ -1,9 +1,11 @@
 from pathlib import Path
 
+from mml_utils.os_utils import escape_space
+
 
 class RotatingFileHandler:
 
-    def __init__(self, path, stem, max_per_script=-1, num_scripts=-1):
+    def __init__(self, path, stem, max_per_script=-1, num_scripts=-1, header_rows: list = None):
         self.path = path
         self.stem = stem
         self.fhs = []
@@ -12,6 +14,7 @@ class RotatingFileHandler:
         self.max_per_script = max_per_script
         self.num_scripts = num_scripts
         self.is_max_per_script = max_per_script > -1  # simplify this repeated check
+        self.header_rows = header_rows
         self._init_filehandlers()
 
     def next_script(self):
@@ -28,12 +31,19 @@ class RotatingFileHandler:
                 self.num_scripts = 1
             for _ in range(self.num_scripts):
                 self.fhs.append(open(self.next_script(), 'w', newline=''))
+        self.write_headers()
+
+    def write_headers(self):
+        for fh in self.fhs:
+            for header_row in self.header_rows:
+                fh.write(f'{header_row}\n')
 
     def rotate(self):
-        """Rotate output script"""
+        """Rotate output script -- only used in max per script"""
         for fh in self.fhs:
             fh.close()
         self.fhs = [open(self.next_script(), 'w', newline='')]
+        self.write_headers()
 
     def writeline(self, line):
         self.count += 1
@@ -85,7 +95,7 @@ def write_ensure_directories(outpath, target_dirs):
     with open(outpath / 'ensure_directories.sh', 'w', newline='') as out:
         out.write(f'# Run this file to ensure all output directories have been created.\n')
         for target_dir in target_dirs:
-            out.write(f'mkdir -p {target_dir.as_posix()}\n')
+            out.write(f'mkdir -p {escape_space(target_dir.as_posix())}\n')
 
     with open(outpath / 'start_servers.sh', 'w', newline='') as out:
         out.write(f'# Start the WSD Server, probably need to update the full path.\n')
@@ -104,6 +114,7 @@ def write_shell_script(writer, directory, filelist, mm_outpath, mm_path, paramet
         else:
             file = target_file.as_posix()
         writer.writeline(
-            f'{mm_path} {parameters} {file} {(target_dir / target_file.stem).as_posix()}.mmi'
+            f'{escape_space(mm_path)} {parameters} {escape_space(file)}'
+            f' {escape_space((target_dir / target_file.stem).as_posix())}.mmi'
         )
     return target_dirs
