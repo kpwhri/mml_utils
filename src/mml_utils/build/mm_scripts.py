@@ -95,6 +95,7 @@ def write_ensure_directories(outpath, target_dirs):
 
 def write_shell_script(writer, directory, filelist, mm_outpath, mm_path, parameters, replace):
     target_dirs = set()
+    writer.writeline(f'# Remember to set path, e.g., `export PATH=$PATH:/mnt/c/public_mm/bin`\n')
     for target_file in get_next_file(filelist, directory):
         target_dir = mm_outpath or target_file.parent
         target_dirs.add(target_dir)

@@ -33,21 +33,21 @@
     * [Prerequisites](#prerequisites)
     * [Installation](#installation)
 * [Usage](#usage)
-    * [End to End Example](examples/complete/README.md) 
+    * [End to End Example](examples/complete/README.md)
     * Commands
-      * [Build MetaMapLite Directory from SQL/CSV](#mml-to-txt)
-      * [Run Metamaplite in Batches](#run-metamaplite-in-batches)
-      * [Copy Notes to Re-run: mml-copy-notes](#mml-copy-notes)
-      * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
-      * [Extract MML Results: mml-extract-mml](#mml-extract-mml)
-      * [Check MML Progress: mml-extract-mml](#mml-check-progress)
-      * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
-      * [Split Long File: mml-split-files](#mml-split-files)
-      * [Run AFEP on MML Output: mml-run-afep](#mml-run-afep)
-      * [Check How Closely Offsets Match: mml-check-offsets](#mml-check-offsets)
-      * [Prepare CSV Files for Review: mml-prepare-review](#mml-prepare-review)
-      * [Build Frequncy Tables](examples/complete/README.md#generate-frequency-tables)
-      * [Build Metamap Sheel Script](#build-metamap-scripts-mml-build-mmscript--mml-build-mmscript-multi)
+        * [Build MetaMapLite Directory from SQL/CSV](#mml-to-txt)
+        * [Run Metamaplite in Batches](#run-metamaplite-in-batches)
+        * [Copy Notes to Re-run: mml-copy-notes](#mml-copy-notes)
+        * [Run MML Against a Filelist: mml-run-filelist](#mml-run-filelist)
+        * [Extract MML Results: mml-extract-mml](#mml-extract-mml)
+        * [Check MML Progress: mml-extract-mml](#mml-check-progress)
+        * [Split MML Filelist: mml-split-filelist](#mml-split-filelist)
+        * [Split Long File: mml-split-files](#mml-split-files)
+        * [Run AFEP on MML Output: mml-run-afep](#mml-run-afep)
+        * [Check How Closely Offsets Match: mml-check-offsets](#mml-check-offsets)
+        * [Prepare CSV Files for Review: mml-prepare-review](#mml-prepare-review)
+        * [Build Frequncy Tables](examples/complete/README.md#generate-frequency-tables)
+        * [Build Metamap Sheel Script](#build-metamap-scripts-mml-build-mmscript--mml-build-mmscript-multi)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -71,8 +71,8 @@ Additional instructions, including UMLS/MML installation are described here: htt
 ### Prerequisites
 
 * Recommended Python 3.11+
-  * Okay: Python 3.9+
-  * Some portions of the code may require 3.11
+    * Okay: Python 3.9+
+    * Some portions of the code may require 3.11
 * `pip install .`
     * See `pyproject.toml` for updated dependencies.
 
@@ -91,15 +91,25 @@ Additional instructions, including UMLS/MML installation are described here: htt
     pip install .
     ```
 
+## Data Formats
+
+| Tool        | Encoding | Requires Newline |
+|-------------|----------|------------------|
+| Metamap     | ?        | : Y            : | 
+| Metamaplite | ?        | : N            : | 
+| cTAKES      | ?        | : N            : | 
+
 ## Usage
 
 ### End-to-End Example
 
-In the `examples/complete/` directory, you can find a complete end-to-end example of build and running MetaMapLite. One using `*.json` and the other `*.mmi` formats.
+In the `examples/complete/` directory, you can find a complete end-to-end example of build and running MetaMapLite. One
+using `*.json` and the other `*.mmi` formats.
 
 Please see [README.md](examples/complete/README.md) file there for step-by-step instructions.
 
 This examples will lead you through:
+
 * Installing metamaplite (MML)
 * Installing this package
 * Running MML on a sample CSV dataset
@@ -110,8 +120,8 @@ This examples will lead you through:
 
 #### Corpus
 
-Apart from just installing the code, you'll need to prepare and format your data. This can often be quite 
-time-consuming as you'll need to select a cohort, time windows, etc. 
+Apart from just installing the code, you'll need to prepare and format your data. This can often be quite
+time-consuming as you'll need to select a cohort, time windows, etc.
 Prepare this data to look like the [corpus.csv file](examples/complete/corpus.csv) with columns of:
 
 * `studyid`
@@ -125,25 +135,23 @@ Also, create a `metadata_file.csv` which contains:
 * `date`: as `YYYY-MM-DD`
 * ...other fields which may be of interest.
 
-For MetaMapLite (MML) to read the data, you'll need all the text in a single directory. 
+For MetaMapLite (MML) to read the data, you'll need all the text in a single directory.
 The name of each note should be `DOCID.txt` (Python: `f'{docid}.txt'`).
 See the [end-to-end examples](examples/complete/README.md) for commands to convert
 [CSV to Text](examples/complete/README.md#csv-to-text) and
 [creating filelists](examples/complete/README.md#aside-split-into-multiple-filelists).
 
-
 #### Supplementary Files
 
 In addition to the corpus files, several JSON files can be useful for summarizing data (building frequencies, etc.).
 
-
 ##### CUI Definitions
 
-A CUI Definitions json file can be constructed defining the different CUIs that are be targeted. 
-This is particularly useful when building frequency files 
+A CUI Definitions json file can be constructed defining the different CUIs that are be targeted.
+This is particularly useful when building frequency files
 ([`mml-build-freqs` command](examples/complete/README.md#generate-frequency-tables)).
 
-By compiling a list of CUIs in a txt file, this file can be built automatically with a script from the 
+By compiling a list of CUIs in a txt file, this file can be built automatically with a script from the
 [`umls_api_tool` package](https://github.com/dcronkite/umls_api_tool/blob/master/examples/cui/cui_to_best_definition.py).
 
 Here's an example:
@@ -161,10 +169,9 @@ Here's an example:
 ]
 ```
 
-
 ##### Feature Mapping
 
-In certain applications, multiple CUIs will be grouped into a single *feature* or *category*. 
+In certain applications, multiple CUIs will be grouped into a single *feature* or *category*.
 A JSON file should be generated grouping these together. CUIs may appear in multiple features.
 
 Mapping of `feature_name` -> `CUIs`. This will be a json file like:
@@ -198,7 +205,6 @@ Mapping of `feature_name` -> `CUIs`. This will be a json file like:
 ]
 ```
 
-
 ### Run Metamaplite in Batches
 
 These scripts assume the following use case:
@@ -209,7 +215,6 @@ These scripts assume the following use case:
 
 These scripts will repeatedly look for new files, build filelists, and run Metamaplite.
 
-
 #### mml-to-txt
 
 Prepare files for running metamaplite. Files can be in CSV file or SQL database.
@@ -217,11 +222,12 @@ Prepare files for running metamaplite. Files can be in CSV file or SQL database.
 Additional Options (for both sql/csv):
 
 * `--n-dirs [INTEGER]`
-  * Number of directories to create with text files. Defaults to 1
+    * Number of directories to create with text files. Defaults to 1
 * `--text-encoding utf8`
-  * If you want the files in an encoding other than `utf8`, please specify. Be sure to test what MetaMapLite is able to handle.
+    * If you want the files in an encoding other than `utf8`, please specify. Be sure to test what MetaMapLite is able
+      to handle.
 * `--text-extension ".txt"`
-  * Another option is to have no extension for these files. In that case, specify an empty string.
+    * Another option is to have no extension for these files. In that case, specify an empty string.
 
 ##### mml-sql-to-txt
 
@@ -242,9 +248,6 @@ For CSV, you will need to specify the id and text columns.
 Example:
 
     mml-csv-to-txt /path/to/corpus.csv --outdir OUTDIR --id-col note_id --text-col note_text
-
-
-
 
 #### mml-build-filelists
 
@@ -326,7 +329,8 @@ Extract results from running Metamaplite. Currently supports json (default), xmi
 
     mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json|xmi)]
 
-For usage with cTAKES output, include the `--output-directory [CTAKES_XMI_DIR]` which points to the cTAKES output directory.
+For usage with cTAKES output, include the `--output-directory [CTAKES_XMI_DIR]` which points to the cTAKES output
+directory.
 
     mml-extract-mml /path/to/notes --outdir /path/to/output [...] --output-directory /path/to/*.xmi.txt_dir --output-format xmi
 
@@ -337,7 +341,10 @@ For encoding challenges, you can use the following arguments:
 
 #### mml-compare-extracts
 
-To compare two different feature extraction processes (e.g., cTAKES + MedDRA vs MML + MedDRA), place the relevant `notes` and `mml` csv files into directories named after the feature extraction. This command is directory-based rather than file-based, so both outputs cannot be in the same folder. For the following example (generated from `mml-extract-mml`...
+To compare two different feature extraction processes (e.g., cTAKES + MedDRA vs MML + MedDRA), place the
+relevant `notes` and `mml` csv files into directories named after the feature extraction. This command is
+directory-based rather than file-based, so both outputs cannot be in the same folder. For the following example (
+generated from `mml-extract-mml`...
 
     ct_meddra / notes_20230329.csv
     ct_meddra / mml_20230329.csv
@@ -348,14 +355,14 @@ To compare two different feature extraction processes (e.g., cTAKES + MedDRA vs 
 
     mml-compare-extracts ct_meddra mml_meddra
 
-This will create a comparison CSV file called 'compare_ct_meddra_mml_meddra.csv' in the current directory showing the differences.
+This will create a comparison CSV file called 'compare_ct_meddra_mml_meddra.csv' in the current directory showing the
+differences.
 
 More generally, the command:
 
     mml-compare-extracts EXTRACT_DIR_1 EXTRACT_DIR_2 [--outpath OUTPUT_DIR] [--text-encoding (utf|latin1|etc.)] [--name1 NAME] [--name2 NAME2]
 
 The `--name#` arguments are to override the default names which are based on the directories.
-
 
 ### mml-check-progress
 
@@ -426,7 +433,8 @@ An Excel table showing the resulting CUIs can then be built by running:
 
     mml-summarize-afep OUTDIR(outdirectory from `mml-run-afep` command)
 
-If experimenting with multiple approaches (e.g., cTAKES+MedDRA vs MML+MedDRA vs ...), you can run these all in a single command:
+If experimenting with multiple approaches (e.g., cTAKES+MedDRA vs MML+MedDRA vs ...), you can run these all in a single
+command:
 
     mml-run-afep-multi config.toml
 
@@ -447,13 +455,13 @@ Example TOML (an example can be generated using `write_afep_script_for_dirs`):
     expand_cuis = True
     apikey = '1234-5678-9101'
 
-
 This will run AFEP three times and then create an Excel file containing the summary measures.
-
 
 ### Build Metamap Scripts: mml-build-mmscript / mml-build-mmscript-multi
 
-Build a metamap shell script can be a bit of a challenge since the metamap executable expects specifying only a single target file and a single output file. Instead of building this manually, `mml-build-mmscript` (for single configurations) and `mml-build-mmscript-multi` (for comparing multiple metamap configurations).
+Build a metamap shell script can be a bit of a challenge since the metamap executable expects specifying only a single
+target file and a single output file. Instead of building this manually, `mml-build-mmscript` (for single
+configurations) and `mml-build-mmscript-multi` (for comparing multiple metamap configurations).
 
 An example config using the `mml-build-mmscript-multi`:
 
@@ -476,11 +484,9 @@ An example config using the `mml-build-mmscript-multi`:
     parameters = '-C --conj'
     name = 'conj'
 
-
 ### mml-check-offsets
 
 Confirm that the offsets reported by MML are correct.
-
 
     mml-check-offsets /path/to/notes
 
@@ -488,26 +494,26 @@ If running MML on Windows, include `--add-cr` to add back carriage returns.
 
 Use `--replacements old==new` to make certain changes to 'fix' the matches (e.g., special characters).
 
-
 ### mml-prepare-review
 
 Prepare review lists of CSV files.
 
 Inputs (see `tests/fever` for examples:
+
 * Text file (`feature.cui.txt`) containing target CUIs, 1 per line
 * String file (`feature.string.txt`) containing text strings to look for and include with CUI data
 
-
-    mml-prepare-review /path/to/notes --target-path /path/to/inputs [--mml-format json] [--text-extension .txt] [--text-encoding utf8]
-
+  mml-prepare-review /path/to/notes --target-path
+  /path/to/inputs [--mml-format json] [--text-extension .txt] [--text-encoding utf8]
 
 To then take samples from this dataset, use `mml-prepare-review-sample`.
 
 ## Troubleshooting
 
-* If there is a problem with file encoding (e.g., an error like 'unable to decode byte'), the above programs should provide some method for specifying the encoding:
-  * Example options: `--text-encoding` / `--file-encoding`, `--output-encoding`
-  * Example encodings to try for English: `utf8`, `latin1`
+* If there is a problem with file encoding (e.g., an error like 'unable to decode byte'), the above programs should
+  provide some method for specifying the encoding:
+    * Example options: `--text-encoding` / `--file-encoding`, `--output-encoding`
+    * Example encodings to try for English: `utf8`, `latin1`
 
 ## Versions
 
