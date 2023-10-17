@@ -87,6 +87,11 @@ def write_ensure_directories(outpath, target_dirs):
         for target_dir in target_dirs:
             out.write(f'mkdir -p {target_dir.as_posix()}\n')
 
+    with open(outpath / 'start_servers.sh', 'w', newline='') as out:
+        out.write(f'# Start the WSD Server, probably need to update the full path.\n')
+        out.write(f'./bin/skrmedpostctl start\n')
+        out.write(f'./bin/wsdserverctl start\n')
+
 
 def write_shell_script(writer, directory, filelist, mm_outpath, mm_path, parameters, replace):
     target_dirs = set()
