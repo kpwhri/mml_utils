@@ -20,10 +20,32 @@ TODO:
 """
 import pathlib
 
+import click
+
 from mml_utils.run_mml import repeat_run_mml, run_mml
 
 
-def run_mml_filelists_in_dir(filedir: pathlib.Path, mml_home: pathlib.Path, repeat=False):
+@click.command()
+@click.argument('filedir', type=click.Path(path_type=pathlib.Path, file_okay=False))
+@click.option('--mml-home', type=click.Path(path_type=pathlib.Path, file_okay=False),
+              help='Path to metamaplite home.')
+@click.option('--output-format', type=str, default='json',
+              help='Output format (e.g., json or mmi)')
+@click.option('--property-file', type=str, default=None,
+              help='Path to properety file to run.')
+@click.option('--properties', nargs=2, default=None, multiple=True,
+              help='Specify additional properties, e.g., --properties metamaplite.index.directory $PATH.')
+@click.option('--version', default=None,
+              help='Specify UMLS version. If not specified, relevant version will be automatically selected'
+                   ' according to dataset.')
+@click.option('--dataset', default='USAbase',
+              help='Specify UMLS dataset.')
+@click.option('--loglevel', default='WARN',
+              type=click.Choice(['ALL', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL', 'OFF', 'TRACE']),
+              help='Select logging level. Defaults to WARN to avoid MML\'s dense logging output.')
+def run_mml_filelists_in_dir(filedir: pathlib.Path, mml_home: pathlib.Path, output_format='json',
+                             property_file=None, properties=None, repeat=False, version=None, dataset='USAbase',
+                             loglevel='WARN'):
     """
 
     :param repeat:
@@ -33,20 +55,13 @@ def run_mml_filelists_in_dir(filedir: pathlib.Path, mml_home: pathlib.Path, repe
     """
     for file in filedir.glob('*.in_progress'):
         if repeat:
-            repeat_run_mml(file, mml_home)
+            repeat_run_mml(file, mml_home, output_format=output_format, property_file=property_file,
+                           properties=properties, version=version, dataset=dataset, loglevel=loglevel)
         else:
-            run_mml(file, mml_home)
+            run_mml(file, mml_home, output_format=output_format, property_file=property_file, properties=properties,
+                    version=version, dataset=dataset, loglevel=loglevel)
         file.rename(str(file).replace('.in_progress', '.complete'))
 
 
 if __name__ == '__main__':
-    import argparse
-
-    parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
-    parser.add_argument('-m', '--mml-home', dest='mml_home',
-                        help='Path to metamaplite home.')
-    parser.add_argument('-f', '--filedir', type=pathlib.Path,
-                        help='Path to directory containing files with lists of notes to process.')
-    parser.add_argument('--repeat', action='store_true', default=False,
-                        help='Repeatedly re-run if metamaplite fails on a file for any reason.')
-    run_mml_filelists_in_dir(**vars(parser.parse_args()))
+    run_mml_filelists_in_dir()
