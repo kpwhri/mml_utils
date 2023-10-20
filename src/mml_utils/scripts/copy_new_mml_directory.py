@@ -12,7 +12,7 @@ import click
 @click.command()
 @click.option('--source', type=click.Path(exists=True, path_type=pathlib.Path),
               help='Source directory containing text files for processing by metamap;'
-                   ' notes are assumed to have no extension')
+                   ' notes are assumed to have no extension or ".txt"')
 @click.option('--dest', type=click.Path(exists=False, path_type=pathlib.Path),
               help='Destination directory (should not exist) to write text files for processing by metamap')
 @click.option('--filelist-dir', type=click.Path(exists=True, path_type=pathlib.Path),
@@ -35,7 +35,7 @@ def copy_to_new_mml_directory(source: pathlib.Path, dest: pathlib.Path,
     total_moved = 0
     with open(filelist_dir / f'filelist_{dest.name}_{now}.txt', 'w') as out:
         for file in source.iterdir():
-            if file.suffix:
+            if file.suffix and file.suffix != '.txt':
                 continue
             shutil.copy(file, dest)
             out.write(f'{str(dest / file.name)}\n')
