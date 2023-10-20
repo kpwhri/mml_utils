@@ -43,6 +43,7 @@ Types of changes:
 - Metamap shell script builder now generates a draft AFEP toml config
 - more AFEP configs can be grouped in MultiAfepConfig to reduce amount of redundant configurations
 - Updated README with new metamap script builder commands
+- Can specify file or directory when running mml, and a filelist will automatically be created
 
 ### Fixed
 

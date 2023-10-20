@@ -1,17 +1,22 @@
 """
 More generic form of `run_mml` which allows running repeatedly against a single output file.
 """
-import pathlib
+from pathlib import Path
 
 import click
 
+from mml_utils.filelists import build_filelist
 from mml_utils.run_mml import repeat_run_mml, run_mml
 
 
 @click.command()
-@click.option('--filelist', type=click.Path(path_type=pathlib.Path, dir_okay=False),
+@click.option('--file', default=None, type=click.Path(path_type=Path, dir_okay=False),
+              help='File to be processed.')
+@click.option('--filelist', default=None, type=click.Path(path_type=Path, dir_okay=False),
               help='File with list of all files to be processed, one per line.')
-@click.option('--mml-home', type=click.Path(path_type=pathlib.Path, file_okay=False),
+@click.option('--directory', default=None, type=click.Path(path_type=Path, file_okay=False),
+              help='File with list of all files to be processed, one per line.')
+@click.option('--mml-home', type=click.Path(path_type=Path, file_okay=False),
               help='Path to metamaplite home.')
 @click.option('--output-format', type=str, default='json',
               help='Output format (e.g., json or mmi)')
@@ -27,9 +32,15 @@ from mml_utils.run_mml import repeat_run_mml, run_mml
 @click.option('--loglevel', default='WARN',
               type=click.Choice(['ALL', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL', 'OFF', 'TRACE']),
               help='Select logging level. Defaults to WARN to avoid MML\'s dense logging output.')
-def run_single_mml_filelist(filelist: pathlib.Path, mml_home: pathlib.Path, output_format='json',
+def run_single_mml_filelist(filelist: Path, file: Path, directory: Path, mml_home: Path, output_format='json',
                             property_file=None, properties=None, repeat=False, version=None, dataset='USAbase',
                             loglevel='WARN'):
+    if file:
+        filelist = build_filelist(file)
+    elif directory:
+        filelist = build_filelist(directory)
+    if not filelist:
+        raise ValueError(f'No filelist specified. Must supply `--file`, `--filelist`, or `--directory` arguments.')
     if repeat:
         repeat_run_mml(filelist, mml_home, output_format=output_format, property_file=property_file,
                        properties=properties, version=version, dataset=dataset, loglevel=loglevel)
