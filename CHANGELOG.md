@@ -20,6 +20,20 @@ Types of changes:
 ## [Unreleased]
 
 
+## [0.3.6] - 2023-11-16
+
+### Added
+
+* Specify directory or file for `run_mml_filelist`
+* Escapes for spaces and parens when building scripts
+* Including a `start-servers` script as a reminder to kick-off required MM services
+* Clean file ensures newline at end of each file (required by MM)
+
+### Fixed
+
+* Allow *.txt suffix when scanning for files
+
+
 ## [0.3.5] - 2023-09-28
 
 ### Added
