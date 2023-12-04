@@ -15,6 +15,7 @@ dependencies = [
     'loguru',
     'pydantic',
     'charset_normalizer',
+    'pandas',
 ]
 requires-python = '>=3.8'
 keywords = ['nlp', 'information extraction', 'metamap', 'metamaplite', 'ctakes']
@@ -42,7 +43,6 @@ doc = [
     'sphinx-autodoc-typehints',
     'sphinx-book-theme',
 ]
-pandas = ['pandas']
 excel = ['openpyxl']
 
 [project.scripts]

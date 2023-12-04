@@ -63,21 +63,6 @@ def test_extract_data_from_file_target_cuis_mapping(fever_file):
     assert cnt == 18
 
 
-def test_extract_data_from_file_target_cuis_mapping(fever_file):
-    cui = 'C4552740'
-    results = list(extract_data_from_file(fever_file, target_cuis=TargetCuis.fromdict({cui: cui, 'C0424755': cui})))
-    cnt = 0
-    for is_record, data in results:
-        if is_record:
-            assert data['processed'] is True
-            assert data['num_chars'] == 2216
-            assert data['num_letters'] == 1796
-        else:
-            assert data['cui'] == cui
-            cnt += 1
-    assert cnt == 18
-
-
 def test_extract_data_from_file_target_multiple_cuis_mapping(fever_file):
     target_cuis = TargetCuis()
     cui = 'C4552740'

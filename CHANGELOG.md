@@ -19,6 +19,15 @@ Types of changes:
 
 ## [Unreleased]
 
+### Added
+
+* `pandas` as required rather than optional
+* Generate pivot table when running `extract_mml` to show CUI counts note
+
+### Fixed
+
+* Remove duplicate test
+
 
 ## [0.3.6] - 2023-11-16
 
