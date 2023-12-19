@@ -25,6 +25,7 @@ Types of changes:
 * Generate pivot table when running `extract_mml` to show CUI counts note
 * Documentation on using Metamap
 * Timestamp to `cuis_by_doc` CSV output
+* Added `cuis_by_doc.mmi.csv` as an example (this is referenced by the documentation)
 
 ### Fixed
 
