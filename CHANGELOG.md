@@ -19,6 +19,9 @@ Types of changes:
 
 ## [Unreleased]
 
+
+## [0.4.0] - 2023-12-19
+
 ### Added
 
 * `pandas` as required rather than optional
