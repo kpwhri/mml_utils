@@ -30,6 +30,7 @@ Types of changes:
 ### Fixed
 
 * Remove duplicate test
+* `mml-extract-mml` was crashing on json input
 
 
 ## [0.3.6] - 2023-11-16
