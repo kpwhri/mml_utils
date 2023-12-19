@@ -95,7 +95,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
     outdir.mkdir(exist_ok=True)
     note_outfile = outdir / f'notes_{now}.csv'
     mml_outfile = outdir / f'mml_{now}.csv'
-    cuis_by_doc_outfile = outdir / f'cuis_by_doc.csv'
+    cuis_by_doc_outfile = outdir / f'cuis_by_doc_{now}.csv'
 
     if add_fieldname:
         global MML_FIELDNAMES

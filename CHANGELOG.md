@@ -24,6 +24,7 @@ Types of changes:
 * `pandas` as required rather than optional
 * Generate pivot table when running `extract_mml` to show CUI counts note
 * Documentation on using Metamap
+* Timestamp to `cuis_by_doc` CSV output
 
 ### Fixed
 
