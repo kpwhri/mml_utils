@@ -111,7 +111,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
                          output_format, encoding, exclude_negated, output_directories=output_directories,
                          mm_encoding=mm_encoding)
     build_pivot_table(mml_outfile, cuis_by_doc_outfile)
-    return note_outfile, mml_outfile
+    return note_outfile, mml_outfile, cuis_by_doc_outfile
 
 
 def get_output_file(curr_directory, exp_filename, output_format, output_directories=None, skip_missing=False):

@@ -47,3 +47,8 @@ def file0(file0_path):
 @pytest.fixture
 def anaphylaxis_dir():
     return Path('anaphylaxis')
+
+
+@pytest.fixture
+def example_directory():
+    return Path('..') / 'examples'

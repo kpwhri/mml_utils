@@ -26,6 +26,7 @@ Types of changes:
 * Documentation on using Metamap
 * Timestamp to `cuis_by_doc` CSV output
 * Added `cuis_by_doc.mmi.csv` as an example (this is referenced by the documentation)
+* Tests for the complete examples in `./examples/complete` to ensure these work as expected
 
 ### Fixed
 
