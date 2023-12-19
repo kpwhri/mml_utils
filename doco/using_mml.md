@@ -22,8 +22,8 @@ metamaplite.bat --filelistfn=filelist.txt --outputformat=files --usecontext --re
 To re-run on the same files, you will need to include an `--overwrite` flag to tell MML that it's okay to overwrite the existing output files.
 ```
 
-```{admonition} Negation and JSON Output
-Currently, `json` files do not output negation information, but you can make the following change to get that information: [https://github.com/lhncbc/metamaplite/pull/16](https://github.com/lhncbc/metamaplite/pull/16).
+```{info} Negation and JSON Output
+JSON format now supports negation: [https://github.com/lhncbc/metamaplite/pull/16](https://github.com/lhncbc/metamaplite/pull/16).
 ```
 
 ### Run/test text directly in the shell:
