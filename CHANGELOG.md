@@ -30,7 +30,7 @@ Types of changes:
 ### Fixed
 
 * Remove duplicate test
-* `mml-extract-mml` was crashing on json input
+* `mml-extract-mml` was crashing on json input, so create default TargetCuis for json (already there in mmi)
 
 
 ## [0.3.6] - 2023-11-16

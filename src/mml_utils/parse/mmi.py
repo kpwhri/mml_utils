@@ -48,7 +48,7 @@ def split_mmi_line(textline):
     return segments
 
 
-def extract_mml_from_mmi_data(text, filename, *, target_cuis: TargetCuis=None, extras=None):
+def extract_mml_from_mmi_data(text, filename, *, target_cuis: TargetCuis = None, extras=None):
     """
 
     :param text:

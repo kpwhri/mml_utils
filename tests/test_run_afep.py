@@ -7,6 +7,8 @@ def build_toml(outdir, *dirs):
         for d in dirs:
             out.write('[[runs]]\n')
             out.write(f'note_directories = ["{d.as_posix()}"]\n')
+    with open(outdir / 'config.toml', encoding='utf8') as fh:
+        print(fh.read())
     return outdir / 'config.toml'
 
 

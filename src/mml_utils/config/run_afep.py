@@ -22,7 +22,10 @@ class AfepRun(BaseModel):
         super().__init__(**kwargs)
         # post init
         if not self.name:
-            self.name = self.data_directory[0].stem
+            if self.data_directory:
+                self.name = self.data_directory[0].stem
+            else:
+                self.name = 'afep_run'
 
     def set_outdir(self, default: Path):
         self.outdir = self.get_outdir(default)
