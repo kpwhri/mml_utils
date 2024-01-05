@@ -67,7 +67,6 @@ def build_mrrel(conn, path: Path):
         with open(path / 'MRREL.RRF', encoding='utf8') as fh:
             for i, line in enumerate(csv.DictReader(fh, fieldnames=fieldnames, delimiter='|')):
                 if line['sab'] != 'MDR':
-                    print(line)
                     continue
                 cur.execute(f'INSERT INTO MRREL (cui1, cui2, rela, sab) VALUES (?, ?, ?, ?)',
                             (line['cui1'], line['cui2'], line['rela'], line['sab']))
