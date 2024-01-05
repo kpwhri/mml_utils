@@ -136,6 +136,7 @@ def build_cui_normalisation_table(
     2. Retrieve all LLTs for the PTs
     3. Merge the results together (ensuring that no mappings are lost)
 
+    :param self_map_all_llts: ensure that all LLTs are appropriately self-mapped, even ones discovered during pt2llt
     :param map_to_pts_only: all outputs should be PTs (though LLTs will be mapped to PTs)
     :param cuis:
     :param meta_path:
