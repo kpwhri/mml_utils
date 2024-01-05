@@ -12,8 +12,10 @@ def test_load_mrconso(umls_path):
     with sqlite3.connect(':memory:') as conn:
         build_mrconso(conn, umls_path, languages={'ENG'})
         cur = conn.cursor()
-        n_records = cur.execute('select count(*) from MRCONSO').fetchone()
-        assert n_records[0] == record_count
+        n_records = cur.execute('select count(*) from MRCONSO').fetchone()[0]
+        assert n_records == record_count
+        n_records = cur.execute('select count(*) from MRCONSO where sab="MDR"').fetchone()[0]
+        assert n_records == record_count, 'All records are Meddra'
 
 
 def test_load_mrrel(umls_path):
@@ -25,5 +27,7 @@ def test_load_mrrel(umls_path):
     with sqlite3.connect(':memory:') as conn:
         build_mrrel(conn, umls_path)
         cur = conn.cursor()
-        n_records = cur.execute('select count(*) from MRREL').fetchone()
-        assert n_records[0] == record_count
+        n_records = cur.execute('select count(*) from MRREL').fetchone()[0]
+        assert n_records == record_count, 'All relevant records read from RRF file'
+        n_records = cur.execute('select count(*) from MRREL where sab="MDR"').fetchone()[0]
+        assert n_records == record_count, 'All records are Meddra'
