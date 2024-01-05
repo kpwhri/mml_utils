@@ -100,14 +100,14 @@ def test_get_pts_for_llts(umls_path, target_cuis, expected):
     assert results == expected
 
 
-@pytest.mark.parametrize('target_cuis, expected, map_to_pts_only, self_map_all_llts', [
+@pytest.mark.parametrize('target_cuis, expected', [
     (['C0000001'], [
         ('C0000001', 'C0000001'),
         ('C0000002', 'C0000001'),
         ('C0000003', 'C0000001'),
         ('C0000004', 'C0000001'),
         ('C0000005', 'C0000001'),
-    ], False, False),
+    ]),
     (['C0000002'], [
         ('C0000001', 'C0000001'),
         ('C0000002', 'C0000001'),
@@ -115,26 +115,29 @@ def test_get_pts_for_llts(umls_path, target_cuis, expected):
         ('C0000003', 'C0000001'),
         ('C0000004', 'C0000001'),
         ('C0000005', 'C0000001'),
-    ], False, False),
-    # map to pts only
+    ]),
+])
+def test_build_cui_normalisation_table(umls_path, target_cuis, expected):
+    table = build_cui_normalisation_table(target_cuis, umls_path,)
+    assert table == expected
+
+
+@pytest.mark.parametrize('target_cuis, expected', [
     (['C0000001'], [
         ('C0000001', 'C0000001'),
         ('C0000002', 'C0000001'),
         ('C0000003', 'C0000001'),
         ('C0000004', 'C0000001'),
         ('C0000005', 'C0000001'),
-    ], True, False),
+    ]),
     (['C0000002'], [
         ('C0000001', 'C0000001'),
         ('C0000002', 'C0000001'),
         ('C0000003', 'C0000001'),
         ('C0000004', 'C0000001'),
         ('C0000005', 'C0000001'),
-    ], True, False),
+    ]),
 ])
-def test_build_cui_normalisation_table(umls_path, target_cuis, expected, map_to_pts_only, self_map_all_llts):
-    table = build_cui_normalisation_table(target_cuis, umls_path,
-                                          map_to_pts_only=map_to_pts_only,
-                                          self_map_all_llts=self_map_all_llts,
-                                          )
+def test_build_cui_normalisation_table_map_to_pts_only(umls_path, target_cuis, expected):
+    table = build_cui_normalisation_table(target_cuis, umls_path, map_to_pts_only=True)
     assert table == expected
