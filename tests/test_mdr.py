@@ -3,7 +3,7 @@ import sqlite3
 import pytest
 
 from mml_utils.umls.export_to_db import build_mrconso, build_mrrel
-from mml_utils.umls.mdr import connect, get_llts_for_pts, get_pts_for_llts
+from mml_utils.umls.mdr import connect, get_llts_for_pts, get_pts_for_llts, build_cui_normalisation_table
 
 
 def compare_table(cur, tablename, record_count=None):
@@ -60,23 +60,23 @@ def test_connect_and_populate(umls_path, caplog):
 
 @pytest.mark.parametrize('target_cuis, expected', [
     (['C0000001', 'C0000008'], [
-        ('C0000001', 'C0000002'),
-        ('C0000001', 'C0000003'),
-        ('C0000001', 'C0000004'),
-        ('C0000001', 'C0000005'),
-        ('C0000008', 'C0000007'),
+        ('C0000002', 'C0000001'),
+        ('C0000003', 'C0000001'),
+        ('C0000004', 'C0000001'),
+        ('C0000005', 'C0000001'),
+        ('C0000007', 'C0000008'),
     ]),
     (['C0000001'], [
-        ('C0000001', 'C0000002'),
-        ('C0000001', 'C0000003'),
-        ('C0000001', 'C0000004'),
-        ('C0000001', 'C0000005'),
+        ('C0000002', 'C0000001'),
+        ('C0000003', 'C0000001'),
+        ('C0000004', 'C0000001'),
+        ('C0000005', 'C0000001'),
     ]),
     (['C0000001', 'C0000002', 'C0000003'], [
-        ('C0000001', 'C0000002'),
-        ('C0000001', 'C0000003'),
-        ('C0000001', 'C0000004'),
-        ('C0000001', 'C0000005'),
+        ('C0000002', 'C0000001'),
+        ('C0000003', 'C0000001'),
+        ('C0000004', 'C0000001'),
+        ('C0000005', 'C0000001'),
     ]),
     (['C0000006', 'C0000002', 'C0000003'], []),
 ])
@@ -88,13 +88,53 @@ def test_get_llts_for_pts(umls_path, target_cuis, expected):
 @pytest.mark.parametrize('target_cuis, expected', [
     (['C0000001', 'C0000008'], []),
     (['C0000002'], [
-        ('C0000001', 'C0000002'),
+        ('C0000002', 'C0000001'),
     ]),
     (['C0000001', 'C0000002', 'C0000003'], [
-        ('C0000001', 'C0000002'),
-        ('C0000001', 'C0000003'),
+        ('C0000002', 'C0000001'),
+        ('C0000003', 'C0000001'),
     ]),
 ])
 def test_get_pts_for_llts(umls_path, target_cuis, expected):
     results = get_pts_for_llts(target_cuis, umls_path)
     assert results == expected
+
+
+@pytest.mark.parametrize('target_cuis, expected, map_to_pts_only, self_map_all_llts', [
+    (['C0000001'], [
+        ('C0000001', 'C0000001'),
+        ('C0000002', 'C0000001'),
+        ('C0000003', 'C0000001'),
+        ('C0000004', 'C0000001'),
+        ('C0000005', 'C0000001'),
+    ], False, False),
+    (['C0000002'], [
+        ('C0000001', 'C0000001'),
+        ('C0000002', 'C0000001'),
+        ('C0000002', 'C0000002'),  # because it's an input CUI
+        ('C0000003', 'C0000001'),
+        ('C0000004', 'C0000001'),
+        ('C0000005', 'C0000001'),
+    ], False, False),
+    # map to pts only
+    (['C0000001'], [
+        ('C0000001', 'C0000001'),
+        ('C0000002', 'C0000001'),
+        ('C0000003', 'C0000001'),
+        ('C0000004', 'C0000001'),
+        ('C0000005', 'C0000001'),
+    ], True, False),
+    (['C0000002'], [
+        ('C0000001', 'C0000001'),
+        ('C0000002', 'C0000001'),
+        ('C0000003', 'C0000001'),
+        ('C0000004', 'C0000001'),
+        ('C0000005', 'C0000001'),
+    ], True, False),
+])
+def test_build_cui_normalisation_table(umls_path, target_cuis, expected, map_to_pts_only, self_map_all_llts):
+    table = build_cui_normalisation_table(target_cuis, umls_path,
+                                          map_to_pts_only=map_to_pts_only,
+                                          self_map_all_llts=self_map_all_llts,
+                                          )
+    assert table == expected

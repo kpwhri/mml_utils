@@ -39,7 +39,7 @@ def get_llts_for_pts(cuis, meta_path, *, languages: set = None):
     :param cuis: all CUIs
     :param meta_path: path to location of MRCONSO and MRREL
     :param languages: set; defaults to english (`{ENG}`)
-    :return: list[ tuple[PT, LLT] ]
+    :return: list[ tuple[LLT, PT] ]
     """
     # get all LLTs for a PT
     with connect(meta_path, languages=languages) as cur:
@@ -50,7 +50,7 @@ def get_llts_for_pts(cuis, meta_path, *, languages: set = None):
             and CUI in (?{', ?' * (len(cuis) - 1)})
         '''
         cur.execute(f'''
-            select b.cui1, b.cui2 
+            select b.cui2, b.cui1 
             from mrconso a
             inner join mrrel b on a.cui = b.cui1
             inner join mrconso c on b.cui2 = c.cui
@@ -73,7 +73,7 @@ def get_pts_for_llts(cuis, meta_path, *, languages: set = None):
     :param cuis: all CUIs (all PTs with be ignored)
     :param meta_path: path to location of MRCONSO and MRREL
     :param languages: set; defaults to english (`{ENG}`)
-    :return: list[ tuple[PT, LLT] ]
+    :return: list[ tuple[LLT, PT] ]
     """
     # get all LLTs for a PT
     with connect(meta_path, languages=languages) as cur:
@@ -84,7 +84,7 @@ def get_pts_for_llts(cuis, meta_path, *, languages: set = None):
             and CUI in (?{', ?' * (len(cuis) - 1)})
         '''
         cur.execute(f'''
-            select b.cui1, b.cui2 
+            select b.cui2, b.cui1 
             from mrconso a
             inner join mrrel b on a.cui = b.cui1
             inner join mrconso c on b.cui2 = c.cui
@@ -98,3 +98,61 @@ def get_pts_for_llts(cuis, meta_path, *, languages: set = None):
             group by b.cui1, b.cui2;
         ''', cuis)
         return cur.fetchall()
+
+
+def get_pts(cuis, meta_path, *, languages: set = None):
+    """
+    Get preferred terms for give CUI list.
+    :param cuis:
+    :param meta_path:
+    :param languages:
+    :return:
+    """
+    with connect(meta_path, languages=languages) as cur:
+        cur.execute(f'''
+                select distinct cui
+                from mrconso
+                where sab='MDR' and tty = 'PT'
+                and cui in (?{', ?' * (len(cuis) - 1)})
+            ''', cuis)
+        return [x[0] for x in cur.fetchall()]
+
+
+def build_cui_normalisation_table(
+        cuis, meta_path, *, languages: set = None,
+        map_to_pts_only=False,
+        self_map_all_llts=False,
+
+):
+    """
+    Build a table of all possible CUI relationships for MDR
+    1. Retrieve all PTs for the LLTs
+    2. Retrieve all LLTs for the PTs
+    3. Merge the results together (ensuring that no mappings are lost)
+
+    :param map_to_pts_only: all outputs should be PTs (though LLTs will be mapped to PTs)
+    :param cuis:
+    :param meta_path:
+    :param languages:
+    :return:
+    """
+    # create default mapping of all CUIs to self: these were all found
+    cuis_table = [(cui, cui) for cui in cuis]
+    # retrieve all PTs for the LLTs
+    all_pts_table = get_pts_for_llts(cuis, meta_path, languages=languages)
+    possible_new_pts = [pt for llt, pt in all_pts_table]
+    self_map_pts_table = [(cui, cui) for cui in possible_new_pts]
+    all_possible_pts = cuis + possible_new_pts
+    # retrieve all LLTs for the PTs
+    all_llts_table = get_llts_for_pts(all_possible_pts, meta_path, languages=languages)
+    self_map_llts_table = [(llt, llt) for llt, pt in all_llts_table]
+    # combine and dedupe result
+    merged_lists = cuis_table + self_map_pts_table + all_pts_table + all_llts_table
+    if self_map_all_llts:
+        merged_lists += self_map_llts_table
+    final_list = list(sorted(set(merged_lists)))
+    if map_to_pts_only:
+        target_cuis = [target for src, target in final_list]
+        all_pts = set(get_pts(target_cuis, meta_path, languages=languages))
+        final_list = [(src, target) for src, target in final_list if target in all_pts]
+    return final_list
