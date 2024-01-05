@@ -1,6 +1,17 @@
 import sqlite3
 
 from mml_utils.umls.export_to_db import build_mrconso, build_mrrel
+from mml_utils.umls.mdr import connect
+
+
+def compare_table(cur, tablename, record_count=None):
+    n_records = cur.execute(f'select count(*) from {tablename}').fetchone()[0]
+    if record_count:
+        assert n_records == record_count, 'All relevant records read from RRF file'
+    n_records_mdr = cur.execute(f'select count(*) from {tablename} where sab="MDR"').fetchone()[0]
+    if record_count:
+        assert n_records_mdr == record_count, 'All records are Meddra (method 1)'
+    assert n_records == n_records_mdr, 'All records are Meddra (method 2)'
 
 
 def test_load_mrconso(umls_path):
@@ -12,10 +23,7 @@ def test_load_mrconso(umls_path):
     with sqlite3.connect(':memory:') as conn:
         build_mrconso(conn, umls_path, languages={'ENG'})
         cur = conn.cursor()
-        n_records = cur.execute('select count(*) from MRCONSO').fetchone()[0]
-        assert n_records == record_count
-        n_records = cur.execute('select count(*) from MRCONSO where sab="MDR"').fetchone()[0]
-        assert n_records == record_count, 'All records are Meddra'
+        compare_table(cur, 'MRCONSO', record_count=record_count)
 
 
 def test_load_mrrel(umls_path):
@@ -27,7 +35,16 @@ def test_load_mrrel(umls_path):
     with sqlite3.connect(':memory:') as conn:
         build_mrrel(conn, umls_path)
         cur = conn.cursor()
-        n_records = cur.execute('select count(*) from MRREL').fetchone()[0]
-        assert n_records == record_count, 'All relevant records read from RRF file'
-        n_records = cur.execute('select count(*) from MRREL where sab="MDR"').fetchone()[0]
-        assert n_records == record_count, 'All records are Meddra'
+        compare_table(cur, 'MRREL', record_count=record_count)
+
+
+def test_connect_and_populate(umls_path, caplog):
+    db_path = umls_path / 'mml_utils.mdr.db'
+    db_path.unlink(missing_ok=True)
+    with connect(umls_path) as cur:
+        assert 'MDR database not built' in caplog.text
+        assert 'Extracting MRCONSO' in caplog.text
+        assert 'Extracting MRREL' in caplog.text
+        compare_table(cur, 'MRCONSO')
+        compare_table(cur, 'MRREL')
+    db_path.unlink()
