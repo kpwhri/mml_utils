@@ -1,6 +1,6 @@
 import sqlite3
 
-from mml_utils.umls.export_to_db import build_mrconso
+from mml_utils.umls.export_to_db import build_mrconso, build_mrrel
 
 
 def test_load_mrconso(umls_path):
@@ -13,4 +13,17 @@ def test_load_mrconso(umls_path):
         build_mrconso(conn, umls_path, languages={'ENG'})
         cur = conn.cursor()
         n_records = cur.execute('select count(*) from MRCONSO').fetchone()
+        assert n_records[0] == record_count
+
+
+def test_load_mrrel(umls_path):
+    record_count = 0  # dynamically count qualifying lines
+    with open(umls_path / 'MRREL.RRF') as fh:
+        for line in fh:
+            if '|MDR|' in line:
+                record_count += 1
+    with sqlite3.connect(':memory:') as conn:
+        build_mrrel(conn, umls_path)
+        cur = conn.cursor()
+        n_records = cur.execute('select count(*) from MRREL').fetchone()
         assert n_records[0] == record_count

@@ -45,23 +45,21 @@ def build_mrrel(conn, path: Path):
                   'dir', 'suppress', 'cvf']
     with Cursor(conn) as cur:
         cur.execute('''
-            CREATE TABLE mrconso (
-                cui char(8),
-                --lat char(3), 
-                --ts char(1),
-                --lui char(10),
-                --stt char(3),
-                --sui char(10),
-                --ispref char(1),
-                --aui char(9),
-                --saui char(50),
-                --scui char(100),
-                --sdui char(100),
-                sab char(40),
-                tty char(40)
-                --code char(100),
-                --str char(3000),
-                --srl integer external,
+            CREATE TABLE mrrel (
+                cui1 char(8),
+                --aui1 char(9),
+                --stype1 char(50),
+                --rel char(4),
+                cui2 char(8),
+                --aui2 char(9),
+                --stype2 char(50),
+                rela char(100),
+                --rui char(10),
+                --srui char(50),
+                sab char(40)
+                --sl char(40),
+                --rg char(10),
+                --dir char(1),
                 --suppress char(1),
                 --cvf integer external
             )
@@ -69,6 +67,7 @@ def build_mrrel(conn, path: Path):
         with open(path / 'MRREL.RRF', encoding='utf8') as fh:
             for i, line in enumerate(csv.DictReader(fh, fieldnames=fieldnames, delimiter='|')):
                 if line['sab'] != 'MDR':
+                    print(line)
                     continue
                 cur.execute(f'INSERT INTO MRREL (cui1, cui2, rela, sab) VALUES (?, ?, ?, ?)',
                             (line['cui1'], line['cui2'], line['rela'], line['sab']))
