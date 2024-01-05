@@ -7,6 +7,8 @@ import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 
+from loguru import logger
+
 from mml_utils.umls.export_to_db import build_mrconso, build_mrrel
 
 
@@ -18,8 +20,12 @@ def connect(meta_path: Path, *, languages: set = None):
     if not exists:
         if not languages:
             languages = {'ENG'}
+        logger.info(f'MDR database not built: extracting subset of MDR for {languages} at {db_path}.')
+        logger.info(f'Extracting MRCONSO (<5min)...')
         build_mrconso(conn, meta_path, languages)
+        logger.info(f'Extracting MRREL (<5min)...')
         build_mrrel(conn, meta_path)
+        logger.info(f'Extracted MRCONSO and MRREL subset to {db_path}.')
     yield conn.cursor()
     conn.close()
 
