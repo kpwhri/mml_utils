@@ -118,7 +118,7 @@ def test_get_pts_for_llts(umls_path, target_cuis, expected):
     ]),
 ])
 def test_build_cui_normalisation_table(umls_path, target_cuis, expected):
-    table = build_cui_normalisation_table(target_cuis, umls_path,)
+    table = build_cui_normalisation_table(target_cuis, umls_path)
     assert table == expected
 
 
@@ -140,4 +140,33 @@ def test_build_cui_normalisation_table(umls_path, target_cuis, expected):
 ])
 def test_build_cui_normalisation_table_map_to_pts_only(umls_path, target_cuis, expected):
     table = build_cui_normalisation_table(target_cuis, umls_path, map_to_pts_only=True)
+    assert table == expected
+
+
+@pytest.mark.parametrize('target_cuis, expected', [
+    (['C0000001'], [
+        ('C0000001', 'C0000001'),
+        ('C0000002', 'C0000001'),
+        ('C0000002', 'C0000002'),
+        ('C0000003', 'C0000001'),
+        ('C0000003', 'C0000003'),
+        ('C0000004', 'C0000001'),
+        ('C0000004', 'C0000004'),
+        ('C0000005', 'C0000001'),
+        ('C0000005', 'C0000005'),
+    ]),
+    (['C0000002'], [
+        ('C0000001', 'C0000001'),
+        ('C0000002', 'C0000001'),
+        ('C0000002', 'C0000002'),
+        ('C0000003', 'C0000001'),
+        ('C0000003', 'C0000003'),
+        ('C0000004', 'C0000001'),
+        ('C0000004', 'C0000004'),
+        ('C0000005', 'C0000001'),
+        ('C0000005', 'C0000005'),
+    ]),
+])
+def test_build_cui_normalisation_table_self_map_all_llts(umls_path, target_cuis, expected):
+    table = build_cui_normalisation_table(target_cuis, umls_path, self_map_all_llts=True)
     assert table == expected
