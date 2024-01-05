@@ -52,3 +52,18 @@ def anaphylaxis_dir():
 @pytest.fixture
 def example_directory():
     return Path('..') / 'examples'
+
+
+@pytest.fixture
+def umls_path():
+    return Path('umls')
+
+
+@pytest.fixture
+def mrconso(umls_path):
+    return umls_path / 'MRCONSO.RRF'
+
+
+@pytest.fixture
+def mrrel(umls_path):
+    return umls_path / 'MRREL.RRF'

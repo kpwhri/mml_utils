@@ -15,3 +15,6 @@ class Cursor:
         self.cur.close()
         if self.commit:
             self.conn.commit()
+
+    def execute(self, *args, **kwargs):
+        return self.cur.execute(*args, **kwargs)
