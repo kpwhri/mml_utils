@@ -26,6 +26,8 @@ def connect(meta_path: Path, *, languages: set = None):
         logger.info(f'Extracting MRREL (<5min)...')
         build_mrrel(conn, meta_path)
         logger.info(f'Extracted MRCONSO and MRREL subset to {db_path}.')
+    else:
+        logger.info(f'Found MDR database at: {db_path}')
     yield conn.cursor()
     conn.close()
 

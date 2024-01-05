@@ -47,4 +47,10 @@ def test_connect_and_populate(umls_path, caplog):
         assert 'Extracting MRREL' in caplog.text
         compare_table(cur, 'MRCONSO')
         compare_table(cur, 'MRREL')
-    db_path.unlink()
+    assert db_path.exists()
+    # test a second connection
+    caplog.clear()
+    with connect(umls_path) as cur:
+        assert 'Found MDR database' in caplog.text
+        assert 'MDR database not built' not in caplog.text
+    db_path.unlink()  # clean up
