@@ -41,6 +41,8 @@ def get_llts_for_pts(cuis, meta_path, *, languages: set = None):
     :param languages: set; defaults to english (`{ENG}`)
     :return: list[ tuple[LLT, PT] ]
     """
+    if not cuis:
+        return []
     # get all LLTs for a PT
     with connect(meta_path, languages=languages) as cur:
         subquery = f'''
@@ -75,6 +77,8 @@ def get_pts_for_llts(cuis, meta_path, *, languages: set = None):
     :param languages: set; defaults to english (`{ENG}`)
     :return: list[ tuple[LLT, PT] ]
     """
+    if not cuis:
+        return []
     # get all LLTs for a PT
     with connect(meta_path, languages=languages) as cur:
         subquery = f'''
@@ -108,6 +112,8 @@ def get_pts(cuis, meta_path, *, languages: set = None):
     :param languages:
     :return:
     """
+    if not cuis:
+        return []
     with connect(meta_path, languages=languages) as cur:
         cur.execute(f'''
                 select distinct cui

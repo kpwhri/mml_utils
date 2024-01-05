@@ -116,6 +116,8 @@ def test_get_pts_for_llts(umls_path, target_cuis, expected):
         ('C0000004', 'C0000001'),
         ('C0000005', 'C0000001'),
     ]),
+    ([], []),  # empty set
+    (['C23'], [('C23', 'C23')]),  # non-present CUI (allows arbitrary values as self-mapped)
 ])
 def test_build_cui_normalisation_table(umls_path, target_cuis, expected):
     table = build_cui_normalisation_table(target_cuis, umls_path)
@@ -137,6 +139,8 @@ def test_build_cui_normalisation_table(umls_path, target_cuis, expected):
         ('C0000004', 'C0000001'),
         ('C0000005', 'C0000001'),
     ]),
+    ([], []),  # empty set
+    (['C23'], []),  # non-present CUI (arbitrary value not a PT)
 ])
 def test_build_cui_normalisation_table_map_to_pts_only(umls_path, target_cuis, expected):
     table = build_cui_normalisation_table(target_cuis, umls_path, map_to_pts_only=True)
@@ -166,6 +170,8 @@ def test_build_cui_normalisation_table_map_to_pts_only(umls_path, target_cuis, e
         ('C0000005', 'C0000001'),
         ('C0000005', 'C0000005'),
     ]),
+    ([], []),  # empty set
+    (['C23'], [('C23', 'C23')]),  # non-present CUI (allows arbitrary values as self-mapped)
 ])
 def test_build_cui_normalisation_table_self_map_all_llts(umls_path, target_cuis, expected):
     table = build_cui_normalisation_table(target_cuis, umls_path, self_map_all_llts=True)
