@@ -1,7 +1,7 @@
 import sqlite3
 
 from mml_utils.umls.export_to_db import build_mrconso, build_mrrel
-from mml_utils.umls.mdr import connect
+from mml_utils.umls.mdr import connect, get_llts_for_pts
 
 
 def compare_table(cur, tablename, record_count=None):
@@ -54,3 +54,16 @@ def test_connect_and_populate(umls_path, caplog):
         assert 'Found MDR database' in caplog.text
         assert 'MDR database not built' not in caplog.text
     db_path.unlink()  # clean up
+
+
+def test_get_llts_for_pts(umls_path):
+    target_cuis = ['C0000001', 'C0000008']
+    expected = [
+        ('C0000001', 'C0000002'),
+        ('C0000001', 'C0000003'),
+        ('C0000001', 'C0000004'),
+        ('C0000001', 'C0000005'),
+        ('C0000008', 'C0000007'),
+    ]
+    results = get_llts_for_pts(target_cuis, umls_path)
+    assert results == expected

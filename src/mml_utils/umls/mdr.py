@@ -50,7 +50,7 @@ def get_llts_for_pts(cuis, meta_path, *, languages: set = None):
             and CUI in (?{', ?' * (len(cuis) - 1)})
         '''
         cur.execute(f'''
-            select b.cui1, b.rela, b.cui2 
+            select b.cui1, b.cui2 
             from mrconso a
             inner join mrrel b on a.cui = b.cui1
             inner join mrconso c on b.cui2 = c.cui
@@ -61,7 +61,7 @@ def get_llts_for_pts(cuis, meta_path, *, languages: set = None):
             and (c.TTY='LLT' or c.TTY='OL')
             and a.cui !=c.cui
             and a.cui in ({subquery})
-            group by b.cui1, b.rela, b.cui2
+            group by b.cui1, b.cui2
         ''', cuis)
         return cur.fetchall()
 
@@ -84,7 +84,7 @@ def get_pts_for_llts(cuis, meta_path, *, languages: set = None):
             and CUI in (?{', ?' * (len(cuis) - 1)})
         '''
         cur.execute(f'''
-            select b.cui1, b.rela, b.cui2 
+            select b.cui1, b.cui2 
             from mrconso a
             inner join mrrel b on a.cui = b.cui1
             inner join mrconso c on b.cui2 = c.cui
@@ -95,6 +95,6 @@ def get_pts_for_llts(cuis, meta_path, *, languages: set = None):
             and a.TTY='PT'
             and a.cui != c.cui
             and c.cui in ({subquery})
-            group by b.cui1, b.rela, b.cui2;
+            group by b.cui1, b.cui2;
         ''', cuis)
         return cur.fetchall()
