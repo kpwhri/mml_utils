@@ -15,6 +15,7 @@ from loguru import logger
 from mml_utils.parse.json import extract_mml_from_json_data
 from mml_utils.parse.mmi import extract_mml_from_mmi_data
 from mml_utils.parse.xmi import extract_mml_from_xmi_data
+from mml_utils.umls.mdr import normalise_cuis
 
 
 def extract_articles(note_directories, mml_format, *, data_directories=None):
@@ -92,7 +93,7 @@ def run_greedy_algorithm(cui_df, df):
 
 def run_afep_algorithm(note_directories, *, mml_format='json', outdir: Path = None,
                        expand_cuis=False, apikey=None, skip_greedy_algorithm=False, min_kb=None,
-                       max_kb=None, data_directory=None):
+                       max_kb=None, data_directory=None, cui_normalisation=False, meta_path: Path = None):
     now = dtstr()
     if outdir:
         outdir.mkdir(exist_ok=True, parents=True)
@@ -105,8 +106,14 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: Path = No
         logger.error(f'No articles found!')
         raise ValueError(f'No articles found! Perhaps the wrong directory was indicated for reading output?')
 
+    # results: dict with keys:
+    #   ['docid', 'filename', 'matchedtext', 'conceptstring', 'cui', 'preferredname',
+    #    'start', 'length', 'end', 'evid', 'negated', 'pos', 'semantictype', 'all_semantictypes',
+    #    'all_sources', 'inpo', 'event_id', 'article_source']
     if expand_cuis:
         results = add_shorter_match_cuis(results, apikey)
+    if cui_normalisation:
+        results = normalise_cuis(results, meta_path)
 
     logger.info(f'Building pandas dataset from {len(results)} results.')
     df = pd.DataFrame.from_records(results)

@@ -17,6 +17,8 @@ class AfepRun(BaseModel):
     max_kb: int = None
     data_directory: list[Path] = None
     name: str = None  # for naming output directory
+    cui_normalisation: bool = None
+    meta_path: Path = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -29,6 +31,9 @@ class AfepRun(BaseModel):
 
     def set_outdir(self, default: Path):
         self.outdir = self.get_outdir(default)
+
+    def set_meta_path(self, default: Path):
+        self.meta_path = self.meta_path or default
 
     def set_note_directories(self, default: list[Path]):
         if not self.note_directories:
@@ -66,6 +71,8 @@ class MultiAfepConfig(BaseModel):
     expand_cuis: bool = False
     min_kb: int = None
     max_kb: int = None
+    cui_normalisation: bool = False
+    meta_path: Path = None
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -74,6 +81,7 @@ class MultiAfepConfig(BaseModel):
             run.set_outdir(self.outdir)
             run.set_note_directories(self.note_directories)
             run.set_mml_format(self.mml_format)
+            run.set_meta_path(self.meta_path)
             if self.expand_cuis or run.expand_cuis:
                 run.apikey = self.apikey
                 run.expand_cuis = True
@@ -81,4 +89,6 @@ class MultiAfepConfig(BaseModel):
                 run.min_kb = self.min_kb
             if self.max_kb and run.max_kb is None:
                 run.max_kb = self.max_kb
+            if self.cui_normalisation and run.cui_normalisation is None:
+                run.cui_normalisation = True
             run.is_valid()

@@ -4,6 +4,7 @@ Functions for working with MedDRa.
 Particularly, in manipulating and expanding CUIs using preferred terms and lower-level terms.
 """
 import sqlite3
+from collections import defaultdict
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -121,7 +122,26 @@ def get_pts(cuis, meta_path, *, languages: set = None):
                 where sab='MDR' and tty = 'PT'
                 and cui in (?{', ?' * (len(cuis) - 1)})
             ''', cuis)
-        return [x[0] for x in cur.fetchall()]
+        return [x[0] for x in cur]
+
+
+def get_names_of_cuis(cuis, meta_path, *, languages: set = None):
+    """
+    Get names of the specified cuis
+    :param cuis:
+    :param meta_path:
+    :param languages:
+    :return:
+    """
+    if not cuis:
+        return []
+    with connect(meta_path, languages=languages) as cur:
+        cur.execute(f'''
+                select distinct cui, str
+                from mrconso
+                where cui in (?{', ?' * (len(cuis) - 1)})
+            ''', list(cuis))
+        return {cui: name for cui, name in cur}
 
 
 def build_cui_normalisation_table(
@@ -163,3 +183,43 @@ def build_cui_normalisation_table(
         all_pts = set(get_pts(target_cuis, meta_path, languages=languages))
         final_list = [(src, target) for src, target in final_list if target in all_pts]
     return final_list
+
+
+def table_to_dict_of_lists(table):
+    """
+    Map a table (output of build_cui_normalisation_table) to a dict of lists with src -> [target, target,...]
+    :param table:
+    :return:
+    """
+    result = defaultdict(list)
+    all_targets = set()
+    for src, target in table:
+        result[src].append(target)
+        all_targets.add(target)
+    return result, all_targets
+
+
+def normalise_cuis(results, meta_path, *, map_to_pts_only=False, self_map_all_llts=False):
+    logger.info(f'Normalisaing CUIs.')
+    target_cuis = list({row['cui'] for row in results})
+    table = build_cui_normalisation_table(target_cuis, meta_path,
+                                          map_to_pts_only=map_to_pts_only,
+                                          self_map_all_llts=self_map_all_llts)
+    src_to_target, all_targets = table_to_dict_of_lists(table)
+    cui2name = get_names_of_cuis(all_targets, meta_path)
+    cui2name_set = {x for lst in cui2name.values() for x in lst}
+    new_results = []
+    if difference := len(all_targets - cui2name_set):
+        logger.warning(f'Skipping normalisation for {difference} CUIs which do not appear to be in MDR.')
+        logger.info(f'These CUIs will still be in the output dataset.')
+    for row in results:
+        cui = row['cui']
+        for new_cui in src_to_target[cui]:
+            if new_cui not in cui2name:
+                continue  # not a MDR CUI
+            new_results.append(row | {
+                'cui': new_cui, 'matchedtext': cui2name[new_cui], 'preferredname': cui2name[new_cui],
+                'stage': f'normalise-{cui}',
+            })
+    logger.info(f'Adding {len(new_results)} results from CUI normalisation.')
+    return results + new_results

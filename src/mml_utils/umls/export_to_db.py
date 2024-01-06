@@ -23,9 +23,9 @@ def build_mrconso(conn, path: Path, languages=None):
                 --scui char(100),
                 --sdui char(100),
                 sab char(40),
-                tty char(40)
+                tty char(40),
                 --code char(100),
-                --str char(3000),
+                str char(3000)
                 --srl integer external,
                 --suppress char(1),
                 --cvf integer external
@@ -35,8 +35,8 @@ def build_mrconso(conn, path: Path, languages=None):
             for i, line in enumerate(csv.DictReader(fh, fieldnames=fieldnames, delimiter='|')):
                 if line['sab'] != 'MDR' or (languages and line['lat'] not in languages):
                     continue
-                cur.execute(f'INSERT INTO MRCONSO (cui, sab, tty) VALUES (?, ?, ?)',
-                            (line['cui'], line['sab'], line['tty']))
+                cur.execute(f'INSERT INTO MRCONSO (cui, sab, tty, str) VALUES (?, ?, ?, ?)',
+                            (line['cui'], line['sab'], line['tty'], line['str']))
 
 
 def build_mrrel(conn, path: Path):
