@@ -93,7 +93,8 @@ def run_greedy_algorithm(cui_df, df):
 
 def run_afep_algorithm(note_directories, *, mml_format='json', outdir: Path = None,
                        expand_cuis=False, apikey=None, skip_greedy_algorithm=False, min_kb=None,
-                       max_kb=None, data_directory=None, cui_normalisation=False, meta_path: Path = None):
+                       max_kb=None, data_directory=None, cui_normalisation=False, meta_path: Path = None,
+                       map_to_pts_only=False, self_map_all_llts=False):
     now = dtstr()
     if outdir:
         outdir.mkdir(exist_ok=True, parents=True)
@@ -113,7 +114,8 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: Path = No
     if expand_cuis:
         results = add_shorter_match_cuis(results, apikey)
     if cui_normalisation:
-        results = normalise_cuis(results, meta_path)
+        results = normalise_cuis(results, meta_path, map_to_pts_only=map_to_pts_only,
+                                 self_map_all_llts=self_map_all_llts)
 
     logger.info(f'Building pandas dataset from {len(results)} results.')
     df = pd.DataFrame.from_records(results)
@@ -152,7 +154,8 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: Path = No
     if cui_normalisation:
         # ISSUE: There may be more targets then selected_cuis due a CUI being both PT and LLT
         with open(outdir / f'selected_cuis_{now}.normalised.txt', 'w') as out:
-            table = build_cui_normalisation_table(selected_cuis, meta_path)
+            table = build_cui_normalisation_table(selected_cuis, meta_path, map_to_pts_only=map_to_pts_only,
+                                                  self_map_all_llts=self_map_all_llts)
             for src, target in table:
                 out.write(f'{src},{target}\n')
 

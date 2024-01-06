@@ -19,6 +19,8 @@ class AfepRun(BaseModel):
     name: str = None  # for naming output directory
     cui_normalisation: bool = None
     meta_path: Path = None
+    map_to_pts_only: bool = None
+    self_map_all_llts: bool = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -34,6 +36,12 @@ class AfepRun(BaseModel):
 
     def set_meta_path(self, default: Path):
         self.meta_path = self.meta_path or default
+
+    def set_map_to_pts_only(self, default: bool):
+        self.map_to_pts_only = self.map_to_pts_only if self.map_to_pts_only is not None else default
+
+    def set_self_map_all_llts(self, default: bool):
+        self.self_map_all_llts = self.self_map_all_llts if self.self_map_all_llts is not None else default
 
     def set_note_directories(self, default: list[Path]):
         if not self.note_directories:
@@ -73,6 +81,8 @@ class MultiAfepConfig(BaseModel):
     max_kb: int = None
     cui_normalisation: bool = False
     meta_path: Path = None
+    map_to_pts_only: bool = False
+    self_map_all_llts: bool = False
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -82,6 +92,8 @@ class MultiAfepConfig(BaseModel):
             run.set_note_directories(self.note_directories)
             run.set_mml_format(self.mml_format)
             run.set_meta_path(self.meta_path)
+            run.set_map_to_pts_only(self.map_to_pts_only)
+            run.set_self_map_all_llts(self.self_map_all_llts)
             if self.expand_cuis or run.expand_cuis:
                 run.apikey = self.apikey
                 run.expand_cuis = True
