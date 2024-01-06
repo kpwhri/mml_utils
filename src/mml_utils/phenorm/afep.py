@@ -15,7 +15,7 @@ from loguru import logger
 from mml_utils.parse.json import extract_mml_from_json_data
 from mml_utils.parse.mmi import extract_mml_from_mmi_data
 from mml_utils.parse.xmi import extract_mml_from_xmi_data
-from mml_utils.umls.mdr import normalise_cuis
+from mml_utils.umls.mdr import normalise_cuis, build_cui_normalisation_table
 
 
 def extract_articles(note_directories, mml_format, *, data_directories=None):
@@ -146,8 +146,15 @@ def run_afep_algorithm(note_directories, *, mml_format='json', outdir: Path = No
         'all_semantictypes': lambda x: ','.join(set(x)),
     }).reset_index()
 
+    selected_cuis = list(res_dict_df['cui'].unique())
     with open(outdir / f'selected_cuis_{now}.txt', 'w') as out:
-        out.write('\n'.join(res_dict_df['cui'].unique()))
+        out.write('\n'.join(selected_cuis))
+    if cui_normalisation:
+        # ISSUE: There may be more targets then selected_cuis due a CUI being both PT and LLT
+        with open(outdir / f'selected_cuis_{now}.normalised.txt', 'w') as out:
+            table = build_cui_normalisation_table(selected_cuis, meta_path)
+            for src, target in table:
+                out.write(f'{src},{target}\n')
 
     cui_df['value'] = 1
     article_df = cui_df[['cui', 'article_source', 'value']].pivot_table(
