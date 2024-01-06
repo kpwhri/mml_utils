@@ -12,6 +12,13 @@ except ImportError:
 
 
 def add_shorter_match_cuis(results, apikey):
+    """
+    Attempt to expand the CUIs by splitting on and/or and looking for possible matches.
+
+    :param results:
+    :param apikey:
+    :return:
+    """
     if UMLS_API_TOOL_INSTALLED:
         logger.info(f'Trying to expand CUIs...')
         auth = FriendlyAuthenticator.from_apikey(apikey)
