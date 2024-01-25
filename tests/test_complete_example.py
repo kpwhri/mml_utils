@@ -93,5 +93,6 @@ def test_complete_arbitrary_extensions_mmi(complete_example_dir, tmp_path):
         output_suffix=mmi_extension,
     )
     assert_csvs_equal(mml_outfile, complete_example_dir / 'mmlout' / 'mml.mmi.csv', skip_length_check=True)
-    assert_csvs_equal(note_outfile, complete_example_dir / 'mmlout' / 'notes.mmi.csv', skip_fields=['filename', 'docid'])
+    assert_csvs_equal(note_outfile, complete_example_dir / 'mmlout' / 'notes.mmi.csv',
+                      skip_fields=['filename', 'docid'])  # these fields will not match up
     assert_csvs_equal(cuis_by_doc_outfile, complete_example_dir / 'mmlout' / 'cuis_by_doc.mmi.csv')
