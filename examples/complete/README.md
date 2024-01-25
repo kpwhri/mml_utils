@@ -75,6 +75,19 @@ Compile mmi or json output to a CSV file. The `--outdir` must exist.
 To limit to a certain number of cuis, create a file (e.g., `include-cuis.txt`) and place each CUI on a separate line.
 See `include-cuis.txt` as an example.
 
+**Assumptions:**
+* The notes are assumed to have no extension or `.txt`
+* The note stem (i.e., the note with 1 `.SUFFIX` removed) is assumed to match the output files minus 1 suffix
+  * GOOD: `this.txt` == `this.mmi`
+  * GOOD: `this` == `this.mmi`
+  * GOOD: `this.formatted.txt` == `this.formatted.mmi`
+  * BAD: `this.formatted.txt` == `this.mmi`
+* The `mmi` format is assumed to have an `mmi` extension, `json` format is assumed to have `.json` extension, etc.
+  * If this is not the case, use the flags:
+    * `--output-suffix`: if different suffix for output files (e.g., if using `out` rather than `mmi` specify `--output-suffix .out`)
+    * `--notes-suffix`: if different suffix for notes files (e.g., if using `out` rather than `txt` specify `--notes-suffix .out`)
+* The notes are assumed to be in the same directory as the notes, otherwise you'll need to specify `--output-directory /path/to/mmi_out`
+
 Command:
 
     mml-extract-mml notes --outdir mmlout --cui-file include-cuis.txt --output-format mmi
