@@ -325,7 +325,9 @@ Each run will result in a newly-created filelist version. Default output format 
 
 ### mml-extract-mml
 
-Extract results from running Metamaplite. Currently supports json (default), xmi (ctakes), and mmi.
+Extract results from running Metamaplite. Currently supports json (default), xmi (ctakes), and mmi. This command assumes that the mmi/json files from Metamaplite are on the same path as the text files/notes. If this is not the case, specify the path to the text files/notes in `/path/to/notes` and use `--output-directory` to specify where the output files are.
+
+*Important assumptions about extensions:* ideally the extensions to all text files will be `.txt` (or no extension) and those to the output formats for for Metamaplite/cTAKES are `.mmi`, `.json`, or `.txt.xmi`. If this is not the case, you can try the experimental `--output-suffix` and `--notes-suffix` (if not `.txt`). In addition, the *stem* of both the note and the relevant output file must be identical. If possible, use only a single `.` (period, dot) in the filename (i.e., prefer not using multiple suffixes).
 
     mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json|xmi)]
 
