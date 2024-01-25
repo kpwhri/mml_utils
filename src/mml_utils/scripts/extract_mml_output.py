@@ -55,6 +55,11 @@ NOTE_FIELDNAMES = [
               help='Encoding for reading output of MML or cTAKES.')
 @click.option('--file-encoding', 'encoding', default='utf8',
               help='Encoding for reading text files.')
+@click.option('--note-suffix', default='.txt',
+              help='Specify note suffix if different than no suffix and ".txt". Include the period.')
+@click.option('--output-suffix', default=None,
+              help='Specify output suffix for mmi/json files if different from default `--output-format`.'
+                   ' Include the period.')
 def _extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
                  *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: List[str] = None,
                  exclude_negated=False, output_directories=None, mm_encoding='cp1252'):
@@ -77,7 +82,8 @@ def load_target_cuis(cui_file) -> TargetCuis:
 
 def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
                 *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: List[str] = None,
-                exclude_negated=False, output_directories=None, mm_encoding='cp1252'):
+                exclude_negated=False, output_directories=None, mm_encoding='cp1252',
+                note_suffix='.txt', output_suffix=None):
     """
 
     :param exclude_negated: exclude negated CUIs from the output
@@ -106,18 +112,29 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
     if output_directories is None:
         output_directories = note_directories
     get_field_names(note_directories, output_format=output_format, max_search=max_search,
-                    output_directories=output_directories, mm_encoding=mm_encoding)
+                    output_directories=output_directories, mm_encoding=mm_encoding,
+                    note_suffix=note_suffix, output_suffix=output_suffix)
     build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
                          output_format, encoding, exclude_negated, output_directories=output_directories,
-                         mm_encoding=mm_encoding)
+                         mm_encoding=mm_encoding, note_suffix=note_suffix, output_suffix=output_suffix)
     build_pivot_table(mml_outfile, cuis_by_doc_outfile)
     return note_outfile, mml_outfile, cuis_by_doc_outfile
 
 
-def get_output_file(curr_directory, exp_filename, output_format, output_directories=None, skip_missing=False):
+def get_output_file(curr_directory, exp_filename, output_format, output_directories=None, skip_missing=False,
+                    output_suffix=None):
     """Retrieve the extracted data from file."""
-    if output_format == 'xmi':
+    if output_suffix is not None:
+        output_format = output_suffix.lstrip('.')
+    elif output_format == 'xmi':
         output_format = 'txt.xmi'  # how ctakes does renaming
+    if (path := pathlib.Path(curr_directory / f'{exp_filename}.{output_format}')).exists():
+        return path
+    elif output_directories:
+        for output_directory in output_directories:
+            if (path := pathlib.Path(output_directory / f'{exp_filename}.{output_format}')).exists():
+                return path
+    exp_filename = exp_filename.split('.')[0]
     if (path := pathlib.Path(curr_directory / f'{exp_filename}.{output_format}')).exists():
         return path
     elif output_directories:
@@ -132,7 +149,8 @@ def get_output_file(curr_directory, exp_filename, output_format, output_director
 
 
 def get_field_names(note_directories: List[pathlib.Path], *, output_format='json', mm_encoding='cp1252',
-                    max_search=1000, output_directories=None):
+                    max_search=1000, output_directories=None,
+                    note_suffix='.txt', output_suffix=None):
     """
 
     :param note_directories:
@@ -147,10 +165,10 @@ def get_field_names(note_directories: List[pathlib.Path], *, output_format='json
     for note_dir in note_directories:
         cnt = 0
         for file in note_dir.iterdir():
-            if file.suffix not in {'.txt', ''} or file.is_dir():
+            if (file.suffix not in {note_suffix, ''} and ''.join(file.suffixes) != note_suffix) or file.is_dir():
                 continue
-            outfile = get_output_file(file.parent, f'{str(file.stem)}', output_format,
-                                      output_directories=output_directories)
+            outfile = get_output_file(file.parent, file.stem, output_format,
+                                      output_directories=output_directories, output_suffix=output_suffix)
             if outfile is None or not outfile.exists():
                 continue
             for data in extract_mml_data(outfile, encoding=mm_encoding, output_format=output_format,
@@ -165,7 +183,7 @@ def get_field_names(note_directories: List[pathlib.Path], *, output_format='json
 
 def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
                          output_format, encoding, exclude_negated, output_directories=None,
-                         mm_encoding='cp1252'):
+                         mm_encoding='cp1252', note_suffix='.txt', output_suffix=None):
     missing_note_dict = set()
     missing_mml_dict = set()
     logger_warning_count = 5
@@ -178,7 +196,8 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
         for is_record, data in extract_data(note_directories, target_cuis=target_cuis,
                                             encoding=encoding, output_format=output_format,
                                             exclude_negated=exclude_negated, output_directories=output_directories,
-                                            mm_encoding=mm_encoding):
+                                            mm_encoding=mm_encoding, note_suffix=note_suffix,
+                                            output_suffix=output_suffix):
             if is_record:
                 field_names = NOTE_FIELDNAMES
             else:
@@ -226,29 +245,33 @@ def build_pivot_table(mml_file, outfile):
 
 
 def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
-                 output_format='json', exclude_negated=False, output_directories=None):
+                 output_format='json', exclude_negated=False, output_directories=None, note_suffix='.txt',
+                 output_suffix=None):
     for note_dir in note_directories:
         logger.info(f'Processing directory: {note_dir}')
         yield from extract_data_from_directory(
             note_dir, encoding=encoding, exclude_negated=exclude_negated, mm_encoding=mm_encoding,
-            output_format=output_format, target_cuis=target_cuis, output_directories=output_directories
+            output_format=output_format, target_cuis=target_cuis, output_directories=output_directories,
+            note_suffix=note_suffix, output_suffix=output_suffix
         )
 
 
 def extract_data_from_directory(note_dir, *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
-                                output_format='json', exclude_negated=False, output_directories=None):
+                                output_format='json', exclude_negated=False, output_directories=None,
+                                note_suffix='.txt', output_suffix=None):
     for file in note_dir.iterdir():
-        if file.suffix not in {'.txt', ''} or file.is_dir():  # assume all notes have suffixes and all output does not
+        if (file.suffix not in {note_suffix, ''} and ''.join(file.suffixes) != note_suffix) or file.is_dir():
             continue
         logger.info(f'Processing file: {file}')
         yield from extract_data_from_file(
             file, encoding=encoding, exclude_negated=exclude_negated, mm_encoding=mm_encoding,
             output_format=output_format, target_cuis=target_cuis, output_directories=output_directories,
+            output_suffix=output_suffix
         )
 
 
 def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
-                           output_format='json', exclude_negated=False, output_directories=None):
+                           output_format='json', exclude_negated=False, output_directories=None, output_suffix=None):
     record = {
         'filename': file.stem,
         'docid': str(file),
@@ -259,8 +282,12 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encodi
         record['num_chars'] = len(text)
         record['num_words'] = len(text.split())
         record['num_letters'] = len(re.sub(r'[^A-Za-z0-9]', '', text, flags=re.I))
-    outfile = get_output_file(file.parent, f'{str(file.stem)}', output_format,
-                              output_directories=output_directories)
+    outfile = get_output_file(file.parent, file.stem, output_format,
+                              output_directories=output_directories, output_suffix=output_suffix)
+    if outfile is None:
+        stem = file.stem.split('.')[0]
+        outfile = get_output_file(file.parent, f'{stem}', output_format,
+                                  output_directories=output_directories, output_suffix=output_suffix)
     if outfile and outfile.exists():
         logger.info(f'Processing associated {output_format}: {outfile}.')
         for data in extract_mml_data(outfile, encoding=mm_encoding,
@@ -270,6 +297,10 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encodi
             yield False, data
         record['processed'] = True
     else:
+        exp_suffix = output_suffix if output_suffix else f'.{output_format}'
+        stem = file.stem.split('.')[0]
+        logger.warning(f'Expected {output_format} file like {file.stem}{exp_suffix} or {stem}{exp_suffix}'
+                       f' in {output_directories}.')
         record['processed'] = False
     yield True, record
 
