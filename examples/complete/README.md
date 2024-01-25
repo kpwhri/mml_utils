@@ -87,6 +87,7 @@ See `include-cuis.txt` as an example.
     * `--output-suffix`: if different suffix for output files (e.g., if using `out` rather than `mmi` specify `--output-suffix .out`)
     * `--notes-suffix`: if different suffix for notes files (e.g., if using `out` rather than `txt` specify `--notes-suffix .out`)
 * The notes are assumed to be in the same directory as the notes, otherwise you'll need to specify `--output-directory /path/to/mmi_out`
+  * Ideally, this will look like the `/examples/complete/notes` directory (though, pick either mmi or json; don't need both)
 
 Command:
 
