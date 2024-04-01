@@ -17,7 +17,7 @@ def run_ctakes(directory: Path, ctakes_home: Path, outdir: Path, umls_key: str =
     :param outdir: directory to output xmi files
     :return:
     """
-    logger.info(f'Running cTKAES in {directory}.')
+    logger.info(f'Running cTAKES in {directory}.')
     exe_path = Path('.') / 'bin' / f'runClinicalPipeline.{bat_or_sh()}'
     umls_arg = f'--key {umls_key}' if umls_key else ''
     dict_arg = f'--lookupXml {dictionary}'
