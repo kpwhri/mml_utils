@@ -21,7 +21,10 @@ def run_ctakes(directory: Path, ctakes_home: Path, outdir: Path, umls_key: str =
     exe_path = Path('.') / 'bin' / f'runClinicalPipeline.{bat_or_sh()}'
     umls_arg = f'--key {umls_key}' if umls_key else ''
     dict_arg = f'--lookupXml {dictionary}'
-    cmd = f'{exe_path} -i {directory} --xmiOut {outdir} {umls_arg} {dict_arg}'.split()
+    cmd_line = f'{exe_path} -i {directory} --xmiOut {outdir} {umls_arg} {dict_arg}'
+    logger.info(f'Running command: {cmd_line}')
+    logger.info(f'* If heap space error, consider increasing integer value in {exe_path}: `-Xmx2g`')
+    cmd = cmd_line.split()
     res = subprocess.run(cmd, shell=True, universal_newlines=True, cwd=ctakes_home)
     if res.returncode != 0:
         logger.warning(f'cTAKES returned with status code {res.returncode}.')
