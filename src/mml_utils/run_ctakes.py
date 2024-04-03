@@ -24,6 +24,7 @@ def run_ctakes(directory: Path, ctakes_home: Path, outdir: Path, umls_key: str =
     cmd_line = f'{exe_path} -i {directory} --xmiOut {outdir} {umls_arg} {dict_arg}'
     logger.info(f'Running command: {cmd_line}')
     logger.info(f'* If heap space error, consider increasing integer value in {exe_path}: `-Xmx2g`')
+    logger.info(f'* If "trying to serialize non-XML character", add `--clean-files` argument.')
     cmd = cmd_line.split()
     res = subprocess.run(cmd, shell=True, universal_newlines=True, cwd=ctakes_home)
     if res.returncode != 0:
