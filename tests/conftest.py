@@ -67,3 +67,8 @@ def mrconso(umls_path):
 @pytest.fixture
 def mrrel(umls_path):
     return umls_path / 'MRREL.RRF'
+
+
+@pytest.fixture
+def source_data_path():
+    return Path('data')

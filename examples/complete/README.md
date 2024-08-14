@@ -6,7 +6,9 @@
 * Install MetaMapLite
     * See instructions here: https://kpwhri.github.io/mml_utils/install_metamaplite.html
     * You will need to remember install location (e.g., `C:/public_mm_lite`)
-* Install `mml_utils` with `pip install .`
+* Install `mml_utils` by:
+  * Cloning this repository `git clone https://github.com/kpwhri/mml_utils`
+  * Installing with `cd mml_utils` and `pip install .` 
 * Navigate to `examples/complete` directory: `cd examples/complete`
 * If you want to follow along, copy the `corpus.csv` to a different directory and `cd` there.
 

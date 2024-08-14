@@ -8,6 +8,7 @@ import csv
 import pathlib
 
 import click
+import pandas as pd
 from loguru import logger
 
 
@@ -22,6 +23,12 @@ from loguru import logger
               help='Extension of text files to be created.')
 @click.option('--text-encoding', default='utf8',
               help='Encoding for writing text files.')
+def text_from_database_cmd(connection_string, query, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
+                           text_encoding='utf8'):
+    text_from_database(connection_string, query, outdir, n_dirs=n_dirs, text_extension=text_extension,
+                       text_encoding=text_encoding)
+
+
 def text_from_database(connection_string, query, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
                        text_encoding='utf8'):
     try:
@@ -55,6 +62,12 @@ def text_from_database(connection_string, query, outdir: pathlib.Path, n_dirs=1,
               help='Encoding for source CSV file.')
 @click.option('--csv-delimiter', default=',',
               help='Column delimiter for csv file.')
+def text_from_csv_cmd(csv_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
+                      text_encoding='utf8', csv_encoding='utf8', csv_delimiter=','):
+    text_from_csv(csv_file, id_col, text_col, outdir, n_dirs=n_dirs, text_extension=text_extension,
+                  text_encoding=text_encoding, csv_encoding=csv_encoding, csv_delimiter=csv_delimiter)
+
+
 def text_from_csv(csv_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
                   text_encoding='utf8', csv_encoding='utf8', csv_delimiter=','):
     with open(csv_file, newline='', encoding=csv_encoding) as fh:
@@ -62,6 +75,46 @@ def text_from_csv(csv_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, te
         text_gen = ((row[id_col], row[text_col]) for row in reader)
         build_files(text_gen, outdir=outdir, n_dirs=n_dirs,
                     text_extension=text_extension, text_encoding=text_encoding)
+
+
+@click.command()
+@click.argument('sas-file', type=click.Path(dir_okay=False, path_type=pathlib.Path), default=None)
+@click.option('--id-col', default='docid', type=str,
+              help='Name of column containing note ids.')
+@click.option('--text-col', default='text', type=str,
+              help='Name of column containing text.')
+@click.option('--outdir', type=click.Path(file_okay=False, path_type=pathlib.Path), default=None,
+              help='Directory to create subfolders and filelists.')
+@click.option('--n-dirs', default=1, type=int,
+              help='Number of directories to create.')
+@click.option('--text-extension', default='.txt',
+              help='Extension of text files to be created.')
+@click.option('--text-encoding', default='utf8',
+              help='Encoding for writing text files.')
+@click.option('--sas-encoding', default='latin1',
+              help='Encoding for source SAS7BDAT file.')
+@click.option('--force-id-to-int/--dont-force-id-to-int', default=False,
+              help='By default, id column will be coerced to an int due to preference in pandas for float.')
+def text_from_sas7bdat_cmd(sas_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
+                           text_encoding='utf8', sas_encoding='latin1', force_id_to_int=True):
+    text_from_sas7bdat(sas_file, id_col, text_col, outdir, n_dirs=n_dirs, text_extension=text_extension,
+                       text_encoding=text_encoding, sas_encoding=sas_encoding, force_id_to_int=force_id_to_int)
+
+
+def text_from_sas7bdat(sas_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
+                       text_encoding='utf8', sas_encoding='latin1', force_id_to_int=True):
+    build_files(_text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_to_int=force_id_to_int),
+                outdir=outdir, n_dirs=n_dirs, text_extension=text_extension, text_encoding=text_encoding)
+
+
+def _text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_to_int=True):
+    for df in pd.read_sas(sas_file, encoding=sas_encoding, chunksize=2000):
+        for row in df.itertuples():
+            id_ = getattr(row, id_col)
+            if force_id_to_int:
+                id_ = int(id_)
+            text = getattr(row, text_col)
+            yield id_, text
 
 
 def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
@@ -85,14 +138,22 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     filelists = [open(outdir / f'filelist{i}.txt', 'w') if n_dirs > 1
                  else open(outdir / f'filelist.txt', 'w')
                  for i in range(n_dirs)]
-    for i, (note_id, text) in enumerate(text_gen):
+    completed = {}
+    i = 0
+    for note_id, text in text_gen:
+        if note_id in completed:  # handle notes with multiple 'note_lines'
+            with open(completed[note_id], 'a', encoding=text_encoding, errors='replace') as out:
+                out.write(text)
+            continue
         outfile = outdirs[i % n_dirs] / f'{note_id}{text_extension}'
+        completed[note_id] = outfile
         with open(outfile, 'w', encoding=text_encoding, errors='replace') as out:
             out.write(text)
         filelists[i % n_dirs].write(f'{outfile.absolute()}\n')
+        i += 1
     for fl in filelists:
         fl.close()
 
 
 if __name__ == '__main__':
-    text_from_database()
+    text_from_database_cmd()
