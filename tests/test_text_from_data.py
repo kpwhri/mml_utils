@@ -30,3 +30,28 @@ def test_text_from_sas7bdat(source_data_path):
             assert df[df['note_id'] == int(path.stem)]['note_text'].values[0] == path.read_text()
             count += 1
     assert count == 9, 'Count number of files generated'
+
+
+def test_text_from_csv(source_data_path):
+    outdir = source_data_path / 'csv.out'
+    shutil.rmtree(outdir, ignore_errors=True)
+    text_from_csv(
+        source_data_path / 'corpus.csv',
+        id_col='note_id',
+        text_col='note_text',
+        outdir=outdir,
+    )
+    # check
+    df = pd.read_csv(source_data_path / 'corpus.csv', encoding='utf8')
+    df['note_id'] = df['note_id'].apply(int)
+    assert df.shape[0] == 10  # one note has two lines
+    assert df['note_id'].nunique() == 9
+    df = df.groupby('note_id').agg({'note_text': lambda x: ''.join(x)}).reset_index()
+    with open(outdir / 'filelist.txt') as fh:
+        count = 0
+        for line in fh:
+            path = Path(line.strip())
+            assert path.exists()
+            assert df[df['note_id'] == int(path.stem)]['note_text'].values[0] == path.read_text()
+            count += 1
+    assert count == 9, 'Count number of files generated'
