@@ -141,6 +141,8 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     completed = {}
     i = 0
     for note_id, text in text_gen:
+        if not isinstance(text, str) or text.strip() == '':  # handle forms of None/nan
+            continue
         if note_id in completed:  # handle notes with multiple 'note_lines'
             with open(completed[note_id], 'a', encoding=text_encoding, errors='replace') as out:
                 out.write(text)
