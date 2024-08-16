@@ -74,23 +74,30 @@ It is worth acquainting yourself with some brief MetaMap documentation [here](ht
 
 You may wish to run MetaMap without the aid of the `mml_utils` package. (The `mml_utils` packages was designed to run a number of experiments with varying configurations, not for a single run for which it might prove a bit clunky.) If you choose not to use it, run all your files and continue to the next heading. Windows users, in particular, may find benefit in the `mml_utils` package (see below).
 
-First, you'll need to start the part of speech and word sense disambiguation servers:
+First, you'll need to start the part of speech and word sense disambiguation servers (these are found in the `public_mm` directory from installing MetaMap:
 * `./bin/skrmedpostctl start`
 * `./bin/wsdserverctl start`
 
 Second, instead of directly calling MetaMap, `mml_utils` will attempt to generate configuration files to run MetaMap. These should be looked over before running. We'll create a `.toml` file called `config.toml` with the following contents (full paths are preferred to avoid errors). An example `toml` file is provided below
 
 ```toml
-outpath = 'C:\workspace\scripts'
-filelist = 'C:\workspace\filelist.txt'
-mm_outpath = '/mnt/c/workspace/mmout'
-parameters = '-Z 2022AB -V USAbase -N'
-num_scripts = 3
+# Create shell scripts to run metamap on corpus
+# Usage:
+# 1. Build the shell scripts: `mml-build-mmscript-multi run_mm_on_corpus.toml`
+# 2. Run the shell scripts in the `outpath`
+# 3. Build the output
+outpath = 'C:\workspace\scripts'  # path to write Metamap-running shell scripts to
+filelist = 'C:\workspace\corpus\filelist.txt'  # newline-separated list of files
+mm_outpath = '/mnt/c/workspace/mmout'  # output location for Metamap mmi/json files
+mm_path = '/mnt/c/public_mm/bin/metamap'  # full path to metamap executable (otherwise, defaults to assuming public_mm/bin is on PATH)
+parameters = '-R MDR,RXNORM -Z 2022AB -V NLM -N'  # parameters to run Metamap with
+num_scripts = 3  # number of scripts to prepare (i.e., enabling parallel processing of notes)
 replace = ['C:', '/mnt/c']
 
+# here is the run we used, though other configuration options can be provided in a separate run
 [[runs]]
-parameters = ''
-name = 'baseline'
+parameters = '-y'
+name = 'wsd'
 ```
 
 * `outpath`: where the scripts will be placed
@@ -107,6 +114,12 @@ Command:
 
     mml-build-mmscript-multi config.toml
 
+This will create a `scripts` directory (or whatever you supplied to `outpath`) of 2 files along with one for each of the `num_scripts`. NB: On Windows, these must be run on WSL.
+
+* `start_servers.sh`: commands to start the WSD and POS servers; show a relative path (you will need to navigate to the MetaMap home directory `cd public_mm`)
+* `ensure_directories`: make sure output directories exist
+* `script_N.sh`: these contain commands to run MetaMap; since MetaMap cannot run on a folder/filelist, each file must be run individually
+  * it may be worth testing out the first command, fixing it if it doesn't run properly, and then doing a global find/replace to make sure all the commands will work
 
 ## Extracting CUIs
 

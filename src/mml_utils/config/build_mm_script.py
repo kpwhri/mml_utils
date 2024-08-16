@@ -36,7 +36,11 @@ class MultiBuildMMScript(BaseModel):
         if self.filelist is None and self.directory is None:
             raise ValueError(f'Either `filelist` or `directory` must be specified.')
 
-        self.mm_path = str(self.mm_path) if self.mm_path else 'metamap'
+        if isinstance(self.mm_path, Path):
+            self.mm_path = self.mm_path.as_posix()
+        elif self.mm_path is None:
+            self.mm_path = 'metamap'
+
         if not self.outpath:
             self.outpath = Path('.')
         self.outpath.mkdir(exist_ok=True)

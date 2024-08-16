@@ -42,6 +42,13 @@ def run_build_mm_multi(config_file):
     logger.info(f'Writing example AFEP config...')
     write_afep_script_for_dirs(config_file.parent, target_dirs, mml_format='mmi')
     logger.info(f'Completed.')
+    logger.info(f'To access script directory, try:')
+    logger.info(f' * `cd {example_usage.rsplit("/", 1)[0]}`')
+    if example_usage.startswith('/mnt'):
+        mnt_path = '/'.join(example_usage.split('/')[:3])
+        logger.info(f'On WSL, you may first need to mount the drives:')
+        logger.info(f' * `mkdir {mnt_path}`')
+        logger.info(f' * `mount -t drvfs {config.outpath.drive} {mnt_path}`')
 
 
 if __name__ == '__main__':
