@@ -1,305 +1,352 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="./">
+
+<html lang="en" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extracting Concepts Using MetaMap &#8212; Metamaplite Utilities 0.4.1 documentation</title>
-    
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+    <title>Extracting Concepts Using MetaMap &#8212; Metamaplite Utilities 0.5.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css?v=a123c646" />
-    
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=bd778e0b"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/documentation_options.js?v=e4e9a439"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js?v=dbd2e957"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'using_mm';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Using MetaMapLite" href="using_mml.html" />
     <link rel="prev" title="UMLS License" href="umls_license.html" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
   
   
-  <h1 class="site-logo" id="site-title">Metamaplite Utilities 0.4.1 documentation</h1>
   
+  
+  
+  
+    <p class="title logo__title">Metamaplite Utilities 0.5.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:
+</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="afep.html">Automated Feature Extraction for Phenotyping (AFEP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_umls_for_ctakes.html">Build UMLS for cTAKES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_umls_for_mml.html">Build UMLS for Metamaplite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_ctakes.html">Installing cTAKES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_metamaplite.html">Installing MetaMapLite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_mm.html">Instructions for Installing Metamap on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_umls.html">Install UMLS Metathesaurus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="umls_license.html">UMLS License</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Extracting Concepts Using MetaMap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_mml.html">Using MetaMapLite</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/using_mm.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
 </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <p class="caption collapsible-parent" role="heading">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="afep.html">
-   Automated Feature Extraction for Phenotyping (AFEP)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="build_umls_for_ctakes.html">
-   Build UMLS for cTAKES
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="build_umls_for_mml.html">
-   Build UMLS for Metamaplite
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="install_ctakes.html">
-   Installing cTAKES
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="install_metamaplite.html">
-   Installing MetaMapLite
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="install_mm.html">
-   Instructions for Installing Metamap on Windows
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="install_umls.html">
-   Install UMLS Metathesaurus
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="troubleshooting.html">
-   Troubleshooting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="umls_license.html">
-   UMLS License
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Extracting Concepts Using MetaMap
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="using_mml.html">
-   Using MetaMapLite
-  </a>
- </li>
-</ul>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
     </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/using_mm.md.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
+  
 </div>
+</div>
+              
+              
 
-        <!-- Source interaction buttons -->
-
-
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
-
-        <!-- Launch buttons -->
-
-    </div>
-
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Extracting Concepts Using MetaMap</h1>
     <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup-prerequisites">
-   Setup/Prerequisites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-config-files-and-shell-scripts">
-   Build Config Files and Shell Scripts
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#format-definition">
-     Format/definition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-config-toml">
-     Example
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       config.toml
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#run-config-toml-to-build-scripts">
-     Run
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       config.toml
-      </span>
-     </code>
-     to Build Scripts
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-metamap">
-   Running Metamap
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ensure-directories">
-     Ensure Directories
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#start-servers">
-     Start Servers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#run-metamap">
-     Run Metamap
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#extracting-cuis-from-metamap-output">
-   Extracting CUIs from Metamap Output
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters">
-     Parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-config">
-     Example Config
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#run-afep">
-   Run AFEP
-  </a>
- </li>
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-prerequisites">Setup/Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-config-files-and-shell-scripts">Build Config Files and Shell Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-definition">Format/definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-config-toml">Example <code class="docutils literal notranslate"><span class="pre">config.toml</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-config-toml-to-build-scripts">Run <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> to Build Scripts</a></li>
 </ul>
-
-        </nav>
-        
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-metamap">Running Metamap</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensure-directories">Ensure Directories</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-servers">Start Servers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-metamap">Run Metamap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-cuis-from-metamap-output">Extracting CUIs from Metamap Output</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-config">Example Config</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-afep">Run AFEP</a></li>
+</ul>
+            </nav>
+        </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="extracting-concepts-using-metamap">
-<h1>Extracting Concepts Using MetaMap<a class="headerlink" href="#extracting-concepts-using-metamap" title="Link to this heading">¶</a></h1>
+<h1>Extracting Concepts Using MetaMap<a class="headerlink" href="#extracting-concepts-using-metamap" title="Link to this heading">#</a></h1>
 <p>Use case: I want to use MetaMap to extract concepts from the UMLS. This document will cover building configuration files to run <code class="docutils literal notranslate"><span class="pre">metamap</span></code>.</p>
 <p>Since the focus of this documentation is on usage of the <code class="docutils literal notranslate"><span class="pre">mml_utils</span></code> package, it will be assumed that this is installed (but it is definitely not required). Note that in the case of Metamap, <code class="docutils literal notranslate"><span class="pre">mml_utils</span></code> <strong>cannot</strong> be the sole intermediary. Instead, it will generate shell scripts which must be run in a Linux (or WSL) environment.</p>
 <section id="setup-prerequisites">
-<h2>Setup/Prerequisites<a class="headerlink" href="#setup-prerequisites" title="Link to this heading">¶</a></h2>
+<h2>Setup/Prerequisites<a class="headerlink" href="#setup-prerequisites" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Installation is discussed <a class="reference internal" href="install_mm.html#install-metamap"><span class="std std-ref">elsewhere</span></a></p>
 <ul>
@@ -326,7 +373,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </div></blockquote>
 </section>
 <section id="build-config-files-and-shell-scripts">
-<h2>Build Config Files and Shell Scripts<a class="headerlink" href="#build-config-files-and-shell-scripts" title="Link to this heading">¶</a></h2>
+<h2>Build Config Files and Shell Scripts<a class="headerlink" href="#build-config-files-and-shell-scripts" title="Link to this heading">#</a></h2>
 <p>To generate the shell scripts, create a configuration file in the TOML format called <code class="docutils literal notranslate"><span class="pre">config.toml</span></code>. This shell script can handle creating multiple sub-configurations if you want to run Metamap with different sets of parameters. Each of these sub-configurations is called a ‘run’.</p>
 <blockquote>
 <div><p><strong>Warning</strong>
@@ -334,7 +381,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </div></blockquote>
 <p>In providing an example configuration, I’m going to use Windows-based examples since these are more challenging to encode correctly (i.e., certain elements need to be Windows-formatted paths and others need to be Unix-styled paths). For other OSs, just use all <em>normal</em> (i.e., Unix-style) paths. For Windows, follow the examples below carefully.</p>
 <section id="format-definition">
-<h3>Format/definition<a class="headerlink" href="#format-definition" title="Link to this heading">¶</a></h3>
+<h3>Format/definition<a class="headerlink" href="#format-definition" title="Link to this heading">#</a></h3>
 <p>For all <code class="docutils literal notranslate"><span class="pre">run</span></code>s, these are the global definitions.</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="n">outpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PATH for output scripts&#39;</span>
 <span class="n">filelist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PATH to corpus filelist&#39;</span>
@@ -354,7 +401,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </div>
 </section>
 <section id="example-config-toml">
-<h3>Example <code class="docutils literal notranslate"><span class="pre">config.toml</span></code><a class="headerlink" href="#example-config-toml" title="Link to this heading">¶</a></h3>
+<h3>Example <code class="docutils literal notranslate"><span class="pre">config.toml</span></code><a class="headerlink" href="#example-config-toml" title="Link to this heading">#</a></h3>
 <p>The following <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> will run the 2022AB UMLS corpus on the NLM subset using MDR (Meddra) and RXNORM.</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="n">outpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:/project/extract/metamap/scripts&#39;</span>
 <span class="n">filelist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\project\corpora\corpus1\filelist_corpus1.txt&#39;</span>
@@ -379,7 +426,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </div>
 </section>
 <section id="run-config-toml-to-build-scripts">
-<h3>Run <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> to Build Scripts<a class="headerlink" href="#run-config-toml-to-build-scripts" title="Link to this heading">¶</a></h3>
+<h3>Run <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> to Build Scripts<a class="headerlink" href="#run-config-toml-to-build-scripts" title="Link to this heading">#</a></h3>
 <p>Once the <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> is ready, building the scripts is as simple as running:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">mml-build-mmscript-multi</span> <span class="pre">config.toml</span></code></p></li>
@@ -390,7 +437,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </section>
 </section>
 <section id="running-metamap">
-<h2>Running Metamap<a class="headerlink" href="#running-metamap" title="Link to this heading">¶</a></h2>
+<h2>Running Metamap<a class="headerlink" href="#running-metamap" title="Link to this heading">#</a></h2>
 <p>Here we will use the scripts generated by the <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> run in the previous step. This will consist of three scripts (or, <em>types</em> of scripts) which should be run in the order below:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ensure_directories.sh</span></code></p>
@@ -414,15 +461,15 @@ In Python, something like <code class="docutils literal notranslate"><span class
 <p>With all scripts, it is worth at least taking a quick look at the files to make sure that reasonable defaults have been included.</p>
 <p>Also, if you need to mount a particular drive (e.g., WSL on Windows), use <code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">-t</span> <span class="pre">drvfs</span> <span class="pre">C:</span> <span class="pre">/mnt/c</span></code>.</p>
 <section id="ensure-directories">
-<h3>Ensure Directories<a class="headerlink" href="#ensure-directories" title="Link to this heading">¶</a></h3>
+<h3>Ensure Directories<a class="headerlink" href="#ensure-directories" title="Link to this heading">#</a></h3>
 <p>This script makes sure the correct output directories actually exist.</p>
 </section>
 <section id="start-servers">
-<h3>Start Servers<a class="headerlink" href="#start-servers" title="Link to this heading">¶</a></h3>
+<h3>Start Servers<a class="headerlink" href="#start-servers" title="Link to this heading">#</a></h3>
 <p>This script will start the WSD and POS tagging servers. This only needs to be completed once on each server/computer this is being run on. Each of the <code class="docutils literal notranslate"><span class="pre">script_N.sh</span></code> shell scripts will need to communicate with these servers.</p>
 </section>
 <section id="run-metamap">
-<h3>Run Metamap<a class="headerlink" href="#run-metamap" title="Link to this heading">¶</a></h3>
+<h3>Run Metamap<a class="headerlink" href="#run-metamap" title="Link to this heading">#</a></h3>
 <p>These will run Metamap.</p>
 <ul class="simple">
 <li><p>If you just see <code class="docutils literal notranslate"><span class="pre">metamap</span></code>, ensure <code class="docutils literal notranslate"><span class="pre">$MMPATH/bin</span></code> is on the path</p>
@@ -442,7 +489,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </section>
 </section>
 <section id="extracting-cuis-from-metamap-output">
-<h2>Extracting CUIs from Metamap Output<a class="headerlink" href="#extracting-cuis-from-metamap-output" title="Link to this heading">¶</a></h2>
+<h2>Extracting CUIs from Metamap Output<a class="headerlink" href="#extracting-cuis-from-metamap-output" title="Link to this heading">#</a></h2>
 <p>Once all of the <code class="docutils literal notranslate"><span class="pre">script_N.sh</span></code> shell scripts have finished running (and it’s a good idea to glance at the last few to make sure there aren’t any devious errors), you’ll want to get the CUIs out of the output.</p>
 <p>To accomplish this, we’ll run <code class="docutils literal notranslate"><span class="pre">mml-extract-mml</span></code> which will read all of the <code class="docutils literal notranslate"><span class="pre">*.mmi</span></code> files and extract all (or a specified subset of) CUIs. This will generate three output files.</p>
 <ul class="simple">
@@ -466,7 +513,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </li>
 </ul>
 <section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h3>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">CORPUS_DIR</span></code>: path to files in the corpus that was processed</p>
 <ul>
@@ -493,7 +540,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </ul>
 </section>
 <section id="example-config">
-<h3>Example Config<a class="headerlink" href="#example-config" title="Link to this heading">¶</a></h3>
+<h3>Example Config<a class="headerlink" href="#example-config" title="Link to this heading">#</a></h3>
 <p>Here’s an example run on the command line, using the data generated by <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> (<a class="reference internal" href="#example-configtoml"><span class="xref myst">above</span></a>).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mml</span><span class="o">-</span><span class="n">extract</span><span class="o">-</span><span class="n">mml</span>
 <span class="n">C</span><span class="p">:</span>\<span class="n">project</span>\<span class="n">corpora</span>\<span class="n">corpus1</span>\<span class="n">files</span>
@@ -511,7 +558,7 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </section>
 </section>
 <section id="run-afep">
-<h2>Run AFEP<a class="headerlink" href="#run-afep" title="Link to this heading">¶</a></h2>
+<h2>Run AFEP<a class="headerlink" href="#run-afep" title="Link to this heading">#</a></h2>
 <p>If you are using Metamap to run the PheNorm algorithm (or another algorithm which also requires use of AFEP), then this section will guide you through the steps. When running AFEP, the goal is to select the set of features which occurs across multiple knowledge base source. If you are on this step, you have, presumably, already run Metamap on the text of these articles (and ensured that each article terminated in a newline).</p>
 <p>To run AFEP, update the <code class="docutils literal notranslate"><span class="pre">run_afep-{datetime}.toml</span></code> file generated in the <a class="reference internal" href="#build-config-files-and-shell-scripts"><span class="xref myst">Build Config Files section above</span></a>. Running this will generate a series of CSV files with (as long as <code class="docutils literal notranslate"><span class="pre">build_summary</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>) a summarizing CSV file. You can use the <code class="docutils literal notranslate"><span class="pre">afep_summary.csv</span></code> (or <code class="docutils literal notranslate"><span class="pre">afep_summary.xlsx</span></code>) file to review and select a subset of CUIs for inclusion.</p>
 <p>Once the set of CUIs has been identified, create a file called, e.g., <code class="docutils literal notranslate"><span class="pre">cuis.txt</span></code>, and place each CUI on a separate line. If you want to do CUI normalisation, place the <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">CUI</span></code> (i.e., the CUI that is to be found in corpus) on the left, a comma, and then the <code class="docutils literal notranslate"><span class="pre">target</span> <span class="pre">CUI</span></code> (i.e., the CUI being mapped to) on the right.</p>
@@ -520,38 +567,121 @@ In Python, something like <code class="docutils literal notranslate"><span class
 </section>
 
 
-              </div>
+                </article>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="umls_license.html" title="previous page">UMLS License</a>
-    <a class='right-next' id="next-link" href="using_mml.html" title="next page">Using MetaMapLite</a>
 
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By dcronkite <dcronkite@gmail.com><br/>
-        
-            &copy; Copyright 2023, KPWHRI.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="umls_license.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">UMLS License</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="using_mml.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using MetaMapLite</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-prerequisites">Setup/Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-config-files-and-shell-scripts">Build Config Files and Shell Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-definition">Format/definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-config-toml">Example <code class="docutils literal notranslate"><span class="pre">config.toml</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-config-toml-to-build-scripts">Run <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> to Build Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-metamap">Running Metamap</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensure-directories">Ensure Directories</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-servers">Start Servers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-metamap">Run Metamap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-cuis-from-metamap-output">Extracting CUIs from Metamap Output</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-config">Example Config</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-afep">Run AFEP</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By dcronkite <dcronkite@gmail.com>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, KPWHRI.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
