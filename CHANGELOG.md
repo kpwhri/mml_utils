@@ -19,6 +19,8 @@ Types of changes:
 
 ## [Unreleased]
 
+## [0.5.0] - 2024-08-16
+
 ### Added
 
 * `--note-suffix` and `--output-suffix` if suffixes are different than those required (experimental)
