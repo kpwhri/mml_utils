@@ -144,8 +144,9 @@ Command:
 
 Output:
 
-* CSV file beginning with 'mml' containing an unpacked version of the mmi or json file
-* CSV file beginning with 'notes' containing summary statistics on the notes in the corpus
+* `mml_{date}.csv`: an unpacked version of the mmi or json file
+* `notes_{date}.csv`: summary statistics on the notes in the corpus
+* `cuis_by_doc_{date}.csv`: count of CUIs by note
 * A log file with lots of errors for missing variables/column names.
     * To add these back into your output file, specify, e.g., `--add-fieldname negated fndg pos ...` and re-run.
 
