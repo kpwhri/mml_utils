@@ -22,11 +22,12 @@ Beginning with `corpus.sas7bdat` (or, alternatively, `corpus.csv`), convert thes
 
 Command:
 
-    mml-sas-to-txt corpus.sas7bdat --id-col note_id --text-col note_text [--n-dir 4]
+    mml-sas-to-txt corpus.sas7bdat --id-col note_id --text-col note_text [--n-dir 4] [--outdir OUTDIR]
 
 * `--n-dir INTEGER`: create `INTEGER` number of folders/filelists; this will allow for easy parallelization when using MetaMapLite (but added complications when using MetaMap)
 * For CSV files, use `mml-csv-to-txt`.
 * For a database table, use `mml-sql-to-txt`.
+* `--outdir PATH`: location to place 'output' (see below); defaults to current directory
 
 Output:
 * A folder `notes` (or multiple folders `notesN`) containing text files with note text.
