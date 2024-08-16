@@ -130,13 +130,17 @@ Once the appropriate NLP tool has been run, we will build a CSV file to include 
 
 Command:
 
-    mml-extract-mml notes --outdir mmlout --cui-file cuis.txt --output-format mmi|json
+    mml-extract-mml notes --outdir mmout --cui-file cuis.txt --output-format mmi|json [--output-directory mmout/wsd]
   
 
 * `--output-format`: pick either `mmi` or `json` depending on whether the NLP tool output mmi or json files
-* `--outdir`: output will be placed here
+* `--outdir`: directory to output CSV files
+* `--output-directory`: directory containing output `*.mmi` or `*.json` files if it's different than `notes`
+  * MetaMapLite dumps the output files in the same directory, so you could skip this command
+  * MetaMap, when following the directions above, will place the `*.mmi` files in `./mmout/wsd`
 * `--cui-file`: file containing the target CUIs to include, along with any mappings (where appropriate)
-* `notes`: directory containing raw files and NLP tool CUI annotations
+  * For anaphylaxis, this file can be found in the current directory of this README as `cuis.txt`
+* `notes`: directory containing raw files (output by the `Dataset to Text` step, above)
 
 Output:
 
