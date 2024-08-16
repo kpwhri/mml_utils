@@ -22,6 +22,11 @@ Types of changes:
 ### Added
 
 * `--note-suffix` and `--output-suffix` if suffixes are different than those required (experimental)
+* CUI normalization
+* Documentation/docstrings including for PheNorm-specific use cases
+* Improved logging with suggested troubleshooting methods
+* Added support for SAS7BDAT files as an input corpus
+* Skipping non-strings and empty notes when converting a corpus to files
 
 
 ## [0.4.0] - 2023-12-19
