@@ -27,6 +27,7 @@ Types of changes:
 * Improved logging with suggested troubleshooting methods
 * Added support for SAS7BDAT files as an input corpus
 * Skipping non-strings and empty notes when converting a corpus to files
+* Extract MDR (MedDRA) LLTs (lower level terms) for a given set of PTs (primary terms)
 
 
 ## [0.4.0] - 2023-12-19
