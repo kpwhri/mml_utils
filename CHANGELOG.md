@@ -26,9 +26,14 @@ Types of changes:
 * Documentation/docstrings including for PheNorm-specific use cases
 * Improved logging with suggested troubleshooting methods
 * Added support for SAS7BDAT files as an input corpus
-* Skipping non-strings and empty notes when converting a corpus to files
 * Extract MDR (MedDRA) LLTs (lower level terms) for a given set of PTs (primary terms)
 * Always add newline when creating files for compatibility with MetaMap (tests fixed too)
+
+### Fixed
+
+* Skipping non-strings and empty notes when converting a corpus to files
+* Click parameters not being accepted by function in `mml-extract-mml` function 
+
 
 
 ## [0.4.0] - 2023-12-19
