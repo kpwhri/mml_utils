@@ -28,6 +28,7 @@ Types of changes:
 * Added support for SAS7BDAT files as an input corpus
 * Skipping non-strings and empty notes when converting a corpus to files
 * Extract MDR (MedDRA) LLTs (lower level terms) for a given set of PTs (primary terms)
+* Always add newline when creating files for compatibility with MetaMap (tests fixed too)
 
 
 ## [0.4.0] - 2023-12-19

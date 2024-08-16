@@ -45,6 +45,8 @@ def _check_text_vs_dataframe(df, outdir):
         for line in fh:
             path = Path(line.strip())
             assert path.exists()
-            assert df[df['note_id'] == int(path.stem)]['note_text'].values[0] == path.read_text()
+            # add newline due to needs of MetaMap
+            source_text_with_newline = df[df['note_id'] == int(path.stem)]['note_text'].values[0] + '\n'
+            assert source_text_with_newline == path.read_text()
             count += 1
     assert count == 9, 'Count number of files generated'

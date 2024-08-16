@@ -118,10 +118,11 @@ def _text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_
 
 
 def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
-                text_extension='.txt', text_encoding='utf8'):
+                text_extension='.txt', text_encoding='utf8', require_newline=True):
     """
     Write files to directory from generator outputting (note_id, text).
         A filelist will also be created for each outdirectory.
+    :param require_newline: always add a newline to avoid issues when running MetaMap
     :param text_gen:
     :param outdir:
     :param n_dirs:
@@ -144,13 +145,22 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
         if not isinstance(text, str) or text.strip() == '':  # handle forms of None/nan
             continue
         if note_id in completed:  # handle notes with multiple 'note_lines'
-            with open(completed[note_id], 'a', encoding=text_encoding, errors='replace') as out:
+            with open(completed[note_id], encoding=text_encoding) as fh:
+                prev_text = fh.read()
+            if require_newline:
+                prev_text = prev_text[:-1]
+            with open(completed[note_id], 'w', encoding=text_encoding, errors='replace') as out:
+                out.write(prev_text)
                 out.write(text)
+                if require_newline:
+                    out.write('\n')
             continue
         outfile = outdirs[i % n_dirs] / f'{note_id}{text_extension}'
         completed[note_id] = outfile
         with open(outfile, 'w', encoding=text_encoding, errors='replace') as out:
             out.write(text)
+            if require_newline:
+                out.write('\n')
         filelists[i % n_dirs].write(f'{outfile.absolute()}\n')
         i += 1
     for fl in filelists:

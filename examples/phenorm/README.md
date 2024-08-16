@@ -31,6 +31,7 @@ Command:
 
 Output:
 * A folder `notes` (or multiple folders `notesN`) containing text files with note text.
+  * NB: A newline will be added at the end of each note file so that MetaMap will correctly process it (otherwise, Metamap will quietly skip the last line).
 * A file `filelist.txt` (or multiple) with the path to each text file for processing with MetaMapLite or MetaMap.
 
 
@@ -120,6 +121,8 @@ This will create a `scripts` directory (or whatever you supplied to `outpath`) o
 * `ensure_directories`: make sure output directories exist
 * `script_N.sh`: these contain commands to run MetaMap; since MetaMap cannot run on a folder/filelist, each file must be run individually
   * it may be worth testing out the first command, fixing it if it doesn't run properly, and then doing a global find/replace to make sure all the commands will work
+
+Begin by starting the servers, run `./ensure_directories.sh` once, and then run each `./script_N.sh`.
 
 ## Extracting CUIs
 
