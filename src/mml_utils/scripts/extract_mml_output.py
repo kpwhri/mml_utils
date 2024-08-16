@@ -62,10 +62,12 @@ NOTE_FIELDNAMES = [
                    ' Include the period.')
 def _extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
                  *, encoding='utf8', output_format='json', max_search=1000, add_fieldname: List[str] = None,
-                 exclude_negated=False, output_directories=None, mm_encoding='cp1252'):
+                 exclude_negated=False, output_directories=None, mm_encoding='cp1252', note_suffix='.txt',
+                 output_suffix=None):
     extract_mml(note_directories, outdir, cui_file,
                 encoding=encoding, output_format=output_format, max_search=max_search, add_fieldname=add_fieldname,
-                exclude_negated=exclude_negated, output_directories=output_directories, mm_encoding=mm_encoding)
+                exclude_negated=exclude_negated, output_directories=output_directories, mm_encoding=mm_encoding,
+                note_suffix=note_suffix, output_suffix=output_suffix)
 
 
 def load_target_cuis(cui_file) -> TargetCuis:
@@ -86,6 +88,10 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
                 note_suffix='.txt', output_suffix=None):
     """
 
+    :param output_directories:
+    :param mm_encoding:
+    :param note_suffix:
+    :param output_suffix:
     :param exclude_negated: exclude negated CUIs from the output
     :param add_fieldname:
     :param max_search:
@@ -153,6 +159,9 @@ def get_field_names(note_directories: List[pathlib.Path], *, output_format='json
                     note_suffix='.txt', output_suffix=None):
     """
 
+    :param output_directories:
+    :param note_suffix:
+    :param output_suffix:
     :param note_directories:
     :param output_format:
     :param mm_encoding:
