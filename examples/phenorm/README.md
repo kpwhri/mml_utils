@@ -150,7 +150,78 @@ Output:
 * A log file with lots of errors for missing variables/column names.
     * To add these back into your output file, specify, e.g., `--add-fieldname negated fndg pos ...` and re-run.
 
-  
+
+### Silver Labels
+
+For Anaphylaxis PheNorm, we created a `silver_labels.csv` file containing a subset of CUIs which were considered as possible targets in the modeling. To accomplish, this we can run:
+
+```python
+
+import pandas as pd
+
+
+df = pd.read_csv('mml_{date}.csv')  # Output from `Extracting CUIs` step
+target_cuis = [  # a list of our target CUIs
+    'C4316895',
+    'C0685898',
+    'C0340865',
+    'C0002792',
+    'C0854649',
+]
+shared_cuis = set(df['cui'].unique()) & set(target_cuis)  # what CUIs are actually in the data?
+# select only those rows with the target cuis
+res_df = df[df['cui'].isin(target_cuis)].groupby(
+    ['docid', 'cui']
+)['start'].count().unstack().fillna(0).reset_index().applymap(int)
+res_df.to_csv(f'silver_labels_{len(shared_cuis)}.csv', index=False)
+```
+
+### Regex Counts
+
+For Anaphylaxis Phenorm, we created a `regex_counts.csv` file to calculate the frequency of the words `anaphylaxis` and `epinephrine` in the dataset. At a high level, all that is required is to count the total occurrences of the regular expressions `\banaph\w*` and `\bepine\w*`. The output file should be formatted as a CSV with, e.g.:
+
+```csv
+note_id,anaphylaxis,epinephrine
+1,0,0
+2,0,0
+3,4,1
+4,0,0
+5,1,1
+```
+
+This can also be generated using the `corporutil` Python package, with instructions [here](https://github.com/kpwhri/corporutil?tab=readme-ov-file#get-counts-of-regular-expressions). The command (with parameters) would look something like this:
+
+```shell
+python /path/to/src/corporutil/scripts/regex_counts.py
+corpus  # see definitions below
+--outdir
+stats  # output directory
+--regex  # regular expressions to include
+anaphylaxis==\banaph\w*
+--regex
+epinephrine==\bepine\w*
+```
+
+Or, with pure Python:
+
+```python
+from pathlib import Path
+import re
+
+epi_pat = re.compile(r'\bepine\w*')
+ana_pat = re.compile(r'\banaph\w*')
+
+results = []  # dict, can write to CSV with DictWriter
+for file in Path(r'/path/to/directory').iterdir():
+    with open(file, encoding='utf8') as fh:
+        text = fh.read()
+        results.append({
+          'note_id': file.stem,
+          'epinephrine': len(epi_pat.findall(text)),
+          'anaphylaxis': len(ana_pat.findall(text)),
+        })
+```
+
 
 ## Next Steps
 
