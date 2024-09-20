@@ -6,6 +6,15 @@ class TargetCuis:
     def __init__(self):
         self.data = defaultdict(set)
 
+    @property
+    def values(self) -> set:
+        """Unique target (i.e., output) CUIs"""
+        return set.union(*self.data.values())
+
+    @property
+    def keys(self) -> set:
+        return set(self.data.keys())
+
     def __contains__(self, item):
         if not self.data:
             return True
@@ -26,10 +35,13 @@ class TargetCuis:
         return len(self.data.keys())
 
     def n_values(self):
-        return len(set().union(*self.data.values()))
+        return len(self.values)
 
     def __len__(self):
         return self.n_values()
+
+    def __bool__(self):
+        return bool(self.data)
 
     @classmethod
     def fromdict(cls, d: dict):

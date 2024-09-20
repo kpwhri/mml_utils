@@ -123,7 +123,7 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
     build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfile,
                          output_format, encoding, exclude_negated, output_directories=output_directories,
                          mm_encoding=mm_encoding, note_suffix=note_suffix, output_suffix=output_suffix)
-    build_pivot_table(mml_outfile, cuis_by_doc_outfile)
+    build_pivot_table(mml_outfile, cuis_by_doc_outfile, target_cuis)
     return note_outfile, mml_outfile, cuis_by_doc_outfile
 
 
@@ -240,7 +240,7 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
     logger.info(f'Completed successfully.')
 
 
-def build_pivot_table(mml_file, outfile):
+def build_pivot_table(mml_file, outfile, target_cuis: TargetCuis = None):
     if pd is None:
         logger.warning(f'Unable to build pivot table: please install pandas `pip install pandas` and try again.')
         return
@@ -249,8 +249,16 @@ def build_pivot_table(mml_file, outfile):
     n_docs = df['docid'].nunique()
     df['count'] = 1
     df = df.pivot_table(index='docid', columns='cui', values='count', fill_value=0, aggfunc=sum).reset_index()
+    if target_cuis:  # ensure that all output cuis have been included in the output
+        missing_cuis = set(target_cuis.values) - set(df.columns)
+        logger.info(f'Adding back {len(missing_cuis)} CUIs that were not found in the notes.')
+        n_cuis += len(missing_cuis)
+        for missing_cui in missing_cuis:
+            df[missing_cui] = 0
+    # sort output columns
+    df = df[['docid'] + sorted(col for col in df.columns if col.startswith('C'))]
     df.to_csv(outfile, index=False)
-    logger.info(f'Output {n_cuis} CUIs for {n_docs} documents to: {outfile}.')
+    logger.info(f'Output {n_cuis} CUIs (expected {len(target_cuis)}) for {n_docs} documents to: {outfile}.')
 
 
 def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, encoding='utf8', mm_encoding='cp1252',
