@@ -261,8 +261,6 @@ Types of changes:
 
 - Script to automate creation of text files in a directory (i.e., building input for metamaplite)
 
-## [0.0.7] - 2022-06-05
-
 ### Fixed
 
 - Remove default sheet in Excel file
@@ -295,6 +293,5 @@ Types of changes:
 [0.1.1]: https://github.com/kpwhri/mml_utils/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/kpwhri/mml_utils/compare/0.0.9...0.1.0
 [0.0.9]: https://github.com/kpwhri/mml_utils/compare/0.0.8...0.0.9
-[0.0.8]: https://github.com/kpwhri/mml_utils/compare/0.0.7...0.0.8
-[0.0.7]: https://github.com/kpwhri/mml_utils/compare/0.0.6...0.0.7
-[0.0.6]: https://github.com/kpwhri/mml_utils/releases/v0.0.6
+[0.0.8]: https://github.com/kpwhri/mml_utils/compare/0.0.6...0.0.8
+[0.0.6]: https://github.com/kpwhri/mml_utils/releases/0.0.6
