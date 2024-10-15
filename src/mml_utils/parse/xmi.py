@@ -104,6 +104,8 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis=None, e
                         semtype: 1,
                     })
     for currid in results:
-        results[currid]['all_sources'] = ','.join(results[currid]['all_sources'])
-        results[currid]['all_semantictypes'] = ','.join(results[currid]['all_semantictypes'])
-    yield from (result for result in results.values() if not target_cuis or result['cui'] in target_cuis)
+        if 'all_sources' in results[currid]:
+            # may not be included if, e.g., the CUI is not in target_cuis
+            results[currid]['all_sources'] = ','.join(results[currid]['all_sources'])
+            results[currid]['all_semantictypes'] = ','.join(results[currid]['all_semantictypes'])
+    yield from (result for result in results.values() if not target_cuis or result.get('cui', None) in target_cuis)

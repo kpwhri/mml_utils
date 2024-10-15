@@ -19,6 +19,10 @@ Types of changes:
 
 ## [Unreleased]
 
+### Fixed
+
+* Error was raised when parsing cTAKES xmi files when the entity is not one of the target CUIs
+
 
 ## [1.0.0] - 2024-09-20
 
