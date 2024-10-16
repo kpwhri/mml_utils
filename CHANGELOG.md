@@ -19,6 +19,8 @@ Types of changes:
 
 ## [Unreleased]
 
+## [1.0.1] - 2024-10-16
+
 ### Fixed
 
 * Error was raised when parsing cTAKES xmi files when the entity is not one of the target CUIs
@@ -277,7 +279,8 @@ Types of changes:
 - Automatically build review files to Excel or CSV
 
 
-[unreleased]: https://github.com/kpwhri/mml_utils/compare/1.0.0...HEAD
+[unreleased]: https://github.com/kpwhri/mml_utils/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/kpwhri/mml_utils/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/kpwhri/mml_utils/compare/0.5.0...1.0.0
 [0.5.0]: https://github.com/kpwhri/mml_utils/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/kpwhri/mml_utils/compare/0.3.6...0.4.0
