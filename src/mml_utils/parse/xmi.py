@@ -3,7 +3,7 @@ Extract MML format for cTAKES output data.
 
 cTAKES output data is supplied in 'xmi' files which follow an XML format.
 """
-import pathlib
+from pathlib import Path
 from collections import defaultdict
 from xml.etree import ElementTree
 
@@ -29,7 +29,8 @@ def build_index_references(root):
     return text, postags
 
 
-def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis=None, extras=None):
+def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis = None, extras=None,
+                              skip_repeat_concepts=True):
     if not target_cuis:
         target_cuis = TargetCuis()
     tree = ElementTree.ElementTree(ElementTree.fromstring(text))
@@ -37,13 +38,14 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis=None, e
     # build text not to get 'matchedtext' equivalent
     text, postags = build_index_references(root)
     # extract info
-    file = pathlib.Path(filename)
+    file = Path(filename)
     stem = file.stem.replace('.txt', '')
     # results are stored, prefixed by any extras
     if extras is None:
         extras = {}
     results = defaultdict(lambda: extras.copy())
     i = 0
+    remove_concept_ids = set()
     for child in root:
         if 'textsem.ecore' in child.tag:
             if 'ontologyConceptArr' in child.keys():
@@ -56,8 +58,12 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis=None, e
                 generic = bool(child.get('generic'))
                 subject = child.get('subject')
 
-                for concept in child.get('ontologyConceptArr').split():
+                for j, concept in enumerate(child.get('ontologyConceptArr').split()):
                     concept_id = int(concept)
+                    if j >= 1 and skip_repeat_concepts:
+                        # same CUI, but different code
+                        remove_concept_ids.add(concept_id)  # record as these will be added in `refsem.ecore`
+                        continue
                     results[concept_id].update({
                         'event_id': f'{stem}_{concept_id}_{i}',
                         'docid': stem,
@@ -104,8 +110,11 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis=None, e
                         semtype: 1,
                     })
     for currid in results:
+        if currid in remove_concept_ids:
+            continue
         if 'all_sources' in results[currid]:
             # may not be included if, e.g., the CUI is not in target_cuis
             results[currid]['all_sources'] = ','.join(results[currid]['all_sources'])
             results[currid]['all_semantictypes'] = ','.join(results[currid]['all_semantictypes'])
-    yield from (result for result in results.values() if not target_cuis or result.get('cui', None) in target_cuis)
+        if not target_cuis or results[currid].get('cui', None) in target_cuis:
+            yield results[currid]

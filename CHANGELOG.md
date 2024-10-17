@@ -19,6 +19,11 @@ Types of changes:
 
 ## [Unreleased]
 
+### Fixed
+
+* cTAKES XMI output produces duplicate CUIs due to different codes; by default, only take the first now to more accurately represent CUI count
+
+
 ## [1.0.1] - 2024-10-16
 
 ### Fixed
