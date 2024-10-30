@@ -19,7 +19,7 @@
 <h3 align="center">Utilities and Scripts for Running Metamaplite</h3>
 
   <p>
-    Scripts for running Metamaplite (MML) against large batches of text.
+    Tools for running Metamaplite, Metamap, and cTAKES and interpreting their output.
   </p>
 </div>
 
