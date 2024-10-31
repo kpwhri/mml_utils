@@ -69,6 +69,7 @@ mml-run-ctakes = "mml_utils.scripts.run_ctakes:run_ctakes_directory"
 mml-build-freqs = "mml_utils.scripts.build_frequency_tables:_build_frequency_tables"
 mml-build-mmscript-multi = "mml_utils.scripts.build_mm_script_multi:_run_build_mm_multi"
 mml-build-mmscript = "mml_utils.scripts.build_mm_script:_build_mm_script"
+mml-compare = "mml_utils.scripts.compare_outputs:_run_compare_outputs"
 
 [project.urls]
 Home = 'https://github.com/kpwhri/mml_utils'

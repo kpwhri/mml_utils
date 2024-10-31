@@ -48,6 +48,7 @@
         * [Prepare CSV Files for Review: mml-prepare-review](#mml-prepare-review)
         * [Build Frequncy Tables](examples/complete/README.md#generate-frequency-tables)
         * [Build Metamap Sheel Script](#build-metamap-scripts-mml-build-mmscript--mml-build-mmscript-multi)
+        * [Compare Multiple Output Files]()
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -152,7 +153,8 @@ This is particularly useful when building frequency files
 ([`mml-build-freqs` command](examples/complete/README.md#generate-frequency-tables)).
 
 By compiling a list of CUIs in a txt file, this file can be built automatically with a script from the
-[`umls_api_tool` package](https://github.com/dcronkite/umls_api_tool/blob/master/examples/cui/cui_to_best_definition.py).
+[
+`umls_api_tool` package](https://github.com/dcronkite/umls_api_tool/blob/master/examples/cui/cui_to_best_definition.py).
 
 Here's an example:
 
@@ -325,9 +327,15 @@ Each run will result in a newly-created filelist version. Default output format 
 
 ### mml-extract-mml
 
-Extract results from running Metamaplite. Currently supports json (default), xmi (ctakes), and mmi. This command assumes that the mmi/json files from Metamaplite are on the same path as the text files/notes. If this is not the case, specify the path to the text files/notes in `/path/to/notes` and use `--output-directory` to specify where the output files are.
+Extract results from running Metamaplite. Currently supports json (default), xmi (ctakes), and mmi. This command assumes
+that the mmi/json files from Metamaplite are on the same path as the text files/notes. If this is not the case, specify
+the path to the text files/notes in `/path/to/notes` and use `--output-directory` to specify where the output files are.
 
-*Important assumptions about extensions:* ideally the extensions to all text files will be `.txt` (or no extension) and those to the output formats for for Metamaplite/cTAKES are `.mmi`, `.json`, or `.txt.xmi`. If this is not the case, you can try the experimental `--output-suffix` and `--notes-suffix` (if not `.txt`). In addition, the *stem* of both the note and the relevant output file must be identical. If possible, use only a single `.` (period, dot) in the filename (i.e., prefer not using multiple suffixes).
+*Important assumptions about extensions:* ideally the extensions to all text files will be `.txt` (or no extension) and
+those to the output formats for for Metamaplite/cTAKES are `.mmi`, `.json`, or `.txt.xmi`. If this is not the case, you
+can try the experimental `--output-suffix` and `--notes-suffix` (if not `.txt`). In addition, the *stem* of both the
+note and the relevant output file must be identical. If possible, use only a single `.` (period, dot) in the filename (
+i.e., prefer not using multiple suffixes).
 
     mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json|xmi)]
 
@@ -509,6 +517,46 @@ Inputs (see `tests/fever` for examples:
   /path/to/inputs [--mml-format json] [--text-extension .txt] [--text-encoding utf8]
 
 To then take samples from this dataset, use `mml-prepare-review-sample`.
+
+### Compare Multiple Offset Files with `mml-compare`
+
+Compare outputs of different configurations, vocabularies, or tools with `mml_compare`.
+
+To run this, specify an output directory and the directories containing `cuis_by_doc_*.csv` files. The `*` stands for
+the date. By default, the most recent version will be included.
+
+An example config follows. We specify each `cui_by_doc` file we want compared. This includes:
+* `ct`: run using cTAKES
+* `mm`: run using MetaMap
+* `mml`: run using MetaMapLite
+* `joined`: if note had multiple lines, we joined them
+* `lined`: lined version of note, where docid was given name `{docid}_{linenum}` (e.g., 12487_1)
+The goal of this analysis was to compare performance of NLP extraction tools when the raw notes were not joined together and see if htis had a degrading performance (it did not have an appreciable difference).
+
+
+    --outdir
+    /path/to/compare
+    --compare
+    joined-ct_fast==/path/to/joined/ct_fast/out
+    --compare
+    joined-ct_rx_mdr==/path/to/joined/ct_rx_mdr/out
+    --compare
+    joined-mm_default==/path/to/joined/mm_default/out
+    --compare
+    joined-mm_rx_mdr==/path/to/joined/mm_rx_mdr/out
+    --compare
+    joined-mml_default==/path/to/joined/mml_default/out
+    --compare
+    lined-ct_fast==/path/to/lined/ct_fast/out
+    --compare
+    lined-ct_rx_mdr==/path/to/lined/ct_rx_mdr/out
+    --compare
+    lined-mm_default==/path/to/lined/mm_default/out
+    --compare
+    lined-mm_rx_mdr==/path/to/lined/mm_rx_mdr/out
+    --compare
+    lined-mml_default==/path/to/lined/mml_default/out
+
 
 ## Troubleshooting
 

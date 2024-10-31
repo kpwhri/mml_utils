@@ -23,6 +23,10 @@ Types of changes:
 
 * cTAKES XMI output produces duplicate CUIs due to different codes; by default, only take the first now to more accurately represent CUI count
 
+### Added
+
+* Function/script to generate comparisons between different methods/approaches using Jaccard similarity
+
 
 ## [1.0.1] - 2024-10-16
 
