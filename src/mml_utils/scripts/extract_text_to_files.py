@@ -202,8 +202,11 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
                 out.write('\n')
         filelists[i % n_dirs].write(f'{outfile.absolute()}\n')
         i += 1
+        if i % 100_000 == 0:
+            logger.info(f'Finished reading {i:,} lines.')
     for fl in filelists:
         fl.close()
+    logger.info(f'Done! Finished reading {i:,} lines (i.e., notes/note parts) from source dataset.')
 
 
 if __name__ == '__main__':
