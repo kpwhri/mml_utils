@@ -5,6 +5,7 @@ This file will build 1 or more directories containing files with the name
  f'{note_id}.txt' and containing only the note's complete text.
 """
 import csv
+import json
 import pathlib
 
 import click
@@ -115,6 +116,44 @@ def _text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_
                 id_ = int(id_)
             text = getattr(row, text_col)
             yield id_, text
+
+
+@click.command()
+@click.argument('jsonl-file', type=click.Path(dir_okay=False, path_type=pathlib.Path), default=None)
+@click.option('--id-col', default='docid', type=str,
+              help='Name of column containing note ids.')
+@click.option('--text-col', default='text', type=str,
+              help='Name of column containing text.')
+@click.option('--outdir', type=click.Path(file_okay=False, path_type=pathlib.Path), default=None,
+              help='Directory to create subfolders and filelists.')
+@click.option('--n-dirs', default=1, type=int,
+              help='Number of directories to create.')
+@click.option('--text-extension', default='.txt',
+              help='Extension of text files to be created.')
+@click.option('--text-encoding', default='utf8',
+              help='Encoding for writing text files.')
+@click.option('--jsonl-encoding', default='utf8',
+              help='Encoding for source JSONL file.')
+def text_from_jsonl_cmd(jsonl_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
+                        text_encoding='utf8', jsonl_encoding='utf8'):
+    text_from_jsonl(jsonl_file, id_col, text_col, outdir, n_dirs=n_dirs, text_extension=text_extension,
+                    text_encoding=text_encoding, jsonl_encoding=jsonl_encoding)
+
+
+def text_from_jsonl(jsonl_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
+                    text_encoding='utf8', jsonl_encoding='utf8'):
+    build_files(_text_from_jsonl_iter(jsonl_file, jsonl_encoding, id_col, text_col),
+                outdir=outdir,
+                n_dirs=n_dirs,
+                text_extension=text_extension,
+                text_encoding=text_encoding)
+
+
+def _text_from_jsonl_iter(jsonl_file, jsonl_encoding, id_col, text_col):
+    with open(jsonl_file, encoding=jsonl_encoding) as fh:
+        for line in fh:
+            data = json.loads(line)
+            yield data[id_col], data[text_col]
 
 
 def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,

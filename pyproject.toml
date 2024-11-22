@@ -65,6 +65,7 @@ mml-prepare-review-sample = "mml_utils.scripts.sample_review_set:_compile_to_exc
 mml-sql-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_database_cmd"
 mml-csv-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_csv_cmd"
 mml-sas-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_sas7bdat_cmd"
+mml-jsonl-to-txt = "mml_utils.scripts.extract_text_to_files:text_from_jsonl_cmd"
 mml-run-ctakes = "mml_utils.scripts.run_ctakes:run_ctakes_directory"
 mml-build-freqs = "mml_utils.scripts.build_frequency_tables:_build_frequency_tables"
 mml-build-mmscript-multi = "mml_utils.scripts.build_mm_script_multi:_run_build_mm_multi"
