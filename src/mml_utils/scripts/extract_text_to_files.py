@@ -6,6 +6,7 @@ This file will build 1 or more directories containing files with the name
 """
 import csv
 import json
+import os
 import pathlib
 from collections import UserDict, OrderedDict
 
@@ -135,19 +136,28 @@ def _text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_
               help='Encoding for writing text files.')
 @click.option('--jsonl-encoding', default='utf8',
               help='Encoding for source JSONL file.')
+@click.option('--resume', is_flag=True, default=False,
+              help='Safely resume processing (will re-run the last recorded note_id).')
 def text_from_jsonl_cmd(jsonl_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
-                        text_encoding='utf8', jsonl_encoding='utf8'):
+                        text_encoding='utf8', jsonl_encoding='utf8', resume=False):
     text_from_jsonl(jsonl_file, id_col, text_col, outdir, n_dirs=n_dirs, text_extension=text_extension,
-                    text_encoding=text_encoding, jsonl_encoding=jsonl_encoding)
+                    text_encoding=text_encoding, jsonl_encoding=jsonl_encoding, resume=resume)
 
 
 def text_from_jsonl(jsonl_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
-                    text_encoding='utf8', jsonl_encoding='utf8'):
-    build_files(_text_from_jsonl_iter(jsonl_file, jsonl_encoding, id_col, text_col),
-                outdir=outdir,
-                n_dirs=n_dirs,
-                text_extension=text_extension,
-                text_encoding=text_encoding)
+                    text_encoding='utf8', jsonl_encoding='utf8', resume=False):
+    if resume:
+        resume_building_files(_text_from_jsonl_iter(jsonl_file, jsonl_encoding, id_col, text_col),
+                              outdir=outdir,
+                              n_dirs=n_dirs,
+                              text_extension=text_extension,
+                              text_encoding=text_encoding)
+    else:
+        build_files(_text_from_jsonl_iter(jsonl_file, jsonl_encoding, id_col, text_col),
+                    outdir=outdir,
+                    n_dirs=n_dirs,
+                    text_extension=text_extension,
+                    text_encoding=text_encoding)
 
 
 def _text_from_jsonl_iter(jsonl_file, jsonl_encoding, id_col, text_col):
@@ -173,7 +183,6 @@ class FIFOOrderedDict(UserDict):
             self.data.popitem(last=False)
 
 
-
 def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
                 text_extension='.txt', text_encoding='utf8', require_newline=True):
     """
@@ -196,7 +205,13 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     filelists = [open(outdir / f'filelist{i}.txt', 'w') if n_dirs > 1
                  else open(outdir / f'filelist.txt', 'w')
                  for i in range(n_dirs)]
-    completed = FIFOOrderedDict(max_length=10)  # only retain last 10: multiple lines must appear together
+    _build_files(text_gen, n_dirs, outdirs, filelists, text_encoding, text_extension, require_newline)
+
+
+def _build_files(text_gen, n_dirs, outdirs, filelists, text_encoding, text_extension, require_newline,
+                 completed: FIFOOrderedDict = None):
+    if not completed:
+        completed = FIFOOrderedDict(max_length=10)  # only retain last 10: multiple lines must appear together
     i = 0
     for note_id, text in text_gen:
         if not isinstance(text, str) or text.strip() == '':  # handle forms of None/nan
@@ -227,5 +242,69 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     logger.info(f'Done! Finished reading {i:,} lines (i.e., notes/note parts) from source dataset.')
 
 
+def _get_last_path(file: pathlib.Path):
+    num_newlines = 0
+    with open(file, 'rb') as f:
+        try:
+            f.seek(-2, os.SEEK_END)
+            while num_newlines < 2:  # each path is written with a newline at the end
+                f.seek(-2, os.SEEK_CUR)
+                if f.read(1) == b'\n':
+                    break
+        except OSError:
+            f.seek(0)
+        last_line = f.readline().decode().strip()
+    return pathlib.Path(last_line)
+
+
+def resume_building_files(text_gen, outdir: pathlib.Path, n_dirs=1,
+                          text_extension='.txt', text_encoding='utf8', require_newline=True):
+    """
+    Figure otu where the process was interrupted by getting last note ids written to filelist. Re-run the last one
+      and then keep going.
+    :param text_gen:
+    :param outdir:
+    :param n_dirs:
+    :param text_extension:
+    :param text_encoding:
+    :param require_newline:
+    :return:
+    """
+    logger.info(f'Attempting to resume building files.')
+    outdirs = [p for p in sorted(outdir.glob('notes*'))]
+    filelist_paths = [p for p in sorted(outdir.glob('filelist*.txt'))]
+    assert len(outdirs) == len(
+        filelist_paths) == n_dirs, 'Ensure no disagreement between number of output directories/sets.'
+    # get last value in each filelist
+    last_paths = [_get_last_path(f) for f in filelist_paths]
+    last_noteids = {p.name.removesuffix(text_extension): p for p in last_paths}
+    logger.info(f'Possible last note_ids: {last_noteids}.'
+                f' Will skip all files until all three of these are found.'
+                f' The last found will be re-processed.')
+    filelists = [open(f, 'a') for f in filelist_paths]
+    completed = FIFOOrderedDict(max_length=10)  # only retain last 10: multiple lines must appear together
+    for note_id, text in text_gen:
+        if not isinstance(text, str) or text.strip() == '':  # handle forms of None/nan
+            continue
+        note_id_str = str(note_id)
+        if note_id_str in last_noteids:
+            if len(last_noteids) == 1:
+                last_file = last_noteids[note_id_str]
+                logger.info(f'Last completed note_id: {note_id_str}.')
+                logger.info(f'Preparing to re-run and re-build: {last_file}.')
+                last_file.unlink(missing_ok=True)  # might not have been written, possible cause of error
+                completed[note_id] = last_file
+                with open(last_file, 'w', encoding=text_encoding, errors='replace') as out:
+                    out.write(text)
+                    if require_newline:
+                        out.write('\n')
+                logger.info(f'Successfully re-wrote {note_id} to {last_file}. Running notes going forward.')
+                break
+            else:
+                del last_noteids[note_id]
+    _build_files(text_gen, n_dirs, outdirs, filelists, text_encoding, text_extension, require_newline, completed)
+
+
 if __name__ == '__main__':
-    text_from_database_cmd()
+    # text_from_database_cmd()
+    text_from_jsonl_cmd()
