@@ -31,7 +31,7 @@ Types of changes:
 
 * Function/script to generate comparisons between different methods/approaches using Jaccard similarity
 * Added support for generating text files from jsonlines using `mml-jsonl-to-txt`
-* Resume an interrupted run of `mml-jsonl-to-text` by passing `--resume` argument
+* Resume an interrupted run of `mml-jsonl-to-text` (and other extract text files) by passing `--resume` argument
 
 
 ## [1.0.1] - 2024-10-16

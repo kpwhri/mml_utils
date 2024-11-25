@@ -26,14 +26,16 @@ from loguru import logger
               help='Extension of text files to be created.')
 @click.option('--text-encoding', default='utf8',
               help='Encoding for writing text files.')
+@click.option('--resume', is_flag=True, default=False,
+              help='Safely resume processing (will re-run the last recorded note_id).')
 def text_from_database_cmd(connection_string, query, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
-                           text_encoding='utf8'):
+                           text_encoding='utf8', resume=False):
     text_from_database(connection_string, query, outdir, n_dirs=n_dirs, text_extension=text_extension,
-                       text_encoding=text_encoding)
+                       text_encoding=text_encoding, resume=resume)
 
 
 def text_from_database(connection_string, query, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
-                       text_encoding='utf8'):
+                       text_encoding='utf8', resume=False):
     try:
         import sqlalchemy as sa
     except ImportError as ie:
@@ -43,8 +45,12 @@ def text_from_database(connection_string, query, outdir: pathlib.Path, n_dirs=1,
         return
 
     eng = sa.create_engine(connection_string)
-    build_files(eng.execute(query), outdir=outdir, n_dirs=n_dirs,
-                text_extension=text_extension, text_encoding=text_encoding)
+    if resume:
+        resume_building_files(eng.execute(query), outdir=outdir, n_dirs=n_dirs,
+                              text_extension=text_extension, text_encoding=text_encoding)
+    else:
+        build_files(eng.execute(query), outdir=outdir, n_dirs=n_dirs,
+                    text_extension=text_extension, text_encoding=text_encoding)
 
 
 @click.command()
@@ -65,19 +71,25 @@ def text_from_database(connection_string, query, outdir: pathlib.Path, n_dirs=1,
               help='Encoding for source CSV file.')
 @click.option('--csv-delimiter', default=',',
               help='Column delimiter for csv file.')
+@click.option('--resume', is_flag=True, default=False,
+              help='Safely resume processing (will re-run the last recorded note_id).')
 def text_from_csv_cmd(csv_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
-                      text_encoding='utf8', csv_encoding='utf8', csv_delimiter=','):
+                      text_encoding='utf8', csv_encoding='utf8', csv_delimiter=',', resume=False):
     text_from_csv(csv_file, id_col, text_col, outdir, n_dirs=n_dirs, text_extension=text_extension,
-                  text_encoding=text_encoding, csv_encoding=csv_encoding, csv_delimiter=csv_delimiter)
+                  text_encoding=text_encoding, csv_encoding=csv_encoding, csv_delimiter=csv_delimiter, resume=resume)
 
 
 def text_from_csv(csv_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
-                  text_encoding='utf8', csv_encoding='utf8', csv_delimiter=','):
+                  text_encoding='utf8', csv_encoding='utf8', csv_delimiter=',', resume=False):
     with open(csv_file, newline='', encoding=csv_encoding) as fh:
         reader = csv.DictReader(fh, delimiter=csv_delimiter)
         text_gen = ((row[id_col], row[text_col]) for row in reader)
-        build_files(text_gen, outdir=outdir, n_dirs=n_dirs,
-                    text_extension=text_extension, text_encoding=text_encoding)
+        if resume:
+            resume_building_files(text_gen, outdir=outdir, n_dirs=n_dirs,
+                                  text_extension=text_extension, text_encoding=text_encoding)
+        else:
+            build_files(text_gen, outdir=outdir, n_dirs=n_dirs,
+                        text_extension=text_extension, text_encoding=text_encoding)
 
 
 @click.command()
@@ -98,16 +110,24 @@ def text_from_csv(csv_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, te
               help='Encoding for source SAS7BDAT file.')
 @click.option('--force-id-to-int/--dont-force-id-to-int', default=False,
               help='By default, id column will be coerced to an int due to preference in pandas for float.')
+@click.option('--resume', is_flag=True, default=False,
+              help='Safely resume processing (will re-run the last recorded note_id).')
 def text_from_sas7bdat_cmd(sas_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
-                           text_encoding='utf8', sas_encoding='latin1', force_id_to_int=True):
+                           text_encoding='utf8', sas_encoding='latin1', force_id_to_int=True, resume=False):
     text_from_sas7bdat(sas_file, id_col, text_col, outdir, n_dirs=n_dirs, text_extension=text_extension,
-                       text_encoding=text_encoding, sas_encoding=sas_encoding, force_id_to_int=force_id_to_int)
+                       text_encoding=text_encoding, sas_encoding=sas_encoding, force_id_to_int=force_id_to_int,
+                       resume=resume)
 
 
 def text_from_sas7bdat(sas_file, id_col, text_col, outdir: pathlib.Path, n_dirs=1, text_extension='.txt',
-                       text_encoding='utf8', sas_encoding='latin1', force_id_to_int=True):
-    build_files(_text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_to_int=force_id_to_int),
-                outdir=outdir, n_dirs=n_dirs, text_extension=text_extension, text_encoding=text_encoding)
+                       text_encoding='utf8', sas_encoding='latin1', force_id_to_int=True, resume=False):
+    if resume:
+        resume_building_files(
+            _text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_to_int=force_id_to_int),
+            outdir=outdir, n_dirs=n_dirs, text_extension=text_extension, text_encoding=text_encoding)
+    else:
+        build_files(_text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_to_int=force_id_to_int),
+                    outdir=outdir, n_dirs=n_dirs, text_extension=text_extension, text_encoding=text_encoding)
 
 
 def _text_from_sas7bdat_iter(sas_file, sas_encoding, id_col, text_col, force_id_to_int=True):
@@ -199,6 +219,8 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     if outdir is None:
         outdir = pathlib.Path('.')
     logger.info(f'Writing files to: {outdir}.')
+    logger.info(f'If this process gets interrupted, consider automatically resuming by appending'
+                f' the `--resume` flag to the command line.')
     outdirs = [outdir / f'notes{i}' if n_dirs > 1 else outdir / f'notes' for i in range(n_dirs)]
     for d in outdirs:
         d.mkdir(exist_ok=False, parents=True)
@@ -306,5 +328,4 @@ def resume_building_files(text_gen, outdir: pathlib.Path, n_dirs=1,
 
 
 if __name__ == '__main__':
-    # text_from_database_cmd()
-    text_from_jsonl_cmd()
+    text_from_database_cmd()
