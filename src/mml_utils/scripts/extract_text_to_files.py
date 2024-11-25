@@ -7,6 +7,7 @@ This file will build 1 or more directories containing files with the name
 import csv
 import json
 import pathlib
+from collections import UserDict, OrderedDict
 
 import click
 import pandas as pd
@@ -156,6 +157,23 @@ def _text_from_jsonl_iter(jsonl_file, jsonl_encoding, id_col, text_col):
             yield data[id_col], data[text_col]
 
 
+class FIFOOrderedDict(UserDict):
+    """Limit the memory footprint of dict by only retaining most recent n
+    ASSUMPTION: if > max_length are present in dict (somehow) only 1 will be removed with each new insertion..
+    """
+
+    def __init__(self, max_length=10):
+        super().__init__()
+        self.data = OrderedDict(self.data)
+        self.max_length = max_length
+
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value)
+        if len(self.data) > self.max_length:
+            self.data.popitem(last=False)
+
+
+
 def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
                 text_extension='.txt', text_encoding='utf8', require_newline=True):
     """
@@ -178,7 +196,7 @@ def build_files(text_gen, outdir: pathlib.Path, n_dirs=1,
     filelists = [open(outdir / f'filelist{i}.txt', 'w') if n_dirs > 1
                  else open(outdir / f'filelist.txt', 'w')
                  for i in range(n_dirs)]
-    completed = {}
+    completed = FIFOOrderedDict(max_length=10)  # only retain last 10: multiple lines must appear together
     i = 0
     for note_id, text in text_gen:
         if not isinstance(text, str) or text.strip() == '':  # handle forms of None/nan
