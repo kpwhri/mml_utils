@@ -33,13 +33,13 @@ def clean_filelist(filelist: Path, output_directory: Path = None, output_format=
                     cnt += 1
                     continue
                 if last_line is not None:
-                    logger.info(f'Found {cnt} already processed.')
+                    logger.info(f'Found {cnt:,} already processed.')
                     logger.info(f'Setting last completed to be repeated in case of incomplete output: {last_line}')
                     out.write(last_line)
                     last_line = None
                 out.write(line)
                 undone += 1
-    logger.info(f'Finished writing {undone} uncompleted to filelist.')
+    logger.info(f'Finished writing {undone:,} uncompleted to filelist.')
 
 
 if __name__ == '__main__':
