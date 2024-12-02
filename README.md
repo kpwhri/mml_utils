@@ -325,6 +325,15 @@ Each run will result in a newly-created filelist version. Default output format 
 
     mml-run-filelist --filelist /path/to/filelist.txt --mml-home ./public_mm_lite [--output-format (mmi|json)]
 
+If the processing gets interrupted, a new filelist can be built using the `mml-clean-filelist` command. The location of the filelist will be retained (a backup of the original will be placed in the same location with a `.bk` suffix).
+
+    mml-clean-filelist /path/to/filelist.txt [--output-format (mmi|json)] [--output-directory /path/to/outdir]
+
+* `--output-format` defaults to looking for `json`
+* `--output-directory` defaults to assuming input and output are in same directory (as done for MetaMapLite)
+* Once this is done, re-run `mml-run-filelist --filelist /path/to/filelist.txt ...`
+  * The original filelist will be renamed with a tiemstamp.
+
 ### mml-extract-mml
 
 Extract results from running Metamaplite. Currently supports json (default), xmi (ctakes), and mmi. This command assumes
