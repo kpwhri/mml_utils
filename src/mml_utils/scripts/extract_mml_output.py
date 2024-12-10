@@ -323,7 +323,7 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encodi
         exp_suffix = output_suffix if output_suffix else f'.{output_format}'
         stem = file.stem.split('.')[0]
         logger.warning(f'Expected {output_format} file like {file.stem}{exp_suffix} or {stem}{exp_suffix}'
-                       f' in {output_directories}.')
+                       f' in {output_directories or file.parent}.')
         record['processed'] = False
     yield True, record
 
