@@ -33,6 +33,7 @@ Types of changes:
 * Added support for generating text files from jsonlines using `mml-jsonl-to-txt`
 * Resume an interrupted run of `mml-jsonl-to-text` (and other extract text files) by passing `--resume` argument
 * Added script to remove already processed files from a filelist
+* Added option to skip missing (i.e., unprocessed files) while running extraction
 
 
 ## [1.0.1] - 2024-10-16
