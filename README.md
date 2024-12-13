@@ -104,6 +104,13 @@ Additional instructions, including UMLS/MML installation are described here: htt
 
 ### End-to-End Example
 
+There are several examples in the `examples` directory.
+
+* [Complete Example](examples/complete/README.md)
+* [Phenorm-focused Example](examples/phenorm/README.md)
+* [cTAKES Example](examples/ctakes/README.md)
+
+
 In the `examples/complete/` directory, you can find a complete end-to-end example of build and running MetaMapLite. One
 using `*.json` and the other `*.mmi` formats.
 
