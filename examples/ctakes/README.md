@@ -21,7 +21,7 @@ How to run with cTAKES.
 
 cTAKES operates with directories. Thus, you will have files in an input directory (e.g., `C:\notes`) and write the output as `.xmi` files to an output directory (e.g., `C:\ctakes_out`). If an input file is `C:\notes\001.txt`, the output file will be `C:\ctakes_out\001.txt.xmi`.
 
-If you wish to enable 'multi-processing', you'll need to move files into multiple directories (e.g., move 25% to each of `C:\notes0`, `C:\notes1`, etc.)
+If you wish to enable 'multi-processing', you'll need to move files into multiple directories (e.g., move 25% to each of `C:\notes0`, `C:\notes1`, etc.). Note that the `mml-extract-mml` only works with a single output directory. Either plan to run multiple `mml-extract-mml` processes (appending the results), or dump into a single output directory. In addition, multiple cTAKES installs will be required as the application places a lock on the dictionary. The same configuration (i.e., `ctakes` directory) can be moved to separate machines or duplicated on the same machine to get around the lock.
 
 Command:
 
@@ -35,7 +35,20 @@ This command with run the `bin\runClinicalPipeline.bat` or `bin/runClinicalPipel
 
 ## Extracting Results
 
-TODO
+Once cTAKES has run, we'll need to extract the relevant CUIs from the output. To accomplish this, we'll use the `mml-extract-mml` command (this is the same command and parameters as for extracting with MetaMapLite and MetaMap).
+
+    mml-extract-mml C:\notes --outdir C:\extract_cuis --cui-file C:\cuis.txt --extract-format xmi --extract-directory C:\ctakes_out [--extract-encoding utf8]
+
+* `cuis.txt`: a single CUI per line, only these CUIs will be considered
+
+If you are checking progress (and expect a number of files to be unprocessed) run `mml-extract-mml` with `--skip-missing` flag, OR:
+
+    mml-extract C:\ctakes_out --outdir C:\extract_cuis_incomplete --cui-file C:\cuis.txt --extract-format xmi --note-directory C:\notes
+
+If you have multiple notes directories that were run in parallel, you can extract all of these at once (NB: be suer to keep the notes directories and extract directories in order to speed up processing):
+
+    mml-extract-mml C:\notes0 C:\notes1 --outdir C:\extract_cuis --cui-file C:\cuis.txt --extract-format xmi --extract-directory C:\ctakes_out0 --extract-directory C:\ctakes_out1 [--extract-encoding utf8]
+
 
 ## Troubleshooting
 
