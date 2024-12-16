@@ -130,12 +130,12 @@ Once the appropriate NLP tool has been run, we will build a CSV file to include 
 
 Command:
 
-    mml-extract-mml notes --outdir mmout --cui-file cuis.txt --output-format mmi|json [--output-directory mmout/wsd]
+    mml-extract-mml notes --outdir mmout --cui-file cuis.txt --extract-format mmi|json [--extract-directory mmout/wsd]
   
 
-* `--output-format`: pick either `mmi` or `json` depending on whether the NLP tool output mmi or json files
+* `--extract-format`: pick either `mmi` or `json` depending on whether the NLP tool output mmi or json files
 * `--outdir`: directory to output CSV files
-* `--output-directory`: directory containing output `*.mmi` or `*.json` files if it's different than `notes`
+* `--extract-directory`: directory containing output `*.mmi` or `*.json` files if it's different than `notes`
   * MetaMapLite dumps the output files in the same directory, so you could skip this command
   * MetaMap, when following the directions above, will place the `*.mmi` files in `./mmout/wsd`
 * `--cui-file`: file containing the target CUIs to include, along with any mappings (where appropriate)
@@ -144,7 +144,7 @@ Command:
 
 Output:
 
-* `mml_{date}.csv`: an unpacked version of the mmi or json file
+* `nlp_{date}.csv`: an unpacked version of the mmi or json file
 * `notes_{date}.csv`: summary statistics on the notes in the corpus
 * `cuis_by_doc_{date}.csv`: count of CUIs by note
 * A log file with lots of errors for missing variables/column names.
@@ -241,7 +241,7 @@ It may prove useful to select a subset of CUIs and group by a 'patient' or 'even
 import pandas as pd
 
 
-df = pd.read_csv('mml_20240814_160954.csv')  # Output from `Extracting CUIs` step
+df = pd.read_csv('nlp_20240814_160954.csv')  # Output from `Extracting CUIs` step
 target_cuis = [  # a list of our target CUIs
     'C4316895',
     'C0685898',
@@ -269,7 +269,7 @@ res_df.to_csv(f'selected_cuis_{len(shared_cuis)}.csv', index=False)
 import pandas as pd
 
 
-df = pd.read_csv('mml_20240814_160954.csv')  # Output from `Extracting CUIs` step
+df = pd.read_csv('nlp_20240814_160954.csv')  # Output from `Extracting CUIs` step
 df = df[['docid', 'cui', 'negated']]
 df = df.rename(columns={'docid': 'note_id'})
 cuis = list(df['cui'].unique())
@@ -290,7 +290,7 @@ res['non_negated'] = res['note_id'] - res['negated']
 import pandas as pd
 
 
-df = pd.read_csv('mml_20240814_160954.csv')  # Output from `Extracting CUIs` step
+df = pd.read_csv('nlp_20240814_160954.csv')  # Output from `Extracting CUIs` step
 df = df[['docid', 'cui', 'negated']]
 df = df.rename(columns={'docid': 'note_id'})
 neg_df = df.copy()
