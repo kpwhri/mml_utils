@@ -26,6 +26,7 @@ Types of changes:
 ### Changed
 
 * For extracting text to files, reduced memory footprint by only retaining most recent 10 records.
+* Assume that `output-directory` elements are aligned with `notes-directories` in order.
 
 ### Added
 
