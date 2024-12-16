@@ -353,12 +353,12 @@ can try the experimental `--output-suffix` and `--notes-suffix` (if not `.txt`).
 note and the relevant output file must be identical. If possible, use only a single `.` (period, dot) in the filename (
 i.e., prefer not using multiple suffixes).
 
-    mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json|xmi)]
+    mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--extract-format (mmi|json|xmi)]
 
-For usage with cTAKES output, include the `--output-directory [CTAKES_XMI_DIR]` which points to the cTAKES output
+For usage with cTAKES output, include the `--extract-directory [CTAKES_XMI_DIR]` which points to the cTAKES output
 directory.
 
-    mml-extract-mml /path/to/notes --outdir /path/to/output [...] --output-directory /path/to/*.xmi.txt_dir --output-format xmi
+    mml-extract-mml /path/to/notes --outdir /path/to/output [...] --extract-directory /path/to/*.xmi.txt_dir --extract-format xmi
 
 For encoding challenges, you can use the following arguments:
 

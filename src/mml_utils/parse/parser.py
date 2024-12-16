@@ -6,8 +6,7 @@ from mml_utils.parse.mmi import extract_mml_from_mmi_data
 from mml_utils.parse.xmi import extract_mml_from_xmi_data
 
 
-def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None, extract_format='json',
-                     data_directories=None):
+def extract_mml_data(file: pathlib.Path, *, encoding='cp1252', target_cuis=None, extract_format='json'):
     with open(file, encoding=encoding) as fh:
         text = fh.read()
     if not text.strip():  # handle empty note

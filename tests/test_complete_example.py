@@ -51,7 +51,7 @@ def test_complete_example_json(complete_example_dir, tmp_path):
         note_directories=[complete_example_dir / 'notes'],
         outdir=tmp_path / 'mmlout',
         cui_file=complete_example_dir / 'include-cuis.txt',
-        output_format='json',
+        extract_format='json',
     )
     assert_csvs_equal(mml_outfile, complete_example_dir / 'mmlout' / 'mml.json.csv')
     assert_csvs_equal(note_outfile, complete_example_dir / 'mmlout' / 'notes.json.csv')
@@ -63,7 +63,7 @@ def test_complete_example_mmi(complete_example_dir, tmp_path):
         note_directories=[complete_example_dir / 'notes'],
         outdir=tmp_path / 'mmlout',
         cui_file=complete_example_dir / 'include-cuis.txt',
-        output_format='mmi',
+        extract_format='mmi',
     )
     assert_csvs_equal(mml_outfile, complete_example_dir / 'mmlout' / 'mml.mmi.csv', skip_length_check=True)
     assert_csvs_equal(note_outfile, complete_example_dir / 'mmlout' / 'notes.mmi.csv')
@@ -85,12 +85,12 @@ def test_complete_arbitrary_extensions_mmi(complete_example_dir, tmp_path):
     copy_files_to_path(complete_example_dir / 'notes', '.txt', text_path, txt_extension)
     note_outfile, mml_outfile, cuis_by_doc_outfile = extract_mml(
         note_directories=[text_path],
-        output_directories=[mmi_path],
+        extract_directories=[mmi_path],
         outdir=tmp_path / 'mmlout',
         cui_file=complete_example_dir / 'include-cuis.txt',
-        output_format='mmi',
+        extract_format='mmi',
         note_suffix=txt_extension,
-        output_suffix=mmi_extension,
+        extract_suffix=mmi_extension,
     )
     assert_csvs_equal(mml_outfile, complete_example_dir / 'mmlout' / 'mml.mmi.csv', skip_length_check=True)
     assert_csvs_equal(note_outfile, complete_example_dir / 'mmlout' / 'notes.mmi.csv',
