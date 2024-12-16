@@ -25,11 +25,11 @@ If you wish to enable 'multi-processing', you'll need to move files into multipl
 
 Command:
 
-    run-ctakes [INPUT_DIRECTORY] --ctakes-home [CTAKES_HOME] --outdir [OUTPUT_DIRECTORY] --umls-key [UMLS KEY] --dictionary [DICTIONARY_XML_FILE]
+    mml-run-ctakes [INPUT_DIRECTORY] --ctakes-home [CTAKES_HOME] --outdir [OUTPUT_DIRECTORY] --umls-key [UMLS KEY] --dictionary [DICTIONARY_XML_FILE]
 
 For example:
 
-    run-ctakes C:\notes --ctakes-home C:\ctakes\apache-ctakes-4.0.0.1 --outdir C:\ctakes_out --umls-key 752a91b2-5dc9-fake-aa41-ecfd88dbb90a --dictionary C:\ctakes\apache-ctakes-4.0.0.1\resources\org\apache\ctakes\dictionary\lookup\fast\sno_rx_16ab.xml
+    mml-run-ctakes C:\notes --ctakes-home C:\ctakes\apache-ctakes-4.0.0.1 --outdir C:\ctakes_out --umls-key 752a91b2-5dc9-fake-aa41-ecfd88dbb90a --dictionary C:\ctakes\apache-ctakes-4.0.0.1\resources\org\apache\ctakes\dictionary\lookup\fast\sno_rx_16ab.xml
 
 This command with run the `bin\runClinicalPipeline.bat` or `bin/runClinicalPipeline.sh` file. If there are issues with the run, this file can often be directly edited (or directly initialized and avoid using `mml_utils`).
 
