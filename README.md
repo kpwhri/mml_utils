@@ -343,7 +343,7 @@ If the processing gets interrupted, a new filelist can be built using the `mml-c
 
 ### mml-extract-mml
 
-Extract results from running Metamaplite. Currently supports json (default), xmi (ctakes), and mmi. This command assumes
+Extract results from running Metamaplite, Metamap, or cTAKES. Currently supports json (default), xmi (ctakes), and mmi. This command assumes
 that the mmi/json files from Metamaplite are on the same path as the text files/notes. If this is not the case, specify
 the path to the text files/notes in `/path/to/notes` and use `--output-directory` to specify where the output files are.
 
@@ -364,6 +364,30 @@ For encoding challenges, you can use the following arguments:
 
 * `--file-encoding`: encoding that the text notes are written/saved in (e.g., 'latin1', 'utf8')
 * `--output-encoding`: encoding that the program (i.e., Metamaplite or cTAKES) wrote the output to
+
+*Alternative: Extract to Text*
+
+Importantly, the above `mml-extract-mml` will use the perspective of the notes when identifying extractions. If your notes are only partially processed (e.g., you're trying to get intermediary results), it may make sense to just iterate across all of the processed NLP extracts rather than notes. For this, we would use `mml-extract`. In pseudocode, here's the difference between the approaches:
+
+```python
+
+# mml-extract-mml
+
+for note in notes:
+    nlp_extract = get_nlp_results(note)
+    write_output(note, nlp_extract)
+
+# mml-extract
+for extract in extracts:
+    note = get_note(extract)
+    write_output(extract, note)
+
+```
+
+    mml-extract /path/to/extract [/path/to/extract2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--output-format (mmi|json|xmi)] [--note-directory /path/to/notes] [--note-directory /path/to/notes2]
+
+* The `--note-directory` argument is only required if it differs from the extract directory (i.e., required for cTAKES).
+* If `/path/to/extract` is the output of `/path/to/notes`, and `/path/to/extract2` is the output of the notes in `/path/to/notes2`, esnure that they are listed in the same order. This will speed up the processing. 
 
 #### mml-compare-extracts
 

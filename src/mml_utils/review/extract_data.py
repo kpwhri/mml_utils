@@ -246,7 +246,7 @@ def extract_cuis(text, mml_file, mml_format, target_cuis):
     :return:
     """
     cui_data = []
-    for data in extract_mml_data(mml_file, target_cuis=target_cuis, output_format=mml_format):
+    for data in extract_mml_data(mml_file, target_cuis=target_cuis, extract_format=mml_format):
         try:
             start, end = find_target_text(text, data['matchedtext'], data['start'], data['end'])
         except ValueError as ve:

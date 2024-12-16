@@ -46,6 +46,7 @@ doc = [
 excel = ['openpyxl']
 
 [project.scripts]
+mml-extract = "mml_utils.scripts.extract_mml:_extract_mml"
 mml-clean = "mml_utils.scripts.clean_files:clean_files_cmd"
 mml-run-filelist = "mml_utils.scripts.run_mml_on_filelist:run_single_mml_filelist"
 mml-clean-filelist = "mml_utils.scripts.remove_done_from_filelist:clean_filelist"

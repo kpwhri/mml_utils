@@ -25,7 +25,7 @@ try:
 except ImportError:
     pd = None
 
-MML_FIELDNAMES = [
+NLP_FIELDNAMES = [
     'event_id', 'docid', 'filename', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length',
 ]
 NOTE_FIELDNAMES = [
@@ -112,9 +112,9 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
     cuis_by_doc_outfile = outdir / f'cuis_by_doc_{now}.csv'
 
     if add_fieldname:
-        global MML_FIELDNAMES
+        global NLP_FIELDNAMES
         for fieldname in add_fieldname:
-            MML_FIELDNAMES.append(fieldname)
+            NLP_FIELDNAMES.append(fieldname)
 
     target_cuis = load_target_cuis(cui_file)
     if output_directories is None:
@@ -188,8 +188,8 @@ def get_field_names(note_directories: List[pathlib.Path], *, output_format='json
     :return:
     """
     logger.info('Retrieving fieldnames.')
-    global MML_FIELDNAMES
-    fieldnames = set(MML_FIELDNAMES)
+    global NLP_FIELDNAMES
+    fieldnames = set(NLP_FIELDNAMES)
     for i, note_dir in enumerate(note_directories):
         cnt = 0
         for file in note_dir.iterdir():
@@ -200,10 +200,10 @@ def get_field_names(note_directories: List[pathlib.Path], *, output_format='json
                                       dir_index=i)
             if outfile is None or not outfile.exists():
                 continue
-            for data in extract_mml_data(outfile, encoding=mm_encoding, output_format=output_format,
+            for data in extract_mml_data(outfile, encoding=mm_encoding, extract_format=output_format,
                                          target_cuis=TargetCuis()):
                 for fieldname in set(data.keys()) - fieldnames:
-                    MML_FIELDNAMES.append(fieldname)
+                    NLP_FIELDNAMES.append(fieldname)
                     fieldnames.add(fieldname)
             cnt += 1
             if cnt > max_search:
@@ -221,7 +221,7 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
             open(mml_outfile, 'w', newline='', encoding='utf8') as mml_out:
         note_writer = csv.DictWriter(note_out, fieldnames=NOTE_FIELDNAMES)
         note_writer.writeheader()
-        mml_writer = csv.DictWriter(mml_out, fieldnames=MML_FIELDNAMES)
+        mml_writer = csv.DictWriter(mml_out, fieldnames=NLP_FIELDNAMES)
         mml_writer.writeheader()
         for is_record, data in extract_data(note_directories, target_cuis=target_cuis,
                                             encoding=encoding, output_format=output_format,
@@ -231,7 +231,7 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
             if is_record:
                 field_names = NOTE_FIELDNAMES
             else:
-                field_names = MML_FIELDNAMES
+                field_names = NLP_FIELDNAMES
             curr_missing_data_dict = set(data.keys()) - set(field_names)
             if curr_missing_data_dict:
                 if logger_warning_count > 0:
@@ -249,7 +249,7 @@ def build_extracted_file(note_directories, target_cuis, note_outfile, mml_outfil
                     missing_mml_dict |= curr_missing_data_dict
                     if logger_warning_count >= 0:
                         logger.info(f'''Missing MML Dict: '{"','".join(missing_mml_dict)}' ''')
-                    data = {k: v for k, v in data.items() if k in MML_FIELDNAMES}
+                    data = {k: v for k, v in data.items() if k in NLP_FIELDNAMES}
             if is_record:
                 note_writer.writerow(data)
             else:
@@ -332,7 +332,7 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', mm_encodi
     if outfile and outfile.exists():
         logger.info(f'Processing associated {output_format}: {outfile}.')
         for data in extract_mml_data(outfile, encoding=mm_encoding,
-                                     target_cuis=target_cuis, output_format=output_format):
+                                     target_cuis=target_cuis, extract_format=output_format):
             if exclude_negated and data['negated']:
                 continue  # exclude negated terms if requested
             yield False, data

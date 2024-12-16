@@ -37,6 +37,7 @@ Types of changes:
 * Added option to skip missing (i.e., unprocessed files) while running extraction
 * Adding example from cTAKES
 * `.gitignore` file...about time
+* `mml-extract` script to start from the output and find associated text; useful if most files have not yet been processed.
 
 
 ## [1.0.1] - 2024-10-16
