@@ -9,7 +9,9 @@ class TargetCuis:
     @property
     def values(self) -> set:
         """Unique target (i.e., output) CUIs"""
-        return set.union(*self.data.values())
+        if self.data:
+            return set.union(*self.data.values())
+        return set()
 
     @property
     def keys(self) -> set:

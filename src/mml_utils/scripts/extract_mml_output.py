@@ -8,15 +8,14 @@ filename, [metamaplite metadata], [other metadata joinable on 'filename'; e.g., 
 Table 2: Notes with note length and whether or not it was processed.
 filename, length, processed: yes/no
 """
-import csv
-import datetime
 import pathlib
-import re
 from typing import List
 
 import click
 from loguru import logger
 
+from mml_utils.extract.utils import NLP_FIELDNAMES, add_notefile_to_record
+from mml_utils.extract.utils import prepare_extract, find_path, build_pivot_table, build_extracted_file
 from mml_utils.parse.parser import extract_mml_data
 from mml_utils.parse.target_cuis import TargetCuis
 
@@ -24,13 +23,6 @@ try:
     import pandas as pd
 except ImportError:
     pd = None
-
-NLP_FIELDNAMES = [
-    'event_id', 'docid', 'filename', 'matchedtext', 'conceptstring', 'cui', 'preferredname', 'start', 'length',
-]
-NOTE_FIELDNAMES = [
-    'filename', 'docid', 'num_chars', 'num_letters', 'num_words', 'processed',
-]
 
 
 @click.command()
@@ -73,18 +65,6 @@ def _extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui
                 note_suffix=note_suffix, extract_suffix=extract_suffix, skip_missing=skip_missing)
 
 
-def load_target_cuis(cui_file) -> TargetCuis:
-    target_cuis = TargetCuis()
-    if cui_file is None:
-        logger.warning(f'Retaining all CUIs.')
-        return target_cuis
-    with open(cui_file, encoding='utf8') as fh:
-        for line in fh:
-            target_cuis.add(*line.strip().split(','))
-    logger.info(f'Keeping {target_cuis.n_keys()} CUIs, and mapping to {target_cuis.n_values()}.')
-    return target_cuis
-
-
 def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_file: pathlib.Path = None,
                 *, encoding='utf8', extract_format='json', max_search=1000, add_fieldname: List[str] = None,
                 exclude_negated=False, extract_directories=None, extract_encoding='cp1252',
@@ -106,47 +86,40 @@ def extract_mml(note_directories: List[pathlib.Path], outdir: pathlib.Path, cui_
     :param encoding:
     :return:
     """
-    now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    outdir.mkdir(exist_ok=True)
-    note_outfile = outdir / f'notes_{now}.csv'
-    nlp_outfile = outdir / f'mml_{now}.csv'
-    cuis_by_doc_outfile = outdir / f'cuis_by_doc_{now}.csv'
+    (note_outfile, nlp_outfile, cuis_by_doc_outfile), target_cuis = prepare_extract(outdir, add_fieldname, cui_file)
 
-    if add_fieldname:
-        global NLP_FIELDNAMES
-        for fieldname in add_fieldname:
-            NLP_FIELDNAMES.append(fieldname)
-
-    target_cuis = load_target_cuis(cui_file)
     if extract_directories is None:
         extract_directories = note_directories
     get_field_names(note_directories, extract_format=extract_format, max_search=max_search,
                     extract_directories=extract_directories, extract_encoding=extract_encoding,
                     note_suffix=note_suffix, extract_suffix=extract_suffix, skip_missing=skip_missing)
-    build_extracted_file(note_directories, target_cuis, note_outfile, nlp_outfile,
-                         extract_format, encoding, exclude_negated, extract_directories=extract_directories,
-                         extract_encoding=extract_encoding, note_suffix=note_suffix, extract_suffix=extract_suffix,
-                         skip_missing=skip_missing)
+    result_iter = extract_data(note_directories, target_cuis=target_cuis,
+                               extract_format=extract_format, encoding=encoding, exclude_negated=exclude_negated,
+                               extract_directories=extract_directories, extract_encoding=extract_encoding,
+                               note_suffix=note_suffix, extract_suffix=extract_suffix, skip_missing=skip_missing)
+    build_extracted_file(result_iter, note_outfile, nlp_outfile)
     build_pivot_table(nlp_outfile, cuis_by_doc_outfile, target_cuis)
     return note_outfile, nlp_outfile, cuis_by_doc_outfile
 
 
-def get_output_file(curr_directory, exp_filename, extract_format, extract_directories=None, skip_missing=False,
-                    extract_suffix=None, dir_index=None):
+def get_extract_file(curr_directory, exp_filename, extract_format, extract_directories=None, skip_missing=False,
+                     extract_suffix=None, dir_index=None):
     """Retrieve the extracted data from file."""
     if extract_suffix is not None:
         extract_format = extract_suffix.lstrip('.')
     elif extract_format == 'xmi':
         extract_format = 'txt.xmi'  # how ctakes does renaming
 
-    if path := find_path(exp_filename, extract_format, curr_directory, extract_directories, dir_index):
+    if path := find_path(f'{exp_filename}.{extract_format}',
+                         curr_directory, extract_directories, dir_index):
         return path
 
     exp_filename_2 = exp_filename.split('.')[0]
     if exp_filename != exp_filename_2:
         logger.warning(f'Failed to find expected output file: {exp_filename}.{extract_format};'
                        f' trying: {exp_filename_2}.{extract_format}.')
-        if path := find_path(exp_filename_2, extract_format, curr_directory, extract_directories, dir_index):
+        if path := find_path(f'{exp_filename_2}.{extract_format}',
+                             curr_directory, extract_directories, dir_index):
             return path
 
     msg = f'Failed to find expected output file: {exp_filename}.{extract_format}.'
@@ -154,22 +127,6 @@ def get_output_file(curr_directory, exp_filename, extract_format, extract_direct
         logger.warning(msg)
     else:
         raise ValueError(msg)
-
-
-def find_path(exp_filename, output_format, curr_directory, output_directories=None, dir_index=None):
-    """Look for the expected filename + output format at a particular path."""
-    if output_directories:
-        # prefer output directory corresponding to ordered list of note directories
-        if dir_index < len(output_directories) and (
-                path := pathlib.Path(output_directories[dir_index] / f'{exp_filename}.{output_format}')).exists():
-            return path
-        for i, output_directory in enumerate(output_directories):
-            if i == dir_index:  # already looked here
-                continue
-            if (path := pathlib.Path(output_directory / f'{exp_filename}.{output_format}')).exists():
-                return path
-    elif (path := pathlib.Path(curr_directory / f'{exp_filename}.{output_format}')).exists():
-        return path
 
 
 def get_field_names(note_directories: List[pathlib.Path], *, extract_format='json', extract_encoding='cp1252',
@@ -188,98 +145,27 @@ def get_field_names(note_directories: List[pathlib.Path], *, extract_format='jso
     :return:
     """
     logger.info('Retrieving fieldnames.')
-    global NLP_FIELDNAMES
     fieldnames = set(NLP_FIELDNAMES)
+    target_search = max_search // len(note_directories)
+    logger.info(f'Exploring first {target_search} of {len(note_directories)} directories.')
     for i, note_dir in enumerate(note_directories):
         cnt = 0
         for file in note_dir.iterdir():
             if (file.suffix not in {note_suffix, ''} and ''.join(file.suffixes) != note_suffix) or file.is_dir():
                 continue
-            outfile = get_output_file(file.parent, file.stem, extract_format, skip_missing=skip_missing,
-                                      extract_directories=extract_directories, extract_suffix=extract_suffix,
-                                      dir_index=i)
-            if outfile is None or not outfile.exists():
+            extract_file = get_extract_file(file.parent, file.stem, extract_format, skip_missing=skip_missing,
+                                            extract_directories=extract_directories, extract_suffix=extract_suffix,
+                                            dir_index=i)
+            if extract_file is None or not extract_file.exists():
                 continue
-            for data in extract_mml_data(outfile, encoding=extract_encoding, extract_format=extract_format,
+            for data in extract_mml_data(extract_file, encoding=extract_encoding, extract_format=extract_format,
                                          target_cuis=TargetCuis()):
                 for fieldname in set(data.keys()) - fieldnames:
                     NLP_FIELDNAMES.append(fieldname)
                     fieldnames.add(fieldname)
             cnt += 1
-            if cnt > max_search:
+            if cnt > target_search:
                 break
-
-
-def build_extracted_file(note_directories, target_cuis, note_outfile, nlp_outfile,
-                         extract_format, encoding, exclude_negated, extract_directories=None,
-                         extract_encoding='cp1252', note_suffix='.txt', extract_suffix=None,
-                         skip_missing=False):
-    missing_note_dict = set()
-    missing_mml_dict = set()
-    logger_warning_count = 5
-    with open(note_outfile, 'w', newline='', encoding='utf8') as note_out, \
-            open(nlp_outfile, 'w', newline='', encoding='utf8') as nlp_out:
-        note_writer = csv.DictWriter(note_out, fieldnames=NOTE_FIELDNAMES)
-        note_writer.writeheader()
-        nlp_writer = csv.DictWriter(nlp_out, fieldnames=NLP_FIELDNAMES)
-        nlp_writer.writeheader()
-        for is_record, data in extract_data(note_directories, target_cuis=target_cuis,
-                                            encoding=encoding, extract_format=extract_format,
-                                            exclude_negated=exclude_negated, extract_directories=extract_directories,
-                                            extract_encoding=extract_encoding, note_suffix=note_suffix,
-                                            extract_suffix=extract_suffix, skip_missing=skip_missing):
-            if is_record:
-                field_names = NOTE_FIELDNAMES
-            else:
-                field_names = NLP_FIELDNAMES
-            curr_missing_data_dict = set(data.keys()) - set(field_names)
-            if curr_missing_data_dict:
-                if logger_warning_count > 0:
-                    logger.warning(f'Only processing known fields for record: {data["docid"]}')
-                    logger_warning_count -= 1
-                    if logger_warning_count == 0:
-                        logger.warning(f'Suppressing future warnings:'
-                                       f' a final summary of added keys will be logged at the end.')
-                if is_record:
-                    missing_note_dict |= curr_missing_data_dict
-                    if logger_warning_count >= 0:
-                        logger.info(f'''Missing Note Dict: '{"','".join(missing_note_dict)}' ''')
-                    data = {k: v for k, v in data.items() if k in NOTE_FIELDNAMES}
-                else:
-                    missing_mml_dict |= curr_missing_data_dict
-                    if logger_warning_count >= 0:
-                        logger.info(f'''Missing MML Dict: '{"','".join(missing_mml_dict)}' ''')
-                    data = {k: v for k, v in data.items() if k in NLP_FIELDNAMES}
-            if is_record:
-                note_writer.writerow(data)
-            else:
-                nlp_writer.writerow(data)
-    if missing_mml_dict:
-        logger.warning(f'''All Missing MML Dict: '{"','".join(missing_mml_dict)}' ''')
-    if missing_note_dict:
-        logger.warning(f'''All Missing Note Dict: '{"','".join(missing_note_dict)}' ''')
-    logger.info(f'Completed successfully.')
-
-
-def build_pivot_table(mml_file, outfile, target_cuis: TargetCuis = None):
-    if pd is None:
-        logger.warning(f'Unable to build pivot table: please install pandas `pip install pandas` and try again.')
-        return
-    df = pd.read_csv(mml_file, usecols=['docid', 'cui'])
-    n_cuis = df['cui'].nunique()
-    n_docs = df['docid'].nunique()
-    df['count'] = 1
-    df = df.pivot_table(index='docid', columns='cui', values='count', fill_value=0, aggfunc=sum).reset_index()
-    if target_cuis:  # ensure that all output cuis have been included in the output
-        missing_cuis = set(target_cuis.values) - set(df.columns)
-        logger.info(f'Adding back {len(missing_cuis)} CUIs that were not found in the notes.')
-        n_cuis += len(missing_cuis)
-        for missing_cui in missing_cuis:
-            df[missing_cui] = 0
-    # sort output columns
-    df = df[['docid'] + sorted(col for col in df.columns if col.startswith('C'))]
-    df.to_csv(outfile, index=False)
-    logger.info(f'Output {n_cuis} CUIs (expected {len(target_cuis)}) for {n_docs} documents to: {outfile}.')
 
 
 def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, encoding='utf8', extract_encoding='cp1252',
@@ -312,26 +198,22 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', extract_e
                            extract_format='json', exclude_negated=False, skip_missing=False,
                            extract_directories=None, extract_suffix=None, dir_index=None):
     record = {
-        'filename': file.stem,
-        'docid': str(file),
+        'docid': file.stem,
+        'filename': str(file),
     }
     target_cuis = TargetCuis() if target_cuis is None else target_cuis
-    with open(file, encoding=encoding) as fh:
-        text = fh.read()
-        record['num_chars'] = len(text)
-        record['num_words'] = len(text.split())
-        record['num_letters'] = len(re.sub(r'[^A-Za-z0-9]', '', text, flags=re.I))
-    outfile = get_output_file(file.parent, file.stem, extract_format, skip_missing=skip_missing,
-                              extract_directories=extract_directories, extract_suffix=extract_suffix,
-                              dir_index=dir_index)
-    if outfile is None:
+    add_notefile_to_record(record, file, encoding)
+    extract_file = get_extract_file(file.parent, file.stem, extract_format, skip_missing=skip_missing,
+                                    extract_directories=extract_directories, extract_suffix=extract_suffix,
+                                    dir_index=dir_index)
+    if extract_file is None:
         stem = file.stem.split('.')[0]
-        outfile = get_output_file(file.parent, f'{stem}', extract_format, skip_missing=skip_missing,
-                                  extract_directories=extract_directories, extract_suffix=extract_suffix,
-                                  dir_index=dir_index)
-    if outfile and outfile.exists():
-        logger.info(f'Processing associated {extract_format}: {outfile}.')
-        for data in extract_mml_data(outfile, encoding=extract_encoding,
+        extract_file = get_extract_file(file.parent, f'{stem}', extract_format, skip_missing=skip_missing,
+                                        extract_directories=extract_directories, extract_suffix=extract_suffix,
+                                        dir_index=dir_index)
+    if extract_file and extract_file.exists():
+        logger.info(f'Processing associated {extract_format}: {extract_file}.')
+        for data in extract_mml_data(extract_file, encoding=extract_encoding,
                                      target_cuis=target_cuis, extract_format=extract_format):
             if exclude_negated and data['negated']:
                 continue  # exclude negated terms if requested

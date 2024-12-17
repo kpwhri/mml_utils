@@ -38,6 +38,7 @@ Types of changes:
 * Adding example from cTAKES
 * `.gitignore` file...about time
 * `mml-extract` script to start from the output and find associated text; useful if most files have not yet been processed.
+* Significant refactoring and improvements on `mml-extract` and `mml-extract-output` pipelines
 
 
 ## [1.0.1] - 2024-10-16
