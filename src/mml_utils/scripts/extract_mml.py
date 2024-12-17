@@ -121,8 +121,7 @@ def extract_mml(extract_directories: List[pathlib.Path], outdir: pathlib.Path, c
     if note_directories is None:
         note_directories = note_directories
     get_field_names(extract_directories, extract_format=extract_format, max_search=max_search,
-                    note_directories=note_directories, extract_encoding=extract_encoding,
-                    note_suffix=note_suffix, extract_suffix=extract_suffix, skip_missing=skip_missing)
+                    extract_encoding=extract_encoding, extract_suffix=extract_suffix)
     build_extracted_file(extract_directories, target_cuis, note_outfile, nlp_outfile,
                          extract_format, encoding, exclude_negated, note_directories=note_directories,
                          extract_encoding=extract_encoding, note_suffix=note_suffix, extract_suffix=extract_suffix,
@@ -132,9 +131,11 @@ def extract_mml(extract_directories: List[pathlib.Path], outdir: pathlib.Path, c
 
 
 def get_output_file(curr_directory, filename: str, extract_format, note_directories=None, skip_missing=False,
-                    note_suffix=None, dir_index=None):
+                    note_suffix='.txt', dir_index=None, extract_suffix=None):
     """Retrieve the extracted data from file."""
-    if extract_format == 'xmi':
+    if extract_suffix:
+        exp_filename = filename.removesuffix(extract_suffix) + note_suffix
+    elif extract_format == 'xmi':
         exp_filename = filename.removesuffix('.xmi')
     else:
         exp_filename = f"{filename.removesuffix(f'.{extract_format}')}{note_suffix}"
@@ -173,15 +174,11 @@ def find_path(exp_filename, curr_directory, note_directories=None, dir_index=Non
 
 
 def get_field_names(extract_directories: List[pathlib.Path], *, extract_format='json', extract_encoding='cp1252',
-                    max_search=1000, note_directories=None, skip_missing=False,
-                    note_suffix='.txt', extract_suffix=None):
+                    max_search=1000, extract_suffix=None):
     """
 
     :param extract_directories:
-    :param skip_missing: don't raise error if missing output file is found
-    :param note_suffix:
     :param extract_suffix:
-    :param note_directories:
     :param extract_format:
     :param extract_encoding:
     :param max_search: how many files to look at in each directory
@@ -192,15 +189,8 @@ def get_field_names(extract_directories: List[pathlib.Path], *, extract_format='
     fieldnames = set(NLP_FIELDNAMES)
     for i, extract_dir in enumerate(extract_directories):
         cnt = 0
-        for file in extract_dir.iterdir():
-            if file.suffix != extract_suffix or file.is_dir():
-                continue
-            outfile = get_output_file(file.parent, file.name, extract_format, skip_missing=skip_missing,
-                                      note_directories=note_directories, note_suffix=note_suffix,
-                                      dir_index=i)
-            if outfile is None or not outfile.exists():
-                continue
-            for data in extract_mml_data(outfile, encoding=extract_encoding, extract_format=extract_format,
+        for extract_file in extract_dir.glob(f'*{extract_suffix or "." + extract_format}'):
+            for data in extract_mml_data(extract_file, encoding=extract_encoding, extract_format=extract_format,
                                          target_cuis=TargetCuis()):
                 for fieldname in set(data.keys()) - fieldnames:
                     NLP_FIELDNAMES.append(fieldname)
@@ -298,9 +288,7 @@ def extract_data(extract_directories: List[pathlib.Path], *, target_cuis=None, e
 def extract_data_from_directory(extract_dir, *, target_cuis=None, encoding='utf8', extract_encoding='cp1252',
                                 extract_format='json', exclude_negated=False, note_directories=None,
                                 note_suffix='.txt', extract_suffix=None, skip_missing=False, dir_index=None):
-    for file in extract_dir.iterdir():
-        if file.suffix.lstrip('.') != extract_format or file.is_dir():
-            continue
+    for file in extract_dir.glob(f'*{extract_suffix or "." + extract_format}'):
         logger.info(f'Processing file: {file}')
         yield from extract_data_from_file(
             file, encoding=encoding, exclude_negated=exclude_negated, extract_encoding=extract_encoding,
@@ -332,7 +320,7 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', extract_e
     # find note data
     note = get_output_file(file.parent, file.name, extract_format, skip_missing=skip_missing,
                            note_directories=note_directories, note_suffix=note_suffix,
-                           dir_index=dir_index)
+                           dir_index=dir_index, extract_suffix=extract_suffix)
     if note and note.exists():
         logger.info(f'Processing associated note text: {note}.')
 
