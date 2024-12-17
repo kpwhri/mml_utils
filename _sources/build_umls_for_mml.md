@@ -106,6 +106,11 @@ You have now created a UMLS subset to run, but it is not yet indexed for Metamap
    * `java.io.FileNotFoundException: \tmp\words.txt.tmp`: see Step 4, #3, bullet 3
    * `java.io.FileNotFoundException: tables/vars.txt`: see Step 4, #3, bullet 3
    * `java.io.FileNotFoundException: indices/meshtcrelaxed/postings`: see Step 4, #3, bullet 4
+   * `java.lang.OutOfMemoryError: GC overhead limit exceeded`: identify the failed call and increase the memory limit (e.g., increase `-Xmx7g` to `-Xms12g`)
+
+```{admonition} Hidden Errors in the Output
+When the `create_indexes` script completes, take a couple minutes to ensure that there are no errors. There is a lot of output generated which might obscure an error in an intermediate step. Consider piping the data to a text file to more easily explore.
+```
 
 ### Step 5: Run Metamaplite
 
