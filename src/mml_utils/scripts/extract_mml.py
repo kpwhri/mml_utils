@@ -119,7 +119,7 @@ def extract_mml(extract_directories: List[pathlib.Path], outdir: pathlib.Path, c
 
     target_cuis = load_target_cuis(cui_file)
     if note_directories is None:
-        note_directories = note_directories
+        note_directories = extract_directories
     get_field_names(extract_directories, extract_format=extract_format, max_search=max_search,
                     extract_encoding=extract_encoding, extract_suffix=extract_suffix)
     build_extracted_file(extract_directories, target_cuis, note_outfile, nlp_outfile,
