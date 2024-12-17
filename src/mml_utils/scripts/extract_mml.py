@@ -331,7 +331,7 @@ def extract_data_from_file(file, *, target_cuis=None, encoding='utf8', extract_e
 
     # find note data
     note = get_output_file(file.parent, file.name, extract_format, skip_missing=skip_missing,
-                           note_directories=note_directories, note_suffix=extract_suffix,
+                           note_directories=note_directories, note_suffix=note_suffix,
                            dir_index=dir_index)
     if note and note.exists():
         logger.info(f'Processing associated note text: {note}.')
