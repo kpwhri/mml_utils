@@ -19,6 +19,8 @@ Types of changes:
 
 ## [Unreleased]
 
+## [1.0.1] - 2024-12-17
+
 ### Fixed
 
 * cTAKES XMI output produces duplicate CUIs due to different codes; by default, only take the first now to more accurately represent CUI count
@@ -302,6 +304,7 @@ Types of changes:
 
 
 [unreleased]: https://github.com/kpwhri/mml_utils/compare/1.0.1...HEAD
+[1.1.0]: https://github.com/kpwhri/mml_utils/compare/1.0.1...1.1.0
 [1.0.1]: https://github.com/kpwhri/mml_utils/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/kpwhri/mml_utils/compare/0.5.0...1.0.0
 [0.5.0]: https://github.com/kpwhri/mml_utils/compare/0.4.0...0.5.0
