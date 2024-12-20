@@ -31,17 +31,21 @@ def build_non_xml_regex():
 
 def clean_non_xml(directory: Path, encoding='utf8'):
     pat = build_non_xml_regex()
+    count = 0
     for file in os.scandir(directory):  # pathlib.Path.iterdir creates an intermediate list
         with open(file, encoding=encoding) as fh:
             text = fh.read()
         new_text = pat.sub(' ', text)
         if new_text != text:
+            count += 1
             with open(file, 'w', encoding='utf8') as out:
                 out.write(new_text)
+    return count
 
 
 def clean_non_xml_from_directories(directories: list[Path], encoding='utf8'):
     logger.info(f'Removing non-XML characters from {len(directories)} directories.')
     for i, directory in enumerate(directories):
         logger.info(f'{i}: Starting to remove non-XML characters from {directory}...')
-        clean_non_xml(directory, encoding=encoding)
+        count = clean_non_xml(directory, encoding=encoding)
+        logger.info(f'{i}: Done! Cleaned {count} files containing non-XML characters from {directory}.')
