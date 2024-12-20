@@ -26,7 +26,11 @@ def run_ctakes_directory(directory: Path, ctakes_home: Path, outdir: Path, umls_
                          dictionary: Path = None, clean_files: bool = False, clean_files_src_encoding='utf8'):
     if clean_files:
         logger.info(f'Overwriting files in {directory} to remove non-XML characters.')
-        clean_non_xml(directory, encoding=clean_files_src_encoding)
+        count = clean_non_xml(directory, encoding=clean_files_src_encoding)
+        logger.info(f'Overwrote {count} files in {directory} containing non-XML characters.')
+    else:
+        logger.info(f'Skipping removing non-XML characters from text:'
+                    f' cTAKES may error out if these have not been removed.')
     run_ctakes(directory, ctakes_home, outdir, umls_key, dictionary)
 
 
