@@ -96,9 +96,9 @@ Additional instructions, including UMLS/MML installation are described here: htt
 
 | Tool        | Encoding | Requires Newline | Allows Spaces in Path | Must Run in Text Directory |
 |-------------|----------|------------------|-----------------------|----------------------------|
-| Metamap     | ?        | : Y            : | : N:                  | :N:                        |
-| Metamaplite | ?        | : N            : | : N:                  | :Y:                        |
-| cTAKES      | ?        | : N            : | : Y:                  | :Y:                        |
+| Metamap     | Latin-1  | : Y            : | : N:                  | :N:                        |
+| Metamaplite | Latin-1  | : N            : | : N:                  | :Y:                        |
+| cTAKES      | UTF-8    | : N            : | : Y:                  | :Y:                        |
 
 ## Usage
 
