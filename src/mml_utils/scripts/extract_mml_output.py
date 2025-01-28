@@ -16,6 +16,7 @@ from loguru import logger
 
 from mml_utils.extract.utils import NLP_FIELDNAMES, add_notefile_to_record
 from mml_utils.extract.utils import prepare_extract, find_path, build_pivot_table, build_extracted_file
+from mml_utils.os_utils import scandir
 from mml_utils.parse.parser import extract_mml_data
 from mml_utils.parse.target_cuis import TargetCuis
 
@@ -46,7 +47,7 @@ except ImportError:
 @click.option('--skip-missing', is_flag=True, default=False,
               help='Skipping any missing (i.e., unprocessed) text files. Useful for generating sample data.')
 @click.option('--extract-encoding', default='cp1252',
-              help='Encoding for reading output of MML or cTAKES.')
+              help='Encoding for reading output of MML or cTAKES. cTAKES probably wants `utf8`.')
 @click.option('--file-encoding', 'encoding', default='utf8',
               help='Encoding for reading text files.')
 @click.option('--note-suffix', default='.txt',
@@ -150,7 +151,7 @@ def get_field_names(note_directories: List[pathlib.Path], *, extract_format='jso
     logger.info(f'Exploring first {target_search} of {len(note_directories)} directories.')
     for i, note_dir in enumerate(note_directories):
         cnt = 0
-        for file in note_dir.iterdir():
+        for file in scandir(note_dir):
             if (file.suffix not in {note_suffix, ''} and ''.join(file.suffixes) != note_suffix) or file.is_dir():
                 continue
             extract_file = get_extract_file(file.parent, file.stem, extract_format, skip_missing=skip_missing,
@@ -183,7 +184,7 @@ def extract_data(note_directories: List[pathlib.Path], *, target_cuis=None, enco
 def extract_data_from_directory(note_dir, *, target_cuis=None, encoding='utf8', extract_encoding='cp1252',
                                 extract_format='json', exclude_negated=False, extract_directories=None,
                                 note_suffix='.txt', extract_suffix=None, skip_missing=False, dir_index=None):
-    for file in note_dir.iterdir():
+    for file in scandir(note_dir):
         if (file.suffix not in {note_suffix, ''} and ''.join(file.suffixes) != note_suffix) or file.is_dir():
             continue
         logger.info(f'Processing file: {file}')
