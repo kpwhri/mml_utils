@@ -22,6 +22,7 @@ Types of changes:
 ### Added
 
 * Improve efficiency of removing non-XML characters by using `os.scandir` rather than `pathlib.Path.iterdir`
+* Created `scandir` function to avoid creating intermediate lists.
 
 ## [1.0.1] - 2024-12-17
 
