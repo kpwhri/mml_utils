@@ -356,7 +356,7 @@ i.e., prefer not using multiple suffixes).
     mml-extract-mml /path/to/notes [/path/to/notes2] --outdir /path/to/output --cui-file /only/include/these/cuis.txt [--extract-format (mmi|json|xmi)]
 
 For usage with cTAKES output, include the `--extract-directory [CTAKES_XMI_DIR]` which points to the cTAKES output
-directory.
+directory. You may need to specify UTF-8 format (e.g., `--extract-encoding utf8`).
 
     mml-extract-mml /path/to/notes --outdir /path/to/output [...] --extract-directory /path/to/*.xmi.txt_dir --extract-format xmi
 
