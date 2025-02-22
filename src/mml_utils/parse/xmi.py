@@ -54,9 +54,10 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis = None,
                 end_idx = int(child.get('end'))
                 confidence = float(child.get('confidence'))
                 uncertainty = float(child.get('uncertainty'))
-                conditional = bool(child.get('conditional'))
-                generic = bool(child.get('generic'))
-                subject = child.get('subject')
+                conditional = child.get('conditional').lower() == 'true'  # 'true' or 'false'
+                generic = child.get('generic').lower() == 'true'  # 'true' or 'false'
+                historical = bool(int(child.get('historyOf')))  # '0' or '1'
+                subject = child.get('subject')  # 'patient'
 
                 for j, concept in enumerate(child.get('ontologyConceptArr').split()):
                     concept_id = int(concept)
@@ -75,6 +76,7 @@ def extract_mml_from_xmi_data(text, filename, *, target_cuis: TargetCuis = None,
                         'confidence': confidence,
                         'uncertainty': uncertainty,
                         'conditional': conditional,
+                        'historical': historical,
                         'generic': generic,
                         'subject': subject,
                         'matchedtext': text[start_idx: end_idx],
